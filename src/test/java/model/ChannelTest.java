@@ -18,6 +18,7 @@ public class ChannelTest {
 
     @Test
     public void getAllUserNames() {
+        Channel channel = new Channel("Together4Ever");
     }
 
     @Test
