@@ -8,6 +8,7 @@ public interface IChannel {
     List<IMessage> getAllMessages();
     List<IMessage> getLastMessages(int index);
 
+    void sendMessage(IMessage message);
     void join(IUser user);
     void leave(IUser user);
 
