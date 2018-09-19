@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -46,27 +47,63 @@ public class ChannelTest {
         IMessage messageTwo = new Message(userTwo,"Hi how are you?",timeStampTwo);
         IMessage messageThree = new Message(userOne,"Tjenixen",timeStampTwo);
 
-        assertEquals(messageOne.getTimestamp().getHour(),15);
-        assertTrue(messageOne.getSender().getName().equals("UserOne"));
-        assertTrue(messageOne.getMessage().equals("Hello my friends!"));
+        channel.sendMessage(messageOne);
+        channel.sendMessage(messageTwo);
+        channel.sendMessage(messageThree);
 
-        assertEquals(messageTwo.getTimestamp().getMinute(),56);
-        assertTrue(messageTwo.getSender().getName().equals("UserTwo"));
-        assertTrue(messageTwo.getMessage().equals("Hi how are you?"));
+        List<IMessage> messages = channel.getAllMessages();
 
-        assertEquals(messageThree.getTimestamp().getDayOfMonth(),11);
-        assertTrue(messageThree.getSender().getName().equals("UserOne"));
-        assertTrue(messageThree.getMessage().equals("Tjenixen"));
+        assertEquals(messages.get(0).getTimestamp().getHour(),15);
+        assertTrue(messages.get(0).getSender().getName().equals("UserOne"));
+        assertTrue(messages.get(0).getMessage().equals("Hello my friends!"));
+
+        assertEquals(messages.get(1).getTimestamp().getMinute(),56);
+        assertTrue(messages.get(1).getSender().getName().equals("UserTwo"));
+        assertTrue(messages.get(1).getMessage().equals("Hi how are you?"));
+
+        assertEquals(messages.get(2).getTimestamp().getDayOfMonth(),11);
+        assertTrue(messages.get(2).getSender().getName().equals("UserOne"));
+        assertTrue(messages.get(2).getMessage().equals("Tjenixen"));
     }
 
     @Test
     public void getLastMessages() {
-        //Create three messages, send team, and check if the channel's two latest messages contains the same
+        //Create a channel and three messages, send team, and check if the channel's two latest messages contains the same
         // info as the two messages you sent last.
+        IChannel channel = new Channel("Together4Ever");
+        IUser userOne = new User("UserOne", "password");
+        LocalDateTime timeStampOne = LocalDateTime.of(2013,3,4,15,23);
+        IUser userTwo = new User("UserTwo", "password");
+        LocalDateTime timeStampTwo = LocalDateTime.of(2008,9,11,10,56);
+
+        IMessage messageOne = new Message(userOne,"Hello my friends!",timeStampOne);
+        IMessage messageTwo = new Message(userTwo,"Hi how are you?",timeStampTwo);
+        IMessage messageThree = new Message(userOne,"Tjenixen",timeStampTwo);
+
+        channel.sendMessage(messageOne);
+        channel.sendMessage(messageTwo);
+        channel.sendMessage(messageThree);
+
+        List<IMessage> messages = channel.getLastMessages(2);
+
+        //This should equal messageTwo's data
+        assertEquals(messages.get(0).getTimestamp().getMinute(),56);
+        assertTrue(messages.get(0).getSender().getName().equals("UserTwo"));
+        assertTrue(messages.get(0).getMessage().equals("Hi how are you?"));
+
+        //This should equal messageThree's data
+        assertEquals(messages.get(1).getTimestamp().getDayOfMonth(),11);
+        assertTrue(messages.get(1).getSender().getName().equals("UserOne"));
+        assertTrue(messages.get(1).getMessage().equals("Tjenixen"));
+
+        assertFalse(messages.get(0).getMessage().equals("Hello my friends!"));
+
+
     }
 
     @Test
     public void join() {
+        
     }
 
     @Test
