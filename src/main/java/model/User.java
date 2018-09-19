@@ -35,10 +35,26 @@ public class User implements IUser {
         }
     }
 
+
+    /**
+     * Checks if the client is in the clients collection. If so and the password is
+     * matching the objects password it removes it.
+     * @param client The client that wants to be removed.
+     * @param password The password that needs to match the objects password.
+     */
+    public void removeClient(IClient client, String password){
+        clients.forEach(x -> {
+            if(x==client && this.password.equals(password)){
+                clients.remove(client);
+            }
+        });
+    }
+
     /**
      * Sends a message to all the connected clients in the objects collection.
      * @param message The message that should be sent to the connected clients.
      */
+
     @Override
     public void sendMessageToClients(IMessage message) {
         clients.forEach(x -> x.update(message));
