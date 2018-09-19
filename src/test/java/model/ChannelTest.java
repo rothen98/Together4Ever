@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.Assert.*;
 
 public class ChannelTest {
@@ -18,15 +20,43 @@ public class ChannelTest {
 
     @Test
     public void getAllUserNames() {
-        Channel channel = new Channel("Together4Ever");
-        //Create two users, let them join, and get all users names
+        //Create channel and two users, let them join, and get all users names
+        IChannel channel = new Channel("Together4Ever");
+        User userOne = new User("UserOne", "password");
+        User userTwo = new User("UserTwo", "password");
+        channel.join(userOne);
+        channel.join(userTwo);
+
+        assertEquals("UserOne",userOne.getName());
+        assertEquals("UserTwo",userTwo.getName());
+
     }
 
     @Test
     public void getAllMessages() {
-        Channel channel = new Channel("Together4Ever");
-        //Create three messages, send them, and check if the channel's messages contains the same
+        //Create three messages with different data, send them, and check if the channel's messages contains the same
         //info as the three created messages
+        IChannel channel = new Channel("Together4Ever");
+        IUser userOne = new User("UserOne", "password");
+        LocalDateTime timeStampOne = LocalDateTime.of(2013,3,4,15,23);
+        IUser userTwo = new User("UserTwo", "password");
+        LocalDateTime timeStampTwo = LocalDateTime.of(2008,9,11,10,56);
+
+        IMessage messageOne = new Message(userOne,"Hello my friends!",timeStampOne);
+        IMessage messageTwo = new Message(userTwo,"Hi how are you?",timeStampTwo);
+        IMessage messageThree = new Message(userOne,"Tjenixen",timeStampTwo);
+
+        assertEquals(messageOne.getTimestamp().getHour(),15);
+        assertTrue(messageOne.getSender().getName().equals("UserOne"));
+        assertTrue(messageOne.getMessage().equals("Hello my friends!"));
+
+        assertEquals(messageTwo.getTimestamp().getMinute(),56);
+        assertTrue(messageTwo.getSender().getName().equals("UserTwo"));
+        assertTrue(messageTwo.getMessage().equals("Hi how are you?"));
+
+        assertEquals(messageThree.getTimestamp().getDayOfMonth(),11);
+        assertTrue(messageThree.getSender().getName().equals("UserOne"));
+        assertTrue(messageThree.getMessage().equals("Tjenixen"));
     }
 
     @Test
