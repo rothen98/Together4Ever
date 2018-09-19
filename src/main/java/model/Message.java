@@ -18,10 +18,6 @@ public class Message implements IMessage {
 
     }
 
-    public IUser getUser() {
-        return null;
-    }
-
     public String getMessage() {
         return message;
     }
@@ -33,5 +29,5 @@ public class Message implements IMessage {
     public IUser getSender() {
         return sender;
     }
-    
+
 }
