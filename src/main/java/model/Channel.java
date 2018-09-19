@@ -1,10 +1,17 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * @author Tobias Lindroth
+ *
+ * The Channel class contains data about the channel's users and messages.
+ * There are methods to get the messages, the users names and also methods for joining and leaving the channel.
+ */
 public class Channel implements IChannel {
     private Collection<IUser> users;
     private List<IMessage> messages;
@@ -15,11 +22,12 @@ public class Channel implements IChannel {
         this.users = new HashSet<>();
         this.messages = new ArrayList<>();
 
+
     }
 
     /**
      * This method will return  all the user names of this channel
-     * @return a collection with strings
+     * @return a collection with the users names
      */
     @Override
     public Collection<String> getAllUserNames() {
@@ -65,15 +73,24 @@ public class Channel implements IChannel {
         //Is copy of list really needed?
     }
 
+    /**
+     * This method will add the user to the channel
+     * @param user
+     */
     @Override
     public void join(IUser user) {
         users.add(user);
     }
 
+    /**
+     * This method will remove the user from the channel
+     * @param user
+     */
     @Override
     public void leave(IUser user) {
         users.remove(user);
     }
+
 
     @Override
     public String getName() {
