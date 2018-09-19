@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -28,8 +29,11 @@ public class ChannelTest {
         channel.join(userOne);
         channel.join(userTwo);
 
-        assertEquals("UserOne",userOne.getName());
-        assertEquals("UserTwo",userTwo.getName());
+        Collection<String> names = channel.getAllUserNames();
+
+        assertTrue(names.contains("UserOne"));
+        assertTrue(names.contains("UserTwo"));
+        assertTrue(names.size() == 2);
 
     }
 
