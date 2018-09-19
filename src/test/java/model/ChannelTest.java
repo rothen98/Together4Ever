@@ -121,5 +121,7 @@ public class ChannelTest {
     @Test
     public void getName() {
         //Create a channel and check if the method returns the gicen name
+        Channel channel = new Channel("channel name");
+        assertTrue(channel.getName().equals("channel name"));
     }
 }
