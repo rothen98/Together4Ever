@@ -31,20 +31,38 @@ public class Channel implements IChannel {
         return returnCollection;
     }
 
+    /**
+     * This method will return a copy of all the messages that a channel contains
+     * @return a list with messages
+     */
     @Override
     public List<IMessage> getAllMessages() {
         return copyOfList(messages);
     }
 
-    private List<IMessage> copyOfList(List<IMessage> messages) {
-        return messages;
-        //TODO make this method
+    /**
+     * This method will copy a list
+     * @param list
+     * @param <T>
+     * @return the copy
+     */
+    private <T> List<T> copyOfList(List<T> list) {
+        List<T> listToReturn = new ArrayList<>();
+        for(T element:list){
+            listToReturn.add(element);
+        }
+        return listToReturn;
     }
 
+    /**
+     * This method will return the @param amount latest messages that were sent to the channel.
+     * @param amount The numbers of messages you wish to be returned
+     * @return A list with messages
+     */
     @Override
     public List<IMessage> getLastMessages(int amount) {
-        return messages.subList(messages.size()-amount,messages.size());
-        //Todo does this really return a copy?
+        return copyOfList(messages.subList(messages.size()-amount,messages.size()));
+        //Is copy of list really needed?
     }
 
     @Override
