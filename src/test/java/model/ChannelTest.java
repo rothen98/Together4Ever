@@ -103,11 +103,19 @@ public class ChannelTest {
 
     @Test
     public void join() {
-        
+        IUser user = new User("UserOne", "Password");
+        Channel channel = new Channel("Channel");
+        channel.join(user);
+        assertTrue(channel.getAllUserNames().contains("UserOne"));
     }
 
     @Test
     public void leave() {
+        IUser user = new User("UserOne", "Password");
+        Channel channel = new Channel("Channel");
+        channel.join(user);
+        channel.leave(user);
+        assertFalse(channel.getAllUserNames().contains("UserOne"));
     }
 
     @Test
