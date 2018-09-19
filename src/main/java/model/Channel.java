@@ -73,6 +73,14 @@ public class Channel implements IChannel {
         //Is copy of list really needed?
     }
 
+    @Override
+    public void sendMessage(IMessage message) {
+        messages.add(message);
+        for(IUser user: users){
+            user.sendMessageToClients(message);
+        }
+    }
+
     /**
      * This method will add the user to the channel
      * @param user
