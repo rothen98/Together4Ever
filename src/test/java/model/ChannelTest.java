@@ -11,21 +11,22 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class ChannelTest {
-
+    private IChannel channel;
     @Before
     public void setUp() throws Exception {
+        channel = new Channel("Together4Ever");
     }
 
     @After
     public void tearDown() throws Exception {
+        channel = null;
     }
 
     @Test
     public void getAllUserNames() {
         //Create channel and two users, let them join, and get all users names
-        IChannel channel = new Channel("Together4Ever");
-        User userOne = new User("UserOne", "password");
-        User userTwo = new User("UserTwo", "password");
+        IUser userOne = new User("UserOne", "password");
+        IUser userTwo = new User("UserTwo", "password");
         channel.join(userOne);
         channel.join(userTwo);
 
@@ -39,9 +40,8 @@ public class ChannelTest {
 
     @Test
     public void getAllMessages() {
-        //Create three messages with different data, send them, and check if the channel's messages contains the same
+        //Create channel and three messages with different data, send them, and check if the channel's messages contains the same
         //info as the three created messages
-        IChannel channel = new Channel("Together4Ever");
         IUser userOne = new User("UserOne", "password");
         LocalDateTime timeStampOne = LocalDateTime.of(2013,3,4,15,23);
         IUser userTwo = new User("UserTwo", "password");
@@ -49,11 +49,10 @@ public class ChannelTest {
 
         IMessage messageOne = new Message(userOne,"Hello my friends!",timeStampOne);
         IMessage messageTwo = new Message(userTwo,"Hi how are you?",timeStampTwo);
-        IMessage messageThree = new Message(userOne,"Tjenixen",timeStampTwo);
 
         channel.sendMessage(messageOne);
         channel.sendMessage(messageTwo);
-        channel.sendMessage(messageThree);
+
 
         List<IMessage> messages = channel.getAllMessages();
 
@@ -65,16 +64,13 @@ public class ChannelTest {
         assertTrue(messages.get(1).getSender().getName().equals("UserTwo"));
         assertTrue(messages.get(1).getMessage().equals("Hi how are you?"));
 
-        assertEquals(messages.get(2).getTimestamp().getDayOfMonth(),11);
-        assertTrue(messages.get(2).getSender().getName().equals("UserOne"));
-        assertTrue(messages.get(2).getMessage().equals("Tjenixen"));
+
     }
 
     @Test
     public void getLastMessages() {
         //Create a channel and three messages, send team, and check if the channel's two latest messages contains the same
         // info as the two messages you sent last.
-        IChannel channel = new Channel("Together4Ever");
         IUser userOne = new User("UserOne", "password");
         LocalDateTime timeStampOne = LocalDateTime.of(2013,3,4,15,23);
         IUser userTwo = new User("UserTwo", "password");
@@ -108,7 +104,6 @@ public class ChannelTest {
     @Test
     public void join() {
         IUser user = new User("UserOne", "Password");
-        Channel channel = new Channel("Channel");
         channel.join(user);
         assertTrue(channel.getAllUserNames().contains("UserOne"));
     }
@@ -124,8 +119,21 @@ public class ChannelTest {
 
     @Test
     public void getName() {
-        //Create a channel and check if the method returns the gicen name
-        Channel channel = new Channel("channel name");
-        assertTrue(channel.getName().equals("channel name"));
+        //Create a channel and check if the method returns the given name
+        assertTrue(channel.getName().equals("Together4Ever"));
+    }
+
+    @Test
+    public void sendMessage(){
+        IUser userOne = new MockUser("UserOne", "password");
+        LocalDateTime timeStampOne = LocalDateTime.of(2013,3,4,15,23);
+        MockUser userTwo = new MockUser("UserTwo", "password");
+        channel.join(userOne);
+        channel.join(userTwo);
+        IMessage messageOne = new Message(userOne,"Hello my friends!",timeStampOne);
+        channel.sendMessage(messageOne);
+        assertEquals("Hello my friends!",userTwo.getReceivedMessages().get(0).getMessage());
+
+
     }
 }
