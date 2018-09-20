@@ -4,7 +4,7 @@ import java.util.Collection;
 
 
 public interface IServer {
-    Collection<IChannel> getUsersChannels(IUser user);
+    Collection<IChannel> getUserChannels(IUser user);
     Collection<String> getChannelNames();
 
     IChannel getChannel(int id);
