@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Server implements IServer {
-    private Collection<IUser> users;
-    private Collection<IChannel> channels;
+    private final Collection<IUser> users;
+    private final Collection<IChannel> channels;
 
     public Server() {
         this.users = new HashSet<>();
@@ -22,7 +22,7 @@ public class Server implements IServer {
      * @return A collection with the channels the given user is a member of
      */
     @Override
-    public Collection<IChannel> getUsersChannels(IUser user) {
+    public Collection<IChannel> getUserChannels(IUser user) {
         final Collection<IChannel> channelsToReturn = new ArrayList<>();
         channels.forEach(channel -> {
             //TODO
@@ -68,9 +68,13 @@ public class Server implements IServer {
     @Override
     public IUser getUser(String name, String password) {
         users.forEach(user->{
-            /*if(user.authorize(name,password)){
-                return user;
-            }*/
+            /*if(user.getName().equals(name)){
+                if(user.authorize(password)
+                {
+                    return user;
+                }else{
+                 throw WrongPasswordException
+                }*/
         });
         //throw NoUserFoundException if user not found
         return null;
