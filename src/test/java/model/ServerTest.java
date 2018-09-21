@@ -50,5 +50,5 @@ public class ServerTest {
         fail("Test can't be implemented yet");
     }
 
-    
+
 }

@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 
 /**
- * This class contains data about which usersand channels that exists.
+ * This class contains data about which users and channels that exists.
  * There are methods to:
  * Get a certain user or channel
  * Get all channel names
@@ -24,7 +24,7 @@ public class Server implements IServer {
 
     /**
      * This method returns all the channels the given user is a member of.
-     * It asks each existing method if it has the given user, and if it does, the channel are
+     * It asks each existing method if it has the given user, and if it does, the channel is
      * added to the collection that are to be returned.
      * @param user This is the user whose channels you want to receive
      * @return A collection with the channels the given user is a member of
@@ -54,7 +54,7 @@ public class Server implements IServer {
     }
 
     /**
-     * This method will check if their is an channel with the given id.
+     * This method will check if there is a channel with the given id.
      * If it does, this channel will be returned.
      * @param id
      * @return the channel with the given id
