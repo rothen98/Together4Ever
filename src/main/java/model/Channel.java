@@ -19,8 +19,6 @@ public class Channel implements IChannel {
         this.name = name;
         this.users = new HashSet<>();
         this.messages = new ArrayList<>();
-
-
     }
 
     /**
@@ -108,6 +106,16 @@ public class Channel implements IChannel {
     @Override
     public void leave(IUser user) {
         users.remove(user);
+    }
+
+    /***
+     * This method evaluates whether the given user is a member of the channel or not.
+     * @param user The user you want to check if he/she is a member.
+     * @return if the user is a member of the channel.
+     */
+    @Override
+    public boolean hasUser(IUser user) {
+        return users.contains(user);
     }
 
 

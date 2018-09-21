@@ -13,6 +13,7 @@ public interface IChannel {
     void join(IUser user);
     void leave(IUser user);
 
+    boolean hasUser(IUser user);
     String getName();
     int getID();
 
