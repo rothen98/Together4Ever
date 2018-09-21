@@ -1,10 +1,7 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Tobias Lindroth
@@ -16,8 +13,9 @@ public class Channel implements IChannel {
     private Collection<IUser> users;
     private List<IMessage> messages;
     private String name;
+    private int id;
 
-    public Channel(String name) {
+    public Channel(String name,int id) {
         this.name = name;
         this.users = new HashSet<>();
         this.messages = new ArrayList<>();
@@ -74,6 +72,11 @@ public class Channel implements IChannel {
     }
 
     @Override
+    public int getNumberOfUsers() {
+        return users.size();
+    }
+
+    @Override
     public void sendMessage(IMessage message) {
         messages.add(message);
         for(IUser user: users){
@@ -103,5 +106,25 @@ public class Channel implements IChannel {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public int getID(){
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Channel)) return false;
+        Channel channel = (Channel) o;
+        return id == channel.getID() &&
+                Objects.equals(getName(), channel.getName());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getName(), id);
     }
 }

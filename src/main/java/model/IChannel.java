@@ -7,12 +7,15 @@ public interface IChannel {
     Collection<String> getAllUserNames();
     List<IMessage> getAllMessages();
     List<IMessage> getLastMessages(int index);
+    int getNumberOfUsers();
 
     void sendMessage(IMessage message);
     void join(IUser user);
     void leave(IUser user);
 
     String getName();
+    int getID();
+
 
 
 
