@@ -48,8 +48,8 @@ public class Channel implements IChannel {
 
     /**
      * This method will copy a list
-     * @param list
-     * @param <T>
+     * @param list the list to be copied
+     * @param <T> any object
      * @return the copy
      */
     private <T> List<T> copyOfList(List<T> list) {
@@ -71,11 +71,19 @@ public class Channel implements IChannel {
         //Is copy of list really needed?
     }
 
+    /**
+     * This method returns how many users the channel has
+     * @return number of users
+     */
     @Override
     public int getNumberOfUsers() {
         return users.size();
     }
 
+    /**
+     * This method sends the given to all it's users.
+     * @param message The message to be broadcast to all users.
+     */
     @Override
     public void sendMessage(IMessage message) {
         messages.add(message);
