@@ -25,10 +25,9 @@ public class Server implements IServer {
     public Collection<IChannel> getUserChannels(IUser user) {
         final Collection<IChannel> channelsToReturn = new ArrayList<>();
         channels.forEach(channel -> {
-            //TODO
-            /*if(channel.hasUser(user)){ //We need to be able to check if a channel has a user
+            if(channel.hasUser(user)){ //We need to be able to check if a channel has a user
                 channelsToReturn.add(channel);
-            }*/
+            }
         });
         return channelsToReturn;
     }
@@ -54,12 +53,11 @@ public class Server implements IServer {
      */
     @Override
     public IChannel getChannel(int id) {
-        channels.forEach(channel -> {
-            //Todo
-            /*if(channel.getID() == id){
-                return true;
-            }*/
-        });
+        for(IChannel c:channels){
+            if(c.getID()==id){
+                return c;
+            }
+        }
         //throw NoChannelFoundException if no channel found
         return null;
     }
