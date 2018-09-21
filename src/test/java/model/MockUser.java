@@ -14,7 +14,7 @@ public class MockUser extends User {
 
     @Override
     public void sendMessageToClients(IMessage message){
-        super.sendMessageToClients(message);
+        //super.sendMessageToClients(message);
         messages.add(message);
     }
 

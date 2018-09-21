@@ -14,7 +14,7 @@ public class ChannelTest {
     private IChannel channel;
     @Before
     public void setUp() throws Exception {
-        channel = new Channel("Together4Ever");
+        channel = new Channel("Together4Ever",1);
     }
 
     @After
@@ -40,8 +40,7 @@ public class ChannelTest {
 
     @Test
     public void getAllMessages() {
-        //Create channel and three messages with different data, send them, and check if the channel's messages contains the same
-        //info as the three created messages
+        //Create channel and two messages. Send the messages and check if the channel has two messages.
         IUser userOne = new User("UserOne", "password");
         LocalDateTime timeStampOne = LocalDateTime.of(2013,3,4,15,23);
         IUser userTwo = new User("UserTwo", "password");
@@ -53,20 +52,9 @@ public class ChannelTest {
         channel.sendMessage(messageOne);
         channel.sendMessage(messageTwo);
 
-
-        List<IMessage> messages = channel.getAllMessages();
-
         assertTrue(channel.getAllMessages().size() == 2);
 
-        /*assertEquals(messages.get(0).getTimestamp().getHour(),15);
-        assertTrue(messages.get(0).getSender().getName().equals("UserOne"));
-        assertTrue(messages.get(0).getMessage().equals("Hello my friends!"));
-
-        assertEquals(messages.get(1).getTimestamp().getMinute(),56);
-        assertTrue(messages.get(1).getSender().getName().equals("UserTwo"));
-        assertTrue(messages.get(1).getMessage().equals("Hi how are you?"));*/
-
-
+        //Perhaps we should check if the received messages holds the correct data?
     }
 
     @Test
@@ -80,27 +68,14 @@ public class ChannelTest {
 
         IMessage messageOne = new Message(userOne,"Hello my friends!",timeStampOne);
         IMessage messageTwo = new Message(userTwo,"Hi how are you?",timeStampTwo);
-        IMessage messageThree = new Message(userOne,"Tjenixen",timeStampTwo);
 
         channel.sendMessage(messageOne);
         channel.sendMessage(messageTwo);
-        channel.sendMessage(messageThree);
+        ;
 
-        List<IMessage> messages = channel.getLastMessages(2);
-        assertTrue(channel.getLastMessages(2).size()==2);
+        assertTrue(channel.getLastMessages(1).size()==1);
 
-        /*//This should equal messageTwo's data
-        assertEquals(messages.get(0).getTimestamp().getMinute(),56);
-        assertTrue(messages.get(0).getSender().getName().equals("UserTwo"));
-        assertTrue(messages.get(0).getMessage().equals("Hi how are you?"));
-
-        //This should equal messageThree's data
-        assertEquals(messages.get(1).getTimestamp().getDayOfMonth(),11);
-        assertTrue(messages.get(1).getSender().getName().equals("UserOne"));
-        assertTrue(messages.get(1).getMessage().equals("Tjenixen"));
-
-        assertFalse(messages.get(0).getMessage().equals("Hello my friends!"));*/
-
+        //Perhaps we should check if the received messages holds the correct data?
 
     }
 
@@ -108,16 +83,15 @@ public class ChannelTest {
     public void join() {
         IUser user = new MockUser("UserOne", "Password");
         channel.join(user);
-        assertTrue(channel.getAllUserNames().size()==1);
+        assertTrue(channel.getNumberOfUsers()==1);
     }
 
     @Test
     public void leave() {
         IUser user = new MockUser("UserOne", "Password");
-        Channel channel = new Channel("Channel");
         channel.join(user);
         channel.leave(user);
-        assertTrue(channel.getAllUserNames().size()==0);
+        assertTrue(channel.getNumberOfUsers()==0);
     }
 
     @Test
@@ -139,5 +113,26 @@ public class ChannelTest {
         assertEquals(1,userOne.getReceivedMessages().size());
 
 
+    }
+
+    @Test
+    public void hasUser(){
+        IUser user = new MockUser("user","password");
+        IUser userTwo = new MockUser("userTwo","password");
+        channel.join(user);
+        assertTrue(channel.hasUser(user));
+        assertFalse(channel.hasUser(userTwo));
+    }
+
+    @Test
+    public void equals(){
+        Channel otherChannel = new Channel("Together4Ever",2);
+        assertFalse(channel.equals(otherChannel));
+
+    }
+
+    @Test
+    public void getID(){
+        assertTrue(channel.getID()==1);
     }
 }

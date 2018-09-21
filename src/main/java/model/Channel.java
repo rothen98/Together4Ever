@@ -19,6 +19,7 @@ public class Channel implements IChannel {
         this.name = name;
         this.users = new HashSet<>();
         this.messages = new ArrayList<>();
+        this.id = id;
     }
 
     /**
@@ -134,8 +135,8 @@ public class Channel implements IChannel {
         if (this == o) return true;
         if (!(o instanceof Channel)) return false;
         Channel channel = (Channel) o;
-        return id == channel.getID() &&
-                Objects.equals(getName(), channel.getName());
+        return id == channel.getID() && getName().equals(channel.getName());
+
     }
 
     @Override
