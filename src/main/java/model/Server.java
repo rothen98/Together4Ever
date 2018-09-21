@@ -5,6 +5,14 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
+/**
+ * This class contains data about which usersand channels that exists.
+ * There are methods to:
+ * Get a certain user or channel
+ * Get all channel names
+ * Get all channels a certain user is a member of
+ * Add new users and channels
+ */
 public class Server implements IServer {
     private final Collection<IUser> users;
     private final Collection<IChannel> channels;
@@ -74,7 +82,7 @@ public class Server implements IServer {
                  throw WrongPasswordException
                 }*/
         });
-        //throw NoUserFoundException if user not found
+        //throw NoSuchUserFoundException if user not found
         return null;
 
     }
