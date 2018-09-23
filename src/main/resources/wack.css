@@ -1,0 +1,15 @@
+
+.text-small{
+    -fx-font-size: 9px;
+    -fx-font-family: Arial;
+}
+
+.text-normal{
+    -fx-font-size: 13px;
+    -fx-font-family: Arial;
+}
+
+.text-large{
+    -fx-font-size: 20px;
+    -fx-font-family: Arial;
+}
