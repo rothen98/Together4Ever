@@ -1,10 +1,7 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Tobias Lindroth
@@ -16,13 +13,13 @@ public class Channel implements IChannel {
     private Collection<IUser> users;
     private List<IMessage> messages;
     private String name;
+    private int id;
 
-    public Channel(String name) {
+    public Channel(String name,int id) {
         this.name = name;
         this.users = new HashSet<>();
         this.messages = new ArrayList<>();
-
-
+        this.id = id;
     }
 
     /**
@@ -50,8 +47,8 @@ public class Channel implements IChannel {
 
     /**
      * This method will copy a list
-     * @param list
-     * @param <T>
+     * @param list the list to be copied
+     * @param <T> any object
      * @return the copy
      */
     private <T> List<T> copyOfList(List<T> list) {
@@ -73,6 +70,19 @@ public class Channel implements IChannel {
         //Is copy of list really needed?
     }
 
+    /**
+     * This method returns how many users the channel has
+     * @return number of users
+     */
+    @Override
+    public int getNumberOfUsers() {
+        return users.size();
+    }
+
+    /**
+     * This method sends the given to all it's users.
+     * @param message The message to be broadcast to all users.
+     */
     @Override
     public void sendMessage(IMessage message) {
         messages.add(message);
@@ -99,9 +109,39 @@ public class Channel implements IChannel {
         users.remove(user);
     }
 
+    /***
+     * This method evaluates whether the given user is a member of the channel or not.
+     * @param user The user you want to check if he/she is a member.
+     * @return if the user is a member of the channel.
+     */
+    @Override
+    public boolean hasUser(IUser user) {
+        return users.contains(user);
+    }
+
 
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public int getID(){
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Channel)) return false;
+        Channel channel = (Channel) o;
+        return id == channel.getID() && getName().equals(channel.getName());
+
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getName(), id);
     }
 }
