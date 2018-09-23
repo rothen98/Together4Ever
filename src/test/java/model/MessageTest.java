@@ -30,7 +30,7 @@ public class MessageTest {
 
     @Test
     public void getMessage() {
-        //just creating a message and checking that it cant be changed
+        //Creating a message and checking that it cant be changed
         String newMessage = message.getMessage();
         String testMessage = "These wont be the same";
         //newMessage = testMessage;
@@ -47,9 +47,17 @@ public class MessageTest {
         int hour = timestamp.getHour();
         int minute = timestamp.getMinute();
         int second = timestamp.getSecond();
+        String sendTime = hour + ":" + minute;
 
         assertTrue(day == 23);
-        //Ill do the same for the other variables
+        assertTrue(month == 9);
+        assertTrue(year == 2018);
+        assertNotEquals(hour, 23);
+        assertTrue(hour == timestamp.getHour());
+        assertTrue(minute == timestamp.getMinute());
+        assertNotEquals(second, 05);
+        assertNotNull(timestamp);
+        assertEquals(sendTime, hour+":"+minute);
 
     }
 
@@ -59,6 +67,9 @@ public class MessageTest {
         sender2 = new User("TestName", "Password23");
 
         assertNotEquals(sender, sender2);
+        assertNotNull(sender);
+        assertNotNull(sender2);
+        
         //Dont know what Ill do for test right now...
     }
 }
