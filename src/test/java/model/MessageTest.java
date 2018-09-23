@@ -36,11 +36,11 @@ public class MessageTest {
         //newMessage = testMessage;
         assertNotEquals(newMessage, testMessage);
         assertTrue(newMessage.length() == 15);
-        //Will probably test something more here.
     }
 
     @Test
     public void getTimestamp() {
+        //Ensuring that the timestamp is accurate and that we can extract the correct information from the object
         int day = timestamp.getDayOfMonth();
         int month = timestamp.getMonthValue();
         int year = timestamp.getYear();
@@ -48,28 +48,29 @@ public class MessageTest {
         int minute = timestamp.getMinute();
         int second = timestamp.getSecond();
         String sendTime = hour + ":" + minute;
+        LocalDateTime testTimestamp = LocalDateTime.now();
 
-        assertTrue(day == 23);
-        assertTrue(month == 9);
-        assertTrue(year == 2018);
+        assertTrue(day == testTimestamp.getDayOfMonth());
+        assertTrue(month == testTimestamp.getMonthValue());
+        assertTrue(year == testTimestamp.getYear());
         assertNotEquals(hour, 23);
-        assertTrue(hour == timestamp.getHour());
-        assertTrue(minute == timestamp.getMinute());
-        assertNotEquals(second, 05);
+        assertTrue(hour == testTimestamp.getHour());
+        assertTrue(minute == testTimestamp.getMinute());
+        assertNotEquals(second, 5.543);
         assertNotNull(timestamp);
-        assertEquals(sendTime, hour+":"+minute);
+        assertEquals(sendTime, testTimestamp.getHour()+":"+testTimestamp.getMinute());
 
     }
 
     @Test
     public void getSender() {
+        //Create a sender for the message and check to make sure they aren't empty
         sender = new User("Name", "Password12");
         sender2 = new User("TestName", "Password23");
 
         assertNotEquals(sender, sender2);
         assertNotNull(sender);
         assertNotNull(sender2);
-        
-        //Dont know what Ill do for test right now...
+        assertTrue(sender.getName() == "Name");
     }
 }
