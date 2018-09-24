@@ -33,6 +33,10 @@ public class TextMessageTest {
         //newMessage = testMessage;
         assertNotEquals(newTextMessage, testTextMessage);
         assertTrue(newTextMessage.length() == 15);
+        timestamp = textMessage.getTimestamp();
+        //assertTrue(timestamp.getYear() == 2018);
+        sender = textMessage.getSender();
+        //assertFalse(sender.getName() == "");
 
     }
 }
