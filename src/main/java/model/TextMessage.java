@@ -19,7 +19,7 @@ public class TextMessage extends Message{
 
     /**
      *
-     * @return the active text message 
+     * @return the active text message
      */
     public String getTextMessage() {
         return textMessage;
