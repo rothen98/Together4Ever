@@ -15,6 +15,7 @@ public class TextMessage extends Message{
 
     public TextMessage (IUser sender, String text, LocalDateTime timestamp) {
         super(sender, text, timestamp);
+        this.textMessage = text;
     }
 
     /**

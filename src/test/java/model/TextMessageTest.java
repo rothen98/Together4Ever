@@ -27,6 +27,12 @@ public class TextMessageTest {
 
     @Test
     public void getTextMessage() {
-        
+        //Creating a textMessage and checking that it cant be changed
+        String newTextMessage = textMessage.getTextMessage();
+        String testTextMessage = "These wont be the same";
+        //newMessage = testMessage;
+        assertNotEquals(newTextMessage, testTextMessage);
+        assertTrue(newTextMessage.length() == 15);
+
     }
 }
