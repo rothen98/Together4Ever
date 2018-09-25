@@ -12,14 +12,14 @@ import java.time.LocalDateTime;
 public class Message implements IMessage {
 
     private IUser sender;
-    private String message;
+    private IMessageContent messageContent;
     private LocalDateTime timestamp;
 
 
-    public Message(IUser sender, String message, LocalDateTime timestamp) {
+    public Message(IUser sender, IMessageContent messageContent, LocalDateTime timestamp) {
 
         this.sender = sender;
-        this.message = message;
+        this.messageContent = messageContent;
         this.timestamp = timestamp;
     }
 
@@ -27,14 +27,16 @@ public class Message implements IMessage {
      *
      * @return the (text) message that was written
      */
-    public String getMessage() {
-        return message;
+    @Override
+    public IMessageContent getMessageContent() {
+        return messageContent;
     }
 
     /**
      *
      * @return the timestamp in a specific format
      */
+    @Override
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
@@ -43,6 +45,7 @@ public class Message implements IMessage {
      *
      * @return the person who wrote the message
      */
+    @Override
     public IUser getSender() {
         return sender;
     }

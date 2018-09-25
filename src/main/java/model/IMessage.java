@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public interface IMessage {
     IUser getSender();
-    String getMessage();
+    IMessageContent getMessageContent();
     LocalDateTime getTimestamp();
     
 
