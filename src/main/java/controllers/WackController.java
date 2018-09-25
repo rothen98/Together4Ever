@@ -4,17 +4,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class WackController implements Initializable {
 
+    @FXML AnchorPane mainView;
+    @FXML AnchorPane newChannelView;
     @FXML Button sendButton;
     @FXML Button searchButton;
-    @FXML Button createButton;
+    @FXML Button addGroupButton;
+    @FXML Button createGroupButton;
+    @FXML Button closeCreateViewButton;
     @FXML TextField typeField;
     @FXML TextField searchBar;
+    @FXML TextField channelName;
+    @FXML TextField channelDescription;
 
     private void init() {
         
@@ -48,8 +55,31 @@ public class WackController implements Initializable {
     }
 
     @FXML
-    public void createButtonPressed() {
-        System.out.println("New group created");
+    public void addGroupButtonPressed() {
+        newChannelView.toFront();
+    }
+
+    @FXML
+    public void createGroupButtonPressed() {
+        CharSequence channelNameCharacters = channelName.getCharacters();
+        CharSequence channelDescriptionCharacters = channelDescription.getCharacters();
+        String channelNameText;
+        String channelDescriptionText;
+        if (channelNameCharacters.length() > 0) {
+            channelNameText = channelNameCharacters.toString();
+            channelDescriptionText = channelDescriptionCharacters.toString();
+            System.out.println("New group " + channelNameText + " created");
+            System.out.println("Description: " + channelDescriptionText);
+        } else {
+            System.out.println("Type in a group name");
+        }
+        channelName.clear();
+        channelDescription.clear();
+    }
+
+    @FXML
+    public void closeCreateViewButtonPressed() {
+        mainView.toFront();
     }
 
     @Override
