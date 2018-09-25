@@ -14,7 +14,7 @@ public class ChannelTest {
     private IChannel channel;
     @Before
     public void setUp() throws Exception {
-        channel = new Channel("Together4Ever",1);
+        channel = new Channel("Together4Ever");
     }
 
     @After
@@ -126,13 +126,14 @@ public class ChannelTest {
 
     @Test
     public void equals(){
-        Channel otherChannel = new Channel("Together4Ever",2);
+        Channel otherChannel = new Channel("Together4Ever");
         assertFalse(channel.equals(otherChannel));
 
     }
 
     @Test
     public void getID(){
-        assertTrue(channel.getID()==1);
+        IChannel otherChannel = new Channel("otherChannel");
+        assertTrue(channel.getID() +1 == otherChannel.getID());
     }
 }

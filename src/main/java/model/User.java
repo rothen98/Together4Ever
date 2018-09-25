@@ -3,6 +3,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Viktor Franzén
@@ -39,15 +40,26 @@ public class User implements IUser {
     /**
      * Checks if the client is in the clients collection. If so and the password is
      * matching the objects password it removes it.
+     * Using a Arraylist to avoid a ConcurrentModificationError when removing while looping.
      * @param client The client that wants to be removed.
      * @param password The password that needs to match the objects password.
      */
     public void removeClient(IClient client, String password){
+        List<IClient> removeThisClient = new ArrayList<>();
         clients.forEach(x -> {
-            if(x==client && this.password.equals(password)){
-                clients.remove(client);
+            if(x.equals(client) && this.password.equals(password)){
+                removeThisClient.add(client);
             }
         });
+        clients.remove(removeThisClient.get(0));
+    }
+
+    /**
+     * A method mostly used in testing to see if clients are added and removed.
+     * @return Returns the size of the clients list.
+     */
+    public int getAmountOfClients(){
+        return clients.size();
     }
 
     /**
@@ -57,12 +69,17 @@ public class User implements IUser {
 
     @Override
     public void sendMessageToClients(IMessage message) {
+
         clients.forEach(x -> x.update(message));
     }
 
 
+    /**
+     * @return Returns the value in the name variable.
+     */
     @Override
     public String getName() {
         return name;
     }
+
 }
