@@ -39,10 +39,17 @@ public class ServerTest {
     }
 
     @Test
-    public void getChannel() {
+    public void getChannel() throws NoChannelFoundException {
         IChannel channel = new Channel("channel");
         server.addChannel(channel);
         assertTrue(server.getChannel(channel.getID()).equals(channel));
+    }
+
+    @Test(expected = NoChannelFoundException.class)
+    public void getChannelNotFound() throws NoChannelFoundException {
+        IChannel channel = new Channel("channel");
+        server.addChannel(channel);
+        server.getChannel(channel.getID()+1);
     }
 
     @Test(expected=NoSuchUserFoundException.class)
