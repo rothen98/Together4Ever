@@ -1,4 +1,4 @@
 package model;
 
-public class ImageContent {
+public class ImageContent implements IMessageContent {
 }

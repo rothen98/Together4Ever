@@ -1,4 +1,4 @@
 package model;
 
-public class TextContent {
+public class TextContent implements IMessageContent {
 }
