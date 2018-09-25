@@ -54,23 +54,31 @@ public class Server implements IServer {
     }
 
     /**
+     *
      * This method will check if there is a channel with the given id.
      * If it does, this channel will be returned.
-     * @param id
+     * @param id the id of the channel that should be returned
      * @return the channel with the given id
+     * @throws NoChannelFoundException if no channel has the given id
      */
     @Override
-    public IChannel getChannel(int id) {
+    public IChannel getChannel(int id) throws NoChannelFoundException {
         for(IChannel c:channels){
             if(c.getID()==id){
                 return c;
             }
         }
-        //throw NoChannelFoundException if no channel found
-        return null;
+        throw new NoChannelFoundException();
     }
 
-
+    /**
+     * Use this method to get a certain user
+     * @param name the name of the user
+     * @param password the password of the user
+     * @return The user with the given name and password
+     * @throws WrongPasswordException There is a user with the given name, but the password is wrong
+     * @throws NoSuchUserFoundException There is no user with the given name
+     */
     @Override
     public IUser getUser(String name, String password) throws WrongPasswordException, NoSuchUserFoundException {
         for(IUser user:users){
@@ -85,11 +93,19 @@ public class Server implements IServer {
         throw new NoSuchUserFoundException();
     }
 
+    /**
+     * This method will add the given channel to the server
+     * @param channel the channel you want to list at the server
+     */
     @Override
     public void addChannel(IChannel channel) {
         channels.add(channel);
     }
 
+    /**
+     * This method will add the given user to the server
+     * @param user the channel you want to list at the server
+     */
     @Override
     public void addUser(IUser user) {
         users.add(user);
