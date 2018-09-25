@@ -74,7 +74,7 @@ public class User implements IUser {
     }
 
     /**
-     * Checks if the two passwords match. 
+     * Checks if the two passwords match.
      * @param password The password that needs to be checked.
      * @return Returns true if the argument password is matching the objects.
      */
