@@ -73,6 +73,14 @@ public class User implements IUser {
         clients.forEach(x -> x.update(message));
     }
 
+    @Override
+    public boolean autherizeLogIn(String password) {
+        if(this.password.equals(password)){
+            return true;
+        }
+        return false;
+    }
+
 
     /**
      * @return Returns the value in the name variable.
