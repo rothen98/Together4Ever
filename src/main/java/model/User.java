@@ -73,8 +73,13 @@ public class User implements IUser {
         clients.forEach(x -> x.update(message));
     }
 
+    /**
+     * Checks if the two passwords match. 
+     * @param password The password that needs to be checked.
+     * @return Returns true if the argument password is matching the objects.
+     */
     @Override
-    public boolean autherizeLogIn(String password) {
+    public boolean authorizeLogIn(String password) {
         if(this.password.equals(password)){
             return true;
         }
