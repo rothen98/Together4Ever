@@ -71,6 +71,7 @@ public class ServerTest {
         server.addUser(user);
         IUser userTwo = server.getUser("Spondon", "password");
         assertTrue(userTwo.equals(user));
+
     }
 
 

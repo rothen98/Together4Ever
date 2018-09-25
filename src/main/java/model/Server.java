@@ -68,6 +68,7 @@ public class Server implements IServer {
                 return c;
             }
         }
+
         throw new NoChannelFoundException();
     }
 
@@ -97,15 +98,18 @@ public class Server implements IServer {
      * This method will add the given channel to the server
      * @param channel the channel you want to list at the server
      */
+
     @Override
     public void addChannel(IChannel channel) {
         channels.add(channel);
     }
 
+
     /**
      * This method will add the given user to the server
      * @param user the channel you want to list at the server
      */
+
     @Override
     public void addUser(IUser user) {
         users.add(user);
