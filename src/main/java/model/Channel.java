@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author Tobias Lindroth
@@ -15,11 +16,13 @@ public class Channel implements IChannel {
     private String name;
     private int id;
 
-    public Channel(String name,int id) {
+    private static final AtomicInteger idCounter = new AtomicInteger(0);
+
+    public Channel(String name) {
         this.name = name;
         this.users = new HashSet<>();
         this.messages = new ArrayList<>();
-        this.id = id;
+        this.id = idCounter.getAndIncrement();
     }
 
     /**
