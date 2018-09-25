@@ -20,7 +20,7 @@ public class MessageTest {
 
     @Before
     public void setUp() throws Exception {
-        message = new Message(sender, messageContent, timestamp);
+        message = new Message(sender, messageContent);
     }
 
     @After
