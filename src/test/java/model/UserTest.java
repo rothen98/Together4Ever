@@ -68,4 +68,10 @@ public class UserTest {
         user.connectClient(client, "password");
         assertTrue(user.getAmountOfClients() == 1);
     }
+
+    @Test
+    public void authorizeLogIn() {
+        assertTrue(user.authorizeLogIn("password"));
+        assertFalse(user.authorizeLogIn("wrongpassword"));
+    }
 }
