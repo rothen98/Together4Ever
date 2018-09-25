@@ -72,19 +72,17 @@ public class Server implements IServer {
 
 
     @Override
-    public IUser getUser(String name, String password) {
-        users.forEach(user->{
-            /*if(user.getName().equals(name)){
-                if(user.authorize(password)
-                {
+    public IUser getUser(String name, String password) throws WrongPasswordException, NoSuchUserFoundException {
+        for(IUser user:users){
+            if(user.getName().equals(name)){
+                if(user.authorizeLogIn(password)) {
                     return user;
                 }else{
-                 throw WrongPasswordException
-                }*/
-        });
-        //throw NoSuchUserFoundException if user not found
-        return null;
-
+                    throw new WrongPasswordException();
+                }
+            }
+        }
+        throw new NoSuchUserFoundException();
     }
 
     @Override

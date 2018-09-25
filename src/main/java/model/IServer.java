@@ -8,7 +8,7 @@ public interface IServer {
     Collection<String> getChannelNames();
 
     IChannel getChannel(int id);
-    IUser getUser(String name, String password);
+    IUser getUser(String name, String password) throws WrongPasswordException, NoSuchUserFoundException;
 
     void addChannel(IChannel channel);
     void addUser(IUser user);
