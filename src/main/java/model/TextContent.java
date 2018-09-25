@@ -1,13 +1,19 @@
 package model;
 
 public class TextContent implements IMessageContent {
+
+    private String textMessage;
+
+    public TextContent(String textMessage) {
+        this.textMessage = textMessage;
+    }
     @Override
     public MessageType getType() {
-        return null;
+        return MessageType.TEXT;
     }
 
     @Override
     public String getMessage() {
-        return null;
+        return textMessage;
     }
 }
