@@ -42,12 +42,13 @@ public class ChannelTest {
     public void getAllMessages() {
         //Create channel and two messages. Send the messages and check if the channel has two messages.
         IUser userOne = new User("UserOne", "password");
-        LocalDateTime timeStampOne = LocalDateTime.of(2013,3,4,15,23);
         IUser userTwo = new User("UserTwo", "password");
-        LocalDateTime timeStampTwo = LocalDateTime.of(2008,9,11,10,56);
 
-        IMessage messageOne = new Message(userOne,"Hello my friends!",timeStampOne);
-        IMessage messageTwo = new Message(userTwo,"Hi how are you?",timeStampTwo);
+        IMessageContent textMessageOne = new TextContent("Hello my friends");
+        IMessageContent textMessageTwo = new TextContent("Hi how are you?");
+
+        IMessage messageOne = new Message(userOne,textMessageOne);
+        IMessage messageTwo = new Message(userTwo,textMessageTwo);
 
         channel.sendMessage(messageOne);
         channel.sendMessage(messageTwo);
@@ -62,18 +63,15 @@ public class ChannelTest {
         //Create a channel and three messages, send team, and check if the channel's two latest messages contains the same
         // info as the two messages you sent last.
         IUser userOne = new MockUser("UserOne", "password");
-        LocalDateTime timeStampOne = LocalDateTime.of(2013,3,4,15,23);
         IUser userTwo = new User("UserTwo", "password");
-        LocalDateTime timeStampTwo = LocalDateTime.of(2016,9,11,10,56);
 
-        IMessage messageOne = new Message(userOne,"Hello my friends!",timeStampOne);
-        IMessage messageTwo = new Message(userTwo,"Hi how are you?",timeStampTwo);
+        IMessage messageOne = new Message(userOne,new TextContent("Hello my friends!"));
+        IMessage messageTwo = new Message(userTwo,new TextContent("Hi how are you?"));
 
         channel.sendMessage(messageOne);
         channel.sendMessage(messageTwo);
-        ;
 
-        assertTrue(channel.getLastMessages(1).size()==1);
+        assertEquals(1,channel.getLastMessages(1).size());
 
         //Perhaps we should check if the received messages holds the correct data?
 
@@ -107,7 +105,7 @@ public class ChannelTest {
         MockUser userTwo = new MockUser("UserTwo", "password");
         channel.join(userOne);
         channel.join(userTwo);
-        IMessage messageOne = new Message(userOne,"Hello my friends!",timeStampOne);
+        IMessage messageOne = new Message(userOne,new TextContent("Hello my friends!"));
         channel.sendMessage(messageOne);
         assertEquals(1,userTwo.getReceivedMessages().size());
         assertEquals(1,userOne.getReceivedMessages().size());
