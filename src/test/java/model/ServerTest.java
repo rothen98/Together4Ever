@@ -21,7 +21,7 @@ public class ServerTest {
 
     @Test
     public void getUserChannels() {
-        IChannel channel = new Channel("channel",1);
+        IChannel channel = new Channel("channel");
         IUser user = new MockUser("user","h");
         server.addChannel(channel);
         server.addUser(user);
@@ -32,7 +32,7 @@ public class ServerTest {
 
     @Test
     public void getChannelNames() {
-        IChannel channel = new Channel("channel",1);
+        IChannel channel = new Channel("channel");
         server.addChannel(channel);
         assertTrue(server.getChannelNames().size()==1);
         assertTrue(server.getChannelNames().contains("channel"));
@@ -40,14 +40,30 @@ public class ServerTest {
 
     @Test
     public void getChannel() {
-        IChannel channel = new Channel("channel",1);
+        IChannel channel = new Channel("channel");
         server.addChannel(channel);
-        assertTrue(server.getChannel(1).equals(channel));
+        assertTrue(server.getChannel(channel.getID()).equals(channel));
     }
 
-    @Test
-    public void getUser() {
-        fail("Test can't be implemented yet");
+    @Test(expected=NoSuchUserFoundException.class)
+    public void getNotExistingUser() throws NoSuchUserFoundException, WrongPasswordException {
+        IUser user = new User("Tobias", "password");
+        server.addUser(user);
+        IUser userTwo = server.getUser("Spondon", "password");
+    }
+
+    @Test(expected=WrongPasswordException.class)
+    public void getUserWrongPassword() throws NoSuchUserFoundException, WrongPasswordException {
+        IUser user = new User("Tobias", "password");
+        server.addUser(user);
+        IUser userTwo = server.getUser("Tobias", "hej");
+    }
+    @Test(expected=NoSuchUserFoundException.class)
+    public void getUser() throws NoSuchUserFoundException, WrongPasswordException {
+        IUser user = new User("Tobias", "password");
+        server.addUser(user);
+        IUser userTwo = server.getUser("Spondon", "password");
+        assertTrue(userTwo.equals(user));
     }
 
 
