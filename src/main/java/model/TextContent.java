@@ -2,7 +2,7 @@ package model;
 
 public class TextContent implements IMessageContent {
 
-    private String textMessage;
+    private final String textMessage;
 
     public TextContent(String textMessage) {
         this.textMessage = textMessage;

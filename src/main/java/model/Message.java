@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
 
 public class Message implements IMessage {
 
-    private IUser sender;
-    private IMessageContent messageContent;
-    private  LocalDateTime timestamp;
+    private final IUser sender;
+    private final IMessageContent messageContent;
+    private final LocalDateTime timestamp;
 
 
     public Message(IUser sender, IMessageContent messageContent) {
