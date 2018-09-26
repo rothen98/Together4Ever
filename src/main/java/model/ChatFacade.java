@@ -42,7 +42,8 @@ public class ChatFacade {
         return client;
     }
 
-    public void addClientListner() {
-        //will do something later inshallah
+    public void addClientListner(IClientListener listener) {
+         //client.addListener(listener);
+
     }
 }
