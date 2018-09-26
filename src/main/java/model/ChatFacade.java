@@ -23,7 +23,7 @@ public class ChatFacade {
         return server.getUserChannels(user);
     }
 
-    public IUser createUSer(String name, String password) {
+    public IUser createUser(String name, String password) {
         IUser user = new User(name, password);
         server.addUser(user);
         return user;
