@@ -2,7 +2,7 @@ package model;
 
 public class ImageContent implements IMessageContent {
 
-    private String imageMessage;
+    private final String imageMessage;
 
     public ImageContent(String imageMessage) {
         this.imageMessage = imageMessage;

@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
 public class ChatFacadeTest {
 
     private ChatFacade facade;
+    private IServer server;
 
     @Before
     public void setUp() throws Exception {
@@ -22,6 +23,10 @@ public class ChatFacadeTest {
 
     @Test
     public void createChannel() {
+        String channelName = "This is my channel name";
+        server = new Server();
+        facade.createChannel(channelName);
+        assertEquals(1, server.getChannelNames().size());
     }
 
     @Test

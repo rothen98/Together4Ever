@@ -33,7 +33,6 @@ public class MessageTest {
         //Creating a message and checking that it cant be changed
         IMessageContent newMessage = message.getMessageContent();
         String testMessage = "These wont be the same";
-        //newMessage = testMessage;
         assertNotEquals(newMessage, testMessage);
         //assertTrue(newMessage.length() == 15);
     }
