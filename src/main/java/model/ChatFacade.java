@@ -4,11 +4,11 @@ package model;
 import java.util.Collection;
 
 public class ChatFacade {
-    private IServer server;
+    private final IServer server;
     private IClient client;
 
     public ChatFacade() {
-
+        this.server = new Server();
     }
 
     public IChannel createChannel(String channelName) {
@@ -18,7 +18,7 @@ public class ChatFacade {
         return channel;
     }
 
-    public Collection<IChannel> getUsersChannel(IUser user) {
+    public Collection<IChannel> getUserChannels(IUser user) {
 
         return server.getUserChannels(user);
     }
