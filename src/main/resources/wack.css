@@ -13,3 +13,20 @@
     -fx-font-size: 20px;
     -fx-font-family: Arial;
 }
+
+.split-pane-divider{
+    -fx-padding: 0;
+
+}
+
+#labelRight{
+    -fx-text-alignment: right;
+}
+
+#lightbox{
+    -fx-background-color: rgba(0,0,0,0.75);
+}
+
+#createChannelDetail{
+    -fx-background-color: -fx-background;
+}

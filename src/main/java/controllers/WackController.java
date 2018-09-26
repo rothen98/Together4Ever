@@ -1,11 +1,12 @@
 package controllers;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
+import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -13,11 +14,6 @@ public class WackController implements Initializable {
 
     @FXML AnchorPane mainView;
     @FXML AnchorPane newChannelView;
-    @FXML Button sendButton;
-    @FXML Button searchButton;
-    @FXML Button addGroupButton;
-    @FXML Button createGroupButton;
-    @FXML Button closeCreateViewButton;
     @FXML TextField typeField;
     @FXML TextField searchBar;
     @FXML TextField channelName;
@@ -55,6 +51,16 @@ public class WackController implements Initializable {
     }
 
     @FXML
+    public void mouseTrap(Event event) {
+        event.consume();
+    }
+
+    @FXML
+    public void closeCreateChannelDetail() {
+        mainView.toFront();
+    }
+
+    @FXML
     public void addGroupButtonPressed() {
         newChannelView.toFront();
     }
@@ -75,6 +81,7 @@ public class WackController implements Initializable {
         }
         channelName.clear();
         channelDescription.clear();
+        mainView.toFront();
     }
 
     @FXML
