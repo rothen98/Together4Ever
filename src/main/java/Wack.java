@@ -1,3 +1,4 @@
+import controllers.LoginController;
 import controllers.WackController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,14 +11,14 @@ public class Wack extends Application{
     @Override
     public void start(Stage stage) throws Exception {
 
-        WackController controller = new WackController();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("wack.fxml"));
+        LoginController controller = new LoginController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("wack_login.fxml"));
         loader.setController(controller);
 
         Parent root = loader.load();
         //Parent root = FXMLLoader.load(getClass().getResource("wack.fxml"));
 
-        Scene scene = new Scene(root, 1000, 600);
+        Scene scene = new Scene(root, 600, 400);
 
         stage.setTitle("wack");
         stage.setScene(scene);

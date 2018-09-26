@@ -3,10 +3,11 @@ package controllers;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -18,9 +19,38 @@ public class WackController implements Initializable {
     @FXML TextField searchBar;
     @FXML TextField channelName;
     @FXML TextField channelDescription;
+    @FXML Button createGroupButton;
 
     private void init() {
         
+    }
+
+    @FXML
+    public void searchbarKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            searchButtonPressed();
+        }
+    }
+
+    @FXML
+    public void messageKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            sendButtonPressed();
+        }
+    }
+
+    @FXML
+    public void channelNameKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            channelDescription.requestFocus();
+        }
+    }
+
+    @FXML
+    public void channelDescriptionKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            createGroupButton.requestFocus();
+        }
     }
 
     @FXML
