@@ -1,23 +1,56 @@
 package controllers;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class WackController implements Initializable {
 
-    @FXML Button sendButton;
-    @FXML Button searchButton;
-    @FXML Button createButton;
+    @FXML AnchorPane mainView;
+    @FXML AnchorPane newChannelView;
     @FXML TextField typeField;
     @FXML TextField searchBar;
+    @FXML TextField channelName;
+    @FXML TextField channelDescription;
+    @FXML Button createGroupButton;
 
     private void init() {
         
+    }
+
+    @FXML
+    public void searchbarKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            searchButtonPressed();
+        }
+    }
+
+    @FXML
+    public void messageKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            sendButtonPressed();
+        }
+    }
+
+    @FXML
+    public void channelNameKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            channelDescription.requestFocus();
+        }
+    }
+
+    @FXML
+    public void channelDescriptionKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            createGroupButton.requestFocus();
+        }
     }
 
     @FXML
@@ -48,8 +81,42 @@ public class WackController implements Initializable {
     }
 
     @FXML
-    public void createButtonPressed() {
-        System.out.println("New group created");
+    public void mouseTrap(Event event) {
+        event.consume();
+    }
+
+    @FXML
+    public void closeCreateChannelDetail() {
+        mainView.toFront();
+    }
+
+    @FXML
+    public void addGroupButtonPressed() {
+        newChannelView.toFront();
+    }
+
+    @FXML
+    public void createGroupButtonPressed() {
+        CharSequence channelNameCharacters = channelName.getCharacters();
+        CharSequence channelDescriptionCharacters = channelDescription.getCharacters();
+        String channelNameText;
+        String channelDescriptionText;
+        if (channelNameCharacters.length() > 0) {
+            channelNameText = channelNameCharacters.toString();
+            channelDescriptionText = channelDescriptionCharacters.toString();
+            System.out.println("New group " + channelNameText + " created");
+            System.out.println("Description: " + channelDescriptionText);
+        } else {
+            System.out.println("Type in a group name");
+        }
+        channelName.clear();
+        channelDescription.clear();
+        mainView.toFront();
+    }
+
+    @FXML
+    public void closeCreateViewButtonPressed() {
+        mainView.toFront();
     }
 
     @Override

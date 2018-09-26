@@ -2,48 +2,86 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.StackPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WackController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@wack.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <SplitPane dividerPositions="0.29797979797979796" layoutX="7.0" layoutY="8.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+      <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane id="lightbox" fx:id="newChannelView" onMouseClicked="#closeCreateChannelDetail" prefHeight="412.0" prefWidth="953.0">
                <children>
-                  <Button fx:id="createButton" layoutX="58.0" layoutY="357.0" mnemonicParsing="false" onAction="#createButtonPressed" prefHeight="50.0" text="Create new group" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                  <TextField fx:id="searchBar" layoutX="4.0" layoutY="321.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="70.0" />
-                  <Button fx:id="searchButton" layoutX="112.0" layoutY="321.0" mnemonicParsing="false" onAction="#searchButtonPressed" prefWidth="70.0" text="Search" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="1.0" />
-               </children></AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                  <AnchorPane id="createChannelDetail" onMouseClicked="#mouseTrap" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
+                     <children>
+                        <Label id="labelRight" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefWidth="95.0" text="Channel name:" textAlignment="RIGHT" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="130.0" />
+                        <TextField fx:id="channelName" onKeyPressed="#channelNameKeyPressed" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="130.0" />
+                        <Label id="labelRight" alignment="CENTER_RIGHT" prefWidth="95.0" text="Description:" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="170.0" />
+                        <TextField fx:id="channelDescription" onKeyPressed="#channelDescriptionKeyPressed" prefHeight="72.0" prefWidth="167.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="170.0" />
+                        <Button fx:id="createGroupButton" mnemonicParsing="false" onAction="#createGroupButtonPressed" prefHeight="50.0" text="Create group" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="200.0" />
+                        <Button fx:id="closeCreateViewButton" mnemonicParsing="false" onAction="#closeCreateViewButtonPressed" prefHeight="30.0" prefWidth="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@closebutton.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </AnchorPane>
+            <AnchorPane fx:id="mainView" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <SplitPane dividerPositions="0.75" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane dividerPositions="0.25" prefHeight="160.0" prefWidth="200.0" style="-fx-border-width: 1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
-                              <FlowPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <Button fx:id="addGroupButton" layoutX="58.0" layoutY="357.0" mnemonicParsing="false" onAction="#addGroupButtonPressed" prefHeight="50.0" text="Add new group" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                              <TextField fx:id="searchBar" layoutX="4.0" layoutY="321.0" onKeyPressed="#searchbarKeyPressed" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="0.0" />
+                              <Button fx:id="searchButton" layoutX="112.0" layoutY="321.0" mnemonicParsing="false" onAction="#searchButtonPressed" prefWidth="70.0" text="Search" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="414.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
-                              <AnchorPane maxHeight="100.0" prefHeight="100.0" prefWidth="416.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <TextField fx:id="typeField" maxWidth="100.0" minHeight="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
-                                    <Button fx:id="sendButton" mnemonicParsing="false" onAction="#sendButtonPressed" prefHeight="100.0" prefWidth="100.0" text="Send" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
-                                 </children>
-                                 <padding>
-                                    <Insets top="-100.0" />
-                                 </padding>
-                              </AnchorPane>
+                              <SplitPane dividerPositions="0.85" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                       <children>
+                                          <FlowPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                       </children>
+                                    </AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="414.0">
+                                       <children>
+                                          <AnchorPane maxHeight="100.0" prefHeight="100.0" prefWidth="416.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <TextField fx:id="typeField" maxWidth="100.0" minHeight="100.0" onKeyPressed="#messageKeyPressed" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
+                                                <Button fx:id="sendButton" mnemonicParsing="false" onAction="#sendButtonPressed" prefHeight="100.0" prefWidth="100.0" text="Send" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
+                                             </children>
+                                             <padding>
+                                                <Insets top="-100.0" />
+                                             </padding>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
                            </children>
                         </AnchorPane>
                     </items>
                   </SplitPane>
                </children>
             </AnchorPane>
-        </items>
-      </SplitPane>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>
