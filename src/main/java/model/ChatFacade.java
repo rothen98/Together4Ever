@@ -43,7 +43,7 @@ public class ChatFacade {
     }
 
     public void addClientListner(IClientListener listener) {
-         //client.addListener(listener);
+         client.addListeners(listener);
 
     }
 }
