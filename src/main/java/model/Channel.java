@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * @author Tobias Lindroth
  *
+ * 
  * The Channel class contains data about the channel's users and messages.
  * There are methods to get the messages, the users names and also methods for joining and leaving the channel.
  */
