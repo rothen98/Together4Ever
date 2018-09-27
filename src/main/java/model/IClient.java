@@ -2,6 +2,9 @@ package model;
 
 public interface IClient {
 
-    void update(IMessage message);
+    void updateListeners(IMessage message);
+    void addListeners(IClientListener listener);
+    void removeListeners(IClientListener listener);
+    int getAmountOfListeners();
 
 }
