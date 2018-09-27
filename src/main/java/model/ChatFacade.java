@@ -46,4 +46,16 @@ public class ChatFacade {
          client.addListeners(listener);
 
     }
+
+    public void deleteClientListner(IClientListener listner) {
+        client.removeListeners(listner);
+    }
+
+    public void createTextMessage() {
+
+    }
+
+    public void createImageMessage() {
+        
+    }
 }
