@@ -6,6 +6,7 @@ import java.util.Collection;
 public class ChatFacade {
     private final IServer server;
     private IClient client;
+    //private IMessage message;
 
     public ChatFacade() {
         this.server = new Server();
@@ -56,6 +57,6 @@ public class ChatFacade {
     }
 
     public void createImageMessage() {
-        
+
     }
 }
