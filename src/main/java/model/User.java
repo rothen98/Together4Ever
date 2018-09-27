@@ -70,7 +70,7 @@ public class User implements IUser {
     @Override
     public void sendMessageToClients(IMessage message) {
 
-        clients.forEach(x -> x.update(message));
+        clients.forEach(x -> x.updateListeners(message));
     }
 
     /**

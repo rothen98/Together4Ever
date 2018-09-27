@@ -11,7 +11,7 @@ public class MockClient extends Client{
     }
 
     @Override
-    public void update(IMessage message) {
+    public void updateListeners(IMessage message) {
         //super.update(message);
         messages.add(message);
     }
