@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -25,6 +26,8 @@ public class LoginController implements Initializable {
     TextField signupUsername;
     @FXML
     TextField signupPassword;
+    @FXML
+    Button signupButton;
 
     private final ChatFacade chatFacade = new ChatFacade();
 
@@ -35,22 +38,66 @@ public class LoginController implements Initializable {
     }
 
     @FXML
+    public void signupUsernameKeyPressed(KeyEvent event) {
+        //Needs to be improved/shortened
+        if (event.getCode() == KeyCode.ENTER) {
+            signupPassword.requestFocus();
+        } else if (event.getCode() == KeyCode.DOWN) {
+            signupPassword.requestFocus();
+        } else if (event.getCode() == KeyCode.TAB) {
+            signupPassword.requestFocus();
+        }
+    }
+
+    @FXML
     public void signupKeyPressed(KeyEvent event) {
+        //Needs to be improved/shortened
         if (event.getCode() == KeyCode.ENTER) {
             signupButtonPressed();
+        } else if (event.getCode() == KeyCode.UP) {
+            signupUsername.requestFocus();
+        } else if (event.getCode() == KeyCode.DOWN) {
+            signupButton.requestFocus();
         }
     }
 
     @FXML
     public void signupButtonPressed() {
-        CharSequence signupUsernameInput = signupUsername.getCharacters();
-        CharSequence signupPasswordInput = signupPassword.getCharacters();
-        if (signupUsernameInput.length() < 1) {
-            System.out.println("Please choose a username");
-        } else if (signupPasswordInput.length() < 1) {
-            System.out.println("Please choose a password");
+        if (signupUsernameNotEmpty() && signupPasswordNotEmpty()) {
+            chatFacade.createUser(getSignupUsername(), getSignupPassword());
+            System.out.println("User created with name " + getSignupUsername()
+                    + " and password " + getSignupPassword());
+        } else {
+            System.out.println("Please enter a username and password");
         }
     }
+
+    private boolean signupUsernameNotEmpty() {
+        if (signupUsername.getCharacters().length() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean signupPasswordNotEmpty() {
+        if (signupPassword.getCharacters().length() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private String getSignupUsername() {
+        CharSequence signupUsernameInput = signupUsername.getCharacters();
+        return signupUsernameInput.toString();
+    }
+
+    private String getSignupPassword() {
+        CharSequence signupPasswordInput = signupPassword.getCharacters();
+        return signupPasswordInput.toString();
+    }
+
 
     @FXML
     private void createClient() {
