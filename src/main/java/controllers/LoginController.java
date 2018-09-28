@@ -6,7 +6,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import model.ChatFacade;
 
 import java.io.IOException;
 import java.net.URL;
@@ -14,10 +17,16 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
-    @FXML TextField loginUsername;
-    @FXML TextField loginPassword;
-    @FXML TextField signupUsername;
-    @FXML TextField signupPassword;
+    @FXML
+    TextField loginUsername;
+    @FXML
+    TextField loginPassword;
+    @FXML
+    TextField signupUsername;
+    @FXML
+    TextField signupPassword;
+
+    private final ChatFacade chatFacade = new ChatFacade();
 
 
     @Override
@@ -26,13 +35,26 @@ public class LoginController implements Initializable {
     }
 
     @FXML
+    public void signupKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            signupButtonPressed();
+        }
+    }
+
+    @FXML
     public void signupButtonPressed() {
-        createClient();
+        CharSequence signupUsernameInput = signupUsername.getCharacters();
+        CharSequence signupPasswordInput = signupPassword.getCharacters();
+        if (signupUsernameInput.length() < 1) {
+            System.out.println("Please choose a username");
+        } else if (signupPasswordInput.length() < 1) {
+            System.out.println("Please choose a password");
+        }
     }
 
     @FXML
     private void createClient() {
-        WackController controller = new WackController();
+        WackController controller = new WackController(chatFacade, null);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/wack.fxml"));
         loader.setController(controller);
 

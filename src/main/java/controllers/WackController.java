@@ -8,6 +8,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import model.ChatFacade;
+import model.IUser;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -20,6 +23,10 @@ public class WackController implements Initializable {
     @FXML TextField channelName;
     @FXML TextField channelDescription;
     @FXML Button createGroupButton;
+
+    public WackController(ChatFacade chatFacade, IUser user) {
+
+    }
 
     private void init() {
         
