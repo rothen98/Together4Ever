@@ -40,6 +40,7 @@ public class LoginController implements Initializable {
 
     /**
      * This method lets the user use the keyboard to navigate the signup fields
+     *
      * @param event a KeyEvent to check if the user has pressed something on the keyboard
      */
     @FXML
@@ -56,6 +57,7 @@ public class LoginController implements Initializable {
 
     /**
      * This method lets the user use the keyboard to navigate the signup fields
+     *
      * @param event a KeyEvent to check if the user has pressed something on the keyboard
      */
     @FXML
@@ -91,30 +93,25 @@ public class LoginController implements Initializable {
 
     /**
      * This method makes sure that the user has not left the username field empty
+     *
      * @return true if the user has typed something in the field "username"
      */
     private boolean signupUsernameNotEmpty() {
-        if (signupUsername.getCharacters().length() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return signupUsername.getCharacters().length() > 0;
     }
 
     /**
      * This method makes sure that the user has not left the password field empty
+     *
      * @return true if the user has typed in something in the field password
      */
     private boolean signupPasswordNotEmpty() {
-        if (signupPassword.getCharacters().length() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return signupPassword.getCharacters().length() > 0;
     }
 
     /**
      * This method returns the characters from the username field with a String
+     *
      * @return a String with the username that the user has typed in
      */
     private String getSignupUsername() {
@@ -124,6 +121,7 @@ public class LoginController implements Initializable {
 
     /**
      * This method returns the characters from the password field with a String
+     *
      * @return a String with the password that the user has typed in
      */
     private String getSignupPassword() {
@@ -133,6 +131,7 @@ public class LoginController implements Initializable {
 
     /**
      * This method creates a new client for the user
+     *
      * @param user The user who will be logged in and using the client
      */
     @FXML

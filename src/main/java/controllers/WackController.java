@@ -16,22 +16,38 @@ import java.util.ResourceBundle;
 
 public class WackController implements Initializable {
 
-    @FXML AnchorPane mainView;
-    @FXML AnchorPane newChannelView;
-    @FXML TextField typeField;
-    @FXML TextField searchBar;
-    @FXML TextField channelName;
-    @FXML TextField channelDescription;
-    @FXML Button createGroupButton;
+    ChatFacade chatFacade;
+    IUser user;
+
+    @FXML
+    AnchorPane mainView;
+    @FXML
+    AnchorPane newChannelView;
+    @FXML
+    TextField typeField;
+    @FXML
+    TextField searchBar;
+    @FXML
+    TextField channelName;
+    @FXML
+    TextField channelDescription;
+    @FXML
+    Button createGroupButton;
 
     public WackController(ChatFacade chatFacade, IUser user) {
-
+        this.chatFacade = chatFacade;
+        this.user = user;
     }
 
     private void init() {
-        
+
     }
 
+    /**
+     * This method lets the user press Enter on the keyboard to use the searchbar
+     *
+     * @param event a KeyEvent to check if the user has pressed something on the keyboard
+     */
     @FXML
     public void searchbarKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
@@ -39,6 +55,11 @@ public class WackController implements Initializable {
         }
     }
 
+    /**
+     * This method lets the user press Enter on the keyboard to send a message
+     *
+     * @param event a KeyEvent to check if the user has pressed something on the keyboard
+     */
     @FXML
     public void messageKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
@@ -46,6 +67,11 @@ public class WackController implements Initializable {
         }
     }
 
+    /**
+     * This method lets the user use the keyboard to navigate the fields for creating a new channel
+     *
+     * @param event a KeyEvent to check if the user has pressed something on the keyboard
+     */
     @FXML
     public void channelNameKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
@@ -53,6 +79,11 @@ public class WackController implements Initializable {
         }
     }
 
+    /**
+     * This method lets the user use the keyboard to navigate the fields for creating a new channel
+     *
+     * @param event a KeyEvent to check if the user has pressed something on the keyboard
+     */
     @FXML
     public void channelDescriptionKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
@@ -63,10 +94,9 @@ public class WackController implements Initializable {
     @FXML
     public void sendButtonPressed() {
         //get data from textfield, check notEmpty and send to flowpane
-        CharSequence typeFieldCharacters = typeField.getCharacters();
         String message;
-        if (typeFieldCharacters.length() > 0) {
-            message = typeFieldCharacters.toString();
+        if (messagefieldNotEmpty()) {
+            message = typeField.getCharacters().toString();
             System.out.println(message);
             typeField.clear();
         } else {
@@ -74,12 +104,20 @@ public class WackController implements Initializable {
         }
     }
 
+    /**
+     * This method makes sure the user has not left the message field empty
+     *
+     * @return true if the user has typed something in the message field
+     */
+    private boolean messagefieldNotEmpty() {
+        return typeField.getCharacters().length() > 0;
+    }
+
     @FXML
     public void searchButtonPressed() {
-        CharSequence searchBarCharacters = searchBar.getCharacters();
         String searchParameter;
-        if (searchBarCharacters.length() > 0) {
-            searchParameter = searchBarCharacters.toString();
+        if (searchbarNotEmpty()) {
+            searchParameter = searchBar.getCharacters().toString();
             System.out.println("You searched for " + searchParameter);
             searchBar.clear();
         } else {
@@ -87,30 +125,61 @@ public class WackController implements Initializable {
         }
     }
 
-    @FXML
-    public void mouseTrap(Event event) {
-        event.consume();
+    /**
+     * This method makes sure the user has not left the searchbar empty
+     *
+     * @return true if the user has typed in something in the searchbar
+     */
+    private boolean searchbarNotEmpty() {
+        return searchBar.getCharacters().length() > 0;
     }
 
+    /**
+     * This method closes down the view for creating a new channel if the user clicks on the x button in the
+     * top right corner
+     */
+    @FXML
+    public void closeCreateViewButtonPressed() {
+        mainView.toFront();
+    }
+
+    /**
+     * This method closes down the view for creating a new channel if the user clicks on the lightbox surrounding it
+     */
     @FXML
     public void closeCreateChannelDetail() {
         mainView.toFront();
     }
 
+    /**
+     * This method makes sure the view for creating a new channel doesn't close down if the user clicks on it.
+     * It closes down if the user clicks on the grayed out main view behind it.
+     *
+     * @param event checks if the user has clicked on the mouse or pressed anything on the keyboard
+     */
+    @FXML
+    public void mouseTrap(Event event) {
+        event.consume();
+    }
+
+    /**
+     * This method brings up the view for creating a new channel when the user clicks on Add new group
+     */
     @FXML
     public void addGroupButtonPressed() {
         newChannelView.toFront();
     }
 
+
     @FXML
     public void createGroupButtonPressed() {
-        CharSequence channelNameCharacters = channelName.getCharacters();
-        CharSequence channelDescriptionCharacters = channelDescription.getCharacters();
+        //TODO unfinished
         String channelNameText;
         String channelDescriptionText;
-        if (channelNameCharacters.length() > 0) {
-            channelNameText = channelNameCharacters.toString();
-            channelDescriptionText = channelDescriptionCharacters.toString();
+        if (channelnameNotEmpty()) {
+            channelNameText = channelName.getCharacters().toString();
+            chatFacade.createChannel(channelNameText);
+            channelDescriptionText = channelDescription.getCharacters().toString();
             System.out.println("New group " + channelNameText + " created");
             System.out.println("Description: " + channelDescriptionText);
         } else {
@@ -121,9 +190,13 @@ public class WackController implements Initializable {
         mainView.toFront();
     }
 
-    @FXML
-    public void closeCreateViewButtonPressed() {
-        mainView.toFront();
+    /**
+     * This method makes sure the user has not left the channel name field empty
+     *
+     * @return true if the user has typed something in the channel name field
+     */
+    private boolean channelnameNotEmpty() {
+        return channelName.getCharacters().length() > 0;
     }
 
     @Override
