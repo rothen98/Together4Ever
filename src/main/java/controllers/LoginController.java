@@ -11,6 +11,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import model.ChatFacade;
+import model.IUser;
 
 import java.io.IOException;
 import java.net.URL;
@@ -64,7 +65,10 @@ public class LoginController implements Initializable {
     @FXML
     public void signupButtonPressed() {
         if (signupUsernameNotEmpty() && signupPasswordNotEmpty()) {
-            chatFacade.createUser(getSignupUsername(), getSignupPassword());
+            IUser user = chatFacade.createUser(getSignupUsername(), getSignupPassword());
+
+            createClient(user);
+
             System.out.println("User created with name " + getSignupUsername()
                     + " and password " + getSignupPassword());
         } else {
@@ -98,10 +102,9 @@ public class LoginController implements Initializable {
         return signupPasswordInput.toString();
     }
 
-
     @FXML
-    private void createClient() {
-        WackController controller = new WackController(chatFacade, null);
+    private void createClient(IUser user) {
+        WackController controller = new WackController(chatFacade, user);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/wack.fxml"));
         loader.setController(controller);
 
@@ -117,7 +120,7 @@ public class LoginController implements Initializable {
 
         Scene scene = new Scene(root, 1000, 600);
 
-        stage.setTitle("wack");
+        stage.setTitle("wack (logged in as " + user.getName() + ")");
         stage.setScene(scene);
         stage.show();
     }
