@@ -38,9 +38,13 @@ public class LoginController implements Initializable {
 
     }
 
+    /**
+     * This method lets the user use the keyboard to navigate the signup fields
+     * @param event a KeyEvent to check if the user has pressed something on the keyboard
+     */
     @FXML
     public void signupUsernameKeyPressed(KeyEvent event) {
-        //Needs to be improved/shortened
+        //TODO shorten/improve method
         if (event.getCode() == KeyCode.ENTER) {
             signupPassword.requestFocus();
         } else if (event.getCode() == KeyCode.DOWN) {
@@ -50,9 +54,14 @@ public class LoginController implements Initializable {
         }
     }
 
+    /**
+     * This method lets the user use the keyboard to navigate the signup fields
+     * @param event a KeyEvent to check if the user has pressed something on the keyboard
+     */
     @FXML
     public void signupKeyPressed(KeyEvent event) {
-        //Needs to be improved/shortened
+        //TODO shorten/improve method
+        //For some reason can't change method name to signupPasswordKeyPressed
         if (event.getCode() == KeyCode.ENTER) {
             signupButtonPressed();
         } else if (event.getCode() == KeyCode.UP) {
@@ -62,6 +71,10 @@ public class LoginController implements Initializable {
         }
     }
 
+    /**
+     * This method makes sure that the fields for typing in username and password aren't empty,
+     * and then creates a user with the given name and password.
+     */
     @FXML
     public void signupButtonPressed() {
         if (signupUsernameNotEmpty() && signupPasswordNotEmpty()) {
@@ -76,6 +89,10 @@ public class LoginController implements Initializable {
         }
     }
 
+    /**
+     * This method makes sure that the user has not left the username field empty
+     * @return true if the user has typed something in the field "username"
+     */
     private boolean signupUsernameNotEmpty() {
         if (signupUsername.getCharacters().length() > 0) {
             return true;
@@ -84,6 +101,10 @@ public class LoginController implements Initializable {
         }
     }
 
+    /**
+     * This method makes sure that the user has not left the password field empty
+     * @return true if the user has typed in something in the field password
+     */
     private boolean signupPasswordNotEmpty() {
         if (signupPassword.getCharacters().length() > 0) {
             return true;
@@ -92,16 +113,28 @@ public class LoginController implements Initializable {
         }
     }
 
+    /**
+     * This method returns the characters from the username field with a String
+     * @return a String with the username that the user has typed in
+     */
     private String getSignupUsername() {
         CharSequence signupUsernameInput = signupUsername.getCharacters();
         return signupUsernameInput.toString();
     }
 
+    /**
+     * This method returns the characters from the password field with a String
+     * @return a String with the password that the user has typed in
+     */
     private String getSignupPassword() {
         CharSequence signupPasswordInput = signupPassword.getCharacters();
         return signupPasswordInput.toString();
     }
 
+    /**
+     * This method creates a new client for the user
+     * @param user The user who will be logged in and using the client
+     */
     @FXML
     private void createClient(IUser user) {
         WackController controller = new WackController(chatFacade, user);
