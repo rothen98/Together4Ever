@@ -170,7 +170,6 @@ public class WackController implements Initializable {
         newChannelView.toFront();
     }
 
-
     @FXML
     public void createGroupButtonPressed() {
         //TODO unfinished
@@ -179,6 +178,7 @@ public class WackController implements Initializable {
         if (channelnameNotEmpty()) {
             channelNameText = channelName.getCharacters().toString();
             chatFacade.createChannel(channelNameText);
+            chatFacade.getUserChannels(user);
             channelDescriptionText = channelDescription.getCharacters().toString();
             System.out.println("New group " + channelNameText + " created");
             System.out.println("Description: " + channelDescriptionText);
