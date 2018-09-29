@@ -6,7 +6,10 @@ import java.util.Collection;
 public class ChatFacade {
     private final IServer server;
     private IClient client;
-    //private IMessage message;
+    private IMessage message;
+    private TextContent textContent;
+    private ImageContent imageContent;
+    private IUser sender;
 
     public ChatFacade() {
         this.server = new Server();
@@ -52,11 +55,13 @@ public class ChatFacade {
         client.removeListeners(listner);
     }
 
-    public void createTextMessage() {
-
+    public void createTextMessage(String textMessage) {
+        textContent = new TextContent(textMessage);
+        message = new Message(sender, textContent);
     }
 
-    public void createImageMessage() {
-
+    public void createImageMessage(String imageMessage) {
+        imageContent = new ImageContent(imageMessage);
+        message = new Message(sender, imageContent);
     }
 }
