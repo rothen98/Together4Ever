@@ -3,6 +3,11 @@ package model;
 
 import java.util.Collection;
 
+/**
+ * @author Alex Solberg
+ *
+ * The ChatFacade is a connection between the applications model and the controller.
+ */
 public class ChatFacade {
     private final IServer server;
     private IClient client;
@@ -15,6 +20,11 @@ public class ChatFacade {
         this.server = new Server();
     }
 
+    /**
+     * This method will return a newly created channel
+     * @param channelName is a String which represents the name of the channel which will be created
+     * @return a newly created channel to the caller from the controller
+     */
     public IChannel createChannel(String channelName) {
 
         IChannel channel = new Channel(channelName);
@@ -22,6 +32,11 @@ public class ChatFacade {
         return channel;
     }
 
+    /**
+     *
+     * @param user is a wack user that will 
+     * @return
+     */
     public Collection<IChannel> getUserChannels(IUser user) {
 
         return server.getUserChannels(user);
