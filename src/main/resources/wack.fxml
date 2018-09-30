@@ -23,7 +23,7 @@
                         <TextField fx:id="channelName" onKeyPressed="#channelNameKeyPressed" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="130.0" />
                         <Label id="labelRight" alignment="CENTER_RIGHT" prefWidth="95.0" text="Description:" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="170.0" />
                         <TextField fx:id="channelDescription" alignment="TOP_LEFT" onKeyPressed="#channelDescriptionKeyPressed" prefHeight="72.0" prefWidth="167.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="170.0" />
-                        <Button fx:id="createGroupButton" mnemonicParsing="false" onAction="#createGroupButtonPressed" prefHeight="50.0" text="Create group" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="200.0" />
+                        <Button fx:id="createGroupButton" mnemonicParsing="false" onAction="#createGroupButtonPressed" onKeyPressed="#createGroupButtonKeyPressed" prefHeight="50.0" text="Create group" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="200.0" />
                         <Button fx:id="closeCreateViewButton" mnemonicParsing="false" onAction="#closeCreateViewButtonPressed" prefHeight="30.0" prefWidth="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">

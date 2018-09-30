@@ -91,6 +91,18 @@ public class WackController implements Initializable {
         }
     }
 
+    /**
+     * This method lets the user press the enter key to create a new channel
+     *
+     * @param event a KeyEvent to check if the user has pressed something on the keyboard
+     */
+    @FXML
+    public void createGroupButtonKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            createGroupButtonPressed();
+        }
+    }
+
     @FXML
     public void sendButtonPressed() {
         //get data from textfield, check notEmpty and send to flowpane
