@@ -95,4 +95,30 @@ public class User implements IUser {
         return name;
     }
 
+
+    /**
+     * Method to see if an object equals another. Overridden in case of using copies of the same object
+     * in the future.
+     * @param obj Object to compare with.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        //Check if obj == this.
+        if( obj == this){
+            return true;
+        }
+
+        //Check if obj is an instance of user
+        if(!(obj instanceof User)){
+            return false;
+        }
+
+        //Typecast obj to user to be able to compare data.
+        User u = (User) obj;
+
+        if(this.name.equals(u.name) && this.password.equals(u.password)){
+            return true;
+        }
+        return false;
+    }
 }
