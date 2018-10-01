@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 public interface IChannel extends IInformative {
-    Collection<String> getAllUserNames();
+    Collection<IIdentifiable> getAllUsers();
     List<IMessage> getAllMessages();
     List<IMessage> getLastMessages(int index);
     int getNumberOfUsers();

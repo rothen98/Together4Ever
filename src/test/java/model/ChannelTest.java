@@ -14,7 +14,7 @@ public class ChannelTest {
     private IChannel channel;
     @Before
     public void setUp() throws Exception {
-        channel = new Channel("Together4Ever");
+        channel = new Channel("Together4Ever", "The best channel", new User("Tobias", "test"));
     }
 
     @After
@@ -95,7 +95,7 @@ public class ChannelTest {
     @Test
     public void getName() {
         //Create a channel and check if the method returns the given name
-        assertTrue(channel.getName().equals("Together4Ever"));
+        assertTrue(channel.getDisplayName().equals("Together4Ever"));
     }
 
     @Test
@@ -124,14 +124,14 @@ public class ChannelTest {
 
     @Test
     public void equals(){
-        Channel otherChannel = new Channel("Together4Ever");
+        Channel otherChannel = new Channel("Together4Ever","none",new User("Tobias", "test"));
         assertFalse(channel.equals(otherChannel));
 
     }
 
     @Test
     public void getID(){
-        IChannel otherChannel = new Channel("otherChannel");
+        IChannel otherChannel = new Channel("otherChannel","none", new User("Tobias", "test"));
         assertTrue(channel.getID() +1 == otherChannel.getID());
     }
 }

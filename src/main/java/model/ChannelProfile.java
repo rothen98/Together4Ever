@@ -19,21 +19,37 @@ public class ChannelProfile implements IInformative {
         this.description = description;
     }
 
+    /**
+     *
+     * @return The description of the channel
+     */
     @Override
     public String getDescription() {
         return description;
     }
 
+    /**
+     *
+     * @return The channel's id
+     */
     @Override
     public int getID() {
         return id;
     }
 
+    /**
+     *
+     * @return The name of the channel
+     */
     @Override
     public String getDisplayName() {
         return name;
     }
 
+    /**
+     * The image of the channel
+     * @return
+     */
     @Override
     public Image getDisplayImage() {
         return image;

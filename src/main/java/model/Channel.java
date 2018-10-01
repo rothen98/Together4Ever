@@ -35,14 +35,14 @@ public class Channel implements IChannel {
     }
 
     /**
-     * This method will return  all the user names of this channel
-     * @return a collection with the users names
+     * This method will return all the users
+     * @return a collection with the users
      */
     @Override
-    public Collection<String> getAllUserNames() {
-        Collection<String> returnCollection = new ArrayList<>();
+    public Collection<IIdentifiable> getAllUsers() {
+        Collection<IIdentifiable> returnCollection = new ArrayList<>();
         users.forEach(s ->{
-            returnCollection.add(s.getName());
+            returnCollection.add((IIdentifiable)s);
         });
 
         return returnCollection;
