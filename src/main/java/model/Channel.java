@@ -40,6 +40,7 @@ public class Channel implements IChannel {
      */
     @Override
     public Collection<IIdentifiable> getAllUsers() {
+        //Will be implemented in another way when user is changed
         Collection<IIdentifiable> returnCollection = new ArrayList<>();
         users.forEach(s ->{
             returnCollection.add((IIdentifiable)s);

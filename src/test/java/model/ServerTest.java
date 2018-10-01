@@ -3,7 +3,6 @@ package model;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.omg.DynamicAny.DynAnyFactoryPackage.InconsistentTypeCodeHelper;
 
 import static org.junit.Assert.*;
 
@@ -34,8 +33,8 @@ public class ServerTest {
     public void getChannelNames() {
         IChannel channel = new Channel("channel");
         server.addChannel(channel);
-        assertTrue(server.getChannelNames().size()==1);
-        assertTrue(server.getChannelNames().contains("channel"));
+        assertTrue(server.getChannels().size()==1);
+        assertTrue(server.getChannels().contains("channel"));
     }
 
     @Test

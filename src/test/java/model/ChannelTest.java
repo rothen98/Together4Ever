@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -23,18 +24,20 @@ public class ChannelTest {
     }
 
     @Test
-    public void getAllUserNames() {
+    public void getAllUsers() {
         //Create channel and two users, let them join, and get all users names
         IUser userOne = new User("UserOne", "password");
         IUser userTwo = new User("UserTwo", "password");
         channel.join(userOne);
         channel.join(userTwo);
 
-        Collection<String> names = channel.getAllUserNames();
+        Collection<IIdentifiable> users = channel.getAllUsers();
+        assertEquals(3,users.size());
+        String[] names = new String[] {"Tobias", "UserOne","UserTwo"};
+        for (IIdentifiable user:users){
+            assertTrue(Arrays.asList(names).contains(user.getDisplayName()));
+        }
 
-        assertTrue(names.contains("UserOne"));
-        assertTrue(names.contains("UserTwo"));
-        assertTrue(names.size() == 2);
 
     }
 

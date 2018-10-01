@@ -25,12 +25,14 @@ public class ChatFacadeTest {
     }
 
     @Test
+
     public void createChannel() throws NoChannelFoundException {
         String channelName = "This is my channel name";
         IChannel channel = facade.createChannel(channelName);
         int id = channel.getID();
         assertEquals(channel, facade.getChannel(id));
         assertEquals(1, server.getChannelNames().size());
+
     }
 
     @Test
