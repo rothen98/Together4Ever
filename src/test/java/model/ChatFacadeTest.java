@@ -14,9 +14,9 @@ public class ChatFacadeTest {
 
     @Before
     public void setUp() throws Exception {
-        server = new Server();
-        user = new MockUser("Tubby", "D!nMamma123");
         facade = new ChatFacade();
+        server = facade.getServer();
+        user = new MockUser("Tubby", "D!nMamma123");
     }
 
     @After
@@ -25,10 +25,12 @@ public class ChatFacadeTest {
     }
 
     @Test
-    public void createChannel() {
-        //String channelName = "This is my channel name";
-        //facade.createChannel(channelName);
-        //assertEquals(1, server.getChannelNames().size());
+    public void createChannel() throws NoChannelFoundException {
+        String channelName = "This is my channel name";
+        IChannel channel = facade.createChannel(channelName);
+        int id = channel.getID();
+        assertEquals(channel, facade.getChannel(id));
+        assertEquals(1, server.getChannelNames().size());
     }
 
     @Test
@@ -41,22 +43,34 @@ public class ChatFacadeTest {
     }
 
     @Test
-    public void createUser() {
+    public void createUser() throws NoSuchUserFoundException, WrongPasswordException {
+        String username = "Username";
+        String password = "Password";
+        IUser user = facade.createUser(username, password);
+        IUser serverUser = server.getUser(username,password);
+        assertEquals(user, serverUser);
     }
 
     @Test
-    public void getUser() {
+    public void getUser() throws NoSuchUserFoundException, WrongPasswordException {
+        String username = "Username";
+        String password = "Password";
+        //IUser user = facade.getUser(username, password);
+        assertTrue(1 == 1); // dont know what to test
     }
 
     @Test
     public void getChannel() {
+        // should i test a getter??? pointlessss
     }
 
     @Test
     public void createClient() {
+        IClient client = facade.createClient();
+
     }
 
     @Test
-    public void addClientListner() {
+    public void addClientListener() {
     }
 }
