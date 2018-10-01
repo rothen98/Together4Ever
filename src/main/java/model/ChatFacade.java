@@ -26,7 +26,7 @@ public class ChatFacade {
      * @param user is the user which is creating the channel
      * @return a newly created channel to the caller from the controller
      */
-    public IChannel createChannel(String channelName, IUser user) { //take in a user
+    public IChannel createChannel(String channelName/*, IUser user*/) { //take in a user
 
         IChannel channel = new Channel(channelName /*, user*/);//constructor takes a user
         server.addChannel(channel);
@@ -119,5 +119,9 @@ public class ChatFacade {
     public void createImageMessage(String imageMessage) {
         imageContent = new ImageContent(imageMessage);
         message = new Message(sender, imageContent);
+    }
+
+    public IServer getServer () {
+        return server;
     }
 }
