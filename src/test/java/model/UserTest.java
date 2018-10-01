@@ -76,4 +76,16 @@ public class UserTest {
         assertTrue(user.authorizeLogIn("password"));
         assertFalse(user.authorizeLogIn("wrongpassword"));
     }
+
+    @Test
+    public void equals() {
+        IUser user2 = new User("user2", "password");
+        IUser copyUser = new User("testUser", "password");
+
+        assertFalse(user.equals(user2));
+        assertTrue(user.equals(user));
+        assertTrue(user.equals(copyUser));
+        assertFalse(user.equals(client));
+
+    }
 }
