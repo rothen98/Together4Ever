@@ -1,6 +1,7 @@
 package model;
 
-import java.awt.*;
+
+import javafx.scene.image.Image;
 
 /**
  * @author Viktor Franzén

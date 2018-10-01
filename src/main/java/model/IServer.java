@@ -5,7 +5,7 @@ import java.util.Collection;
 
 public interface IServer {
     Collection<IChannel> getUserChannels(IUser user);
-    Collection<String> getChannelNames();
+    Collection<IInformative> getChannels();
 
 
     IChannel getChannel(int id) throws NoChannelFoundException;

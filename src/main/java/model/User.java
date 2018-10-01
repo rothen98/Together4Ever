@@ -2,6 +2,7 @@ package model;
 
 
 import com.sun.corba.se.spi.ior.Identifiable;
+import javafx.scene.image.Image;
 
 import java.awt.*;
 import java.util.ArrayList;
