@@ -1,5 +1,8 @@
 package model;
 
+import java.awt.*;
+
 public interface IIdentifiable {
-    String getName();
+    String getDisplayName();
+    Image getDisplayImage();
 }

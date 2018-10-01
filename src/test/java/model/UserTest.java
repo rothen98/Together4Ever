@@ -10,7 +10,7 @@ import static model.MessageType.TEXT;
 import static org.junit.Assert.*;
 
 public class UserTest {
-    private IUser user;
+    private User user;
     private IClient client;
 
     
@@ -87,5 +87,14 @@ public class UserTest {
         assertTrue(user.equals(copyUser));
         assertFalse(user.equals(client));
 
+    }
+
+    @Test
+    public void getDisplayName() {
+        assertEquals("testUser", user.getDisplayName());
+    }
+
+    @Test
+    public void getDisplayImage() {
     }
 }

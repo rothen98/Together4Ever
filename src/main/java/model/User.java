@@ -1,6 +1,9 @@
 package model;
 
 
+import com.sun.corba.se.spi.ior.Identifiable;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -10,16 +13,20 @@ import java.util.List;
  *
  * This class contains the data of the User. Mainly an identifcation name, password and all it´s clients.
  */
-public class User implements IUser {
+public class User implements IUser, IIdentifiable {
 
     private Collection<IClient> clients;
     private String name;
     private String password;
+    private IIdentifiable userProfile;
 
     public User(String name, String password){
         this.name = name;
+
         this.password = password;
         this.clients = new ArrayList<>();
+
+        this.userProfile = new UserProfile(name);
     }
 
 
@@ -93,6 +100,26 @@ public class User implements IUser {
     @Override
     public String getName() {
         return name;
+    }
+
+
+    /**
+     * Gets the users displayName from the UserProfile
+     * @return the DisplayName
+     */
+    @Override
+    public String getDisplayName(){
+        return userProfile.getDisplayName();
+    }
+
+
+    /**
+     * Gets the users displayImage from the UserProfile
+     * @return the displayImage
+     */
+    @Override
+    public Image getDisplayImage() {
+        return userProfile.getDisplayImage();
     }
 
 
