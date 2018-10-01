@@ -3,7 +3,7 @@ package model;
 import java.util.Collection;
 import java.util.List;
 
-public interface IChannel {
+public interface IChannel extends IInformative {
     Collection<String> getAllUserNames();
     List<IMessage> getAllMessages();
     List<IMessage> getLastMessages(int index);
@@ -14,8 +14,6 @@ public interface IChannel {
     void leave(IUser user);
 
     boolean hasUser(IUser user);
-    String getName();
-    int getID();
 
 
 

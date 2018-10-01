@@ -1,7 +1,11 @@
 package model;
 
+import javafx.scene.image.Image;
+
+import java.awt.*;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -12,18 +16,22 @@ import java.util.concurrent.atomic.AtomicInteger;
  * There are methods to get the messages, the users names and also methods for joining and leaving the channel.
  */
 public class Channel implements IChannel {
-    private Collection<IUser> users;
-    private List<IMessage> messages;
-    private String name;
-    private int id;
+    private final Collection<IUser> users;
+    private final List<IMessage> messages;
 
+    private IInformative channelProfile;
+
+    /**
+     * This fields ensures that every channel gets an unique id.
+     */
     private static final AtomicInteger idCounter = new AtomicInteger(0);
 
-    public Channel(String name) {
-        this.name = name;
+    public Channel(String name,String description,IUser creator) {
+        channelProfile = new ChannelProfile(name,null,idCounter.getAndIncrement(),description);
+        join(creator);
         this.users = new HashSet<>();
         this.messages = new ArrayList<>();
-        this.id = idCounter.getAndIncrement();
+
     }
 
     /**
@@ -97,7 +105,7 @@ public class Channel implements IChannel {
 
     /**
      * This method will add the user to the channel
-     * @param user
+     * @param user the user that are to join the channel
      */
     @Override
     public void join(IUser user) {
@@ -106,7 +114,7 @@ public class Channel implements IChannel {
 
     /**
      * This method will remove the user from the channel
-     * @param user
+     * @param user the user that should be removed
      */
     @Override
     public void leave(IUser user) {
@@ -125,13 +133,17 @@ public class Channel implements IChannel {
 
 
     @Override
-    public String getName() {
-        return name;
+    public String getDisplayName() {
+        return channelProfile.getDisplayName();
     }
 
+    /**
+     *
+     * @return the id of the channel
+     */
     @Override
     public int getID(){
-        return id;
+        return channelProfile.getID();
     }
 
     @Override
@@ -139,13 +151,32 @@ public class Channel implements IChannel {
         if (this == o) return true;
         if (!(o instanceof Channel)) return false;
         Channel channel = (Channel) o;
-        return id == channel.getID() && getName().equals(channel.getName());
+        return this.getID() == channel.getID() && getDisplayName().equals(channel.getDisplayName());
 
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(getName(), id);
+        return Objects.hash(getDisplayName(), getID());
+    }
+
+    /**
+     *
+     * @return The channel's description
+     */
+    @Override
+    public String getDescription() {
+        return channelProfile.getDescription();
+    }
+
+
+    /**
+     *
+     * @return the channels image, null if the channel don't have an image
+     */
+    @Override
+    public Image getDisplayImage() {
+        return channelProfile.getDisplayImage();
     }
 }
