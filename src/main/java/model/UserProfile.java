@@ -20,8 +20,6 @@ public class UserProfile implements IIdentifiable {
 
 
 
-
-
     /**
      * Returns the objects displayName.
      * @return String with the displayName.

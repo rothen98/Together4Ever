@@ -112,7 +112,7 @@ public class User implements IUser, IIdentifiable {
         return userProfile.getDisplayName();
     }
 
-    
+
     /**
      * Gets the users displayImage from the UserProfile
      * @return the displayImage
