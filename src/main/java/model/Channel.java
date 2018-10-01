@@ -28,9 +28,10 @@ public class Channel implements IChannel {
 
     public Channel(String name,String description,IUser creator) {
         channelProfile = new ChannelProfile(name,null,idCounter.getAndIncrement(),description);
-        join(creator);
         this.users = new HashSet<>();
         this.messages = new ArrayList<>();
+
+        join(creator);
 
     }
 

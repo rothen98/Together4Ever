@@ -23,12 +23,12 @@ public class ChatFacade {
     /**
      * This method will return a newly created channel
      * @param channelName is a String which represents the name of the channel which will be created
-     * @param user is the user which is creating the channel
+     * @param creator is the user which is creating the channel
      * @return a newly created channel to the caller from the controller
      */
-    public IChannel createChannel(String channelName/*, IUser user*/) { //take in a user
+    public IChannel createChannel(String channelName, String description, IUser creator) { //take in a user
 
-        IChannel channel = new Channel(channelName /*, user*/);//constructor takes a user
+        IChannel channel = new Channel(channelName,description,creator);//constructor takes a user
         server.addChannel(channel);
         return channel;
     }

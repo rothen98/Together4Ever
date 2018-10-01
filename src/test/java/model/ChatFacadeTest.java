@@ -28,16 +28,16 @@ public class ChatFacadeTest {
 
     public void createChannel() throws NoChannelFoundException {
         String channelName = "This is my channel name";
-        IChannel channel = facade.createChannel(channelName);
+        IChannel channel = facade.createChannel(channelName, "descriptiiiiiiion",user);
         int id = channel.getID();
         assertEquals(channel, facade.getChannel(id));
-        assertEquals(1, server.getChannelNames().size());
+        assertEquals(1, server.getChannels().size());
 
     }
 
     @Test
     public void getUserChannels() {
-        IChannel channel = facade.createChannel("channel");
+        IChannel channel = facade.createChannel("channel","descriiiiiiption",user);
         user = facade.createUser("Tubby", "D!nMamma123");
         channel.join(user);
 

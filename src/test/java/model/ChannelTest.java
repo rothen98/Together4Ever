@@ -33,10 +33,7 @@ public class ChannelTest {
 
         Collection<IIdentifiable> users = channel.getAllUsers();
         assertEquals(3,users.size());
-        String[] names = new String[] {"Tobias", "UserOne","UserTwo"};
-        for (IIdentifiable user:users){
-            assertTrue(Arrays.asList(names).contains(user.getDisplayName()));
-        }
+
 
 
     }
@@ -84,7 +81,7 @@ public class ChannelTest {
     public void join() {
         IUser user = new MockUser("UserOne", "Password");
         channel.join(user);
-        assertTrue(channel.getNumberOfUsers()==1);
+        assertTrue(channel.getNumberOfUsers()==2);
     }
 
     @Test
@@ -92,7 +89,7 @@ public class ChannelTest {
         IUser user = new MockUser("UserOne", "Password");
         channel.join(user);
         channel.leave(user);
-        assertTrue(channel.getNumberOfUsers()==0);
+        assertTrue(channel.getNumberOfUsers()==1);
     }
 
     @Test
@@ -136,5 +133,23 @@ public class ChannelTest {
     public void getID(){
         IChannel otherChannel = new Channel("otherChannel","none", new User("Tobias", "test"));
         assertTrue(channel.getID() +1 == otherChannel.getID());
+    }
+
+    @Test
+    public void getNumberOfUsers() {
+        assertEquals(1,channel.getNumberOfUsers());
+    }
+
+    @Test
+    public void getDisplayName() {
+        IChannel someChannel = new Channel("theName","NA",null);
+        assertEquals("theName",someChannel.getDisplayName());
+    }
+
+
+    @Test
+    public void getDescription() {
+        IChannel someChannel = new Channel("theName","TDA367 group work",null);
+        assertEquals("TDA367 group work",someChannel.getDescription());
     }
 }
