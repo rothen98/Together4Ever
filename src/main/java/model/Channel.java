@@ -111,7 +111,9 @@ public class Channel implements IChannel {
      */
     @Override
     public void join(IUser user) {
+        if (user != null){
         users.add(user);
+        }
     }
 
     /**
@@ -133,7 +135,10 @@ public class Channel implements IChannel {
         return users.contains(user);
     }
 
-
+    /**
+     *
+     * @return The name of the channel
+     */
     @Override
     public String getDisplayName() {
         return channelProfile.getDisplayName();

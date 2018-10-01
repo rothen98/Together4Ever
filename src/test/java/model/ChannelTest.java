@@ -81,7 +81,9 @@ public class ChannelTest {
     public void join() {
         IUser user = new MockUser("UserOne", "Password");
         channel.join(user);
+        channel.join(null);
         assertTrue(channel.getNumberOfUsers()==2);
+        channel.hasUser(user);
     }
 
     @Test
