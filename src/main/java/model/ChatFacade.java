@@ -11,10 +11,6 @@ import java.util.Collection;
 public class ChatFacade {
     private final IServer server;
     private IClient client;
-    private IMessage message;
-    private TextContent textContent;
-    private ImageContent imageContent;
-    private IUser sender;
 
     public ChatFacade() {
         this.server = new Server();
@@ -106,22 +102,20 @@ public class ChatFacade {
     /**
      * This method will create a new text message object
      * @param textMessage is the message that the user wants to send
+     * @param sender
+     * @return
      */
-    public void createTextMessage(String textMessage) {
-        textContent = new TextContent(textMessage);
-        message = new Message(sender, textContent);
+    public IMessage createTextMessage(String textMessage, IUser sender) {
+        return new Message(sender, new TextContent(textMessage));
     }
 
     /**
      * This method will create a new image message object
      * @param imageMessage is an image file(path) that the user wants to send
+     * @param sender
+     * @return
      */
-    public void createImageMessage(String imageMessage) {
-        imageContent = new ImageContent(imageMessage);
-        message = new Message(sender, imageContent);
-    }
-
-    public IServer getServer () {
-        return server;
+    public IMessage createImageMessage(String imageMessage, IUser sender) {
+        return new Message(sender, new ImageContent(imageMessage));
     }
 }

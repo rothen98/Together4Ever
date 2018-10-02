@@ -75,4 +75,21 @@ public class ChatFacadeTest {
     @Test
     public void addClientListener() {
     }
+
+    @Test
+    public void deleteClientListener() {
+
+    }
+
+    @Test
+    public void createTextMessage() {
+    }
+
+    @Test
+    public void createImageMessage() {
+    }
+
+    @Test
+    public void getServer() {
+    }
 }
