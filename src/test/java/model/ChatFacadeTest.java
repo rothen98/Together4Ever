@@ -73,17 +73,29 @@ public class ChatFacadeTest {
 
     @Test
     public void createClient() {
+        String password = "D!nMamma123";
         IClient client = facade.createClient();
+        user.connectClient(client, password);
+        assertEquals(1, user.getAmountOfClients());
 
     }
 
     @Test
     public void addClientListener() {
+        IClient client = facade.createClient();
+        IClientListener listener = new MockListener();
+        client.addListeners(listener);
+        assertEquals(1, client.getAmountOfListeners());
     }
 
     @Test
     public void deleteClientListener() {
-
+        IClient client = facade.createClient();
+        IClientListener listener = new MockListener();
+        client.addListeners(listener);
+        assertEquals(1, client.getAmountOfListeners());
+        client.removeListeners(listener);
+        assertEquals(0, client.getAmountOfListeners());
     }
 
     @Test
