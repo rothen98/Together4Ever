@@ -102,8 +102,8 @@ public class ChatFacade {
     /**
      * This method will create a new text message object
      * @param textMessage is the message that the user wants to send
-     * @param sender
-     * @return
+     * @param sender is the user that is sending the newly created message
+     * @return the newly created textMessage
      */
     public IMessage createTextMessage(String textMessage, IUser sender) {
         return new Message(sender, new TextContent(textMessage));
@@ -112,8 +112,8 @@ public class ChatFacade {
     /**
      * This method will create a new image message object
      * @param imageMessage is an image file(path) that the user wants to send
-     * @param sender
-     * @return
+     * @param sender is the user that is sending the newly created message
+     * @return the newly created imageMessage
      */
     public IMessage createImageMessage(String imageMessage, IUser sender) {
         return new Message(sender, new ImageContent(imageMessage));

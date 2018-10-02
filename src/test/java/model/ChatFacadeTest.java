@@ -15,7 +15,7 @@ public class ChatFacadeTest {
     @Before
     public void setUp() throws Exception {
         facade = new ChatFacade();
-        server = facade.getServer();
+        server = new Server();
         user = new MockUser("Tubby", "D!nMamma123");
     }
 
@@ -31,8 +31,6 @@ public class ChatFacadeTest {
         IChannel channel = facade.createChannel(channelName, "descriptiiiiiiion",user);
         int id = channel.getID();
         assertEquals(channel, facade.getChannel(id));
-        assertEquals(1, server.getChannels().size());
-
     }
 
     @Test
@@ -40,7 +38,7 @@ public class ChatFacadeTest {
         IChannel channel = facade.createChannel("channel","descriiiiiiption",user);
         user = facade.createUser("Tubby", "D!nMamma123");
         channel.join(user);
-
+        assertTrue(facade.getUserChannels(user).size() == 1);
         assertTrue(facade.getUserChannels(user).contains(channel));
     }
 
@@ -57,13 +55,20 @@ public class ChatFacadeTest {
     public void getUser() throws NoSuchUserFoundException, WrongPasswordException {
         String username = "Username";
         String password = "Password";
-        //IUser user = facade.getUser(username, password);
-        assertTrue(1 == 1); // dont know what to test
+        IUser user = facade.createUser(username, password);
+        IUser user2 = facade.getUser(username, password);
+        assertTrue(user == user2);
+        assertTrue(facade.getUserChannels(user).size() == 0);
     }
 
     @Test
-    public void getChannel() {
-        // should i test a getter??? pointlessss
+    public void getChannel() throws NoChannelFoundException {
+        String channelName = "this is my name";
+        String description = "This is my description";
+        IChannel channel = facade.createChannel(channelName, description, user);
+        int id = channel.getID();
+        IChannel testChannel = facade.getChannel(id);
+        assertEquals(testChannel, channel);
     }
 
     @Test
@@ -87,9 +92,5 @@ public class ChatFacadeTest {
 
     @Test
     public void createImageMessage() {
-    }
-
-    @Test
-    public void getServer() {
     }
 }
