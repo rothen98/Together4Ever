@@ -47,7 +47,7 @@ public class WackController implements Initializable {
     public WackController(ChatFacade chatFacade, IUser user) {
         this.chatFacade = chatFacade;
         this.user = user;
-        channelView = new ChannelView();
+        channelView = new ChannelView(user,chatFacade);
     }
 
     @FXML
