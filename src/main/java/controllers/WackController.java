@@ -76,6 +76,10 @@ public class WackController implements Initializable {
     public void channelNameKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
             channelDescription.requestFocus();
+        } else if (event.getCode() == KeyCode.DOWN) {
+            channelDescription.requestFocus();
+        } else if (event.getCode() == KeyCode.TAB) {
+            channelDescription.requestFocus();
         }
     }
 
@@ -87,7 +91,13 @@ public class WackController implements Initializable {
     @FXML
     public void channelDescriptionKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
+            createGroupButtonPressed();
+        } else if (event.getCode() == KeyCode.DOWN) {
             createGroupButton.requestFocus();
+        } else if (event.getCode() == KeyCode.TAB) {
+            createGroupButton.requestFocus();
+        } else if (event.getCode() == KeyCode.UP) {
+            channelName.requestFocus();
         }
     }
 
@@ -167,7 +177,7 @@ public class WackController implements Initializable {
      * This method makes sure the view for creating a new channel doesn't close down if the user clicks on it.
      * It closes down if the user clicks on the grayed out main view behind it.
      *
-     * @param event checks if the user has clicked on the mouse or pressed anything on the keyboard
+     * @param event checks if the user has clicked on the mouse
      */
     @FXML
     public void mouseTrap(Event event) {
