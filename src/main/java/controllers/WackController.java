@@ -4,27 +4,36 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import model.ChatFacade;
+import model.IChannel;
+import model.IMessage;
 import model.IUser;
 
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class WackController implements Initializable {
 
     ChatFacade chatFacade;
     IUser user;
 
+    private ChannelView channelView;
+    private List<ChannelListItem> channelListItems = new ArrayList<>();
+
     @FXML
     AnchorPane mainView;
     @FXML
     AnchorPane newChannelView;
     @FXML
-    TextField typeField;
+    AnchorPane channelHolder;
+    @FXML
+    FlowPane channelListItemHolder;
     @FXML
     TextField searchBar;
     @FXML
@@ -34,13 +43,28 @@ public class WackController implements Initializable {
     @FXML
     Button createGroupButton;
 
+
     public WackController(ChatFacade chatFacade, IUser user) {
         this.chatFacade = chatFacade;
         this.user = user;
+        channelView = new ChannelView();
     }
 
-    private void init() {
+    @FXML
+    public void initialize(URL url, ResourceBundle rb) {
+        System.out.println("init called");
+        channelHolder.getChildren().add(channelView);
+        AnchorPane.setBottomAnchor(channelView,0.0);
+        AnchorPane.setTopAnchor(channelView,0.0);
+        AnchorPane.setLeftAnchor(channelView,0.0);
+        AnchorPane.setRightAnchor(channelView,0.0);
+    }
 
+    private void updateChannelList() {
+        channelListItemHolder.getChildren().clear();
+        for(ChannelListItem c:channelListItems) {
+            channelListItemHolder.getChildren().add(c);
+        }
     }
 
     /**
@@ -52,18 +76,6 @@ public class WackController implements Initializable {
     public void searchbarKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
             searchButtonPressed();
-        }
-    }
-
-    /**
-     * This method lets the user press Enter on the keyboard to send a message
-     *
-     * @param event a KeyEvent to check if the user has pressed something on the keyboard
-     */
-    @FXML
-    public void messageKeyPressed(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) {
-            sendButtonPressed();
         }
     }
 
@@ -111,28 +123,6 @@ public class WackController implements Initializable {
         if (event.getCode() == KeyCode.ENTER) {
             createGroupButtonPressed();
         }
-    }
-
-    @FXML
-    public void sendButtonPressed() {
-        //get data from textfield, check notEmpty and send to flowpane
-        String message;
-        if (messagefieldNotEmpty()) {
-            message = typeField.getCharacters().toString();
-            System.out.println(message);
-            typeField.clear();
-        } else {
-            System.out.println("Type a message");
-        }
-    }
-
-    /**
-     * This method makes sure the user has not left the message field empty
-     *
-     * @return true if the user has typed something in the message field
-     */
-    private boolean messagefieldNotEmpty() {
-        return typeField.getCharacters().length() > 0;
     }
 
     @FXML
@@ -199,9 +189,10 @@ public class WackController implements Initializable {
         String channelDescriptionText;
         if (channelnameNotEmpty()) {
             channelNameText = channelName.getCharacters().toString();
-            chatFacade.createChannel(channelNameText);
-            chatFacade.getUserChannels(user);
             channelDescriptionText = channelDescription.getCharacters().toString();
+            IChannel createdChannel = chatFacade.createChannel(channelNameText, channelDescriptionText, user);
+            channelListItems.add(new ChannelListItem(createdChannel,this));
+            updateChannelList();
             System.out.println("New group " + channelNameText + " created");
             System.out.println("Description: " + channelDescriptionText);
         } else {
@@ -221,8 +212,7 @@ public class WackController implements Initializable {
         return channelName.getCharacters().length() > 0;
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
+    public void openChannelView(IChannel channel) {
+        channelView.setChannel(channel);
     }
 }

@@ -7,6 +7,8 @@ import javafx.scene.layout.AnchorPane;
 import model.IChannel;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class ChannelListItem extends AnchorPane {
 
@@ -34,7 +36,14 @@ public class ChannelListItem extends AnchorPane {
             e.printStackTrace();
         }
 
-        channelName.setText();
+        channelName.setText(channel.getDisplayName());
+        channelDescription.setText(channel.getDescription());
 
     }
+
+    @FXML
+    public void onClick() {
+        parentController.openChannelView(channel);
+    }
+
 }
