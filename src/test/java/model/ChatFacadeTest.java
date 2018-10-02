@@ -47,7 +47,7 @@ public class ChatFacadeTest {
         String username = "Username";
         String password = "Password";
         IUser user = facade.createUser(username, password);
-        IUser serverUser = server.getUser(username,password);
+        IUser serverUser = facade.getUser(username, password);
         assertEquals(user, serverUser);
     }
 
@@ -100,9 +100,33 @@ public class ChatFacadeTest {
 
     @Test
     public void createTextMessage() {
+        String message = "this is my textMessage";
+        String message2 = "this is my next message";
+        IMessage textMessage = facade.createTextMessage(message, user);
+        IMessage textMessage2 = facade.createTextMessage(message2, user);
+        String channelName = "name";
+        String description = "descriotion";
+        IChannel channel = facade.createChannel(channelName, description, user);
+        channel.sendMessage(textMessage);
+        assertTrue(channel.getAllMessages().size() == 1);
+        channel.sendMessage(textMessage2);
+        assertTrue(channel.getAllMessages().size() == 2);
+
+
     }
 
     @Test
     public void createImageMessage() {
+        String message = "src/this/that/image.jpg";
+        String message2 = "src/this/that/image2.jpg";
+        IMessage imageMessage = facade.createImageMessage(message, user);
+        IMessage imageMessage2 = facade.createImageMessage(message2, user);
+        String channelName = "name";
+        String description = "descriotion";
+        IChannel channel = facade.createChannel(channelName, description, user);
+        channel.sendMessage(imageMessage);
+        assertTrue(channel.getAllMessages().size() == 1);
+        channel.sendMessage(imageMessage2);
+        assertTrue(channel.getAllMessages().size() == 2);
     }
 }
