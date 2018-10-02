@@ -15,7 +15,7 @@ public class ChatFacadeTest {
     @Before
     public void setUp() throws Exception {
         facade = new ChatFacade();
-        server = facade.getServer();
+        server = new Server();
         user = new MockUser("Tubby", "D!nMamma123");
     }
 
@@ -31,8 +31,6 @@ public class ChatFacadeTest {
         IChannel channel = facade.createChannel(channelName, "descriptiiiiiiion",user);
         int id = channel.getID();
         assertEquals(channel, facade.getChannel(id));
-        assertEquals(1, server.getChannels().size());
-
     }
 
     @Test
@@ -40,7 +38,7 @@ public class ChatFacadeTest {
         IChannel channel = facade.createChannel("channel","descriiiiiiption",user);
         user = facade.createUser("Tubby", "D!nMamma123");
         channel.join(user);
-
+        assertTrue(facade.getUserChannels(user).size() == 1);
         assertTrue(facade.getUserChannels(user).contains(channel));
     }
 
@@ -49,7 +47,7 @@ public class ChatFacadeTest {
         String username = "Username";
         String password = "Password";
         IUser user = facade.createUser(username, password);
-        IUser serverUser = server.getUser(username,password);
+        IUser serverUser = facade.getUser(username, password);
         assertEquals(user, serverUser);
     }
 
@@ -57,22 +55,78 @@ public class ChatFacadeTest {
     public void getUser() throws NoSuchUserFoundException, WrongPasswordException {
         String username = "Username";
         String password = "Password";
-        //IUser user = facade.getUser(username, password);
-        assertTrue(1 == 1); // dont know what to test
+        IUser user = facade.createUser(username, password);
+        IUser user2 = facade.getUser(username, password);
+        assertTrue(user == user2);
+        assertTrue(facade.getUserChannels(user).size() == 0);
     }
 
     @Test
-    public void getChannel() {
-        // should i test a getter??? pointlessss
+    public void getChannel() throws NoChannelFoundException {
+        String channelName = "this is my name";
+        String description = "This is my description";
+        IChannel channel = facade.createChannel(channelName, description, user);
+        int id = channel.getID();
+        IChannel testChannel = facade.getChannel(id);
+        assertEquals(testChannel, channel);
     }
 
     @Test
     public void createClient() {
+        String password = "D!nMamma123";
         IClient client = facade.createClient();
+        user.connectClient(client, password);
+        assertEquals(1, user.getAmountOfClients());
 
     }
 
     @Test
     public void addClientListener() {
+        IClient client = facade.createClient();
+        IClientListener listener = new MockListener();
+        client.addListeners(listener);
+        assertEquals(1, client.getAmountOfListeners());
+    }
+
+    @Test
+    public void deleteClientListener() {
+        IClient client = facade.createClient();
+        IClientListener listener = new MockListener();
+        client.addListeners(listener);
+        assertEquals(1, client.getAmountOfListeners());
+        client.removeListeners(listener);
+        assertEquals(0, client.getAmountOfListeners());
+    }
+
+    @Test
+    public void createTextMessage() {
+        String message = "this is my textMessage";
+        String message2 = "this is my next message";
+        IMessage textMessage = facade.createTextMessage(message, user);
+        IMessage textMessage2 = facade.createTextMessage(message2, user);
+        String channelName = "name";
+        String description = "descriotion";
+        IChannel channel = facade.createChannel(channelName, description, user);
+        channel.sendMessage(textMessage);
+        assertTrue(channel.getAllMessages().size() == 1);
+        channel.sendMessage(textMessage2);
+        assertTrue(channel.getAllMessages().size() == 2);
+
+
+    }
+
+    @Test
+    public void createImageMessage() {
+        String message = "src/this/that/image.jpg";
+        String message2 = "src/this/that/image2.jpg";
+        IMessage imageMessage = facade.createImageMessage(message, user);
+        IMessage imageMessage2 = facade.createImageMessage(message2, user);
+        String channelName = "name";
+        String description = "descriotion";
+        IChannel channel = facade.createChannel(channelName, description, user);
+        channel.sendMessage(imageMessage);
+        assertTrue(channel.getAllMessages().size() == 1);
+        channel.sendMessage(imageMessage2);
+        assertTrue(channel.getAllMessages().size() == 2);
     }
 }
