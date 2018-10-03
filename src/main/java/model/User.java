@@ -119,7 +119,7 @@ public class User implements IUser{
      * @return the displayImage
      */
     @Override
-    public Image getDisplayImage() {
+    public String getDisplayImage() {
         return userProfile.getDisplayImage();
     }
 

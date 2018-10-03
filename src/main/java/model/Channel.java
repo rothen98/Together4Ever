@@ -27,7 +27,7 @@ public class Channel implements IChannel {
     private static final AtomicInteger idCounter = new AtomicInteger(0);
 
     public Channel(String name,String description,IUser creator) {
-        channelProfile = new ChannelProfile(name,null,idCounter.getAndIncrement(),description);
+        channelProfile = new ChannelProfile(name,idCounter.getAndIncrement(),description);
         this.users = new HashSet<>();
         this.messages = new ArrayList<>();
 
