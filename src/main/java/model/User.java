@@ -14,7 +14,7 @@ import java.util.List;
  *
  * This class contains the data of the User. Mainly an identifcation name, password and all it´s clients.
  */
-public class User implements IUser, IIdentifiable {
+public class User implements IUser{
 
     private Collection<IClient> clients;
     private String name;
