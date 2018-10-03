@@ -183,7 +183,7 @@ public class Channel implements IChannel {
      * @return the channels image, null if the channel don't have an image
      */
     @Override
-    public Image getDisplayImage() {
+    public String getDisplayImage() {
         return channelProfile.getDisplayImage();
     }
 }
