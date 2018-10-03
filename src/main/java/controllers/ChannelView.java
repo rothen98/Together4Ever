@@ -62,7 +62,7 @@ public class ChannelView extends AnchorPane {
 
     @FXML
     public void sendButtonPressed() {
-        //get data from textfield, check notEmpty and send to flowpane
+        //get data from textfield, check notEmpty and send to listview
         String message;
         if (messagefieldNotEmpty()) {
             message = typeField.getCharacters().toString();
