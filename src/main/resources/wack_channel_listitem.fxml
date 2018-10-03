@@ -10,7 +10,7 @@
       <Label fx:id="channelName" layoutX="117.0" layoutY="14.0" text="Channelname" />
       <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="14.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@facebook_profile_pic.jpg" />
+            <Image url="@wack_logo.png" />
          </image>
       </ImageView>
       <Label fx:id="channelDescription" layoutX="117.0" layoutY="43.0" text="Description" />
