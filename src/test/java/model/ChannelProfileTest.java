@@ -11,7 +11,7 @@ public class ChannelProfileTest {
     ChannelProfile profile;
     @Before
     public void setUp() throws Exception {
-        profile = new ChannelProfile("name",null,
+        profile = new ChannelProfile("name",
                 3,"description");
 
     }

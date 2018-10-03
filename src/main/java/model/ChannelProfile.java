@@ -8,13 +8,13 @@ import javafx.scene.image.Image;
  */
 public class ChannelProfile implements IInformative {
     private String name;
-    private Image image;
+    private String image;
     private int id;
     private String description;
 
-    public ChannelProfile(String name, Image image, int id, String description) {
+    public ChannelProfile(String name, int id, String description) {
         this.name = name;
-        this.image = image;
+        //Set this.image to deafult channel image
         this.id = id;
         this.description = description;
     }
@@ -51,7 +51,7 @@ public class ChannelProfile implements IInformative {
      * @return
      */
     @Override
-    public Image getDisplayImage() {
+    public String getDisplayImage() {
         return image;
         //TODO this should return a copy?
     }

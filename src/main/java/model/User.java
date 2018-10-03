@@ -14,7 +14,7 @@ import java.util.List;
  *
  * This class contains the data of the User. Mainly an identifcation name, password and all it´s clients.
  */
-public class User implements IUser, IIdentifiable {
+public class User implements IUser{
 
     private Collection<IClient> clients;
     private String name;
@@ -119,7 +119,7 @@ public class User implements IUser, IIdentifiable {
      * @return the displayImage
      */
     @Override
-    public Image getDisplayImage() {
+    public String getDisplayImage() {
         return userProfile.getDisplayImage();
     }
 

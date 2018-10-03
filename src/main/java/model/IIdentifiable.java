@@ -6,5 +6,5 @@ import java.awt.*;
 
 public interface IIdentifiable {
     String getDisplayName();
-    Image getDisplayImage();
+    String getDisplayImage();
 }
