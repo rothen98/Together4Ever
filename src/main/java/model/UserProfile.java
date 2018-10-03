@@ -11,10 +11,11 @@ import javafx.scene.image.Image;
 public class UserProfile implements IIdentifiable {
 
     private String displayName;
-    private Image displayImage;
+    private String displayImage;
 
     public UserProfile(String displayName){
         this.displayName = displayName;
+
         //Set displayImage to the path to an default displayImage
     }
 
@@ -35,7 +36,7 @@ public class UserProfile implements IIdentifiable {
      * @return The displayImage.
      */
     @Override
-    public Image getDisplayImage() {
+    public String getDisplayImage() {
         return null;
     }
 }
