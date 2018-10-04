@@ -1,10 +1,6 @@
 package model;
 
 
-import com.sun.corba.se.spi.ior.Identifiable;
-import javafx.scene.image.Image;
-
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -19,7 +15,7 @@ public class User implements IUser{
     private Collection<IClient> clients;
     private String name;
     private String password;
-    private IIdentifiable userProfile;
+    private IRecognizable userProfile;
 
     public User(String name, String password){
         this.name = name;

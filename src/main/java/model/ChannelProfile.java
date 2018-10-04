@@ -1,12 +1,10 @@
 package model;
 
-import javafx.scene.image.Image;
-
 /**
  * This class contains information about the channel's profile.
  * The channel's name, description, image and id.
  */
-public class ChannelProfile implements IInformative {
+public class ChannelProfile implements IIdentifiable {
     private String name;
     private String image;
     private int id;

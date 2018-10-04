@@ -3,8 +3,8 @@ package model;
 import java.util.Collection;
 import java.util.List;
 
-public interface IChannel extends IInformative {
-    Collection<IIdentifiable> getAllUsers();
+public interface IChannel extends IIdentifiable {
+    Collection<IRecognizable> getAllUsers();
     List<IMessage> getAllMessages();
     List<IMessage> getLastMessages(int index);
     int getNumberOfUsers();
