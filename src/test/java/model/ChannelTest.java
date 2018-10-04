@@ -5,9 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -31,7 +29,7 @@ public class ChannelTest {
         channel.join(userOne);
         channel.join(userTwo);
 
-        Collection<IIdentifiable> users = channel.getAllUsers();
+        Collection<IRecognizable> users = channel.getAllUsers();
         assertEquals(3,users.size());
 
 

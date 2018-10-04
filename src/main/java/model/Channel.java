@@ -1,9 +1,5 @@
 package model;
 
-import javafx.scene.image.Image;
-
-import java.awt.*;
-import java.time.LocalDate;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -19,7 +15,7 @@ public class Channel implements IChannel {
     private final Collection<IUser> users;
     private final List<IMessage> messages;
 
-    private IInformative channelProfile;
+    private IIdentifiable channelProfile;
 
     /**
      * This fields ensures that every channel gets an unique id.
@@ -40,14 +36,11 @@ public class Channel implements IChannel {
      * @return a collection with the users
      */
     @Override
-    public Collection<IIdentifiable> getAllUsers() {
+    public Collection<IRecognizable> getAllUsers() {
         //Will be implemented in another way when user is changed
-        Collection<IIdentifiable> returnCollection = new ArrayList<>();
-        users.forEach(s ->{
-            returnCollection.add((IIdentifiable)s);
-        });
 
-        return returnCollection;
+        return new ArrayList<>(users);
+
     }
 
     /**
@@ -80,8 +73,14 @@ public class Channel implements IChannel {
      */
     @Override
     public List<IMessage> getLastMessages(int amount) {
-        return copyOfList(messages.subList(messages.size()-amount,messages.size()));
-        //Is copy of list really needed?
+        if(amount>=messages.size()){
+            return getAllMessages();
+        }else{
+            return copyOfList(messages.subList(messages.size()-amount,messages.size()));
+            //Is copy of list really needed?
+        }
+
+
     }
 
     /**
