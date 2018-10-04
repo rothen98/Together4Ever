@@ -118,4 +118,7 @@ public class ChatFacade {
     public IMessage createImageMessage(String imageMessage, IUser sender) {
         return new Message(sender, new ImageContent(imageMessage));
     }
+
+    //Add more methods in this class in order to decrease dependencies.
+    //For example sendMessage etc.
 }

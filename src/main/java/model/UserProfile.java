@@ -1,14 +1,12 @@
 package model;
 
 
-import javafx.scene.image.Image;
-
 /**
  * @author Viktor Franzén
  * The UserProfile class is supposed to contain the information that are going to be displayed
  * to other users in the application and should be easy to change for the user.
  */
-public class UserProfile implements IIdentifiable {
+public class UserProfile implements IRecognizable {
 
     private String displayName;
     private String displayImage;

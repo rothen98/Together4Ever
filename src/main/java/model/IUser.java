@@ -1,6 +1,6 @@
 package model;
 
-public interface IUser extends IIdentifiable {
+public interface IUser extends IRecognizable {
     void connectClient(IClient client, String password);
     void removeClient(IClient client, String password);
     void sendMessageToClients(IMessage message);

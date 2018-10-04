@@ -44,8 +44,8 @@ public class Server implements IServer {
      * @return A collection with the channels
      */
     @Override
-    public Collection<IInformative> getChannels() {
-        final Collection<IInformative> theChannels = new ArrayList<>();
+    public Collection<IIdentifiable> getChannels() {
+        final Collection<IIdentifiable> theChannels = new ArrayList<>();
         theChannels.addAll(channels);
         return theChannels;
     }
