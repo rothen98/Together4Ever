@@ -73,8 +73,14 @@ public class Channel implements IChannel {
      */
     @Override
     public List<IMessage> getLastMessages(int amount) {
-        return copyOfList(messages.subList(messages.size()-amount,messages.size()));
-        //Is copy of list really needed?
+        if(amount>=messages.size()){
+            return getAllMessages();
+        }else{
+            return copyOfList(messages.subList(messages.size()-amount,messages.size()));
+            //Is copy of list really needed?
+        }
+
+
     }
 
     /**
