@@ -39,6 +39,7 @@ public class Channel implements IChannel {
     public Collection<IRecognizable> getAllUsers() {
         //Will be implemented in another way when user is changed
 
+
         return new ArrayList<>(users);
 
     }
