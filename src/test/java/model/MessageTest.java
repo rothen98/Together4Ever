@@ -47,7 +47,7 @@ public class MessageTest {
         int minute = timestamp.getMinute();
         int second = timestamp.getSecond();
         String sendTime = hour + ":" + minute;
-        LocalDateTime testTimestamp = LocalDateTime.now();
+        LocalDateTime testTimestamp = message.getTimestamp();
 
         assertTrue(day == testTimestamp.getDayOfMonth());
         assertTrue(month == testTimestamp.getMonthValue());
