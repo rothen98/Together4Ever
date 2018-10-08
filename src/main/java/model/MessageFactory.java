@@ -44,4 +44,27 @@ public class MessageFactory {
         return new Message(user,content);
     }
 
+
+    /**
+     * A method to create a join message. (With a standard message).
+     * @param user The user that has joined.
+     * @return The message.
+     */
+    public static IMessage createJoinMessage(IUser user){
+        String message = user.getName() + " just joined the channel.";
+        IMessageContent content = new ChannelContent(message);
+        return new Message(user,content);
+    }
+
+    /**
+     * A method to create a leave message. (With a standard message).
+     * @param user The user that has left.
+     * @return The message.
+     */
+    public static IMessage createLeaveMessage(IUser user){
+        String message = user.getName() + " just left the channel.";
+        IMessageContent content = new ChannelContent(message);
+        return new Message(user,content);
+    }
+
 }
