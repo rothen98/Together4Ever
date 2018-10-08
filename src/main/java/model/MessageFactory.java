@@ -67,4 +67,16 @@ public class MessageFactory {
         return new Message(user,content);
     }
 
+
+    /**
+     * A method that can be used to create a channelmessage with an inputed string.
+     * Use when there is no standard message for what the channel are supposed to print.
+     * @param text The message text.
+     * @param user The user that is going to be the author of the message.
+     * @return The message.
+     */
+    public static IMessage createChannelMessage(String text, IUser user){
+        IMessageContent content = new ChannelContent(text);
+        return new Message(user,content);
+    }
 }
