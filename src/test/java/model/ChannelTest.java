@@ -106,14 +106,16 @@ public class ChannelTest {
     @Test
     public void sendMessage(){
         MockUser userOne = new MockUser("UserOne", "password");
-        LocalDateTime timeStampOne = LocalDateTime.of(2013,3,4,15,23);
         MockUser userTwo = new MockUser("UserTwo", "password");
+
         channel.join(userOne);
         channel.join(userTwo);
+
         IMessage messageOne = MessageFactory.createTextMessage("Hello my friends!",userOne);
         channel.sendMessage(messageOne);
-        assertEquals(4,userTwo.getReceivedMessages().size());
-        assertEquals(4,userOne.getReceivedMessages().size());
+
+        assertEquals(2,userTwo.getReceivedMessages().size());
+        assertEquals(3,userOne.getReceivedMessages().size());
 
 
     }
