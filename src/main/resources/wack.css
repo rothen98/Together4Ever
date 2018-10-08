@@ -1,38 +1,47 @@
 
-.text-small{
+.text-small {
     -fx-font-size: 9px;
     -fx-font-family: Arial;
 }
 
-.text-normal{
+.text-normal {
     -fx-font-size: 13px;
     -fx-font-family: Arial;
 }
 
-.text-large{
+.text-large {
     -fx-font-size: 20px;
     -fx-font-family: Arial;
 }
 
-.split-pane-divider{
-    -fx-padding: 0;
+.text-name {
+    -fx-font-size: 13px;
 
 }
 
-#labelRight{
+.split-pane-divider {
+    -fx-padding: 0;
+}
+
+.channelBorder {
+    -fx-border-color: rgba(0, 0, 0, 0.5);
+    -fx-border-width: 1px 1px 1px 0px;
+}
+
+#labelRight {
     -fx-text-alignment: right;
 }
 
-#lightbox{
-    -fx-background-color: rgba(0,0,0,0.75);
+#lightbox {
+    -fx-background-color: rgba(0, 0, 0, 0.75);
 }
 
-#createChannelDetail{
+#createChannelDetail {
     -fx-background-color: -fx-background;
 }
 
 #imageAnchor {
-    -fx-background-image:url("wack_logo.png");
+    -fx-background-image: url("wack_logo.png");
     -fx-background-repeat: stretch;
     -fx-background-position: center center;
 }
