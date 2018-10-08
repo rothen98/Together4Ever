@@ -9,7 +9,7 @@
    <children>
       <ImageView fx:id="userPic" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@defualt_user_pic.jpg" />
+            <Image url="@default_user_pic.jpg" />
          </image>
       </ImageView>
       <Label fx:id="userName" layoutX="14.0" layoutY="148.0" text="Name" />

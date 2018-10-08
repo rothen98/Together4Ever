@@ -28,6 +28,7 @@ public class UserProfileTest {
 
     @Test
     public void getDisplayImage() {
+        assertEquals("../../resources/default_user_pic.jpg", userProfile.getDisplayImage());
     }
 
 }
