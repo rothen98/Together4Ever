@@ -1,7 +1,5 @@
 package model;
 
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +11,7 @@ public class MockUser extends User {
     }
 
     @Override
-    public void sendMessageToClients(IMessage message){
+    public void sendMessageToClients(IIdentifiable iIdentifiable){
         //super.sendMessageToClients(message);
         messages.add(message);
     }

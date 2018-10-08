@@ -94,4 +94,22 @@ public class ChannelView extends AnchorPane {
             sendButtonPressed();
         }
     }
+
+    public int getCurrentChannelID() {
+        if (channel!=null) {
+            return channel.getID();
+        } else {
+            return -1;
+        }
+    }
+
+    public void update() {
+        IMessage newMessage = channel.getLastMessages(1).get(0);
+        addTextMessage(newMessage.getSender().getName(),newMessage.getMessageContent().getMessage());
+
+    }
+
+    private void addTextMessage(String username, String message) {
+        messageList.getItems().add(username + ": " + message);
+    }
 }

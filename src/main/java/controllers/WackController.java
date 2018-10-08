@@ -4,7 +4,6 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -21,7 +20,7 @@ public class WackController implements Initializable, IClientListener {
     IUser user;
 
     private ChannelView channelView;
-    private List<ChannelListItem> channelListItems = new ArrayList<>();
+    private Map< Integer ,ChannelListItem> channelListItems = new HashMap<>();
 
     @FXML
     AnchorPane mainView;
@@ -59,7 +58,7 @@ public class WackController implements Initializable, IClientListener {
 
     private void updateChannelList() {
         channelListItemHolder.getChildren().clear();
-        for(ChannelListItem c:channelListItems) {
+        for(ChannelListItem c:channelListItems.values()) {
             channelListItemHolder.getChildren().add(c);
         }
     }
@@ -188,7 +187,7 @@ public class WackController implements Initializable, IClientListener {
             channelNameText = channelName.getCharacters().toString();
             channelDescriptionText = channelDescription.getCharacters().toString();
             IChannel createdChannel = chatFacade.createChannel(channelNameText, channelDescriptionText, user);
-            channelListItems.add(new ChannelListItem(createdChannel,this));
+            channelListItems.put(createdChannel.getID(), new ChannelListItem(createdChannel,this));
             updateChannelList();
             System.out.println("New group " + channelNameText + " created");
             System.out.println("Description: " + channelDescriptionText);
@@ -214,7 +213,11 @@ public class WackController implements Initializable, IClientListener {
     }
 
     @Override
-    public void update(IMessage message) {
-
+    public void update(IIdentifiable iIdentifiable) {
+        System.out.println("Update!");
+        if (channelView.getCurrentChannelID() == iIdentifiable.getID()) {
+            channelView.update();
+        }
+        //channelListItems.get(iIdentifiable.getID()).update();
     }
 }

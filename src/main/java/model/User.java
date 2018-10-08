@@ -68,13 +68,13 @@ public class User implements IUser{
 
     /**
      * Sends a message to all the connected clients in the objects collection.
-     * @param message The message that should be sent to the connected clients.
+     * @param iIdentifiable
      */
 
     @Override
-    public void sendMessageToClients(IMessage message) {
+    public void sendMessageToClients(IIdentifiable iIdentifiable) {
 
-        clients.forEach(x -> x.updateListeners(message));
+        clients.forEach(x -> x.updateListeners(iIdentifiable));
     }
 
     /**

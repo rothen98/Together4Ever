@@ -3,7 +3,7 @@ package model;
 public interface IUser extends IRecognizable {
     void connectClient(IClient client, String password);
     void removeClient(IClient client, String password);
-    void sendMessageToClients(IMessage message);
+    void sendMessageToClients(IIdentifiable iIdentifiable);
     boolean authorizeLogIn(String password);
     String getName();
     int getAmountOfClients();
