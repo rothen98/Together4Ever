@@ -96,5 +96,6 @@ public class UserTest {
 
     @Test
     public void getDisplayImage() {
+        assertEquals("../../resources/default_user_pic.jpg", user.getDisplayImage());
     }
 }

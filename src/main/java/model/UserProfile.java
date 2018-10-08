@@ -14,6 +14,8 @@ public class UserProfile implements IRecognizable {
     public UserProfile(String displayName){
         this.displayName = displayName;
 
+        displayImage = "../../resources/default_user_pic.jpg";
+
         //Set displayImage to the path to an default displayImage
     }
 
@@ -35,6 +37,6 @@ public class UserProfile implements IRecognizable {
      */
     @Override
     public String getDisplayImage() {
-        return null;
+        return displayImage;
     }
 }
