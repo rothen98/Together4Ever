@@ -30,3 +30,9 @@
 #createChannelDetail{
     -fx-background-color: -fx-background;
 }
+
+#imageAnchor {
+    -fx-background-image:url("wack_logo.png");
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+}

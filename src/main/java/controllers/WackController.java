@@ -10,15 +10,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import model.ChatFacade;
-import model.IChannel;
-import model.IMessage;
-import model.IUser;
+import model.*;
 
 import java.net.URL;
 import java.util.*;
 
-public class WackController implements Initializable {
+public class WackController implements Initializable, IClientListener {
 
     ChatFacade chatFacade;
     IUser user;
@@ -214,5 +211,10 @@ public class WackController implements Initializable {
 
     public void openChannelView(IChannel channel) {
         channelView.setChannel(channel);
+    }
+
+    @Override
+    public void update(IMessage message) {
+
     }
 }
