@@ -112,7 +112,9 @@ public class Channel implements IChannel {
     @Override
     public void join(IUser user) {
         if (user != null){
-        users.add(user);
+            users.add(user);
+            //Send the join message to the channel
+            sendMessage(MessageFactory.createJoinMessage(user));
         }
     }
 
@@ -122,6 +124,8 @@ public class Channel implements IChannel {
      */
     @Override
     public void leave(IUser user) {
+        //Send the leave message to the channel
+        sendMessage(MessageFactory.createLeaveMessage(user));
         users.remove(user);
     }
 

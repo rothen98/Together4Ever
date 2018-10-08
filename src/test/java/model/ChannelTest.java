@@ -13,6 +13,10 @@ public class ChannelTest {
     private IChannel channel;
     @Before
     public void setUp() throws Exception {
+        /*
+        IMPORTANT!!!
+        When joining a user in a channel a message is sent. The length of it will therefore be 1 at the start.
+         */
         channel = new Channel("Together4Ever", "The best channel", new User("Tobias", "test"));
     }
 
@@ -51,7 +55,8 @@ public class ChannelTest {
         channel.sendMessage(messageOne);
         channel.sendMessage(messageTwo);
 
-        assertTrue(channel.getAllMessages().size() == 2);
+        //2 sent messages, 1 join message from base user joining.
+        assertTrue(channel.getAllMessages().size() == 3);
 
         //Perhaps we should check if the received messages holds the correct data?
     }
@@ -101,14 +106,16 @@ public class ChannelTest {
     @Test
     public void sendMessage(){
         MockUser userOne = new MockUser("UserOne", "password");
-        LocalDateTime timeStampOne = LocalDateTime.of(2013,3,4,15,23);
         MockUser userTwo = new MockUser("UserTwo", "password");
+
         channel.join(userOne);
         channel.join(userTwo);
-        IMessage messageOne = new Message(userOne,new TextContent("Hello my friends!"));
+
+        IMessage messageOne = MessageFactory.createTextMessage("Hello my friends!",userOne);
         channel.sendMessage(messageOne);
-        assertEquals(1,userTwo.getReceivedMessages().size());
-        assertEquals(1,userOne.getReceivedMessages().size());
+
+        assertEquals(2,userTwo.getReceivedMessages().size());
+        assertEquals(3,userOne.getReceivedMessages().size());
 
 
     }

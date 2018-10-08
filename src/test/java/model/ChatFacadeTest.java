@@ -108,9 +108,9 @@ public class ChatFacadeTest {
         String description = "descriotion";
         IChannel channel = facade.createChannel(channelName, description, user);
         channel.sendMessage(textMessage);
-        assertTrue(channel.getAllMessages().size() == 1);
-        channel.sendMessage(textMessage2);
         assertTrue(channel.getAllMessages().size() == 2);
+        channel.sendMessage(textMessage2);
+        assertTrue(channel.getAllMessages().size() == 3);
 
 
     }
@@ -125,8 +125,8 @@ public class ChatFacadeTest {
         String description = "descriotion";
         IChannel channel = facade.createChannel(channelName, description, user);
         channel.sendMessage(imageMessage);
-        assertTrue(channel.getAllMessages().size() == 1);
-        channel.sendMessage(imageMessage2);
         assertTrue(channel.getAllMessages().size() == 2);
+        channel.sendMessage(imageMessage2);
+        assertTrue(channel.getAllMessages().size() == 3);
     }
 }

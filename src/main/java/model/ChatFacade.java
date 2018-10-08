@@ -8,6 +8,7 @@ import java.util.Collection;
  *
  * The ChatFacade is a connection between the applications model and the controller.
  */
+
 public class ChatFacade {
     private final IServer server;
     private IClient client;
