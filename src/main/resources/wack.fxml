@@ -52,12 +52,12 @@
                               <Button fx:id="searchButton" layoutX="112.0" layoutY="321.0" mnemonicParsing="false" onAction="#searchButtonPressed" prefWidth="70.0" text="Search" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" />
                               <StackPane layoutY="27.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
                                  <children>
-                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER">
+                                    <ScrollPane fx:id="searchResultsScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER">
                                        <content>
                                           <FlowPane fx:id="searchResultsHolder" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" />
                                        </content>
                                     </ScrollPane>
-                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER">
+                                    <ScrollPane fx:id="channelListItemScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER">
                                        <content>
                                           <FlowPane fx:id="channelListItemHolder" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" />
                                        </content>

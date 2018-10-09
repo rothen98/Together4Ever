@@ -4,6 +4,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -32,6 +33,10 @@ public class WackController implements Initializable, IClientListener {
     FlowPane channelListItemHolder;
     @FXML
     FlowPane searchResultsHolder;
+    @FXML
+    ScrollPane channelListItemScrollPane;
+    @FXML
+    ScrollPane searchResultsScrollPane;
     @FXML
     TextField searchBar;
     @FXML
@@ -139,7 +144,7 @@ public class WackController implements Initializable, IClientListener {
                 }
 
             }
-            searchResultsHolder.toFront();
+            searchResultsScrollPane.toFront();
         } else {
             System.out.println("Type what you want to search for");
         }
