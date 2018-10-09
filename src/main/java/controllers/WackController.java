@@ -4,7 +4,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -21,7 +21,7 @@ public class WackController implements Initializable, IClientListener {
     IUser user;
 
     private ChannelView channelView;
-    private List<ChannelListItem> channelListItems = new ArrayList<>();
+    private Map< Integer ,ChannelListItem> channelListItems = new HashMap<>();
 
     @FXML
     AnchorPane mainView;
@@ -31,6 +31,12 @@ public class WackController implements Initializable, IClientListener {
     AnchorPane channelHolder;
     @FXML
     FlowPane channelListItemHolder;
+    @FXML
+    FlowPane searchResultsHolder;
+    @FXML
+    ScrollPane channelListItemScrollPane;
+    @FXML
+    ScrollPane searchResultsScrollPane;
     @FXML
     TextField searchBar;
     @FXML
@@ -59,7 +65,7 @@ public class WackController implements Initializable, IClientListener {
 
     private void updateChannelList() {
         channelListItemHolder.getChildren().clear();
-        for(ChannelListItem c:channelListItems) {
+        for(ChannelListItem c:channelListItems.values()) {
             channelListItemHolder.getChildren().add(c);
         }
     }
@@ -125,13 +131,33 @@ public class WackController implements Initializable, IClientListener {
     @FXML
     public void searchButtonPressed() {
         String searchParameter;
+        searchResultsHolder.getChildren().clear();
+        channelListItemHolder.toFront();
         if (searchbarNotEmpty()) {
             searchParameter = searchBar.getCharacters().toString();
-            System.out.println("You searched for " + searchParameter);
-            searchBar.clear();
+            List<IIdentifiable> list = getSearchResults(searchParameter);
+            for(IIdentifiable i:list){
+                if(channelListItems.containsKey(i.getID())){
+                    searchResultsHolder.getChildren().add(new SearchItemView(i,this,true));
+                }else{
+                    searchResultsHolder.getChildren().add(new SearchItemView(i,this,false));
+                }
+
+            }
+            searchResultsScrollPane.toFront();
         } else {
             System.out.println("Type what you want to search for");
         }
+    }
+
+    private List<IIdentifiable> getSearchResults(String searchParameter) {
+        List<IIdentifiable> listToReturn = new ArrayList<>();
+        for(IIdentifiable i:chatFacade.getAllChannels()) {
+            if(i.getDisplayName().contains(searchParameter)) {
+                listToReturn.add(i);
+            }
+        }
+        return listToReturn;
     }
 
     /**
@@ -188,7 +214,7 @@ public class WackController implements Initializable, IClientListener {
             channelNameText = channelName.getCharacters().toString();
             channelDescriptionText = channelDescription.getCharacters().toString();
             IChannel createdChannel = chatFacade.createChannel(channelNameText, channelDescriptionText, user);
-            channelListItems.add(new ChannelListItem(createdChannel,this));
+            channelListItems.put(createdChannel.getID(), new ChannelListItem(createdChannel,this));
             updateChannelList();
             System.out.println("New group " + channelNameText + " created");
             System.out.println("Description: " + channelDescriptionText);
@@ -214,7 +240,28 @@ public class WackController implements Initializable, IClientListener {
     }
 
     @Override
-    public void update(IMessage message) {
+    public void update(IIdentifiable iIdentifiable) {
+        System.out.println("Update!");
+        if (channelView.getCurrentChannelID() == iIdentifiable.getID()) {
+            channelView.update();
+        }
+        //channelListItems.get(iIdentifiable.getID()).update();
+    }
 
+    public void joinChannel(int id) {
+        try {
+            IChannel newChannel = chatFacade.getChannel(id);
+            newChannel.join(user);
+            addChatListItem(newChannel);
+            channelView.setChannel(newChannel);
+            channelListItemHolder.toFront();
+            updateChannelList();
+        } catch (NoChannelFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addChatListItem(IChannel newChannel) {
+        channelListItems.put(newChannel.getID(), new ChannelListItem(newChannel,this));
     }
 }

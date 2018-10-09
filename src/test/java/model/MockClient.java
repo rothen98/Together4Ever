@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MockClient extends Client{
-    private List<IMessage> messages;
+    private int numberOFMessages;
 
     public MockClient(){
-        messages = new ArrayList<>();
+
     }
 
     @Override
-    public void updateListeners(IMessage message) {
+    public void updateListeners(IIdentifiable message) {
         //super.update(message);
-        messages.add(message);
+        numberOFMessages++;
     }
 
     public int getAmountOfMessages(){
-        return messages.size();
+        return numberOFMessages;
     }
 }

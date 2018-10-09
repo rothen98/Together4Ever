@@ -16,12 +16,12 @@ public class Client implements IClient{
 
     /**
      * Updates all listeners with the sent message.
-     * @param message The message to send to the listeners.
+     * @param iIdentifiable The message to send to the listeners.
      */
     @Override
-    public void updateListeners(IMessage message) {
+    public void updateListeners(IIdentifiable iIdentifiable) {
         listeners.forEach(x -> {
-            x.update(message);
+            x.update(iIdentifiable);
         });
     }
 

@@ -101,7 +101,7 @@ public class Channel implements IChannel {
     public void sendMessage(IMessage message) {
         messages.add(message);
         for(IUser user: users){
-            user.sendMessageToClients(message);
+            user.sendMessageToClients(this);
         }
     }
 

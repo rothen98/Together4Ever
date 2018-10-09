@@ -120,6 +120,10 @@ public class ChatFacade {
         return new Message(sender, new ImageContent(imageMessage));
     }
 
+    public Collection<IIdentifiable> getAllChannels(){
+        return server.getChannels();
+    }
+
     //Add more methods in this class in order to decrease dependencies.
     //For example sendMessage etc.
 }

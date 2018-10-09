@@ -1,24 +1,22 @@
 package model;
 
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class MockUser extends User {
-    private List<IMessage> messages;
+    private int numberOfUpdates;
     public MockUser(String name, String password) {
         super(name, password);
-        messages = new ArrayList<>();
+
     }
 
     @Override
-    public void sendMessageToClients(IMessage message){
+    public void sendMessageToClients(IIdentifiable iIdentifiable){
         //super.sendMessageToClients(message);
-        messages.add(message);
+        numberOfUpdates++;
     }
 
-    public List<IMessage> getReceivedMessages(){
-        return messages;
+    public int getNumberOfReceivedMessages(){
+        return numberOfUpdates;
     }
 }

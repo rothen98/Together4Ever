@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class MockListener implements IClientListener {
-    private Collection messages = new ArrayList();
+    private int numberOfUpdates;
 
     @Override
-    public void update(IMessage message) {
-        messages.add(message);
+    public void update(IIdentifiable iIdentifiable) {
+        numberOfUpdates++;
     }
 
     public int getAmountOfMessages(){
-        return messages.size();
+        return numberOfUpdates;
     }
 }
