@@ -114,8 +114,8 @@ public class ChannelTest {
         IMessage messageOne = MessageFactory.createTextMessage("Hello my friends!",userOne);
         channel.sendMessage(messageOne);
 
-        assertEquals(2,userTwo.getReceivedMessages().size());
-        assertEquals(3,userOne.getReceivedMessages().size());
+        assertEquals(2,userTwo.getNumberOfReceivedMessages());
+        assertEquals(3,userOne.getNumberOfReceivedMessages());
 
 
     }

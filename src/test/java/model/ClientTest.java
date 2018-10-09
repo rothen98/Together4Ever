@@ -27,7 +27,7 @@ public class ClientTest {
         MockUser userOne = new MockUser("UserOne", "password");
         IMessage messageOne = new Message(userOne,new TextContent("Hello my friends!"));
 
-        client.updateListeners(messageOne);
+        client.updateListeners(null);
         assertTrue(listener.getAmountOfMessages() == 1);
 
     }

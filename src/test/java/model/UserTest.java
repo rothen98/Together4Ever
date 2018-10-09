@@ -51,7 +51,7 @@ public class UserTest {
         IMessageContent messageContent = new TextContent("Hello my friends!");
         IMessage messageOne = new Message(user,messageContent);
 
-        user.sendMessageToClients(messageOne);
+        user.sendMessageToClients(null);
 
         assertTrue(mockclient.getAmountOfMessages() == 1);
     }
