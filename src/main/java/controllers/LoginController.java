@@ -145,6 +145,11 @@ public class LoginController implements Initializable {
         loader.setController(controller);
 
         Stage stage = new Stage();
+        stage.setMinHeight(450);
+        stage.setMinWidth(600);
+        stage.setOnHiding(event -> {
+            System.out.println("Closing stage!!!");
+        });
 
         Parent root = null;
         try {

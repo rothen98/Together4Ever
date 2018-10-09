@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import model.ChatFacade;
 import model.IChannel;
 import model.IMessage;
@@ -24,7 +25,7 @@ public class ChannelView extends AnchorPane {
     private ChatFacade chatFacade;
 
     @FXML
-    ListView messageList;
+    VBox messageList;
     @FXML
     TextField typeField;
     @FXML
@@ -52,10 +53,10 @@ public class ChannelView extends AnchorPane {
         if (channel != null) {
             sendButton.setDisable(false);
             this.channel = channel;
-            messageList.getItems().clear();
+            messageList.getChildren().clear();
             List<String> messages = new ArrayList<>();
             for (IMessage m : channel.getAllMessages()) {
-                messageList.getItems().add(m.getMessageContent().getMessage());
+                messageList.getChildren().add(new MessageView(m));
             }
         }
     }
@@ -105,11 +106,11 @@ public class ChannelView extends AnchorPane {
 
     public void update() {
         IMessage newMessage = channel.getLastMessages(1).get(0);
-        addTextMessage(newMessage.getSender().getName(),newMessage.getMessageContent().getMessage());
+        addTextMessage(newMessage);
 
     }
 
-    private void addTextMessage(String username, String message) {
-        messageList.getItems().add(username + ": " + message);
+    private void addTextMessage(IMessage iMessage) {
+        messageList.getChildren().add(new MessageView(iMessage));
     }
 }

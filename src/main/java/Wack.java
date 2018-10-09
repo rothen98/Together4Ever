@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Wack extends Application{
@@ -22,6 +23,7 @@ public class Wack extends Application{
 
         stage.setTitle("wack");
         stage.setScene(scene);
+        stage.getIcons().add(new Image("wack_logo.png"));
         stage.show();
 
     }
