@@ -11,9 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import model.ChatFacade;
-import model.IClient;
-import model.IUser;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -78,16 +76,21 @@ public class LoginController implements Initializable {
      * and then creates a user with the given name and password.
      */
     @FXML
-    public void signupButtonPressed() {
+    private void signupButtonPressed() {
         if (signupUsernameNotEmpty() && signupPasswordNotEmpty()) {
             IUser user = chatFacade.createUser(getSignupUsername(), getSignupPassword());
-            IClient client = chatFacade.createClient();
-            user.connectClient(client,getSignupPassword());
+            if (user!= null){
+                IClient client = chatFacade.createClient();
+                user.connectClient(client,getSignupPassword());
 
-            createClient(user,client);
+                initClient(user,client);
 
-            System.out.println("User created with name " + getSignupUsername()
-                    + " and password " + getSignupPassword());
+                System.out.println("User created with name " + getSignupUsername()
+                        + " and password " + getSignupPassword());
+            }else{
+                System.out.println("The given username is already taken");
+            }
+
         } else {
             System.out.println("Please enter a username and password");
         }
@@ -137,9 +140,10 @@ public class LoginController implements Initializable {
      * @param user The user who will be logged in and using the client
      */
     @FXML
-    private void createClient(IUser user, IClient client) {
+    private void initClient(IUser user, IClient client) {
         WackController controller = new WackController(chatFacade, user);
         client.addListeners(controller);
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/wack.fxml"));
         loader.setController(controller);
 
@@ -156,12 +160,27 @@ public class LoginController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //Parent root = FXMLLoader.load(getClass().getResource("wack.fxml"));
 
         Scene scene = new Scene(root, 1000, 600);
 
         stage.setTitle("wack (logged in as " + user.getName() + ")");
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    private void loginButtonPressed(){
+        try {
+            IUser user = chatFacade.getUser(loginUsername.getText(),loginPassword.getText());
+            IClient client = chatFacade.createClient();
+            user.connectClient(client,loginPassword.getText());
+            initClient(user,client);
+        } catch (NoSuchUserFoundException e) {
+            e.printStackTrace();
+        } catch (WrongPasswordException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

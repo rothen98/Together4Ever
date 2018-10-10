@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * This class contains data about which users and channels that exists.
@@ -110,5 +111,17 @@ public class Server implements IServer {
     @Override
     public void addUser(IUser user) {
         users.add(user);
+
     }
+
+    @Override
+    public Collection<String> getAllUserNames(){
+        List<String> listToReturn = new ArrayList<>();
+        for(IUser u:users){
+            listToReturn.add(u.getName());
+        }
+        return listToReturn;
+    }
+
+
 }

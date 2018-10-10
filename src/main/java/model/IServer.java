@@ -16,4 +16,5 @@ public interface IServer {
     void addUser(IUser user);
 
 
+    Collection<String> getAllUserNames();
 }

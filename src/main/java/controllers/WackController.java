@@ -63,6 +63,14 @@ public class WackController implements Initializable, IClientListener {
         AnchorPane.setTopAnchor(channelView,0.0);
         AnchorPane.setLeftAnchor(channelView,0.0);
         AnchorPane.setRightAnchor(channelView,0.0);
+
+        Collection<IChannel> channels = chatFacade.getUserChannels(user);
+        System.out.println(channels.size());
+        for(IChannel channel: channels){
+            addChannelListItem(channel);
+        }
+        updateChannelList();
+
     }
 
     private void updateChannelList() {
@@ -249,9 +257,20 @@ public class WackController implements Initializable, IClientListener {
 
     @Override
     public void update(IIdentifiable iIdentifiable) {
-        System.out.println("Update!");
         if (channelView.getCurrentChannelID() == iIdentifiable.getID()) {
             channelView.update();
+        }
+        if(channelListItems.keySet().contains(iIdentifiable.getID())){
+            //Todo
+            //channelListItems.get(iIdentifiable.getID()).update();
+        }
+        else{
+            try {
+                addChannelListItem(chatFacade.getChannel(iIdentifiable.getID()));
+                updateChannelList();
+            } catch (NoChannelFoundException e) {
+                e.printStackTrace();
+            }
         }
         //channelListItems.get(iIdentifiable.getID()).update();
     }
