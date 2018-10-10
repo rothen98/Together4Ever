@@ -29,6 +29,17 @@
     -fx-border-width: 1px 0px 1px 0px;
 }
 
+#channel-list-item{
+    -fx-background-color: rgb(193, 227, 230);
+}
+
+#channel-list-item:hover{
+    -fx-background-color: rgb(112, 230, 216);
+}
+#channel-list-item:pressed{
+    -fx-background-color: rgb(115, 138, 230);
+}
+
 #labelRight {
     -fx-text-alignment: right;
 }

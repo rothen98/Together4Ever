@@ -23,6 +23,7 @@ public class WackController implements Initializable, IClientListener {
 
     private ChannelView channelView;
     private Map< Integer ,ChannelListItem> channelListItems = new HashMap<>();
+    private ChannelListItem selecteChannelItem = null;
 
     @FXML
     AnchorPane mainView;
@@ -214,9 +215,14 @@ public class WackController implements Initializable, IClientListener {
         if (channelnameNotEmpty()) {
             channelNameText = channelName.getCharacters().toString();
             channelDescriptionText = channelDescription.getCharacters().toString();
+
             IChannel createdChannel = chatFacade.createChannel(channelNameText, channelDescriptionText, user);
-            channelListItems.put(createdChannel.getID(), new ChannelListItem(createdChannel,this));
+            channelView.setChannel(createdChannel);
+            ChannelListItem newItem = new ChannelListItem(createdChannel,this);
+            channelListItems.put(createdChannel.getID(), newItem);
             updateChannelList();
+            selectChannelListItem(newItem);
+
             System.out.println("New group " + channelNameText + " created");
             System.out.println("Description: " + channelDescriptionText);
         } else {
@@ -238,6 +244,7 @@ public class WackController implements Initializable, IClientListener {
 
     public void openChannelView(IChannel channel) {
         channelView.setChannel(channel);
+        selectChannelListItem(channelListItems.get(channel.getID()));
     }
 
     @Override
@@ -263,6 +270,22 @@ public class WackController implements Initializable, IClientListener {
     }
 
     private void addChatListItem(IChannel newChannel) {
-        channelListItems.put(newChannel.getID(), new ChannelListItem(newChannel,this));
+        ChannelListItem newItem =  new ChannelListItem(newChannel,this);
+        channelListItems.put(newChannel.getID(),newItem);
+        selectChannelListItem(newItem);
+    }
+
+    /**
+     * This method will make the given channellistitem "Selected" by giving it a
+     * color which differentiates it from the others.
+     * @param item the item that should be selected
+     */
+    private void selectChannelListItem(ChannelListItem item){
+        if(selecteChannelItem!= null){
+            selecteChannelItem.setStyle("");
+        }
+        selecteChannelItem = item;
+        item.setStyle("-fx-background-color: rgb(255,255,255)"); // Should be changed...
+
     }
 }
