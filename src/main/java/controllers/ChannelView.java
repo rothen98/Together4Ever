@@ -3,6 +3,7 @@ package controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -24,6 +25,9 @@ public class ChannelView extends AnchorPane {
     private IUser user;
     private ChatFacade chatFacade;
 
+
+    @FXML
+    Label channelName;
     @FXML
     VBox messageList;
     @FXML
@@ -62,12 +66,19 @@ public class ChannelView extends AnchorPane {
     }
 
     @FXML
+    public void sendButtonKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            sendButtonPressed();
+        }
+    }
+
+    @FXML
     public void sendButtonPressed() {
         //get data from textfield, check notEmpty and send to listview
         String message;
         if (messagefieldNotEmpty()) {
             message = typeField.getCharacters().toString();
-            channel.sendMessage(chatFacade.createTextMessage(message,user));
+            channel.sendMessage(chatFacade.createTextMessage(message, user));
             System.out.println(channel.getDisplayName() + ": " + message);
             typeField.clear();
         } else {
@@ -97,7 +108,7 @@ public class ChannelView extends AnchorPane {
     }
 
     public int getCurrentChannelID() {
-        if (channel!=null) {
+        if (channel != null) {
             return channel.getID();
         } else {
             return -1;

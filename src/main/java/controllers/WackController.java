@@ -10,6 +10,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import model.*;
 
 import java.net.URL;
@@ -30,9 +31,9 @@ public class WackController implements Initializable, IClientListener {
     @FXML
     AnchorPane channelHolder;
     @FXML
-    FlowPane channelListItemHolder;
+    VBox channelListItemHolder;
     @FXML
-    FlowPane searchResultsHolder;
+    VBox searchResultsHolder;
     @FXML
     ScrollPane channelListItemScrollPane;
     @FXML
@@ -254,7 +255,7 @@ public class WackController implements Initializable, IClientListener {
             newChannel.join(user);
             addChatListItem(newChannel);
             channelView.setChannel(newChannel);
-            channelListItemHolder.toFront();
+            channelListItemScrollPane.toFront();
             updateChannelList();
         } catch (NoChannelFoundException e) {
             e.printStackTrace();

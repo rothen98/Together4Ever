@@ -5,14 +5,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onClick" prefHeight="75.0" prefWidth="200.0" styleClass="channelBorder" stylesheets="@wack.css" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onClick" prefHeight="75.0" prefWidth="200.0" styleClass="channelBorder" stylesheets="@wack.css" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="channelName" layoutX="117.0" layoutY="14.0" text="Channelname" />
+      <Label fx:id="channelName" layoutX="77.0" layoutY="14.0" styleClass="text-bold" text="Channelname" AnchorPane.leftAnchor="75.0" />
       <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
          <image>
             <Image url="@default_channel_pic.png" />
          </image>
       </ImageView>
-      <Label fx:id="channelDescription" layoutX="117.0" layoutY="43.0" text="Description" />
+      <Label fx:id="channelDescription" layoutX="77.0" layoutY="33.0" prefWidth="130.0" text="Description" wrapText="true" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="33.0" />
    </children>
 </fx:root>

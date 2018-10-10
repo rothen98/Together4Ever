@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -23,11 +24,11 @@ public class LoginController implements Initializable {
     @FXML
     TextField loginUsername;
     @FXML
-    TextField loginPassword;
+    PasswordField loginPassword;
     @FXML
     TextField signupUsername;
     @FXML
-    TextField signupPassword;
+    PasswordField signupPassword;
     @FXML
     Button signupButton;
 
@@ -50,8 +51,6 @@ public class LoginController implements Initializable {
         if (event.getCode() == KeyCode.ENTER) {
             signupPassword.requestFocus();
         } else if (event.getCode() == KeyCode.DOWN) {
-            signupPassword.requestFocus();
-        } else if (event.getCode() == KeyCode.TAB) {
             signupPassword.requestFocus();
         }
     }
