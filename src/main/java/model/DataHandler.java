@@ -80,7 +80,14 @@ public class DataHandler {
     public Collection<IUser> getUsers() {
         Collection<IUser> users = new HashSet<>();
         for (int i = 0; i < userArray.length(); i++) {
-            //users.add();
+            JSONObject jsonUser = userArray.getJSONObject(i);
+            IUser user = new User(
+                    jsonUser.get("Username").toString(),
+                    jsonUser.get("Password").toString(),
+                    jsonUser.get("DisplayName").toString(),
+                    jsonUser.get("DisplayImage").toString()
+            );
+
         }
         return users;
     }
