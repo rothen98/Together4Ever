@@ -7,6 +7,7 @@ public interface IUser extends IRecognizable {
     boolean authorizeLogIn(String password);
     String getName();
     int getAmountOfClients();
+    String getHashedPassword();
 
 
 }
