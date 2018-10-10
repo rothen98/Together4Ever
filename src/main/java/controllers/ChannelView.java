@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -65,24 +66,25 @@ public class ChannelView extends AnchorPane {
                 loadOlderMessages(10);
             }
         });
+        setScrollDownAutomatically(true);
+
 
 
     }
 
     private void loadOlderMessages(int number){
-        setScrollDownAutomatically(false);
+        //setScrollDownAutomatically(false);
         messageList.getChildren().remove(loadOldMessagesButton);
         int numberOfShowedMessages = messageList.getChildren().size();
         List<IMessage> messages = channel.getLastMessages(numberOfShowedMessages+number);
-        for(IMessage m: messages){
-            System.out.println(m.getMessageContent().getMessage());
-        }
-        for (int i = messages.size()-numberOfShowedMessages;i>=0;i--){
+        int startValue = messages.size()-numberOfShowedMessages;
+        for (int i = startValue;i>=0;i--){
             showOldMessage(messages.get(i));
+            numberOfShowedMessages++;
         }
 
 
-        if(channel.getAllMessages().size() > numberOfShowedMessages + messages.size()){
+        if(channel.getAllMessages().size() > numberOfShowedMessages){
             messageList.getChildren().add(0,loadOldMessagesButton);
         }
 
@@ -180,14 +182,15 @@ public class ChannelView extends AnchorPane {
 
     public void update() {
         IMessage newMessage = channel.getLastMessages(1).get(0);
-        if (messageListScrollPane.getVvalue() < 0.5){
+        //Todo
+        /*if (messageListScrollPane.getVvalue() < 0.5){
             scrollDownButton.setVisible(true);
         }else{
             setScrollDownAutomatically(true);
-        }
+        }*/
         showMessage(newMessage);
 
-        setScrollDownAutomatically(false);
+
     }
     @FXML
     private void scrollDownButtonPressed(){

@@ -11,12 +11,12 @@
    <children>
     <AnchorPane id="imageAnchor" minHeight="0.0" minWidth="0.0" prefHeight="309.0" prefWidth="600.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
-            <Button fx:id="scrollDownButton" mnemonicParsing="false" onAction="#scrollDownButtonPressed" text="Button" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="260.0" />
             <ScrollPane fx:id="messageListScrollPane" fitToHeight="true" fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <content>
                   <VBox fx:id="messageList" prefHeight="200.0" prefWidth="598.0" />
                </content>
             </ScrollPane>
+            <Button fx:id="scrollDownButton" mnemonicParsing="false" onAction="#scrollDownButtonPressed" text="Button" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="260.0" />
          </children>
       </AnchorPane>
     <AnchorPane maxHeight="100.0" minHeight="0.0" minWidth="0.0" prefHeight="75.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
