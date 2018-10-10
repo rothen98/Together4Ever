@@ -28,6 +28,12 @@ public class Channel implements IChannel {
         this.messages = new ArrayList<>();
     }
 
+    public Channel(String channelName, String description, String displayImage) {
+        //This isnt done yet
+        this.users =  new HashSet<>();
+        this.messages = new ArrayList<>();
+    }
+
     /**
      * This method will return all the users
      * @return a collection with the users
