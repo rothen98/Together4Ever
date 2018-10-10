@@ -30,14 +30,14 @@
 }
 
 #channel-list-item{
-    -fx-background-color: rgb(193, 227, 230);
+    -fx-background-color: rgb(255, 255, 255);
 }
 
 #channel-list-item:hover{
-    -fx-background-color: rgb(112, 230, 216);
+    -fx-background-color: rgba(209, 230, 230,0.5);
 }
 #channel-list-item:pressed{
-    -fx-background-color: rgb(115, 138, 230);
+    -fx-background-color: rgba(209,230, 230,0.2);
 }
 
 #labelRight {

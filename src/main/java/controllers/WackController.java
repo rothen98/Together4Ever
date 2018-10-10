@@ -285,7 +285,7 @@ public class WackController implements Initializable, IClientListener {
             selecteChannelItem.setStyle("");
         }
         selecteChannelItem = item;
-        item.setStyle("-fx-background-color: rgb(255,255,255)"); // Should be changed...
+        item.setStyle("-fx-background-color: rgb(209, 230, 230);"); // Should be changed...
 
     }
 }

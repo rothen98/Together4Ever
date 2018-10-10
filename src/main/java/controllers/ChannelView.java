@@ -7,10 +7,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import model.ChatFacade;
-import model.IChannel;
-import model.IMessage;
-import model.IUser;
+import model.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,8 +58,16 @@ public class ChannelView extends AnchorPane {
             messageList.getChildren().clear();
             List<String> messages = new ArrayList<>();
             for (IMessage m : channel.getAllMessages()) {
-                messageList.getChildren().add(new MessageView(m));
+                showMessage(m);
             }
+        }
+    }
+
+    private void showMessage(IMessage message){
+        if(message.getMessageContent().getType()== MessageType.TEXT){
+            addTextMessage(message);
+        }else if(message.getMessageContent().getType()==MessageType.CHANNEL){
+            addChannelMessage(message);
         }
     }
 
@@ -118,7 +123,12 @@ public class ChannelView extends AnchorPane {
 
     public void update() {
         IMessage newMessage = channel.getLastMessages(1).get(0);
-        addTextMessage(newMessage);
+        showMessage(newMessage);
+
+    }
+
+    private void addChannelMessage(IMessage newMessage) {
+        messageList.getChildren().add(new Label(newMessage.getMessageContent().getMessage()));
     }
 
     private void addTextMessage(IMessage iMessage) {

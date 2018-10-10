@@ -37,7 +37,7 @@ public class MessageView extends AnchorPane {
         username.setText(iMessage.getSender().getName());
         messageText.setText(iMessage.getMessageContent().getMessage());
         LocalDateTime time = iMessage.getTimestamp();
-        String displayedTime = time.getDayOfMonth() + "/" + time.getMonthValue() + " " + time.getHour() + "." + time.getMinute();
+        String displayedTime = time.getDayOfMonth() + "/" + time.getMonthValue() + " " + time.getHour() + ":" + time.getMinute();
         timeStamp.setText(displayedTime);
 
 
