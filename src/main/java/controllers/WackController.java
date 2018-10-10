@@ -22,7 +22,7 @@ public class WackController implements Initializable, IClientListener {
     IUser user;
 
     private ChannelView channelView;
-    private Map< Integer ,ChannelListItem> channelListItems = new HashMap<>();
+    private Map<Integer ,ChannelListItem> channelListItems = new HashMap<>();
     private ChannelListItem selecteChannelItem = null;
 
     @FXML
@@ -215,22 +215,22 @@ public class WackController implements Initializable, IClientListener {
         if (channelnameNotEmpty()) {
             channelNameText = channelName.getCharacters().toString();
             channelDescriptionText = channelDescription.getCharacters().toString();
-
             IChannel createdChannel = chatFacade.createChannel(channelNameText, channelDescriptionText, user);
             channelView.setChannel(createdChannel);
-            ChannelListItem newItem = new ChannelListItem(createdChannel,this);
-            channelListItems.put(createdChannel.getID(), newItem);
+            addChannelListItem(createdChannel);
             updateChannelList();
-            selectChannelListItem(newItem);
-
-            System.out.println("New group " + channelNameText + " created");
-            System.out.println("Description: " + channelDescriptionText);
         } else {
             System.out.println("Type in a group name");
         }
         channelName.clear();
         channelDescription.clear();
         mainView.toFront();
+    }
+
+    private void addChannelListItem(IChannel channel){
+        ChannelListItem newItem = new ChannelListItem(channel,this);
+        channelListItems.put(channel.getID(), newItem);
+        selectChannelListItem(newItem);
     }
 
     /**
