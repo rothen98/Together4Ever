@@ -16,6 +16,7 @@ public class User implements IUser{
     private String name;
     private String password;
     private IRecognizable userProfile;
+    private String hashedPassword;
 
     public User(String name, String password){
         this.name = name;
@@ -117,6 +118,14 @@ public class User implements IUser{
     @Override
     public String getDisplayImage() {
         return userProfile.getDisplayImage();
+    }
+
+    /**
+     * @return the users password in an hashed format
+     */
+    @Override
+    public String getHashedPassword() {
+        return hashedPassword;
     }
 
 
