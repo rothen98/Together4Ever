@@ -2,10 +2,7 @@ package controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -34,6 +31,8 @@ public class ChannelView extends AnchorPane {
     TextField typeField;
     @FXML
     Button sendButton;
+    @FXML
+    ScrollPane messageListScrollPane;
 
     public ChannelView(IUser user, ChatFacade chatFacade) {
 
@@ -51,12 +50,14 @@ public class ChannelView extends AnchorPane {
             e.printStackTrace();
         }
         sendButton.setDisable(true);
+        messageListScrollPane.vvalueProperty().bind(messageList.heightProperty());
     }
 
     public void setChannel(IChannel channel) {
         if (channel != null) {
             sendButton.setDisable(false);
             this.channel = channel;
+            this.channelName.setText(channel.getDisplayName());
             messageList.getChildren().clear();
             List<String> messages = new ArrayList<>();
             for (IMessage m : channel.getAllMessages()) {
@@ -118,7 +119,6 @@ public class ChannelView extends AnchorPane {
     public void update() {
         IMessage newMessage = channel.getLastMessages(1).get(0);
         addTextMessage(newMessage);
-
     }
 
     private void addTextMessage(IMessage iMessage) {
