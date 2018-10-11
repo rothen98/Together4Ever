@@ -1,6 +1,8 @@
 package model;
 
 
+import External.jbcrypt.BCrypt;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -15,6 +17,8 @@ public class User implements IUser{
     private Collection<IClient> clients;
     private String name;
     private String password;
+    private String hashedPassword;
+
     private IRecognizable userProfile;
     private String hashedPassword;
 
@@ -25,6 +29,8 @@ public class User implements IUser{
         this.clients = new ArrayList<>();
 
         this.userProfile = new UserProfile(name);
+
+        this.hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
     public User(String name, String password, String displayName, String displayImage) {
