@@ -16,6 +16,7 @@ public class User implements IUser{
     private String name;
     private String password;
     private IRecognizable userProfile;
+    private String hashedPassword;
 
     public User(String name, String password){
         this.name = name;
@@ -24,6 +25,13 @@ public class User implements IUser{
         this.clients = new ArrayList<>();
 
         this.userProfile = new UserProfile(name);
+    }
+
+    public User(String name, String password, String displayName, String displayImage) {
+        this.name = name;
+        this.hashedPassword = password;
+        this.clients = new ArrayList<>();
+        this.userProfile = new UserProfile(displayName, displayImage);
     }
 
 
@@ -109,6 +117,13 @@ public class User implements IUser{
         return userProfile.getDisplayName();
     }
 
+    /*public void setDisplayName(String displayName) {
+        userProfile.setDisplayName(displayName);
+    }
+
+    public void setDisplayImage(String displayName) {
+        userProfile.setDisplayImage(displayName);
+    }*/
 
     /**
      * Gets the users displayImage from the UserProfile
@@ -117,6 +132,14 @@ public class User implements IUser{
     @Override
     public String getDisplayImage() {
         return userProfile.getDisplayImage();
+    }
+
+    /**
+     * @return the users password in an hashed format
+     */
+    @Override
+    public String getHashedPassword() {
+        return hashedPassword;
     }
 
 

@@ -19,7 +19,10 @@ public class UserProfile implements IRecognizable {
         //Set displayImage to the path to an default displayImage
     }
 
-
+    public UserProfile(String displayName, String displayImage) {
+        this.displayName = displayName;
+        this.displayImage=displayImage;
+    }
 
 
     /**
@@ -39,4 +42,13 @@ public class UserProfile implements IRecognizable {
     public String getDisplayImage() {
         return displayImage;
     }
+
+    public void setDisplayName(String displayName) {
+        this.displayImage = displayName;
+    }
+
+    public void setDisplayImage(String displayImage) {
+        this.displayImage = displayImage;
+    }
+
 }
