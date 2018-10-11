@@ -22,7 +22,8 @@ public class WackController implements Initializable, IClientListener {
     IUser user;
 
     private ChannelView channelView;
-    private Map< Integer ,ChannelListItem> channelListItems = new HashMap<>();
+    private Map<Integer ,ChannelListItem> channelListItems = new HashMap<>();
+    private ChannelListItem selecteChannelItem = null;
 
     @FXML
     AnchorPane mainView;
@@ -62,6 +63,14 @@ public class WackController implements Initializable, IClientListener {
         AnchorPane.setTopAnchor(channelView,0.0);
         AnchorPane.setLeftAnchor(channelView,0.0);
         AnchorPane.setRightAnchor(channelView,0.0);
+
+        Collection<IChannel> channels = chatFacade.getUserChannels(user);
+        System.out.println(channels.size());
+        for(IChannel channel: channels){
+            addChannelListItem(channel);
+        }
+        updateChannelList();
+
     }
 
     private void updateChannelList() {
@@ -215,16 +224,21 @@ public class WackController implements Initializable, IClientListener {
             channelNameText = channelName.getCharacters().toString();
             channelDescriptionText = channelDescription.getCharacters().toString();
             IChannel createdChannel = chatFacade.createChannel(channelNameText, channelDescriptionText, user);
-            channelListItems.put(createdChannel.getID(), new ChannelListItem(createdChannel,this));
+            channelView.setChannel(createdChannel);
+            addChannelListItem(createdChannel);
             updateChannelList();
-            System.out.println("New group " + channelNameText + " created");
-            System.out.println("Description: " + channelDescriptionText);
         } else {
             System.out.println("Type in a group name");
         }
         channelName.clear();
         channelDescription.clear();
         mainView.toFront();
+    }
+
+    private void addChannelListItem(IChannel channel){
+        ChannelListItem newItem = new ChannelListItem(channel,this);
+        channelListItems.put(channel.getID(), newItem);
+        selectChannelListItem(newItem);
     }
 
     /**
@@ -238,13 +252,25 @@ public class WackController implements Initializable, IClientListener {
 
     public void openChannelView(IChannel channel) {
         channelView.setChannel(channel);
+        selectChannelListItem(channelListItems.get(channel.getID()));
     }
 
     @Override
     public void update(IIdentifiable iIdentifiable) {
-        System.out.println("Update!");
         if (channelView.getCurrentChannelID() == iIdentifiable.getID()) {
             channelView.update();
+        }
+        if(channelListItems.keySet().contains(iIdentifiable.getID())){
+            //Todo
+            //channelListItems.get(iIdentifiable.getID()).update();
+        }
+        else{
+            try {
+                addChannelListItem(chatFacade.getChannel(iIdentifiable.getID()));
+                updateChannelList();
+            } catch (NoChannelFoundException e) {
+                e.printStackTrace();
+            }
         }
         //channelListItems.get(iIdentifiable.getID()).update();
     }
@@ -263,6 +289,22 @@ public class WackController implements Initializable, IClientListener {
     }
 
     private void addChatListItem(IChannel newChannel) {
-        channelListItems.put(newChannel.getID(), new ChannelListItem(newChannel,this));
+        ChannelListItem newItem =  new ChannelListItem(newChannel,this);
+        channelListItems.put(newChannel.getID(),newItem);
+        selectChannelListItem(newItem);
+    }
+
+    /**
+     * This method will make the given channellistitem "Selected" by giving it a
+     * color which differentiates it from the others.
+     * @param item the item that should be selected
+     */
+    private void selectChannelListItem(ChannelListItem item){
+        if(selecteChannelItem!= null){
+            selecteChannelItem.setStyle("");
+        }
+        selecteChannelItem = item;
+        item.setStyle("-fx-background-color: rgb(209, 230, 230);"); // Should be changed...
+
     }
 }

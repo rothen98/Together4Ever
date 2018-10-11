@@ -5,7 +5,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<fx:root prefHeight="91.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;" styleClass="channelBorder" stylesheets="@wack.css" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="91.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;" styleClass="channelBorder" stylesheets="@wack.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="userPic" fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
          <image>
@@ -14,5 +14,6 @@
       </ImageView>
       <Label fx:id="username" layoutX="15.0" layoutY="66.0" styleClass="text-bold" text="Name" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="20.0" />
       <Label fx:id="messageText" layoutX="85.0" layoutY="21.0" text="Text" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="21.0" />
+      <Label fx:id="timeStamp" layoutX="525.0" layoutY="66.0" text="Label" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" />
    </children>
 </fx:root>

@@ -8,6 +8,7 @@ import javafx.scene.layout.AnchorPane;
 import model.IMessage;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class MessageView extends AnchorPane {
 
@@ -15,6 +16,8 @@ public class MessageView extends AnchorPane {
     Label username;
     @FXML
     Label messageText;
+    @FXML
+    Label timeStamp;
     @FXML
     ImageView userPic;
 
@@ -33,7 +36,9 @@ public class MessageView extends AnchorPane {
 
         username.setText(iMessage.getSender().getName());
         messageText.setText(iMessage.getMessageContent().getMessage());
-
+        LocalDateTime time = iMessage.getTimestamp();
+        String displayedTime = time.getDayOfMonth() + "/" + time.getMonthValue() + " " + time.getHour() + ":" + time.getMinute();
+        timeStamp.setText(displayedTime);
 
 
     }

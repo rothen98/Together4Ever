@@ -25,8 +25,9 @@ public class ChatFacade {
      */
     public IChannel createChannel(String channelName, String description, IUser creator) { //take in a user
 
-        IChannel channel = new Channel(channelName,description,creator);//constructor takes a user
+        IChannel channel = new Channel(channelName,description);//constructor takes a user
         server.addChannel(channel);
+        channel.join(creator);
         return channel;
     }
 
@@ -41,15 +42,20 @@ public class ChatFacade {
     }
 
     /**
-     * This method allows the ocntroller to create users in the model
+     * This method allows the controller to create users in the model.
+     * If the given name is already taken, null will be returned.
      * @param name is the name the user wishes to have
      * @param password is the password the user will use for identification
      * @return a user that gets created and then stored on the server
      */
     public IUser createUser(String name, String password) {
-        IUser user = new User(name, password);
-        server.addUser(user);
-        return user;
+        if (!server.getAllUserNames().contains(name)){
+            IUser user = new User(name, password);
+            server.addUser(user);
+            return user;
+        }
+        return null;
+
     }
 
     /**

@@ -17,7 +17,7 @@ public class ChannelTest {
         IMPORTANT!!!
         When joining a user in a channel a message is sent. The length of it will therefore be 1 at the start.
          */
-        channel = new Channel("Together4Ever", "The best channel", new User("Tobias", "test"));
+        channel = new Channel("Together4Ever", "The best channel");
     }
 
     @After
@@ -34,7 +34,7 @@ public class ChannelTest {
         channel.join(userTwo);
 
         Collection<IRecognizable> users = channel.getAllUsers();
-        assertEquals(3,users.size());
+        assertEquals(2,users.size());
 
 
 
@@ -56,7 +56,7 @@ public class ChannelTest {
         channel.sendMessage(messageTwo);
 
         //2 sent messages, 1 join message from base user joining.
-        assertTrue(channel.getAllMessages().size() == 3);
+        assertTrue(channel.getAllMessages().size() == 2);
 
         //Perhaps we should check if the received messages holds the correct data?
     }
@@ -85,7 +85,7 @@ public class ChannelTest {
         IUser user = new MockUser("UserOne", "Password");
         channel.join(user);
         channel.join(null);
-        assertTrue(channel.getNumberOfUsers()==2);
+        assertTrue(channel.getNumberOfUsers()==1);
         channel.hasUser(user);
     }
 
@@ -94,7 +94,7 @@ public class ChannelTest {
         IUser user = new MockUser("UserOne", "Password");
         channel.join(user);
         channel.leave(user);
-        assertTrue(channel.getNumberOfUsers()==1);
+        assertTrue(channel.getNumberOfUsers()==0);
     }
 
     @Test
@@ -131,32 +131,33 @@ public class ChannelTest {
 
     @Test
     public void equals(){
-        Channel otherChannel = new Channel("Together4Ever","none",new User("Tobias", "test"));
+        Channel otherChannel = new Channel("Together4Ever","none");
         assertFalse(channel.equals(otherChannel));
 
     }
 
     @Test
     public void getID(){
-        IChannel otherChannel = new Channel("otherChannel","none", new User("Tobias", "test"));
+        IChannel otherChannel = new Channel("otherChannel","none");
         assertTrue(channel.getID() +1 == otherChannel.getID());
     }
 
     @Test
     public void getNumberOfUsers() {
+        channel.join(new MockUser("namn","password"));
         assertEquals(1,channel.getNumberOfUsers());
     }
 
     @Test
     public void getDisplayName() {
-        IChannel someChannel = new Channel("theName","NA",null);
+        IChannel someChannel = new Channel("theName","NA");
         assertEquals("theName",someChannel.getDisplayName());
     }
 
 
     @Test
     public void getDescription() {
-        IChannel someChannel = new Channel("theName","TDA367 group work",null);
+        IChannel someChannel = new Channel("theName","TDA367 group work");
         assertEquals("TDA367 group work",someChannel.getDescription());
     }
 }

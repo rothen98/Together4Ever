@@ -7,15 +7,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@wack.css" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@wack.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
     <AnchorPane id="imageAnchor" minHeight="0.0" minWidth="0.0" prefHeight="309.0" prefWidth="600.0" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
-            <ScrollPane fitToHeight="true" fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ScrollPane fx:id="messageListScrollPane" fitToHeight="true" fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <content>
                   <VBox fx:id="messageList" prefHeight="200.0" prefWidth="598.0" />
                </content>
             </ScrollPane>
+            <Button fx:id="scrollDownButton" mnemonicParsing="false" onAction="#scrollDownButtonPressed" text="Button" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="260.0" />
          </children>
       </AnchorPane>
     <AnchorPane maxHeight="100.0" minHeight="0.0" minWidth="0.0" prefHeight="75.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -24,6 +25,6 @@
             <TextField fx:id="typeField" alignment="TOP_LEFT" layoutX="151.0" layoutY="34.0" maxHeight="100.0" onKeyPressed="#sendButtonKeyPressed" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
-      <Label fx:id="channelName" alignment="CENTER" layoutX="283.0" layoutY="14.0" prefHeight="50.0" text="Channel" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Label fx:id="channelName" alignment="CENTER" layoutX="283.0" layoutY="14.0" prefHeight="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </fx:root>
