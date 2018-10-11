@@ -51,11 +51,4 @@ public class UserProfile implements IRecognizable {
         this.displayImage = displayImage;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayImage = displayName;
-    }
-
-    public void setDisplayImage(String displayImage) {
-        this.displayImage = displayImage;
-    }
 }
