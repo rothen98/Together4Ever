@@ -16,7 +16,6 @@ public class User implements IUser{
 
     private Collection<IClient> clients;
     private String name;
-    private String password;
     private String hashedPassword;
 
     private IRecognizable userProfile;
@@ -24,7 +23,7 @@ public class User implements IUser{
     public User(String name, String password){
         this.name = name;
 
-        this.password = password;
+
         this.clients = new ArrayList<>();
 
         this.userProfile = new UserProfile(name);
@@ -35,13 +34,13 @@ public class User implements IUser{
 
 
     /**
-     * Checks if the password is identical to the objects password.
+     * Checks if the password is identical to the objects hashedpassword.
      * If true it adds it to the clients list.
      * @param client The client that wants to be connected
      * @param password The password that needs to match the objects password.
      */
     public void connectClient(IClient client, String password){
-        if(this.password.equals(password)){
+        if(BCrypt.checkpw(password,hashedPassword)){
             clients.add(client);
         }
     }
@@ -57,7 +56,7 @@ public class User implements IUser{
     public void removeClient(IClient client, String password){
         List<IClient> removeThisClient = new ArrayList<>();
         clients.forEach(x -> {
-            if(x.equals(client) && this.password.equals(password)){
+            if(x.equals(client) && BCrypt.checkpw(password,hashedPassword)){
                 removeThisClient.add(client);
             }
         });
@@ -90,7 +89,7 @@ public class User implements IUser{
      */
     @Override
     public boolean authorizeLogIn(String password) {
-        if(this.password.equals(password)){
+        if(BCrypt.checkpw(password,hashedPassword)){
             return true;
         }
         return false;
@@ -146,7 +145,8 @@ public class User implements IUser{
         //Typecast obj to user to be able to compare data.
         User u = (User) obj;
 
-        if(this.name.equals(u.name) && this.password.equals(u.password)){
+        if(this.name.equals(u.name) && this.getDisplayName().equals(u.getDisplayName())
+                && this.getDisplayImage().equals(u.getDisplayImage())){
             return true;
         }
         return false;
