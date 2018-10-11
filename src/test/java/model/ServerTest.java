@@ -21,7 +21,8 @@ public class ServerTest {
     @Test
     public void getUserChannels() {
         IUser user = new MockUser("user","h");
-        IChannel channel = new Channel("channel","desscription",user);
+        IChannel channel = new Channel("channel","desscription");
+        channel.join(user);
         server.addChannel(channel);
         server.addUser(user);
 
@@ -30,7 +31,7 @@ public class ServerTest {
 
     @Test
     public void getChannels() {
-        IChannel channel = new Channel("channel","description",new MockUser("Sopberg","123"));
+        IChannel channel = new Channel("channel","description");
         server.addChannel(channel);
         assertTrue(server.getChannels().size()==1);
         assertTrue(server.getChannels().contains(channel));
@@ -38,14 +39,14 @@ public class ServerTest {
 
     @Test
     public void getChannel() throws NoChannelFoundException {
-        IChannel channel = new Channel("channel","description",new MockUser("Sopberg","123"));
+        IChannel channel = new Channel("channel","description");
         server.addChannel(channel);
         assertTrue(server.getChannel(channel.getID()).equals(channel));
     }
 
     @Test(expected = NoChannelFoundException.class)
     public void getChannelNotFound() throws NoChannelFoundException {
-        IChannel channel = new Channel("channel","description",new MockUser("Sopberg","123"));
+        IChannel channel = new Channel("channel","description");
         server.addChannel(channel);
         server.getChannel(channel.getID()+1);
     }
