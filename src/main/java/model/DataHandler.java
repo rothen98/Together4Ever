@@ -95,12 +95,12 @@ public class DataHandler {
         Collection<IChannel> channels = new HashSet<>();
         for (int i = 0; i < channelArray.length(); i++) {
             JSONObject jsonChannel = userArray.getJSONObject(i);
-            IChannel channel = new Channel(
+            /*IChannel channel = new Channel(
                     jsonChannel.get("ChannelName").toString(),
                     jsonChannel.get("Description").toString(),
                     jsonChannel.get("DisplayImage").toString()
                     //This isnt done yet. Finsih tonight
-            );
+            );*/
         }
 
         return channels;
