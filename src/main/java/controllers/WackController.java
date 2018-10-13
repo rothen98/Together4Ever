@@ -163,7 +163,7 @@ public class WackController implements Initializable, IClientListener {
     private List<IIdentifiable> getSearchResults(String searchParameter) {
         List<IIdentifiable> listToReturn = new ArrayList<>();
         for(IIdentifiable i:chatFacade.getAllChannels()) {
-            if(i.getDisplayName().contains(searchParameter)) {
+            if(i.getDisplayName().toLowerCase().contains(searchParameter.toLowerCase())) {
                 listToReturn.add(i);
             }
         }
