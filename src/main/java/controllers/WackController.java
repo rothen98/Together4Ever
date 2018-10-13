@@ -67,14 +67,42 @@ public class WackController implements Initializable, IClientListener {
         AnchorPane.setRightAnchor(channelView,0.0);
 
         Collection<IChannel> channels = chatFacade.getUserChannels(user);
-        System.out.println(channels.size());
-        for(IChannel channel: channels){
-            addChannelListItem(channel);
-        }
-        updateChannelList();
+        initChannels(channels);
+
 
     }
 
+    /**
+     * This method creates a new ChannelListItem for every channel in channels.
+     * Updates the ChannelListItemsHolder
+     * Opens the channel view with the channel that has the latest message.
+     *
+     * @param channels The channels to use for the initialize
+     */
+    private void initChannels(Collection<IChannel> channels) {
+        IChannel latest = null;
+        for(IChannel channel: channels){
+            addChannelListItem(channel);
+            if(latest == null){
+                latest = channel;
+            }else{
+                int result = latest.getLastMessages(1).get(0).getTimestamp().
+                        compareTo(channel.getLastMessages(1).get(0).getTimestamp());
+                if(result<0){
+                    latest=channel;
+                }
+            }
+        }
+        if(latest!=null){
+            openChannelView(latest);
+        }
+        updateChannelList();
+    }
+
+    /*
+     * This method sorts the items in the channelListItems map and updates
+     * the channelListItemHolder
+     */
     private void updateChannelList() {
         sortChannelItems();
         channelListItemHolder.getChildren().clear();
@@ -246,7 +274,7 @@ public class WackController implements Initializable, IClientListener {
             channelNameText = channelName.getCharacters().toString();
             channelDescriptionText = channelDescription.getCharacters().toString();
             IChannel createdChannel = chatFacade.createChannel(channelNameText, channelDescriptionText, user);
-            channelView.setChannel(createdChannel);
+            openChannelView(createdChannel);
             addChannelListItem(createdChannel);
             updateChannelList();
         } else {
@@ -277,6 +305,15 @@ public class WackController implements Initializable, IClientListener {
         selectChannelListItem(channelListItems.get(channel.getID()));
     }
 
+    /**
+     * This method examines the given iidentifiable.
+     * If the current channel view shows the channel, the channel view is asked to update
+     * Else if the channelistitems contains the channel, the channellistitem is asked to show a notification
+     * Else we assume that another client of the same user has created or joined a new channel, hence this client
+     * needs to create a new channellistitem for the new channel.
+     *Lastly, the channelListItems container is updated.
+     * @param iIdentifiable
+     */
     @Override
     public void update(IIdentifiable iIdentifiable) {
         if (channelView.getCurrentChannelID() == iIdentifiable.getID()) {
@@ -301,7 +338,7 @@ public class WackController implements Initializable, IClientListener {
             IChannel newChannel = chatFacade.getChannel(id);
             newChannel.join(user);
             addChatListItem(newChannel);
-            channelView.setChannel(newChannel);
+            openChannelView(newChannel);
             channelListItemScrollPane.toFront();
             updateChannelList();
         } catch (NoChannelFoundException e) {
@@ -309,10 +346,10 @@ public class WackController implements Initializable, IClientListener {
         }
     }
 
+
     private void addChatListItem(IChannel newChannel) {
         ChannelListItem newItem =  new ChannelListItem(newChannel,this);
         channelListItems.put(newChannel.getID(),newItem);
-        selectChannelListItem(newItem);
     }
 
     /**
