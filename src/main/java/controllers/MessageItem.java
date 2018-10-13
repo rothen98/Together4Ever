@@ -31,7 +31,7 @@ public class MessageItem  {
             e.printStackTrace();
         }
 
-        userName.setText(message.getSender().getName());
+        userName.setText(message.getSender().getDisplayName());
         messageText.setText(message.getMessageContent().getMessage());
     }
 }
