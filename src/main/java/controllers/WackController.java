@@ -14,14 +14,17 @@ import model.*;
 
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toMap;
 
 public class WackController implements Initializable, IClientListener {
 
-    ChatFacade chatFacade;
-    IUser user;
+    private ChatFacade chatFacade;
+    private IUser user;
 
     private ChannelView channelView;
-    private Map<Integer ,ChannelListItem> channelListItems = new HashMap<>();
+    private Map<Integer ,ChannelListItem> channelListItems = new LinkedHashMap<>();
     private ChannelListItem selecteChannelItem = null;
 
     @FXML
@@ -73,10 +76,30 @@ public class WackController implements Initializable, IClientListener {
     }
 
     private void updateChannelList() {
+        sortChannelItems();
         channelListItemHolder.getChildren().clear();
         for(ChannelListItem c:channelListItems.values()) {
             channelListItemHolder.getChildren().add(c);
         }
+        for (Integer i: channelListItems.keySet()){
+            System.out.println("ID: " + i + " Minute: " +channelListItems.get(i).timeOfLastMessage().getMinute()+ " Second: " + channelListItems.get(i).timeOfLastMessage().getSecond());
+        }
+    }
+
+    /**
+     * This method sorts the ChannelListItems according to the LocalDateTime of their latest message.
+     * //@param channelListItemMap the map that will be sorted
+     */
+    private void sortChannelItems() {
+        channelListItems = channelListItems.entrySet().stream().sorted(Collections.reverseOrder(new Comparator<Map.Entry<Integer, ChannelListItem>>() {
+            @Override
+            public int compare(Map.Entry<Integer, ChannelListItem> o1, Map.Entry<Integer, ChannelListItem> o2) {
+                return o1.getValue().timeOfLastMessage().compareTo(o2.getValue().timeOfLastMessage());
+            }
+        })).collect(toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2,
+                LinkedHashMap::new));
+
+
     }
 
     /**
@@ -265,12 +288,12 @@ public class WackController implements Initializable, IClientListener {
         else{
             try {
                 addChannelListItem(chatFacade.getChannel(iIdentifiable.getID()));
-                updateChannelList();
             } catch (NoChannelFoundException e) {
                 e.printStackTrace();
             }
         }
-        //channelListItems.get(iIdentifiable.getID()).update();
+
+        updateChannelList();
     }
 
     public void joinChannel(int id) {

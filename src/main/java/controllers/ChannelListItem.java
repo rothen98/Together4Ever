@@ -8,6 +8,7 @@ import javafx.scene.shape.Circle;
 import model.IChannel;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class ChannelListItem extends AnchorPane {
 
@@ -54,5 +55,9 @@ public class ChannelListItem extends AnchorPane {
 
     public void addNotification() {
         notificationCircle.setVisible(true);
+    }
+
+    public LocalDateTime timeOfLastMessage() {
+        return channel.getLastMessages(1).get(0).getTimestamp();
     }
 }
