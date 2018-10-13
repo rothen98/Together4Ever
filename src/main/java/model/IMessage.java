@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDateTime;
 
 public interface IMessage {
-    IUser getSender();
+    IRecognizable getSender();
     IMessageContent getMessageContent();
     LocalDateTime getTimestamp();
     

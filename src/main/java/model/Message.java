@@ -46,7 +46,7 @@ public class Message implements IMessage {
      * @return the person who wrote the message
      */
     @Override
-    public IUser getSender() {
+    public IRecognizable getSender() {
         return sender;
     }
 

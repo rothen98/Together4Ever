@@ -13,15 +13,17 @@ import java.time.LocalDateTime;
 public class MessageView extends AnchorPane {
 
     @FXML
-    Label username;
+    private Label username;
     @FXML
-    Label messageText;
+    private Label messageText;
     @FXML
-    Label timeStamp;
+    private Label timeStamp;
     @FXML
-    ImageView userPic;
+    private ImageView userPic;
+    @FXML
+    private AnchorPane backgroundPane;
 
-    public MessageView(IMessage iMessage) {
+    public MessageView(IMessage iMessage, boolean clients) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/wack_message_listitem.fxml"));
 
@@ -34,12 +36,19 @@ public class MessageView extends AnchorPane {
             e.printStackTrace();
         }
 
-        username.setText(iMessage.getSender().getName());
+        username.setText(iMessage.getSender().getDisplayName());
         messageText.setText(iMessage.getMessageContent().getMessage());
         LocalDateTime time = iMessage.getTimestamp();
         String displayedTime = time.getDayOfMonth() + "/" + time.getMonthValue() + " " + time.getHour() + ":" + time.getMinute();
         timeStamp.setText(displayedTime);
 
+        if(clients){
+            backgroundPane.getStyleClass().remove("other-message-background");
+            backgroundPane.getStyleClass().add("your-message-background");
+        }
+
 
     }
+
+
 }

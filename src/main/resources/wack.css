@@ -24,6 +24,14 @@
     -fx-padding: 1;
 }
 
+.other-message-background{
+    -fx-background-color: #FFFFFF;
+}
+
+.your-message-background{
+    -fx-background-color: rgb(174, 217, 217);
+}
+
 .channelBorder {
     -fx-border-color: rgba(0, 0, 0, 0.5);
     -fx-border-width: 1px 0px 1px 0px;

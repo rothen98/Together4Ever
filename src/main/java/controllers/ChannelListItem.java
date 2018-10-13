@@ -4,11 +4,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import model.IChannel;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.time.LocalDateTime;
 
 public class ChannelListItem extends AnchorPane {
 
@@ -19,6 +19,8 @@ public class ChannelListItem extends AnchorPane {
     private Label channelName;
     @FXML
     private Label channelDescription;
+    @FXML
+    private Circle notificationCircle;
 
     public ChannelListItem(IChannel channel, WackController parentController) {
 
@@ -43,7 +45,19 @@ public class ChannelListItem extends AnchorPane {
 
     @FXML
     public void onClick() {
+        removeNotification();
         parentController.openChannelView(channel);
     }
 
+    private void removeNotification() {
+        notificationCircle.setVisible(false);
+    }
+
+    public void addNotification() {
+        notificationCircle.setVisible(true);
+    }
+
+    public LocalDateTime timeOfLastMessage() {
+        return channel.getLastMessages(1).get(0).getTimestamp();
+    }
 }
