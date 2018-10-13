@@ -77,7 +77,7 @@ public class ChannelView extends AnchorPane {
         messageList.getChildren().remove(loadOldMessagesButton);
         int numberOfShowedMessages = messageList.getChildren().size();
         List<IMessage> messages = channel.getLastMessages(numberOfShowedMessages+number);
-        int startValue = messages.size()-numberOfShowedMessages;
+        int startValue = messages.size()-numberOfShowedMessages-1;
         for (int i = startValue;i>=0;i--){
             showOldMessage(messages.get(i));
             numberOfShowedMessages++;
@@ -94,6 +94,8 @@ public class ChannelView extends AnchorPane {
     public void setChannel(IChannel channel) {
         if (channel != null) {
             sendButton.setDisable(false);
+            scrollDownButton.setVisible(false);
+            setScrollDownAutomatically(true);
             this.channel = channel;
             this.channelName.setText(channel.getDisplayName());
             messageList.getChildren().clear();
