@@ -9,7 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import model.*;
 
@@ -260,9 +259,8 @@ public class WackController implements Initializable, IClientListener {
         if (channelView.getCurrentChannelID() == iIdentifiable.getID()) {
             channelView.update();
         }
-        if(channelListItems.keySet().contains(iIdentifiable.getID())){
-            //Todo
-            //channelListItems.get(iIdentifiable.getID()).update();
+        else if(channelListItems.keySet().contains(iIdentifiable.getID())){
+            channelListItems.get(iIdentifiable.getID()).addNotification();
         }
         else{
             try {

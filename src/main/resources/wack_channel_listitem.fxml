@@ -4,6 +4,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
 
 <fx:root id="channel-list-item" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#onClick" prefHeight="75.0" prefWidth="200.0" styleClass="channelBorder" stylesheets="@wack.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -14,5 +15,6 @@
          </image>
       </ImageView>
       <Label fx:id="channelDescription" layoutX="77.0" layoutY="33.0" prefWidth="130.0" text="Description" wrapText="true" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="33.0" />
+      <Circle fx:id="notificationCircle" fill="#ff1f1f" layoutX="185.0" layoutY="61.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" visible="false" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="7.0" />
    </children>
 </fx:root>

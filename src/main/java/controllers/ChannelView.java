@@ -241,9 +241,9 @@ public class ChannelView extends AnchorPane {
 
     private void addTextMessage(IMessage iMessage,boolean last) {
         if (last){
-            messageList.getChildren().add(new MessageView(iMessage,senderIsUser(iMessage.getSender().getName())));
+            messageList.getChildren().add(new MessageView(iMessage,senderIsUser(iMessage.getSender().getDisplayName())));
         }else{
-            messageList.getChildren().add(0,new MessageView(iMessage,senderIsUser(iMessage.getSender().getName())));
+            messageList.getChildren().add(0,new MessageView(iMessage,senderIsUser(iMessage.getSender().getDisplayName())));
         }
 
     }
