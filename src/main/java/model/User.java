@@ -1,7 +1,7 @@
 package model;
 
 
-import External.jbcrypt.BCrypt;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.ArrayList;
 import java.util.Collection;
