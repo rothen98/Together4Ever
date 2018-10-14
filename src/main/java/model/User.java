@@ -30,6 +30,7 @@ public class User implements IUser{
         this.userProfile = new UserProfile(name);
 
         this.hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+
     }
 
     public User(String name, String password, String displayName, String displayImage) {
@@ -37,6 +38,7 @@ public class User implements IUser{
         this.hashedPassword = password;
         this.clients = new ArrayList<>();
         this.userProfile = new UserProfile(displayName, displayImage);
+
     }
 
 
