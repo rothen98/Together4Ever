@@ -16,14 +16,13 @@ public class UserProfile implements IRecognizable {
 
         displayImage = "../../resources/default_user_pic.jpg";
 
-        //Set displayImage to the path to an default displayImage
     }
 
 
 
 
     /**
-     * Returns the objects displayName.
+     * Returns the objects displayNam.
      * @return String with the displayName.
      */
     @Override
