@@ -1,4 +1,8 @@
-package model;
+package model.server;
+
+import model.identifiers.IIdentifiable;
+import model.interaction.user.IUser;
+import model.interaction.channel.IChannel;
 
 import java.util.Collection;
 

@@ -1,6 +1,20 @@
 package model;
 
 
+import model.identifiers.IIdentifiable;
+import model.interaction.message.TextContent;
+import model.server.*;
+import model.interaction.user.IUser;
+import model.interaction.user.User;
+import model.interaction.channel.Channel;
+import model.interaction.channel.IChannel;
+import model.client.Client;
+import model.client.IClient;
+import model.client.IClientListener;
+import model.interaction.message.IMessage;
+import model.interaction.message.ImageContent;
+import model.interaction.message.Message;
+
 import java.util.Collection;
 
 /**

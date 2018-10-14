@@ -1,7 +1,7 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+import model.identifiers.IIdentifiable;
+import model.interaction.user.User;
 
 public class MockUser extends User {
     private int numberOfUpdates;

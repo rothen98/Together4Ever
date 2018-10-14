@@ -1,4 +1,4 @@
-package model;
+package model.server;
 
 public class WrongPasswordException extends Exception {
     // Parameterless Constructor

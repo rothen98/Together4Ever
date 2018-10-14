@@ -1,4 +1,9 @@
-package model;
+package model.interaction.channel;
+
+import model.identifiers.IIdentifiable;
+import model.identifiers.IRecognizable;
+import model.interaction.user.IUser;
+import model.interaction.message.IMessage;
 
 import java.util.Collection;
 import java.util.List;

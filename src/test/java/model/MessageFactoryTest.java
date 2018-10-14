@@ -1,10 +1,13 @@
 package model;
 
+import model.interaction.message.ImageContent;
+import model.interaction.message.MessageFactory;
+import model.interaction.message.TextContent;
+import model.interaction.user.IUser;
+import model.interaction.user.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import javax.xml.soap.Text;
 
 import static org.junit.Assert.*;
 
@@ -27,9 +30,9 @@ public class MessageFactoryTest {
         TextContent messageContent = new TextContent(messageText);
 
         assertEquals(messageText,
-                MessageFactory.createTextMessage(messageText,messageSender).getMessageContent().getMessage());
+                MessageFactory.createTextMessage(messageText,messageSender).getMessage());
         assertEquals(messageText,
-                MessageFactory.createTextMessage(messageContent,messageSender).getMessageContent().getMessage());
+                MessageFactory.createTextMessage(messageContent,messageSender).getMessage());
     }
 
 
@@ -39,9 +42,9 @@ public class MessageFactoryTest {
         ImageContent messageContent = new ImageContent(path);
 
         assertEquals(path,
-                MessageFactory.createImageMessage(path,messageSender).getMessageContent().getMessage());
+                MessageFactory.createImageMessage(path,messageSender).getMessage());
         assertEquals(path,
-                MessageFactory.createImageMessage(messageContent,messageSender).getMessageContent().getMessage());
+                MessageFactory.createImageMessage(messageContent,messageSender).getMessage());
     }
 
 
@@ -50,7 +53,7 @@ public class MessageFactoryTest {
         String message = messageSender.getName() + " just joined the channel.";
 
         assertEquals(message,
-                MessageFactory.createJoinMessage(messageSender).getMessageContent().getMessage());
+                MessageFactory.createJoinMessage(messageSender).getMessage());
 
     }
 
@@ -59,7 +62,7 @@ public class MessageFactoryTest {
         String message = messageSender.getName() + " just left the channel.";
 
         assertEquals(message,
-                MessageFactory.createLeaveMessage(messageSender).getMessageContent().getMessage());
+                MessageFactory.createLeaveMessage(messageSender).getMessage());
 
     }
 
@@ -68,7 +71,7 @@ public class MessageFactoryTest {
         String message = "Test message 12345.";
 
         assertEquals(message,
-                MessageFactory.createChannelMessage(message,messageSender).getMessageContent().getMessage());
+                MessageFactory.createChannelMessage(message,messageSender).getMessage());
 
     }
 }

@@ -1,5 +1,9 @@
-package model;
+package model.interaction.user;
 
+
+import model.identifiers.IIdentifiable;
+import model.identifiers.IRecognizable;
+import model.client.IClient;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,10 +41,10 @@ public class User implements IUser{
 
 
     /**
-     * Checks if the password is identical to the objects password.
+     * Checks if the password is identical to the interaction password.
      * If true it adds it to the clients list.
      * @param client The client that wants to be connected
-     * @param password The password that needs to match the objects password.
+     * @param password The password that needs to match the interaction password.
      */
     public void connectClient(IClient client, String password){
         if(this.password.equals(password)){
@@ -51,10 +55,10 @@ public class User implements IUser{
 
     /**
      * Checks if the client is in the clients collection. If so and the password is
-     * matching the objects password it removes it.
+     * matching the interaction password it removes it.
      * Using a Arraylist to avoid a ConcurrentModificationError when removing while looping.
      * @param client The client that wants to be removed.
-     * @param password The password that needs to match the objects password.
+     * @param password The password that needs to match the interaction password.
      */
     public void removeClient(IClient client, String password){
         List<IClient> removeThisClient = new ArrayList<>();
@@ -75,7 +79,7 @@ public class User implements IUser{
     }
 
     /**
-     * Sends a message to all the connected clients in the objects collection.
+     * Sends a message to all the connected clients in the interaction collection.
      * @param iIdentifiable
      */
 
@@ -88,7 +92,7 @@ public class User implements IUser{
     /**
      * Checks if the two passwords match.
      * @param password The password that needs to be checked.
-     * @return Returns true if the argument password is matching the objects.
+     * @return Returns true if the argument password is matching the interaction.
      */
     @Override
     public boolean authorizeLogIn(String password) {

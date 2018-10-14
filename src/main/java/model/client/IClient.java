@@ -1,4 +1,6 @@
-package model;
+package model.client;
+
+import model.identifiers.IIdentifiable;
 
 public interface IClient {
 

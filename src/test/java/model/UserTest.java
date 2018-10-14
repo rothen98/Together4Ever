@@ -1,5 +1,13 @@
 package model;
 
+import model.client.Client;
+import model.client.IClient;
+import model.interaction.message.IMessage;
+import model.interaction.message.IMessageContent;
+import model.interaction.message.Message;
+import model.interaction.message.TextContent;
+import model.interaction.user.IUser;
+import model.interaction.user.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

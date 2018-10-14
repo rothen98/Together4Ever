@@ -1,5 +1,11 @@
 package model;
 
+import model.server.*;
+import model.interaction.user.IUser;
+import model.interaction.channel.IChannel;
+import model.client.IClient;
+import model.client.IClientListener;
+import model.interaction.message.IMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

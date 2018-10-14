@@ -1,4 +1,10 @@
-package model;
+package model.interaction.channel;
+
+import model.identifiers.IIdentifiable;
+import model.identifiers.IRecognizable;
+import model.interaction.message.IMessage;
+import model.interaction.message.MessageFactory;
+import model.interaction.user.IUser;
 
 import java.util.*;
 import java.util.List;
