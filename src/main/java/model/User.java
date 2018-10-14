@@ -19,7 +19,7 @@ public class User implements IUser{
     private String hashedPassword;
 
     private IRecognizable userProfile;
-    private String hashedPassword;
+
 
     public User(String name, String password){
         this.name = name;
