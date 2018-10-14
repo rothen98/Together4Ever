@@ -1,4 +1,4 @@
-package model;
+package model.interaction.message;
 
 public class TextContent implements IMessageContent {
 

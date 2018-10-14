@@ -1,4 +1,4 @@
-package model;
+package model.server;
 
 public class NoChannelFoundException extends Throwable {
     public NoChannelFoundException() {

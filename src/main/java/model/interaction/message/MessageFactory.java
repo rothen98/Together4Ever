@@ -1,5 +1,7 @@
-package model;
+package model.interaction.message;
 
+
+import model.interaction.user.IUser;
 
 /**
  * @author Viktor Franzén

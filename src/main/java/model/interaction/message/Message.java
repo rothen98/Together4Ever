@@ -1,4 +1,7 @@
-package model;
+package model.interaction.message;
+
+import model.identifiers.IRecognizable;
+import model.interaction.user.IUser;
 
 import java.time.LocalDateTime;
 
@@ -6,7 +9,7 @@ import java.time.LocalDateTime;
  * @author Alex Solberg
  *
  * This class contains data about the messages which exist in a channel
- * The objects contain a user, a (test)message and a timestamp
+ * The interaction contain a user, a (test)message and a timestamp
  */
 
 public class Message implements IMessage {
@@ -16,7 +19,7 @@ public class Message implements IMessage {
     private final LocalDateTime timestamp;
 
 
-    public Message(IUser sender, IMessageContent messageContent) {
+     public Message(IUser sender, IMessageContent messageContent) {
 
         this.sender = sender;
         this.messageContent = messageContent;
@@ -27,9 +30,19 @@ public class Message implements IMessage {
      *
      * @return the (text) message that was written
      */
-    @Override
+    /*@Override
     public IMessageContent getMessageContent() {
         return messageContent;
+    }*/
+
+    @Override
+    public MessageType getType(){
+        return messageContent.getType();
+    }
+
+    @Override
+    public String getMessage(){
+        return messageContent.getMessage();
     }
 
     /**

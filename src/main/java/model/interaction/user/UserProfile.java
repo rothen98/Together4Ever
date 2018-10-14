@@ -1,5 +1,7 @@
-package model;
+package model.interaction.user;
 
+
+import model.identifiers.IRecognizable;
 
 /**
  * @author Viktor Franzén
@@ -23,7 +25,6 @@ public class UserProfile implements IRecognizable {
         this.displayImage=displayImage;
     }
 
-
     /**
      * Returns the objects displayNam.
      * @return String with the displayName.
@@ -34,7 +35,7 @@ public class UserProfile implements IRecognizable {
     }
 
     /**
-     * Returns the objects displayImage.
+     * Returns the interaction displayImage.
      * @return The displayImage.
      */
     @Override

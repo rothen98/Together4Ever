@@ -11,10 +11,14 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import model.*;
+import model.identifiers.IIdentifiable;
+import model.server.NoChannelFoundException;
+import model.interaction.user.IUser;
+import model.interaction.channel.IChannel;
+import model.client.IClientListener;
 
 import java.net.URL;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toMap;
 

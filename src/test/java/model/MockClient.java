@@ -1,9 +1,9 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+import model.client.Client;
+import model.identifiers.IIdentifiable;
 
-public class MockClient extends Client{
+public class MockClient extends Client {
     private int numberOFMessages;
 
     public MockClient(){
