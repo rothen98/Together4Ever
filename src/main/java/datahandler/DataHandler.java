@@ -81,18 +81,6 @@ public class DataHandler implements IDataHandler {
             }
     }
 
-
-
-    private void updateUser(IUser u) {
-        JSONObject user;
-        for(int i = 0; i< readUserArray.length(); i++){
-            if(readUserArray.getJSONObject(i).get("Username").equals(u.getName())){
-                user = readChannelArray.getJSONObject(i);
-                initUserJObject(u,user);
-            }
-        }
-    }
-
     private JSONObject createNewUserJObject(IUser u) {
         JSONObject user = new JSONObject();
         initUserJObject(u,user);
@@ -105,14 +93,6 @@ public class DataHandler implements IDataHandler {
         userJ.put("DisplayImage", u.getDisplayImage());
     }
 
-    private boolean userExistsInJson(IUser u) {
-        for(int i = 0; i< readUserArray.length(); i++){
-            if(readUserArray.getJSONObject(i).get("Username").equals(u.getName())){
-                return true;
-            }
-        }
-        return false;
-    }
 
     private void loopChannels(Collection<IChannel> channels) {
         for (IChannel c : channels) {
@@ -121,16 +101,6 @@ public class DataHandler implements IDataHandler {
             }
     }
 
-    private void updateChannel(IChannel c) {
-        JSONObject channel;
-        for(int i = 0; i< readChannelArray.length(); i++){
-            if(readChannelArray.getJSONObject(i).get("ChannelName").equals(c.getDisplayName())){
-                channel = readChannelArray.getJSONObject(i);
-                initChannelJObject(c,channel);
-            }
-        }
-
-    }
 
     private JSONObject createNewChannelJObject(IChannel c) {
         JSONObject channel = new JSONObject();
@@ -160,14 +130,6 @@ public class DataHandler implements IDataHandler {
         channel.put("Users", user);
     }
 
-    private boolean channelExistInJson(IChannel c) {
-        for(int i = 0; i< readChannelArray.length(); i++){
-            if(readChannelArray.getJSONObject(i).get("ChannelName").equals(c.getDisplayName())){
-                return true;
-            }
-        }
-        return false;
-    }
 
     public void pushUsers(Collection<IUser> users) {
         loopUsers(users);
