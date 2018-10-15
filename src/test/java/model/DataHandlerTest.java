@@ -4,8 +4,6 @@ import datahandler.DataHandler;
 import model.chatcomponents.channel.Channel;
 import model.chatcomponents.channel.IChannel;
 import model.chatcomponents.message.IMessage;
-import model.chatcomponents.message.IMessageContent;
-import model.chatcomponents.message.Message;
 import model.chatcomponents.message.MessageFactory;
 import model.server.ChannelData;
 import model.server.IServer;
@@ -16,7 +14,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -31,7 +28,7 @@ public class DataHandlerTest {
 
     @Before
     public void setUp() throws Exception {
-        server = new Server();
+        server = new Server(dataHandler);
     }
 
     @After
@@ -70,7 +67,7 @@ public class DataHandlerTest {
         users.add(user3);
         users.add(user4);
 
-        dataHandler.pushUser(users);
+        dataHandler.pushUsers(users);
 
         assertTrue(users.size() == 4);
     }
@@ -92,7 +89,7 @@ public class DataHandlerTest {
         channels.add(c3);
         channels.add(c4);
 
-        dataHandler.pushChannel(channels);
+        dataHandler.pushChannels(channels);
     }
 
     @Test
@@ -108,7 +105,7 @@ public class DataHandlerTest {
         users.add(user3);
         users.add(user4);
 
-        dataHandler.pushUser(users);
+        dataHandler.pushUsers(users);
 
         Collection<IUser> catchUsers = dataHandler.getUsers();
         assertTrue(catchUsers.size() == 4);
@@ -132,7 +129,7 @@ public class DataHandlerTest {
         channels.add(c3);
         channels.add(c4);
 
-        dataHandler.pushChannel(channels);
+        dataHandler.pushChannels(channels);
 
         Collection<ChannelData> shittyShit = dataHandler.getChannels();
         assertTrue(shittyShit.size() == 4);

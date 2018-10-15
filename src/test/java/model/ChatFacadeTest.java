@@ -1,5 +1,6 @@
 package model;
 
+import datahandler.DataHandler;
 import model.server.*;
 import model.chatcomponents.user.IUser;
 import model.chatcomponents.channel.IChannel;
@@ -20,8 +21,9 @@ public class ChatFacadeTest {
 
     @Before
     public void setUp() throws Exception {
-        facade = new ChatFacade();
-        server = new Server();
+        DataHandler d = new DataHandler();
+        facade = new ChatFacade(new DataHandler());
+        server = new Server(d);
         user = new MockUser("Tubby", "D!nMamma123");
     }
 

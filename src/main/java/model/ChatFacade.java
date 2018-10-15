@@ -24,8 +24,8 @@ public class ChatFacade {
     private final IServer server;
     private IClient client;
 
-    public ChatFacade() {
-        this.server = new Server();
+    public ChatFacade(IDataHandler dataHandler) {
+        this.server = new Server(dataHandler);
     }
 
     /**
@@ -141,6 +141,10 @@ public class ChatFacade {
 
     public Collection<IIdentifiable> getAllChannels(){
         return server.getChannels();
+    }
+
+    public void saveAllData() {
+        server.saveData();
     }
 
     //Add more methods in this class in order to decrease dependencies.

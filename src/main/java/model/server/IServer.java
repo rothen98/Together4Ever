@@ -21,4 +21,6 @@ public interface IServer {
 
 
     Collection<String> getAllUserNames();
+
+    void saveData();
 }

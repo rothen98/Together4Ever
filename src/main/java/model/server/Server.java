@@ -1,9 +1,15 @@
 package model.server;
 
+import datahandler.DataHandler;
+import model.chatcomponents.channel.Channel;
+import model.chatcomponents.message.IMessage;
+import model.chatcomponents.message.MessageFactory;
+import model.chatcomponents.message.MessageType;
 import model.identifiers.IIdentifiable;
 import model.chatcomponents.user.IUser;
 import model.chatcomponents.channel.IChannel;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -20,11 +26,64 @@ import java.util.List;
 public class Server implements IServer {
     private final Collection<IUser> users;
     private final Collection<IChannel> channels;
+    private IDataHandler dataHandler;
 
-    public Server() {
+    public Server(IDataHandler dataHandler) {
         this.users = new HashSet<>();
         this.channels = new HashSet<>();
+        this.dataHandler =dataHandler;
+        initServer();
     }
+
+    private void initServer() {
+        for(IUser user:dataHandler.getUsers()){
+            users.add(user);
+        }
+
+        for(ChannelData data: dataHandler.getChannels()) {
+            List<IUser> channelUsers = new ArrayList<>();
+            for (String username : data.getUserNames()) {
+                for (IUser user : users) {
+                    if (username.equals(user.getName())) {
+                        channelUsers.add(user);
+                        break;
+                    }
+                }
+            }
+            List<IMessage> channelMessages = new ArrayList<>();
+            for(MessageData mdata:data.getMessages()) {
+                for (IUser user : users) {
+                    if (mdata.getSenderName().equals(user.getName())) {
+                        MessageType type;
+                        if(mdata.getType().equals("CHANNEL")){
+                            type = MessageType.CHANNEL;
+                        }else if(mdata.getType().equals("IMAGE")){
+                            type = MessageType.IMAGE;
+                        }else{
+                            type = MessageType.TEXT;
+                        }
+                        channelMessages.add(MessageFactory.createMessage(user,mdata.getContent(),
+                                type, LocalDateTime.parse(mdata.getTimeStamp())));
+                        break;
+                    }
+                }
+            }
+
+            channels.add(new Channel(data.getChannelName(),data.getDescription(),data.getImage(),channelUsers,channelMessages));
+        }
+
+        System.out.println("Channels: " );
+        for(IChannel channel: channels){
+            System.out.println(channel.getDisplayName());
+        }
+        System.out.println("Users");
+        for(IUser user: users){
+            System.out.println(user.getName());
+        }
+        }
+
+
+
 
     /**
      * This method returns all the channels the given user is a member of.
@@ -37,7 +96,7 @@ public class Server implements IServer {
     public Collection<IChannel> getUserChannels(IUser user) {
         final Collection<IChannel> channelsToReturn = new ArrayList<>();
         channels.forEach(channel -> {
-            if(channel.hasUser(user)){ //We need to be able to check if a channel has a user
+            if(channel.hasUser(user)){
                 channelsToReturn.add(channel);
             }
         });
@@ -125,6 +184,13 @@ public class Server implements IServer {
             listToReturn.add(u.getName());
         }
         return listToReturn;
+    }
+
+    @Override
+    public void saveData() {
+        dataHandler.pushUsers(users);
+        dataHandler.pushChannels(channels);
+
     }
 
 

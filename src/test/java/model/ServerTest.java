@@ -1,5 +1,6 @@
 package model;
 
+import datahandler.DataHandler;
 import model.server.*;
 import model.chatcomponents.user.IUser;
 import model.chatcomponents.user.User;
@@ -15,7 +16,7 @@ public class ServerTest {
     IServer server;
     @Before
     public void setUp() throws Exception {
-        server = new Server();
+        server = new Server(new DataHandler());
     }
 
     @After
