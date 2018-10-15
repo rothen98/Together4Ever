@@ -1,6 +1,9 @@
 package datahandler;
 
+import model.chatcomponents.channel.Channel;
 import model.chatcomponents.message.IMessage;
+import model.chatcomponents.message.Message;
+import model.chatcomponents.message.MessageFactory;
 import model.chatcomponents.user.IUser;
 import model.chatcomponents.user.User;
 import model.chatcomponents.channel.IChannel;
@@ -10,8 +13,10 @@ import org.json.JSONObject;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 public class DataHandler {
 
@@ -56,16 +61,18 @@ public class DataHandler {
             channel.put("Description", c.getDescription());
             channel.put("DisplayImage", c.getDisplayImage());
             for(IMessage m: c.getAllMessages()) {
+                JSONArray singleMessage = new JSONArray();
                 JSONArray timestamp = new JSONArray();
-                message.put(m.getMessage());
-                message.put(m.getSender().getDisplayName());
+                singleMessage.put(m.getMessage());
+                singleMessage.put(m.getSender().getDisplayName());
                 timestamp.put(m.getTimestamp().getYear());
                 timestamp.put(m.getTimestamp().getMonthValue());
                 timestamp.put(m.getTimestamp().getDayOfMonth());
                 timestamp.put(m.getTimestamp().getHour());
                 timestamp.put(m.getTimestamp().getMinute());
-                message.put(timestamp);
-                message.put(m.getType());
+                singleMessage.put(timestamp);
+                singleMessage.put(m.getType());
+                message.put(singleMessage);
             }
             channel.put("Messages", message);
             for (IRecognizable u : c.getAllUsers()) {
@@ -117,13 +124,35 @@ public class DataHandler {
     public Collection<IChannel> getChannels() {
         Collection<IChannel> channels = new HashSet<>();
         for (int i = 0; i < channelArray.length(); i++) {
-            JSONObject jsonChannel = userArray.getJSONObject(i);
-            /*IChannel channel = new Channel(
+            JSONObject jsonChannel = channelArray.getJSONObject(i);
+            JSONArray temp = jsonChannel.getJSONArray("Message");
+            List<IMessage> messages = new ArrayList<>();
+            for(int j = 0; j < temp.length(); j++) {
+                JSONArray singletemp = temp.getJSONArray(j);
+                String content = (String)temp.get(0);
+                String senderName = (String)temp.get(1);
+                Integer[] timestamp = (Integer[])temp.get(2);
+                int year = timestamp[0];
+                int month = timestamp[1];
+                int day = timestamp[2];
+                int hour = timestamp[3];
+                int minute = timestamp[4];
+                LocalDateTime time = LocalDateTime.of(year,month,day,hour,minute);
+                String type = (String)temp.get(3);
+                //  IMessage newMessage = MessageFactory;
+            }
+
+
+            Collection<IUser> users = new ArrayList<>();
+
+            IChannel channel = new Channel(
                     jsonChannel.get("ChannelName").toString(),
                     jsonChannel.get("Description").toString(),
-                    jsonChannel.get("DisplayImage").toString()
-                    //This isnt done yet. Finsih tonight
-            );*/
+                    jsonChannel.get("DisplayImage").toString(),
+                    users,
+                    messages
+            );
+            channels.add(channel);
         }
 
         return channels;
