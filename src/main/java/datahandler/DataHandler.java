@@ -2,12 +2,12 @@ package datahandler;
 
 import model.chatcomponents.channel.Channel;
 import model.chatcomponents.message.IMessage;
-import model.chatcomponents.message.Message;
-import model.chatcomponents.message.MessageFactory;
 import model.chatcomponents.user.IUser;
 import model.chatcomponents.user.User;
 import model.chatcomponents.channel.IChannel;
 import model.identifiers.IRecognizable;
+import model.server.ChannelData;
+import model.server.MessageData;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.FileWriter;
@@ -121,40 +121,37 @@ public class DataHandler {
         return users;
     }
 
-    public Collection<IChannel> getChannels() {
-        Collection<IChannel> channels = new HashSet<>();
+    public Collection<ChannelData> getChannels() {
+        Collection<ChannelData> channels = new HashSet<>();
         for (int i = 0; i < channelArray.length(); i++) {
             JSONObject jsonChannel = channelArray.getJSONObject(i);
             JSONArray temp = jsonChannel.getJSONArray("Message");
-            List<IMessage> messages = new ArrayList<>();
+            List<MessageData> messages = new ArrayList<>();
+
             for(int j = 0; j < temp.length(); j++) {
-                JSONArray singletemp = temp.getJSONArray(j);
                 String content = (String)temp.get(0);
                 String senderName = (String)temp.get(1);
                 Integer[] timestamp = (Integer[])temp.get(2);
-                int year = timestamp[0];
-                int month = timestamp[1];
-                int day = timestamp[2];
-                int hour = timestamp[3];
-                int minute = timestamp[4];
-                LocalDateTime time = LocalDateTime.of(year,month,day,hour,minute);
                 String type = (String)temp.get(3);
-                //  IMessage newMessage = MessageFactory;
+                MessageData data = new MessageData(content,senderName,type,timestamp);
+                messages.add(data);
             }
 
+            List<String> users = new ArrayList<>();
+            JSONArray jUsers = jsonChannel.getJSONArray("Users");
+            for (Object o :jUsers) {
+                users.add((String)o);
+            }
 
-            Collection<IUser> users = new ArrayList<>();
-
-            IChannel channel = new Channel(
+            ChannelData channel = new ChannelData(
                     jsonChannel.get("ChannelName").toString(),
                     jsonChannel.get("Description").toString(),
                     jsonChannel.get("DisplayImage").toString(),
-                    users,
-                    messages
+                    messages,
+                    users
             );
             channels.add(channel);
         }
-
         return channels;
     }
 }

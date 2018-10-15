@@ -7,6 +7,7 @@ import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.IMessageContent;
 import model.chatcomponents.message.Message;
 import model.chatcomponents.message.MessageFactory;
+import model.server.ChannelData;
 import model.server.IServer;
 import model.server.Server;
 import model.chatcomponents.user.IUser;
@@ -15,6 +16,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -115,5 +117,7 @@ public class DataHandlerTest {
 
     @Test
     public void getChannels() {
+        Collection<ChannelData> shittyShit = dataHandler.getChannels();
+        assertTrue(shittyShit.size() > 0);
     }
 }
