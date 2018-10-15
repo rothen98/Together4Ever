@@ -25,7 +25,6 @@ public class Message implements IMessage {
         this.messageContent = messageContent;
         this.timestamp = LocalDateTime.now();
     }
-    
     public Message(IUser sender, IMessageContent messageContent, LocalDateTime timestamp){
          this.sender = sender;
          this.messageContent = messageContent;
