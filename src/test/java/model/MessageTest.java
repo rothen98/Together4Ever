@@ -1,7 +1,6 @@
 package model;
 
-import model.chatcomponents.message.IMessageContent;
-import model.chatcomponents.message.Message;
+import model.chatcomponents.message.*;
 import model.chatcomponents.user.IUser;
 import model.chatcomponents.user.User;
 import org.junit.After;
@@ -22,7 +21,10 @@ public class MessageTest {
 
     @Before
     public void setUp() throws Exception {
+        sender = new User("Name", "Password12");
+        sender2 = new User("TestName", "Password23");
         message = new Message(sender, messageContent);
+
     }
 
     @After
@@ -65,13 +67,18 @@ public class MessageTest {
 
     @Test
     public void getSender() {
-        //Create a sender for the message and check to make sure they aren't empty
-        sender = new User("Name", "Password12");
-        sender2 = new User("TestName", "Password23");
 
         assertNotEquals(sender, sender2);
         assertNotNull(sender);
         assertNotNull(sender2);
-        assertTrue(sender.getName() == "Name");
+        assertEquals("Name", sender.getName());
+        assertEquals(sender, message.getSender());
+    }
+
+    @Test
+    public void getType() {
+        IMessage testMessage = new Message(sender, new ChannelContent("text"));
+
+        assertEquals(MessageType.CHANNEL, testMessage.getType());
     }
 }
