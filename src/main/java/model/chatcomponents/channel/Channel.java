@@ -142,7 +142,7 @@ public class Channel implements IChannel {
     }
 
     /**
-     * This method sends the given to all it's users.
+     * This method sends the given message to all it's users.
      * @param message The message to be broadcast to all users.
      */
     @Override
