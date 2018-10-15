@@ -4,14 +4,8 @@ import model.identifiers.IRecognizable;
 
 import java.time.LocalDateTime;
 
-public interface IMessage {
+public interface IMessage extends IMessageContent {
     IRecognizable getSender();
-    //IMessageContent getMessageContent();
-
-    MessageType getType();
-
-    String getMessage();
-
     LocalDateTime getTimestamp();
     
 
