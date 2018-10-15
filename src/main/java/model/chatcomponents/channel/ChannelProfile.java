@@ -14,9 +14,16 @@ public class ChannelProfile implements IIdentifiable {
 
     public ChannelProfile(String name, int id, String description) {
         this.name = name;
-        //Set this.image to deafult channel image
+        this.image = "../../resources/default_channel_pic.jpg";
         this.id = id;
         this.description = description;
+    }
+
+    public ChannelProfile(String channelName, int id, String description, String displayImage) {
+        this.name = channelName;
+        this.id = id;
+        this.description = description;
+        this.image = displayImage;
     }
 
     /**

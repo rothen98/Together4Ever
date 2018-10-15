@@ -1,14 +1,23 @@
 package datahandler;
 
+import model.chatcomponents.channel.Channel;
+import model.chatcomponents.message.IMessage;
+import model.chatcomponents.message.MessageType;
 import model.chatcomponents.user.IUser;
 import model.chatcomponents.user.User;
 import model.chatcomponents.channel.IChannel;
+import model.identifiers.IRecognizable;
+import model.server.ChannelData;
+import model.server.MessageData;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
 public class DataHandler {
 
@@ -46,12 +55,31 @@ public class DataHandler {
     public void loopChannels(Collection<IChannel> channels) {
         for (IChannel c : channels) {
             JSONObject channel = new JSONObject();
+            JSONArray message = new JSONArray();
+            JSONArray user = new JSONArray();
 
             channel.put("ChannelName", c.getDisplayName());
             channel.put("Description", c.getDescription());
             channel.put("DisplayImage", c.getDisplayImage());
-            channel.put("Messages", c.getAllMessages());
-            channel.put("Users", c.getAllUsers());
+            for(IMessage m: c.getAllMessages()) {
+                JSONArray singleMessage = new JSONArray();
+                JSONArray timestamp = new JSONArray();
+                singleMessage.put(m.getMessage());
+                singleMessage.put(m.getSender().getDisplayName());
+                timestamp.put(m.getTimestamp().getYear());
+                timestamp.put(m.getTimestamp().getMonthValue());
+                timestamp.put(m.getTimestamp().getDayOfMonth());
+                timestamp.put(m.getTimestamp().getHour());
+                timestamp.put(m.getTimestamp().getMinute());
+                singleMessage.put(timestamp);
+                singleMessage.put(m.getType());
+                message.put(singleMessage);
+            }
+            channel.put("Messages", message);
+            for (IRecognizable u : c.getAllUsers()) {
+                user.put(u.getDisplayName());
+            }
+            channel.put("Users", user);
 
             channelArray.put(channel);
         }
@@ -94,18 +122,42 @@ public class DataHandler {
         return users;
     }
 
-    public Collection<IChannel> getChannels() {
-        Collection<IChannel> channels = new HashSet<>();
+    public Collection<ChannelData> getChannels() {
+        Collection<ChannelData> channels = new HashSet<>();
         for (int i = 0; i < channelArray.length(); i++) {
-            JSONObject jsonChannel = userArray.getJSONObject(i);
-            /*IChannel channel = new Channel(
+            JSONObject jsonChannel = channelArray.getJSONObject(i);
+            JSONArray temp = jsonChannel.getJSONArray("Messages");
+            List<MessageData> messages = new ArrayList<>();
+
+            for(int j = 0; j < temp.length(); j++) {
+                JSONArray object = temp.getJSONArray(j);
+                String content = (String)object.get(0) ;
+                String senderName = (String)object.get(1);
+                JSONArray timestampJSON = object.getJSONArray(2);
+                Integer[] timestamp = new Integer[5];
+                for(int k =0; k < timestampJSON.length(); k++) {
+                    timestamp[k] = (Integer) timestampJSON.get(k);
+                }
+                MessageType type = (MessageType) object.get(3);
+                MessageData data = new MessageData(content,senderName,type,timestamp);
+                messages.add(data);
+            }
+
+            List<String> users = new ArrayList<>();
+            JSONArray jUsers = jsonChannel.getJSONArray("Users");
+            for (Object o :jUsers) {
+                users.add((String)o);
+            }
+
+            ChannelData channel = new ChannelData(
                     jsonChannel.get("ChannelName").toString(),
                     jsonChannel.get("Description").toString(),
-                    jsonChannel.get("DisplayImage").toString()
-                    //This isnt done yet. Finsih tonight
-            );*/
+                    jsonChannel.get("DisplayImage").toString(),
+                    messages,
+                    users
+            );
+            channels.add(channel);
         }
-
         return channels;
     }
 }

@@ -34,10 +34,10 @@ public class Channel implements IChannel {
         this.messages = new ArrayList<>();
     }
 
-    public Channel(String channelName, String description, String displayImage) {
-        //This isnt done yet
-        this.users =  new HashSet<>();
-        this.messages = new ArrayList<>();
+    public Channel(String channelName, String description, String displayImage, Collection<IUser> users, List<IMessage> messages) {
+        channelProfile = new ChannelProfile(channelName,idCounter.getAndIncrement(), description, displayImage);
+        this.users =  users;
+        this.messages = messages;
     }
     
     /**

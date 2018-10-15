@@ -19,10 +19,10 @@ public class Message implements IMessage {
     private final LocalDateTime timestamp;
 
 
-     public Message(IUser sender, IMessageContent messageContent) {
+     public Message(IUser sender, IMessageContent content) {
 
         this.sender = sender;
-        this.messageContent = messageContent;
+        this.messageContent = content;
         this.timestamp = LocalDateTime.now();
     }
     public Message(IUser sender, IMessageContent messageContent, LocalDateTime timestamp){
