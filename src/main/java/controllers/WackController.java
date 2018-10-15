@@ -16,6 +16,7 @@ import model.server.NoChannelFoundException;
 import model.chatcomponents.user.IUser;
 import model.chatcomponents.channel.IChannel;
 import model.client.IClientListener;
+import util.UserContainer;
 
 import java.net.URL;
 import java.util.*;
@@ -25,7 +26,7 @@ import static java.util.stream.Collectors.toMap;
 public class WackController implements Initializable, IClientListener {
 
     private ChatFacade chatFacade;
-    private IUser user;
+    private UserContainer user;
 
     private ChannelView channelView;
     private Map<Integer ,ChannelListItem> channelListItems = new LinkedHashMap<>();
@@ -55,7 +56,7 @@ public class WackController implements Initializable, IClientListener {
     Button createGroupButton;
 
 
-    public WackController(ChatFacade chatFacade, IUser user) {
+    public WackController(ChatFacade chatFacade, UserContainer user) {
         this.chatFacade = chatFacade;
         this.user = user;
         channelView = new ChannelView(user,chatFacade);
@@ -70,7 +71,7 @@ public class WackController implements Initializable, IClientListener {
         AnchorPane.setLeftAnchor(channelView,0.0);
         AnchorPane.setRightAnchor(channelView,0.0);
 
-        Collection<IChannel> channels = chatFacade.getUserChannels(user);
+        Collection<IChannel> channels = chatFacade.getUserChannels(user.getUser());
         initChannels(channels);
 
 
@@ -277,7 +278,7 @@ public class WackController implements Initializable, IClientListener {
         if (channelnameNotEmpty()) {
             channelNameText = channelName.getCharacters().toString();
             channelDescriptionText = channelDescription.getCharacters().toString();
-            IChannel createdChannel = chatFacade.createChannel(channelNameText, channelDescriptionText, user);
+            IChannel createdChannel = chatFacade.createChannel(channelNameText, channelDescriptionText, user.getUser());
             openChannelView(createdChannel);
             addChannelListItem(createdChannel);
             updateChannelList();
@@ -340,7 +341,7 @@ public class WackController implements Initializable, IClientListener {
     public void joinChannel(int id) {
         try {
             IChannel newChannel = chatFacade.getChannel(id);
-            newChannel.join(user);
+            newChannel.join(user.getUser());
             addChatListItem(newChannel);
             openChannelView(newChannel);
             channelListItemScrollPane.toFront();

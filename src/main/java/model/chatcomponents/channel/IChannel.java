@@ -9,7 +9,9 @@ import java.util.Collection;
 import java.util.List;
 
 public interface IChannel extends IIdentifiable {
-    Collection<IRecognizable> getAllUsers();
+    Collection<IRecognizable> getAllUsersInfo();
+    void kick(String userName, String adminPassword);
+
     List<IMessage> getAllMessages();
     List<IMessage> getLastMessages(int index);
     int getNumberOfUsers();

@@ -38,7 +38,7 @@ public class ChannelTest {
         channel.join(userOne);
         channel.join(userTwo);
 
-        Collection<IRecognizable> users = channel.getAllUsers();
+        Collection<IRecognizable> users = channel.getAllUsersInfo();
         assertEquals(2,users.size());
 
 

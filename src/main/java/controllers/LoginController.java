@@ -17,6 +17,7 @@ import model.client.IClient;
 import model.server.NoSuchUserFoundException;
 import model.server.WrongPasswordException;
 import model.chatcomponents.user.IUser;
+import util.UserContainer;
 
 import java.io.IOException;
 import java.net.URL;
@@ -100,7 +101,7 @@ public class LoginController implements Initializable {
                 IClient client = chatFacade.createClient();
                 user.connectClient(client,getSignupPassword());
 
-                initClient(user,client);
+                initClient(new UserContainer(user, getSignupPassword()),client);
 
                 System.out.println("User created with name " + getSignupUsername()
                         + " and password " + getSignupPassword());
@@ -157,7 +158,7 @@ public class LoginController implements Initializable {
      * @param user The user who will be logged in and using the client
      */
     @FXML
-    private void initClient(IUser user, IClient client) {
+    private void initClient(UserContainer user, IClient client) {
         WackController controller = new WackController(chatFacade, user);
         client.addListeners(controller);
 
@@ -180,7 +181,7 @@ public class LoginController implements Initializable {
 
         Scene scene = new Scene(root, 1000, 600);
 
-        stage.setTitle("wack (logged in as " + user.getName() + ")");
+        stage.setTitle("wack (logged in as " + user.getUser().getName() + ")");
         stage.setScene(scene);
         stage.show();
     }
@@ -191,7 +192,7 @@ public class LoginController implements Initializable {
             IUser user = chatFacade.getUser(loginUsername.getText(),loginPassword.getText());
             IClient client = chatFacade.createClient();
             user.connectClient(client,loginPassword.getText());
-            initClient(user,client);
+            initClient(new UserContainer(user,loginPassword.getText()),client);
         } catch (NoSuchUserFoundException e) {
             e.printStackTrace();
         } catch (WrongPasswordException e) {

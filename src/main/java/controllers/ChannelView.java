@@ -19,6 +19,7 @@ import model.chatcomponents.user.IUser;
 import model.chatcomponents.channel.IChannel;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageType;
+import util.UserContainer;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,7 +27,7 @@ import java.util.List;
 public class ChannelView extends AnchorPane {
 
     private IChannel channel;
-    private IUser user;
+    private UserContainer user;
     private ChatFacade chatFacade;
 
     private Button loadOldMessagesButton;
@@ -44,7 +45,7 @@ public class ChannelView extends AnchorPane {
     @FXML
     ScrollPane messageListScrollPane;
 
-    public ChannelView(IUser user, ChatFacade chatFacade) {
+    public ChannelView(UserContainer user, ChatFacade chatFacade) {
 
         this.user = user;
         this.chatFacade = chatFacade;
@@ -144,7 +145,7 @@ public class ChannelView extends AnchorPane {
         String message;
         if (messagefieldNotEmpty()) {
             message = typeField.getCharacters().toString();
-            channel.sendMessage(chatFacade.createTextMessage(message, user));
+            channel.sendMessage(chatFacade.createTextMessage(message, user.getUser()));
             System.out.println(channel.getDisplayName() + ": " + message);
             typeField.clear();
         } else {
@@ -252,6 +253,6 @@ public class ChannelView extends AnchorPane {
     }
 
     private boolean senderIsUser(String sender_name) {
-        return sender_name.equals(user.getName());
+        return sender_name.equals(user.getUser().getName());
     }
 }

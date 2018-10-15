@@ -1,7 +1,6 @@
 package datahandler;
 
 import model.chatcomponents.message.IMessage;
-import model.chatcomponents.message.MessageType;
 import model.chatcomponents.user.IUser;
 import model.chatcomponents.user.User;
 import model.chatcomponents.channel.IChannel;
@@ -124,7 +123,7 @@ public class DataHandler implements IDataHandler {
             message.put(singleMessage);
         }
         channel.put("Messages", message);
-        for (IRecognizable u : c.getAllUsers()) {
+        for (IRecognizable u : c.getAllUsersInfo()) {
             user.put(u.getDisplayName());
         }
         channel.put("Users", user);
