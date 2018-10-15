@@ -1,4 +1,4 @@
-package model.interaction.user;
+package model.chatcomponents.user;
 
 
 
@@ -51,7 +51,7 @@ public class User implements IUser{
      * Checks if the password is identical to the objects hashedpassword.
      * If true it adds it to the clients list.
      * @param client The client that wants to be connected
-     * @param password The password that needs to match the interaction password.
+     * @param password The password that needs to match the chatcomponents password.
      */
     public void connectClient(IClient client, String password){
         if(BCrypt.checkpw(password,hashedPassword)){
@@ -85,7 +85,7 @@ public class User implements IUser{
     }
 
     /**
-     * Sends a message to all the connected clients in the interaction collection.
+     * Sends a message to all the connected clients in the chatcomponents collection.
      * @param iIdentifiable
      */
 
@@ -98,7 +98,7 @@ public class User implements IUser{
     /**
      * Checks if the two passwords match.
      * @param password The password that needs to be checked.
-     * @return Returns true if the argument password is matching the interaction.
+     * @return Returns true if the argument password is matching the chatcomponents.
      */
     @Override
     public boolean authorizeLogIn(String password) {

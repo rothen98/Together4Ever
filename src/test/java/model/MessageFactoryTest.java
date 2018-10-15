@@ -1,10 +1,10 @@
 package model;
 
-import model.interaction.message.ImageContent;
-import model.interaction.message.MessageFactory;
-import model.interaction.message.TextContent;
-import model.interaction.user.IUser;
-import model.interaction.user.User;
+import model.chatcomponents.message.ImageContent;
+import model.chatcomponents.message.MessageFactory;
+import model.chatcomponents.message.TextContent;
+import model.chatcomponents.user.IUser;
+import model.chatcomponents.user.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,7 +1,7 @@
-package model.interaction.message;
+package model.chatcomponents.message;
 
 import model.identifiers.IRecognizable;
-import model.interaction.user.IUser;
+import model.chatcomponents.user.IUser;
 
 import java.time.LocalDateTime;
 
@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  * @author Alex Solberg
  *
  * This class contains data about the messages which exist in a channel
- * The interaction contain a user, a (test)message and a timestamp
+ * The chatcomponents contain a user, a (test)message and a timestamp
  */
 
 public class Message implements IMessage {

@@ -1,7 +1,7 @@
 package model;
 
 import model.identifiers.IIdentifiable;
-import model.interaction.user.User;
+import model.chatcomponents.user.User;
 
 public class MockUser extends User {
     private int numberOfUpdates;

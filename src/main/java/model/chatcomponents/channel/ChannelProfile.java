@@ -1,4 +1,4 @@
-package model.interaction.channel;
+package model.chatcomponents.channel;
 
 import model.identifiers.IIdentifiable;
 

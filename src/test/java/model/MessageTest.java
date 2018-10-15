@@ -1,9 +1,9 @@
 package model;
 
-import model.interaction.message.IMessageContent;
-import model.interaction.message.Message;
-import model.interaction.user.IUser;
-import model.interaction.user.User;
+import model.chatcomponents.message.IMessageContent;
+import model.chatcomponents.message.Message;
+import model.chatcomponents.user.IUser;
+import model.chatcomponents.user.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

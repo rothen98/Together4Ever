@@ -1,7 +1,7 @@
-package model.interaction.message;
+package model.chatcomponents.message;
 
 
-import model.interaction.user.IUser;
+import model.chatcomponents.user.IUser;
 
 /**
  * @author Viktor Franzén

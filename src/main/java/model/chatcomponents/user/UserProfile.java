@@ -1,4 +1,4 @@
-package model.interaction.user;
+package model.chatcomponents.user;
 
 
 import model.identifiers.IRecognizable;
@@ -35,7 +35,7 @@ public class UserProfile implements IRecognizable {
     }
 
     /**
-     * Returns the interaction displayImage.
+     * Returns the chatcomponents displayImage.
      * @return The displayImage.
      */
     @Override

@@ -15,10 +15,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import model.*;
-import model.interaction.user.IUser;
-import model.interaction.channel.IChannel;
-import model.interaction.message.IMessage;
-import model.interaction.message.MessageType;
+import model.chatcomponents.user.IUser;
+import model.chatcomponents.channel.IChannel;
+import model.chatcomponents.message.IMessage;
+import model.chatcomponents.message.MessageType;
 
 import java.io.IOException;
 import java.util.List;

@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
-import model.interaction.channel.IChannel;
+import model.chatcomponents.channel.IChannel;
 
 import java.io.IOException;
 import java.time.LocalDateTime;

@@ -1,10 +1,10 @@
 package model;
 
 import model.server.*;
-import model.interaction.user.IUser;
-import model.interaction.user.User;
-import model.interaction.channel.Channel;
-import model.interaction.channel.IChannel;
+import model.chatcomponents.user.IUser;
+import model.chatcomponents.user.User;
+import model.chatcomponents.channel.Channel;
+import model.chatcomponents.channel.IChannel;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

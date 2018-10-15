@@ -1,4 +1,4 @@
-package model.interaction.message;
+package model.chatcomponents.message;
 
 public class ImageContent implements IMessageContent {
 
