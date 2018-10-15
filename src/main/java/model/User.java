@@ -57,16 +57,15 @@ public class User implements IUser{
 
 
     /**
-     * Checks if the client is in the clients collection. If so and the password is
-     * matching the objects password it removes it.
+     * Checks if the client is in the clients collection. If it is and it´s equal to the one
+     * as an argument it removes it.
      * Using a Arraylist to avoid a ConcurrentModificationError when removing while looping.
      * @param client The client that wants to be removed.
-     * @param password The password that needs to match the objects password.
      */
-    public void removeClient(IClient client, String password){
+    public void removeClient(IClient client){
         List<IClient> removeThisClient = new ArrayList<>();
         clients.forEach(x -> {
-            if(x.equals(client) && BCrypt.checkpw(password,hashedPassword)){
+            if(x.equals(client)){
                 removeThisClient.add(client);
             }
         });

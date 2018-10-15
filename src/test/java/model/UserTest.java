@@ -37,7 +37,7 @@ public class UserTest {
     @Test
     public void removeClient() {
         user.connectClient(client, "password");
-        user.removeClient(client, "password");
+        user.removeClient(client);
 
         assertTrue(user.getAmountOfClients() == 0);
     }
