@@ -78,21 +78,20 @@ public class ChannelView extends AnchorPane {
         setScrollDownAutomatically(true);
     }
 
-    private void loadOlderMessages(int number){
+    private void loadOlderMessages(int number) {
         setScrollDownAutomatically(false);
         messageList.getChildren().remove(loadOldMessagesButton);
         int numberOfShowedMessages = messageList.getChildren().size();
-        List<IMessage> messages = channel.getLastMessages(numberOfShowedMessages+number);
-        int startValue = messages.size()-numberOfShowedMessages-1;
-        for (int i = startValue;i>=0;i--){
+        List<IMessage> messages = channel.getLastMessages(numberOfShowedMessages + number);
+        int startValue = messages.size() - numberOfShowedMessages - 1;
+        for (int i = startValue; i >= 0; i--) {
             showOldMessage(messages.get(i));
             numberOfShowedMessages++;
         }
-        if(channel.getAllMessages().size() > numberOfShowedMessages){
-            messageList.getChildren().add(0,loadOldMessagesButton);
+        if (channel.getAllMessages().size() > numberOfShowedMessages) {
+            messageList.getChildren().add(0, loadOldMessagesButton);
         }
     }
-
 
 
     public void setChannel(IChannel channel) {
@@ -105,12 +104,12 @@ public class ChannelView extends AnchorPane {
             this.channelName.setText(channel.getDisplayName());
             messageList.getChildren().clear();
 
-            if(channel.getAllMessages().size()>15){
+            if (channel.getAllMessages().size() > 15) {
                 messageList.getChildren().add(loadOldMessagesButton);
                 for (IMessage m : channel.getLastMessages(15)) {
                     showMessage(m);
                 }
-            }else{
+            } else {
                 for (IMessage m : channel.getAllMessages()) {
                     showMessage(m);
                 }
@@ -118,7 +117,7 @@ public class ChannelView extends AnchorPane {
 
         }
     }
-
+    
     private void showMessage(IMessage message){
         if(message.getType()== MessageType.TEXT){
             addTextMessage(message,true);
@@ -134,6 +133,7 @@ public class ChannelView extends AnchorPane {
             addChannelMessage(message,false);
         }
     }
+
 
     @FXML
     public void sendButtonKeyPressed(KeyEvent event) {
@@ -196,17 +196,17 @@ public class ChannelView extends AnchorPane {
     private void handleScrollpane() {
         setScrollDownAutomatically(false);
 
-        double viewportmaxy = Math.abs(messageListScrollPane.getViewportBounds().getMinY()-
+        double viewportmaxy = Math.abs(messageListScrollPane.getViewportBounds().getMinY() -
                 messageListScrollPane.getViewportBounds().getHeight());
         double vvalue = messageListScrollPane.getVvalue();
 
-        if(vvalue>1){
-            vvalue = viewportmaxy/messageList.getHeight();
+        if (vvalue > 1) {
+            vvalue = viewportmaxy / messageList.getHeight();
         }
 
-        if (vvalue < 0.5 && !(messageListScrollPane.getViewportBounds().getMaxY()== messageList.getHeight())){
+        if (vvalue < 0.5 && !(messageListScrollPane.getViewportBounds().getMaxY() == messageList.getHeight())) {
             scrollDownButton.setVisible(true);
-        }else{
+        } else {
             scrollDownButton.setVisible(false);
             setScrollDownAutomatically(true);
             //setScrollDownAutomatically(true);
@@ -214,7 +214,7 @@ public class ChannelView extends AnchorPane {
     }
 
     @FXML
-    private void scrollDownButtonPressed(){
+    private void scrollDownButtonPressed() {
         scrollDownButton.setVisible(false);
         slowScrollToBottom(messageListScrollPane);
     }
@@ -226,7 +226,8 @@ public class ChannelView extends AnchorPane {
 
     @FXML
     private void leaveButtonPressed() {
-
+        optionsPanel.toBack();
+        channel.leave(user);
     }
 
     private void slowScrollToBottom(ScrollPane scrollPane) {
@@ -237,12 +238,13 @@ public class ChannelView extends AnchorPane {
     }
 
     private void setScrollDownAutomatically(boolean doIt) {
-        if(doIt){
+        if (doIt) {
             messageListScrollPane.vvalueProperty().bind(messageList.heightProperty());
-        }else{
+        } else {
             messageListScrollPane.vvalueProperty().unbind();
         }
     }
+
 
     private void addChannelMessage(IMessage newMessage,boolean last) {
         if(last){
@@ -254,11 +256,11 @@ public class ChannelView extends AnchorPane {
 
     }
 
-    private void addTextMessage(IMessage iMessage,boolean last) {
-        if (last){
-            messageList.getChildren().add(new MessageView(iMessage,senderIsUser(iMessage.getSender().getDisplayName())));
-        }else{
-            messageList.getChildren().add(0,new MessageView(iMessage,senderIsUser(iMessage.getSender().getDisplayName())));
+    private void addTextMessage(IMessage iMessage, boolean last) {
+        if (last) {
+            messageList.getChildren().add(new MessageView(iMessage, senderIsUser(iMessage.getSender().getDisplayName())));
+        } else {
+            messageList.getChildren().add(0, new MessageView(iMessage, senderIsUser(iMessage.getSender().getDisplayName())));
         }
 
     }

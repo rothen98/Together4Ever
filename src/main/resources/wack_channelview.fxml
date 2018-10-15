@@ -11,7 +11,7 @@
 
 <fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@wack.css" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane fx:id="optionsPanel" prefHeight="150.0" prefWidth="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+      <AnchorPane fx:id="optionsPanel" prefHeight="150.0" prefWidth="250.0" styleClass="options-panel" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
             <Button fx:id="leaveButton" layoutX="177.0" layoutY="109.0" mnemonicParsing="false" onAction="#leaveButtonPressed" text="Leave Channel" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
          </children>
