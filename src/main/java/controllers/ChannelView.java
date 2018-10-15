@@ -43,6 +43,8 @@ public class ChannelView extends AnchorPane {
     Button sendButton;
     @FXML
     ScrollPane messageListScrollPane;
+    @FXML
+    Button optionsButton;
 
     public ChannelView(IUser user, ChatFacade chatFacade) {
 
@@ -213,6 +215,10 @@ public class ChannelView extends AnchorPane {
     private void scrollDownButtonPressed(){
         scrollDownButton.setVisible(false);
         slowScrollToBottom(messageListScrollPane);
+    }
+
+    @FXML
+    private void optionsButtonPressed() {
 
     }
 
