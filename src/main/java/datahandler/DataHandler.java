@@ -1,5 +1,8 @@
-package model;
+package datahandler;
 
+import model.chatcomponents.user.IUser;
+import model.chatcomponents.user.User;
+import model.chatcomponents.channel.IChannel;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.FileWriter;

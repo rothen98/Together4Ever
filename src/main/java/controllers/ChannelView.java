@@ -8,7 +8,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -16,10 +15,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import model.*;
+import model.chatcomponents.user.IUser;
+import model.chatcomponents.channel.IChannel;
+import model.chatcomponents.message.IMessage;
+import model.chatcomponents.message.MessageType;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ChannelView extends AnchorPane {
@@ -115,17 +116,17 @@ public class ChannelView extends AnchorPane {
     }
 
     private void showMessage(IMessage message){
-        if(message.getMessageContent().getType()== MessageType.TEXT){
+        if(message.getType()== MessageType.TEXT){
             addTextMessage(message,true);
-        }else if(message.getMessageContent().getType()==MessageType.CHANNEL){
+        }else if(message.getType()==MessageType.CHANNEL){
             addChannelMessage(message,true);
         }
     }
 
     private void showOldMessage(IMessage message) {
-        if(message.getMessageContent().getType()== MessageType.TEXT){
+        if(message.getType()== MessageType.TEXT){
             addTextMessage(message,false);
-        }else if(message.getMessageContent().getType()==MessageType.CHANNEL){
+        }else if(message.getType()==MessageType.CHANNEL){
             addChannelMessage(message,false);
         }
     }
@@ -233,9 +234,9 @@ public class ChannelView extends AnchorPane {
 
     private void addChannelMessage(IMessage newMessage,boolean last) {
         if(last){
-            messageList.getChildren().add(new Label(newMessage.getMessageContent().getMessage()));
+            messageList.getChildren().add(new Label(newMessage.getMessage()));
         }else{
-            messageList.getChildren().add(0,new Label(newMessage.getMessageContent().getMessage()));
+            messageList.getChildren().add(0,new Label(newMessage.getMessage()));
 
         }
 

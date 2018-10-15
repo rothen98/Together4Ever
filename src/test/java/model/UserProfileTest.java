@@ -1,6 +1,6 @@
 package model;
 
-import com.sun.corba.se.spi.ior.Identifiable;
+import model.chatcomponents.user.UserProfile;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

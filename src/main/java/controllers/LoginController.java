@@ -12,6 +12,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import model.*;
+import model.client.IClient;
+import model.server.NoSuchUserFoundException;
+import model.server.WrongPasswordException;
+import model.chatcomponents.user.IUser;
 
 import java.io.IOException;
 import java.net.URL;
@@ -151,7 +155,7 @@ public class LoginController implements Initializable {
         stage.setMinHeight(450);
         stage.setMinWidth(600);
         stage.setOnHiding(event -> {
-            System.out.println("Closing stage!!!");
+
         });
 
         Parent root = null;

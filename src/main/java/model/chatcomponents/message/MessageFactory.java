@@ -1,5 +1,7 @@
-package model;
+package model.chatcomponents.message;
 
+
+import model.chatcomponents.user.IUser;
 
 /**
  * @author Viktor Franzén

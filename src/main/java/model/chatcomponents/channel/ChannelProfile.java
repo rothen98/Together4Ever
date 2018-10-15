@@ -1,4 +1,6 @@
-package model;
+package model.chatcomponents.channel;
+
+import model.identifiers.IIdentifiable;
 
 /**
  * This class contains information about the channel's profile.

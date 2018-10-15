@@ -1,5 +1,11 @@
 package model;
 
+import model.server.*;
+import model.chatcomponents.user.IUser;
+import model.chatcomponents.channel.IChannel;
+import model.client.IClient;
+import model.client.IClientListener;
+import model.chatcomponents.message.IMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
