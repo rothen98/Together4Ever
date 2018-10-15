@@ -13,7 +13,6 @@ import javafx.scene.layout.VBox;
 import model.*;
 import model.identifiers.IIdentifiable;
 import model.server.NoChannelFoundException;
-import model.chatcomponents.user.IUser;
 import model.chatcomponents.channel.IChannel;
 import model.client.IClientListener;
 import util.UserContainer;
