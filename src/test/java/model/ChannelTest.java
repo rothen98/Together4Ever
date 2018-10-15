@@ -165,4 +165,12 @@ public class ChannelTest {
         IChannel someChannel = new Channel("theName","TDA367 group work");
         assertEquals("TDA367 group work",someChannel.getDescription());
     }
+
+    @Test
+    public void isChannelAdministrator(){
+        IChannel someChannel = new Channel("theName","TDA367 group work");
+        User user = new User("Test","test");
+        someChannel.join(user);
+        assertTrue(someChannel.isChannelAdministrator(user));
+    }
 }

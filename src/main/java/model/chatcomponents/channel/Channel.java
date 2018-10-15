@@ -18,8 +18,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  * There are methods to get the messages, the users names and also methods for joining and leaving the channel.
  */
 public class Channel implements IChannel {
-    private final Collection<IUser> users;
+    private final List<IUser> users;
     private final List<IMessage> messages;
+    private IUser channelAdministrator;
 
     private IIdentifiable channelProfile;
 
@@ -28,16 +29,34 @@ public class Channel implements IChannel {
      */
     private static final AtomicInteger idCounter = new AtomicInteger(0);
 
+    /**
+     * Constructor used when creating new channel
+     * @param name
+     * @param description
+     */
     public Channel(String name,String description) {
         channelProfile = new ChannelProfile(name,idCounter.getAndIncrement(),description);
-        this.users = new HashSet<>();
+        this.users = new ArrayList<>();
         this.messages = new ArrayList<>();
     }
 
-    public Channel(String channelName, String description, String displayImage, Collection<IUser> users, List<IMessage> messages) {
+    /**
+     * Constructor used when creating channel with information of old channel
+     * @param channelName
+     * @param description
+     * @param displayImage
+     * @param users
+     * @param messages
+     */
+    public Channel(String channelName, String description, String displayImage, List<IUser> users, List<IMessage> messages) {
         channelProfile = new ChannelProfile(channelName,idCounter.getAndIncrement(), description, displayImage);
         this.users =  users;
         this.messages = messages;
+        if(!users.isEmpty()){
+            channelAdministrator = users.get(0);
+            System.out.println("Channel administrator of " + channelName + ": " + channelAdministrator.getName());
+
+        }
     }
     
     /**
@@ -120,7 +139,10 @@ public class Channel implements IChannel {
      */
     @Override
     public void join(IUser user) {
-        if (user != null){
+        if (user != null && !users.contains(user)){
+            if(users.isEmpty()){
+                channelAdministrator = user;
+            }
             users.add(user);
             //Send the join message to the channel
             sendMessage(MessageFactory.createJoinMessage(user));
@@ -146,6 +168,16 @@ public class Channel implements IChannel {
     @Override
     public boolean hasUser(IUser user) {
         return users.contains(user);
+    }
+
+    /**
+     * Checks whether the given user is the channel administrator.
+     * @param user the possible channel admin
+     * @return true if the user is the channel administrator, false otherwise
+     */
+    @Override
+    public boolean isChannelAdministrator(IUser user){
+        return channelAdministrator.equals(user);
     }
 
     /**

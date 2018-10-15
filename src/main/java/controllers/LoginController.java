@@ -37,8 +37,16 @@ public class LoginController implements Initializable {
 
     private final ChatFacade chatFacade;
 
-    public LoginController(ChatFacade chatFacade) {
-        this.chatFacade = chatFacade;
+    public LoginController() {
+        this.chatFacade = new ChatFacade(new DataHandler());
+
+        //We want to save all data when closing the program
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            @Override
+            public void run() {
+                chatFacade.saveAllData();
+            }
+        }));
     }
 
 

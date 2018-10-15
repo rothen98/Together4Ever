@@ -21,7 +21,5 @@ public interface IChannel extends IIdentifiable {
     boolean hasUser(IUser user);
 
 
-
-
-
+    boolean isChannelAdministrator(IUser user);
 }
