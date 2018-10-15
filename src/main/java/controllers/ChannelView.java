@@ -32,6 +32,8 @@ public class ChannelView extends AnchorPane {
     private Button loadOldMessagesButton;
 
     @FXML
+    AnchorPane optionsPanel;
+    @FXML
     Button scrollDownButton;
     @FXML
     Label channelName;
@@ -42,9 +44,12 @@ public class ChannelView extends AnchorPane {
     @FXML
     Button sendButton;
     @FXML
-    ScrollPane messageListScrollPane;
-    @FXML
     Button optionsButton;
+    @FXML
+    Button leaveButton;
+    @FXML
+    ScrollPane messageListScrollPane;
+
 
     public ChannelView(IUser user, ChatFacade chatFacade) {
 
@@ -71,9 +76,6 @@ public class ChannelView extends AnchorPane {
             }
         });
         setScrollDownAutomatically(true);
-
-
-
     }
 
     private void loadOlderMessages(int number){
@@ -89,8 +91,6 @@ public class ChannelView extends AnchorPane {
         if(channel.getAllMessages().size() > numberOfShowedMessages){
             messageList.getChildren().add(0,loadOldMessagesButton);
         }
-
-
     }
 
 
@@ -221,6 +221,11 @@ public class ChannelView extends AnchorPane {
 
     @FXML
     private void optionsButtonPressed() {
+        optionsPanel.toFront();
+    }
+
+    @FXML
+    private void leaveButtonPressed() {
 
     }
 
@@ -237,7 +242,6 @@ public class ChannelView extends AnchorPane {
         }else{
             messageListScrollPane.vvalueProperty().unbind();
         }
-
     }
 
     private void addChannelMessage(IMessage newMessage,boolean last) {

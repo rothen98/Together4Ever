@@ -10,7 +10,7 @@ public class OptionsPanel extends AnchorPane {
     IUser user;
     IChannel channel;
 
-    public OptionsPanel(IUser user, IChannel channel) {
+    /*public OptionsPanel(IUser user, IChannel channel) {
 
         this.user = user;
         this.channel = channel;
@@ -25,5 +25,5 @@ public class OptionsPanel extends AnchorPane {
 
     private void leaveButtonPressed() {
         channel.leave(user);
-    }
+    }*/
 }
