@@ -14,6 +14,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -132,6 +133,7 @@ public class DataHandlerTest {
         dataHandler.pushChannels(channels);
 
         Collection<ChannelData> shittyShit = dataHandler.getChannels();
+        System.out.println(shittyShit.size());
         assertTrue(shittyShit.size() == 4);
     }
 }

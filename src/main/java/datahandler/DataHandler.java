@@ -1,6 +1,7 @@
 package datahandler;
 
 import model.chatcomponents.message.IMessage;
+import model.chatcomponents.message.MessageType;
 import model.chatcomponents.user.IUser;
 import model.chatcomponents.user.User;
 import model.chatcomponents.channel.IChannel;
@@ -27,39 +28,34 @@ public class DataHandler implements IDataHandler {
     private JSONArray writeUserArray;
     private JSONArray writeChannelArray;
 
-    public DataHandler() {
-        try {
-            String data = readFile("src/main/resources/channel.json");
-            if(!data.isEmpty()) {
-                readChannelArray = new JSONArray(data);
-            }else{
-                readChannelArray = new JSONArray();
-            }
-        } catch (IOException e) {
-            readChannelArray = new JSONArray();
-        }
 
-        try {
-            String data = readFile("src/main/resources/user.json");
-            if(!data.isEmpty()) {
-                readUserArray = new JSONArray(data);
-            }else{
-                readUserArray = new JSONArray();
-            }
-        } catch (IOException e) {
-            readUserArray = new JSONArray();
-        }
+    public DataHandler() {
+
+        readChannelArray = createJSONArrayFromFile("src/main/resources/channel.json");
+        readUserArray = createJSONArrayFromFile("src/main/resources/user.json");
 
         writeChannelArray = new JSONArray();
         writeUserArray = new JSONArray();
-
-
 
         try {
             channelFile = new FileWriter("src/main/resources/channel.json");
             userFile = new FileWriter("src/main/resources/user.json");
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+    }
+
+    private JSONArray createJSONArrayFromFile(String filename){
+        try {
+            String data = readFile(filename);
+            if(!data.isEmpty()) {
+                return new JSONArray(data);
+            }else{
+                return new JSONArray();
+            }
+        } catch (IOException e) {
+            return new JSONArray();
         }
 
     }
@@ -154,7 +150,7 @@ public class DataHandler implements IDataHandler {
             singleMessage.put(m.getMessage());
             singleMessage.put(m.getSender().getDisplayName());
             singleMessage.put(m.getTimestamp().toString());
-            singleMessage.put(m.getType());
+            singleMessage.put(m.getType().toString());
             message.put(singleMessage);
         }
         channel.put("Messages", message);
@@ -181,6 +177,8 @@ public class DataHandler implements IDataHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        readUserArray  =writeUserArray;
+        writeUserArray = new JSONArray();
 
     }
 
@@ -193,6 +191,9 @@ public class DataHandler implements IDataHandler {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        readChannelArray=writeChannelArray;
+        writeChannelArray=new JSONArray();
+
     }
 
     public Collection<IUser> getUsers() {
@@ -223,7 +224,8 @@ public class DataHandler implements IDataHandler {
                 String content = (String)object.get(0) ;
                 String senderName = (String)object.get(1);
                 String timestamp = (String)object.get(2);
-                String type = (String) object.get(3);
+                String type = (String)object.get(3);
+
                 MessageData data = new MessageData(content,senderName,type,timestamp);
                 messages.add(data);
             }
