@@ -29,6 +29,16 @@ public class DataHandlerTest {
 
     @Test
     public void loopUsers() {
+        Collection<IUser> users = new HashSet<>();
+        IUser user1 = new User("Text", "test");
+        IUser user2 = new User("Text23", "test2");
+        IUser user3 = new User("Textew", "test3");
+        users.add(user1);
+        users.add(user2);
+        users.add(user3);
+        dataHandler.loopUsers(users);
+        assertTrue(users.size() == 3);
+        assertTrue(users.contains(user1));
     }
 
     @Test
@@ -59,7 +69,7 @@ public class DataHandlerTest {
 
     @Test
     public void getUsers() {
-        /*Collection<IUser> users = new HashSet<>();
+        Collection<IUser> users = new HashSet<>();
 
         IUser user1 = new User("Text", "test");
         IUser user2 = new User("Text23", "test2");
@@ -73,8 +83,8 @@ public class DataHandlerTest {
         dataHandler.pushUser(users);
 
         Collection<IUser> catchUsers = dataHandler.getUsers();
-        assertTrue(catchUsers.size() > 1);
-        System.out.println(catchUsers);*/
+        assertTrue(catchUsers.size() == 4);
+        System.out.println(catchUsers);
     }
 
     @Test
