@@ -1,5 +1,6 @@
 package controllers;
 
+import datahandler.DataHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -34,7 +35,11 @@ public class LoginController implements Initializable {
     @FXML
     Button signupButton;
 
-    private final ChatFacade chatFacade = new ChatFacade();
+    private final ChatFacade chatFacade;
+
+    public LoginController(ChatFacade chatFacade) {
+        this.chatFacade = chatFacade;
+    }
 
 
     @Override

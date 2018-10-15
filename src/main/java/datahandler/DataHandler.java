@@ -1,6 +1,5 @@
 package datahandler;
 
-import model.chatcomponents.channel.Channel;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageType;
 import model.chatcomponents.user.IUser;
@@ -8,27 +7,35 @@ import model.chatcomponents.user.User;
 import model.chatcomponents.channel.IChannel;
 import model.identifiers.IRecognizable;
 import model.server.ChannelData;
+import model.server.IDataHandler;
 import model.server.MessageData;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDateTime;
+
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
-public class DataHandler {
+public class DataHandler implements IDataHandler {
 
     private FileWriter channelFile;
     private FileWriter userFile;
-    private JSONArray userArray;
-    private JSONArray channelArray;
+    private JSONArray readUserArray;
+    private JSONArray readChannelArray;
+    private JSONArray writeUserArray;
+    private JSONArray writeChannelArray;
+
 
     public DataHandler() {
-         userArray = new JSONArray();
-         channelArray = new JSONArray();
+
+        readChannelArray = createJSONArrayFromFile("src/main/resources/channel.json");
+        readUserArray = createJSONArrayFromFile("src/main/resources/user.json");
+
+        writeChannelArray = new JSONArray();
+        writeUserArray = new JSONArray();
 
         try {
             channelFile = new FileWriter("src/main/resources/channel.json");
@@ -39,78 +46,122 @@ public class DataHandler {
 
     }
 
+    private JSONArray createJSONArrayFromFile(String filename){
+        try {
+            String data = readFile(filename);
+            if(!data.isEmpty()) {
+                return new JSONArray(data);
+            }else{
+                return new JSONArray();
+            }
+        } catch (IOException e) {
+            return new JSONArray();
+        }
+
+    }
+
+    private String readFile(String filename) throws IOException {
+        String result = "";
+
+            BufferedReader br = new BufferedReader(new FileReader(filename));
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+            while (line != null) {
+                sb.append(line);
+                line = br.readLine();
+            }
+            result = sb.toString();
+            br.close();
+        return result;
+    }
+
     public void loopUsers(Collection<IUser> users) {
         for (IUser u : users) {
-            JSONObject user = new JSONObject();
-
-            user.put("Username", u.getName());
-            user.put("Password", u.getHashedPassword());
-            user.put("DisplayName", u.getDisplayName());
-            user.put("DisplayImage", u.getDisplayImage());
-
-            userArray.put(user);
-        }
+            writeUserArray.put(createNewUserJObject(u));
+            }
     }
 
-    public void loopChannels(Collection<IChannel> channels) {
+    private JSONObject createNewUserJObject(IUser u) {
+        JSONObject user = new JSONObject();
+        initUserJObject(u,user);
+        return user;
+    }
+    private void initUserJObject(IUser u,JSONObject userJ){
+        userJ.put("Username", u.getName());
+        userJ.put("Password", u.getHashedPassword());
+        userJ.put("DisplayName", u.getDisplayName());
+        userJ.put("DisplayImage", u.getDisplayImage());
+    }
+
+
+    private void loopChannels(Collection<IChannel> channels) {
         for (IChannel c : channels) {
-            JSONObject channel = new JSONObject();
-            JSONArray message = new JSONArray();
-            JSONArray user = new JSONArray();
-
-            channel.put("ChannelName", c.getDisplayName());
-            channel.put("Description", c.getDescription());
-            channel.put("DisplayImage", c.getDisplayImage());
-            for(IMessage m: c.getAllMessages()) {
-                JSONArray singleMessage = new JSONArray();
-                JSONArray timestamp = new JSONArray();
-                singleMessage.put(m.getMessage());
-                singleMessage.put(m.getSender().getDisplayName());
-                timestamp.put(m.getTimestamp().getYear());
-                timestamp.put(m.getTimestamp().getMonthValue());
-                timestamp.put(m.getTimestamp().getDayOfMonth());
-                timestamp.put(m.getTimestamp().getHour());
-                timestamp.put(m.getTimestamp().getMinute());
-                singleMessage.put(timestamp);
-                singleMessage.put(m.getType());
-                message.put(singleMessage);
+                JSONObject channel = createNewChannelJObject(c);
+                writeChannelArray.put(channel);
             }
-            channel.put("Messages", message);
-            for (IRecognizable u : c.getAllUsers()) {
-                user.put(u.getDisplayName());
-            }
-            channel.put("Users", user);
-
-            channelArray.put(channel);
-        }
-
     }
 
-    public void pushUser(Collection<IUser> users) {
+
+    private JSONObject createNewChannelJObject(IChannel c) {
+        JSONObject channel = new JSONObject();
+        initChannelJObject(c, channel);
+        return channel;
+    }
+
+    private void initChannelJObject(IChannel c, JSONObject channel) {
+        JSONArray message = new JSONArray();
+        JSONArray user = new JSONArray();
+
+        channel.put("ChannelName", c.getDisplayName());
+        channel.put("Description", c.getDescription());
+        channel.put("DisplayImage", c.getDisplayImage());
+        for(IMessage m: c.getAllMessages()) {
+            JSONArray singleMessage = new JSONArray();
+            singleMessage.put(m.getMessage());
+            singleMessage.put(m.getSender().getDisplayName());
+            singleMessage.put(m.getTimestamp().toString());
+            singleMessage.put(m.getType().toString());
+            message.put(singleMessage);
+        }
+        channel.put("Messages", message);
+        for (IRecognizable u : c.getAllUsers()) {
+            user.put(u.getDisplayName());
+        }
+        channel.put("Users", user);
+    }
+
+
+    public void pushUsers(Collection<IUser> users) {
         loopUsers(users);
         try {
-            userFile.write(userArray.toString());
+            userFile.write(writeUserArray.toString());
             userFile.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        readUserArray  =writeUserArray;
+        writeUserArray = new JSONArray();
 
     }
 
-    public void pushChannel(Collection<IChannel> channels) {
+    public void pushChannels(Collection<IChannel> channels) {
+        System.out.println("Saving channels");
         loopChannels(channels);
         try {
-            channelFile.write(channelArray.toString());
+            channelFile.write(writeChannelArray.toString());
             channelFile.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        readChannelArray=writeChannelArray;
+        writeChannelArray=new JSONArray();
+
     }
 
     public Collection<IUser> getUsers() {
         Collection<IUser> users = new HashSet<>();
-        for (int i = 0; i < userArray.length(); i++) {
-            JSONObject jsonUser = userArray.getJSONObject(i);
+        for (int i = 0; i < readUserArray.length(); i++) {
+            JSONObject jsonUser = readUserArray.getJSONObject(i);
             IUser user = new User(
                     jsonUser.get("Username").toString(),
                     jsonUser.get("Password").toString(),
@@ -123,9 +174,10 @@ public class DataHandler {
     }
 
     public Collection<ChannelData> getChannels() {
+        System.out.println("Getting Channels...");
         Collection<ChannelData> channels = new HashSet<>();
-        for (int i = 0; i < channelArray.length(); i++) {
-            JSONObject jsonChannel = channelArray.getJSONObject(i);
+        for (int i = 0; i < readChannelArray.length(); i++) {
+            JSONObject jsonChannel = readChannelArray.getJSONObject(i);
             JSONArray temp = jsonChannel.getJSONArray("Messages");
             List<MessageData> messages = new ArrayList<>();
 
@@ -133,12 +185,9 @@ public class DataHandler {
                 JSONArray object = temp.getJSONArray(j);
                 String content = (String)object.get(0) ;
                 String senderName = (String)object.get(1);
-                JSONArray timestampJSON = object.getJSONArray(2);
-                Integer[] timestamp = new Integer[5];
-                for(int k =0; k < timestampJSON.length(); k++) {
-                    timestamp[k] = (Integer) timestampJSON.get(k);
-                }
-                MessageType type = (MessageType) object.get(3);
+                String timestamp = (String)object.get(2);
+                String type = (String)object.get(3);
+
                 MessageData data = new MessageData(content,senderName,type,timestamp);
                 messages.add(data);
             }

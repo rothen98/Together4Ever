@@ -95,4 +95,23 @@ public class MessageFactory {
     public static IMessage createMessageWithTimestamp(IUser sender, IMessageContent messageContent, LocalDateTime timestamp){
         return new Message(sender,messageContent,timestamp);
     }
+
+    /**
+     * This method examines the given type and creates the right kind of message.
+     * @param sender
+     * @param content
+     * @param type
+     * @param timestamp
+     * @return
+     */
+    public static IMessage createMessage(IUser sender, String content, MessageType type, LocalDateTime timestamp) {
+        if(type.equals(MessageType.IMAGE)){
+            return new Message(sender,new ImageContent(content),timestamp);
+        }else if(type.equals(MessageType.CHANNEL)){
+            return new Message(sender,new ChannelContent(content),timestamp);
+        }else{
+            return new Message(sender,new TextContent(content),timestamp);
+        }
+
+    }
 }

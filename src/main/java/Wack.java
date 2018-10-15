@@ -1,18 +1,20 @@
 import controllers.LoginController;
 import controllers.WackController;
+import datahandler.DataHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import model.ChatFacade;
 
 public class Wack extends Application{
-
+    private static ChatFacade chatFacade;
     @Override
     public void start(Stage stage) throws Exception {
-
-        LoginController controller = new LoginController();
+        chatFacade = new ChatFacade(new DataHandler());
+        LoginController controller = new LoginController(chatFacade);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("wack_login.fxml"));
         loader.setController(controller);
 
@@ -30,6 +32,12 @@ public class Wack extends Application{
 
     public static void main(String[] args) {
         launch(args);
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            @Override
+            public void run() {
+                chatFacade.saveAllData();
+            }
+        }));
     }
 
 }
