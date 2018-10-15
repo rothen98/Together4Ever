@@ -3,6 +3,8 @@ package model.chatcomponents.message;
 
 import model.chatcomponents.user.IUser;
 
+import java.time.LocalDateTime;
+
 /**
  * @author Viktor Franzén
  *
@@ -80,5 +82,17 @@ public class MessageFactory {
     public static IMessage createChannelMessage(String text, IUser user){
         IMessageContent content = new ChannelContent(text);
         return new Message(user,content);
+    }
+
+
+    /**
+     * Method to create a message with a timestamp.
+     * @param sender The sender of the message.
+     * @param messageContent The content of the message.
+     * @param timestamp The timestamp of the message.
+     * @return The message.
+     */
+    public static IMessage createMessageWithTimestamp(IUser sender, IMessageContent messageContent, LocalDateTime timestamp){
+        return new Message(sender,messageContent,timestamp);
     }
 }
