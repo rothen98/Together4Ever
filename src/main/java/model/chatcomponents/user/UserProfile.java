@@ -20,6 +20,7 @@ public class UserProfile implements IRecognizable {
 
     }
 
+
     public UserProfile(String displayName, String displayImage) {
         this.displayName = displayName;
         this.displayImage=displayImage;
@@ -44,7 +45,7 @@ public class UserProfile implements IRecognizable {
     }
 
     public void setDisplayName(String displayName) {
-        this.displayImage = displayName;
+        this.displayName = displayName;
     }
 
     public void setDisplayImage(String displayImage) {
