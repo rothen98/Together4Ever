@@ -6,12 +6,13 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class ChannelContentTest {
+public class ImageContentTest {
+
     private IMessageContent content;
 
     @Before
     public void setUp() throws Exception {
-        content = new ChannelContent("test");
+        content = new ImageContent("/test/path");
     }
 
     @After
@@ -21,11 +22,11 @@ public class ChannelContentTest {
 
     @Test
     public void getType() {
-        assertEquals(MessageType.CHANNEL, content.getType());
+        assertEquals(MessageType.IMAGE, content.getType());
     }
 
     @Test
     public void getMessage() {
-        assertEquals("test", content.getMessage());
+        assertEquals("/test/path", content.getMessage());
     }
 }
