@@ -3,7 +3,6 @@ package model.chatcomponents.message;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import sun.plugin2.message.Message;
 
 import static org.junit.Assert.*;
 
