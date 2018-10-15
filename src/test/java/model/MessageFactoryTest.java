@@ -8,6 +8,10 @@ import model.chatcomponents.user.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import sun.util.resources.LocaleData;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static org.junit.Assert.*;
 
@@ -73,5 +77,19 @@ public class MessageFactoryTest {
         assertEquals(message,
                 MessageFactory.createChannelMessage(message,messageSender).getMessage());
 
+    }
+
+
+    @Test
+    public void createMessageWithTimestamp() {
+        LocalDateTime timestamp = LocalDateTime.of(1998,2,8,10,55);
+        TextContent content = new TextContent("test");
+
+
+
+        assertEquals(timestamp,
+                MessageFactory.createMessageWithTimestamp(messageSender,content,timestamp).getTimestamp());
+        assertEquals("test",
+                MessageFactory.createMessageWithTimestamp(messageSender,content,timestamp).getMessage());
     }
 }
