@@ -1,12 +1,15 @@
 package datahandler;
 
+import model.chatcomponents.message.IMessage;
 import model.chatcomponents.user.IUser;
 import model.chatcomponents.user.User;
 import model.chatcomponents.channel.IChannel;
+import model.identifiers.IRecognizable;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -46,12 +49,29 @@ public class DataHandler {
     public void loopChannels(Collection<IChannel> channels) {
         for (IChannel c : channels) {
             JSONObject channel = new JSONObject();
+            JSONArray message = new JSONArray();
+            JSONArray user = new JSONArray();
 
             channel.put("ChannelName", c.getDisplayName());
             channel.put("Description", c.getDescription());
             channel.put("DisplayImage", c.getDisplayImage());
-            channel.put("Messages", c.getAllMessages());
-            channel.put("Users", c.getAllUsers());
+            for(IMessage m: c.getAllMessages()) {
+                JSONArray timestamp = new JSONArray();
+                message.put(m.getMessage());
+                message.put(m.getSender().getDisplayName());
+                timestamp.put(m.getTimestamp().getYear());
+                timestamp.put(m.getTimestamp().getMonthValue());
+                timestamp.put(m.getTimestamp().getDayOfMonth());
+                timestamp.put(m.getTimestamp().getHour());
+                timestamp.put(m.getTimestamp().getMinute());
+                message.put(timestamp);
+                message.put(m.getType());
+            }
+            channel.put("Messages", message);
+            for (IRecognizable u : c.getAllUsers()) {
+                user.put(u.getDisplayName());
+            }
+            channel.put("Users", user);
 
             channelArray.put(channel);
         }
