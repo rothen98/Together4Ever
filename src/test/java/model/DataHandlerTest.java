@@ -1,10 +1,14 @@
 package model;
 
+import datahandler.DataHandler;
+import model.server.IServer;
+import model.server.Server;
+import model.chatcomponents.user.IUser;
+import model.chatcomponents.user.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileWriter;
 import java.util.Collection;
 import java.util.HashSet;
 

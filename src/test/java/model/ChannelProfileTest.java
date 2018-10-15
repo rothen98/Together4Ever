@@ -1,6 +1,6 @@
 package model;
 
-import javafx.scene.image.Image;
+import model.chatcomponents.channel.ChannelProfile;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

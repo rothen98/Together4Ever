@@ -1,6 +1,20 @@
 package model;
 
 
+import model.identifiers.IIdentifiable;
+import model.chatcomponents.message.TextContent;
+import model.server.*;
+import model.chatcomponents.user.IUser;
+import model.chatcomponents.user.User;
+import model.chatcomponents.channel.Channel;
+import model.chatcomponents.channel.IChannel;
+import model.client.Client;
+import model.client.IClient;
+import model.client.IClientListener;
+import model.chatcomponents.message.IMessage;
+import model.chatcomponents.message.ImageContent;
+import model.chatcomponents.message.Message;
+
 import java.util.Collection;
 
 /**

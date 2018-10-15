@@ -1,10 +1,15 @@
 package model;
 
+import model.identifiers.IRecognizable;
+import model.chatcomponents.message.*;
+import model.chatcomponents.user.IUser;
+import model.chatcomponents.user.User;
+import model.chatcomponents.channel.Channel;
+import model.chatcomponents.channel.IChannel;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 
 import static org.junit.Assert.*;

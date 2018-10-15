@@ -1,7 +1,7 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import model.client.IClientListener;
+import model.identifiers.IIdentifiable;
 
 public class MockListener implements IClientListener {
     private int numberOfUpdates;
