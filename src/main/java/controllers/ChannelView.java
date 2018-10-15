@@ -62,6 +62,7 @@ public class ChannelView extends AnchorPane {
             e.printStackTrace();
         }
         sendButton.setDisable(true);
+        optionsButton.setVisible(false);
         loadOldMessagesButton = new Button("Load older messages");
         loadOldMessagesButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -97,6 +98,7 @@ public class ChannelView extends AnchorPane {
     public void setChannel(IChannel channel) {
         if (channel != null) {
             sendButton.setDisable(false);
+            optionsButton.setVisible(true);
             scrollDownButton.setVisible(false);
             setScrollDownAutomatically(true);
             this.channel = channel;
