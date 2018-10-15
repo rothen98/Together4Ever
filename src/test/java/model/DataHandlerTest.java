@@ -117,7 +117,24 @@ public class DataHandlerTest {
 
     @Test
     public void getChannels() {
+        Collection<IChannel> channels = new HashSet<>();
+        IUser user = new User("USENERMAE", "gdfsgfd");
+        IMessage message = MessageFactory.createTextMessage("This is my message", user);
+
+        IChannel c1 = new Channel("ChannelName1", "ChannelDesicrgsghds");
+        c1.sendMessage(message);
+        c1.join(user);
+        IChannel c2 = new Channel("C12", "Cdes");
+        IChannel c3 = new Channel("CHKFS#", "test");
+        IChannel c4 = new Channel("CName5", "test");
+        channels.add(c1);
+        channels.add(c2);
+        channels.add(c3);
+        channels.add(c4);
+
+        dataHandler.pushChannel(channels);
+
         Collection<ChannelData> shittyShit = dataHandler.getChannels();
-        assertTrue(shittyShit.size() > 0);
+        assertTrue(shittyShit.size() == 4);
     }
 }

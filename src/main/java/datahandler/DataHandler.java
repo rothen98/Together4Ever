@@ -2,6 +2,7 @@ package datahandler;
 
 import model.chatcomponents.channel.Channel;
 import model.chatcomponents.message.IMessage;
+import model.chatcomponents.message.MessageType;
 import model.chatcomponents.user.IUser;
 import model.chatcomponents.user.User;
 import model.chatcomponents.channel.IChannel;
@@ -125,14 +126,19 @@ public class DataHandler {
         Collection<ChannelData> channels = new HashSet<>();
         for (int i = 0; i < channelArray.length(); i++) {
             JSONObject jsonChannel = channelArray.getJSONObject(i);
-            JSONArray temp = jsonChannel.getJSONArray("Message");
+            JSONArray temp = jsonChannel.getJSONArray("Messages");
             List<MessageData> messages = new ArrayList<>();
 
             for(int j = 0; j < temp.length(); j++) {
-                String content = (String)temp.get(0);
-                String senderName = (String)temp.get(1);
-                Integer[] timestamp = (Integer[])temp.get(2);
-                String type = (String)temp.get(3);
+                JSONArray object = temp.getJSONArray(j);
+                String content = (String)object.get(0) ;
+                String senderName = (String)object.get(1);
+                JSONArray timestampJSON = object.getJSONArray(2);
+                Integer[] timestamp = new Integer[5];
+                for(int k =0; k < timestampJSON.length(); k++) {
+                    timestamp[k] = (Integer) timestampJSON.get(k);
+                }
+                MessageType type = (MessageType) object.get(3);
                 MessageData data = new MessageData(content,senderName,type,timestamp);
                 messages.add(data);
             }
