@@ -73,7 +73,7 @@ public class DataHandlerTest {
         dataHandler.pushUser(users);
 
         Collection<IUser> catchUsers = dataHandler.getUsers();
-        //assertTrue(catchUsers.size() == 4);
+        assertTrue(catchUsers.size() > 1);
         System.out.println(catchUsers);*/
     }
 
