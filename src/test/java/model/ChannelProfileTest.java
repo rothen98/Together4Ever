@@ -1,6 +1,6 @@
 package model;
 
-import model.interaction.channel.ChannelProfile;
+import model.chatcomponents.channel.ChannelProfile;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

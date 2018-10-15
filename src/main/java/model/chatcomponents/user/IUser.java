@@ -1,4 +1,4 @@
-package model.interaction.user;
+package model.chatcomponents.user;
 
 import model.identifiers.IIdentifiable;
 import model.identifiers.IRecognizable;

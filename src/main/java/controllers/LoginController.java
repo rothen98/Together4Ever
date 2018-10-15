@@ -15,7 +15,7 @@ import model.*;
 import model.client.IClient;
 import model.server.NoSuchUserFoundException;
 import model.server.WrongPasswordException;
-import model.interaction.user.IUser;
+import model.chatcomponents.user.IUser;
 
 import java.io.IOException;
 import java.net.URL;
@@ -155,7 +155,7 @@ public class LoginController implements Initializable {
         stage.setMinHeight(450);
         stage.setMinWidth(600);
         stage.setOnHiding(event -> {
-            System.out.println("Closing stage!!!");
+
         });
 
         Parent root = null;

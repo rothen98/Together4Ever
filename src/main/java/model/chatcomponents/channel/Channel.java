@@ -1,10 +1,10 @@
-package model.interaction.channel;
+package model.chatcomponents.channel;
 
 import model.identifiers.IIdentifiable;
 import model.identifiers.IRecognizable;
-import model.interaction.message.IMessage;
-import model.interaction.message.MessageFactory;
-import model.interaction.user.IUser;
+import model.chatcomponents.message.IMessage;
+import model.chatcomponents.message.MessageFactory;
+import model.chatcomponents.user.IUser;
 
 import java.util.*;
 import java.util.List;

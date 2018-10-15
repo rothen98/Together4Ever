@@ -1,9 +1,9 @@
-package model.interaction.channel;
+package model.chatcomponents.channel;
 
 import model.identifiers.IIdentifiable;
 import model.identifiers.IRecognizable;
-import model.interaction.user.IUser;
-import model.interaction.message.IMessage;
+import model.chatcomponents.user.IUser;
+import model.chatcomponents.message.IMessage;
 
 import java.util.Collection;
 import java.util.List;
