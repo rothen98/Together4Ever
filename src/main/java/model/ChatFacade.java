@@ -1,8 +1,8 @@
 package model;
 
 
+import model.chatcomponents.message.*;
 import model.identifiers.IIdentifiable;
-import model.chatcomponents.message.TextContent;
 import model.server.*;
 import model.chatcomponents.user.IUser;
 import model.chatcomponents.user.User;
@@ -11,9 +11,6 @@ import model.chatcomponents.channel.IChannel;
 import model.client.Client;
 import model.client.IClient;
 import model.client.IClientListener;
-import model.chatcomponents.message.IMessage;
-import model.chatcomponents.message.ImageContent;
-import model.chatcomponents.message.Message;
 
 import java.util.Collection;
 
@@ -127,7 +124,8 @@ public class ChatFacade {
      * @return the newly created textMessage
      */
     public IMessage createTextMessage(String textMessage, IUser sender) {
-        return new Message(sender, new TextContent(textMessage));
+        return MessageFactory.createTextMessage(textMessage, sender);
+
     }
 
     /**
@@ -137,7 +135,8 @@ public class ChatFacade {
      * @return the newly created imageMessage
      */
     public IMessage createImageMessage(String imageMessage, IUser sender) {
-        return new Message(sender, new ImageContent(imageMessage));
+        return MessageFactory.createImageMessage(imageMessage,sender);
+        
     }
 
     public Collection<IIdentifiable> getAllChannels(){
