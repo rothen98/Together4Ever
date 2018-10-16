@@ -5,6 +5,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,11 +29,14 @@ public class ChannelView extends AnchorPane {
     private IChannel channel;
     private IUser user;
     private ChatFacade chatFacade;
+    private WackController parentcontroller;
 
     private Button loadOldMessagesButton;
 
     @FXML
     AnchorPane optionsPanel;
+    @FXML
+    AnchorPane clickBox;
     @FXML
     Button scrollDownButton;
     @FXML
@@ -51,10 +55,11 @@ public class ChannelView extends AnchorPane {
     ScrollPane messageListScrollPane;
 
 
-    public ChannelView(IUser user, ChatFacade chatFacade) {
+    public ChannelView(IUser user, ChatFacade chatFacade, WackController parentcontroller) {
 
         this.user = user;
         this.chatFacade = chatFacade;
+        this.parentcontroller = parentcontroller;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/wack_channelview.fxml"));
 
@@ -118,20 +123,20 @@ public class ChannelView extends AnchorPane {
 
         }
     }
-    
-    private void showMessage(IMessage message){
-        if(message.getType()== MessageType.TEXT){
-            addTextMessage(message,true);
-        }else if(message.getType()==MessageType.CHANNEL){
-            addChannelMessage(message,true);
+
+    private void showMessage(IMessage message) {
+        if (message.getType() == MessageType.TEXT) {
+            addTextMessage(message, true);
+        } else if (message.getType() == MessageType.CHANNEL) {
+            addChannelMessage(message, true);
         }
     }
 
     private void showOldMessage(IMessage message) {
-        if(message.getType()== MessageType.TEXT){
-            addTextMessage(message,false);
-        }else if(message.getType()==MessageType.CHANNEL){
-            addChannelMessage(message,false);
+        if (message.getType() == MessageType.TEXT) {
+            addTextMessage(message, false);
+        } else if (message.getType() == MessageType.CHANNEL) {
+            addChannelMessage(message, false);
         }
     }
 
@@ -215,6 +220,16 @@ public class ChannelView extends AnchorPane {
     }
 
     @FXML
+    private void optionsMouseTrap(Event event){
+        event.consume();
+    }
+
+    @FXML
+    private void closeOptionsView() {
+        clickBox.toBack();
+    }
+
+    @FXML
     private void scrollDownButtonPressed() {
         scrollDownButton.setVisible(false);
         slowScrollToBottom(messageListScrollPane);
@@ -222,7 +237,7 @@ public class ChannelView extends AnchorPane {
 
     @FXML
     private void optionsButtonPressed() {
-        optionsPanel.toFront();
+        clickBox.toFront();
     }
 
     @FXML
@@ -249,14 +264,13 @@ public class ChannelView extends AnchorPane {
     }
 
 
-    private void addChannelMessage(IMessage newMessage,boolean last) {
-        if(last){
+    private void addChannelMessage(IMessage newMessage, boolean last) {
+        if (last) {
             messageList.getChildren().add(new Label(newMessage.getMessage()));
-        }else{
-            messageList.getChildren().add(0,new Label(newMessage.getMessage()));
+        } else {
+            messageList.getChildren().add(0, new Label(newMessage.getMessage()));
 
         }
-
     }
 
     private void addTextMessage(IMessage iMessage, boolean last) {
@@ -265,7 +279,6 @@ public class ChannelView extends AnchorPane {
         } else {
             messageList.getChildren().add(0, new MessageView(iMessage, senderIsUser(iMessage.getSender().getDisplayName())));
         }
-
     }
 
     private boolean senderIsUser(String sender_name) {

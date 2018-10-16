@@ -278,15 +278,21 @@ public class WackController implements Initializable, IClientListener {
             channelNameText = channelName.getCharacters().toString();
             channelDescriptionText = channelDescription.getCharacters().toString();
             IChannel createdChannel = chatFacade.createChannel(channelNameText, channelDescriptionText, user);
-            openChannelView(createdChannel);
-            addChannelListItem(createdChannel);
-            updateChannelList();
+            if(createdChannel != null){
+                openChannelView(createdChannel);
+                addChannelListItem(createdChannel);
+                updateChannelList();
+                channelName.clear();
+                channelDescription.clear();
+                mainView.toFront();
+            }else{
+                System.out.println("Channel name already taken");
+            }
+
         } else {
             System.out.println("Type in a group name");
         }
-        channelName.clear();
-        channelDescription.clear();
-        mainView.toFront();
+
     }
 
     private void addChannelListItem(IChannel channel){

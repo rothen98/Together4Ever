@@ -29,6 +29,8 @@ public class LoginController implements Initializable {
     @FXML
     PasswordField loginPassword;
     @FXML
+    Button loginButton;
+    @FXML
     TextField signupUsername;
     @FXML
     PasswordField signupPassword;
@@ -54,10 +56,7 @@ public class LoginController implements Initializable {
      */
     @FXML
     public void signupUsernameKeyPressed(KeyEvent event) {
-        //TODO shorten/improve method
-        if (event.getCode() == KeyCode.ENTER) {
-            signupPassword.requestFocus();
-        } else if (event.getCode() == KeyCode.DOWN) {
+        if (event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.DOWN) {
             signupPassword.requestFocus();
         }
     }
@@ -69,14 +68,40 @@ public class LoginController implements Initializable {
      */
     @FXML
     public void signupKeyPressed(KeyEvent event) {
-        //TODO shorten/improve method
-        //For some reason can't change method name to signupPasswordKeyPressed
         if (event.getCode() == KeyCode.ENTER) {
             signupButtonPressed();
         } else if (event.getCode() == KeyCode.UP) {
             signupUsername.requestFocus();
         } else if (event.getCode() == KeyCode.DOWN) {
             signupButton.requestFocus();
+        }
+    }
+
+    /**
+     * This method lets the user use the keyboard to navigate the login fields
+     *
+     * @param event a KeyEvent to check if the user has pressed something on the keyboard
+     */
+    @FXML
+    private void loginUsernameKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.DOWN) {
+            loginPassword.requestFocus();
+        }
+    }
+
+    /**
+     * This method lets the user use the keyboard to navigate the signup fields
+     *
+     * @param event a KeyEvent to check if the user has pressed something on the keyboard
+     */
+    @FXML
+    private void loginKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            loginButtonPressed();
+        } else if (event.getCode() == KeyCode.UP) {
+            loginUsername.requestFocus();
+        } else if (event.getCode() == KeyCode.DOWN) {
+            loginButton.requestFocus();
         }
     }
 
@@ -88,15 +113,15 @@ public class LoginController implements Initializable {
     private void signupButtonPressed() {
         if (signupUsernameNotEmpty() && signupPasswordNotEmpty()) {
             IUser user = chatFacade.createUser(getSignupUsername(), getSignupPassword());
-            if (user!= null){
+            if (user != null) {
                 IClient client = chatFacade.createClient();
-                user.connectClient(client,getSignupPassword());
+                user.connectClient(client, getSignupPassword());
 
-                initClient(user,client);
+                initClient(user, client);
 
                 System.out.println("User created with name " + getSignupUsername()
                         + " and password " + getSignupPassword());
-            }else{
+            } else {
                 System.out.println("The given username is already taken");
             }
 
@@ -178,12 +203,12 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void loginButtonPressed(){
+    private void loginButtonPressed() {
         try {
-            IUser user = chatFacade.getUser(loginUsername.getText(),loginPassword.getText());
+            IUser user = chatFacade.getUser(loginUsername.getText(), loginPassword.getText());
             IClient client = chatFacade.createClient();
-            user.connectClient(client,loginPassword.getText());
-            initClient(user,client);
+            user.connectClient(client, loginPassword.getText());
+            initClient(user, client);
         } catch (NoSuchUserFoundException e) {
             e.printStackTrace();
         } catch (WrongPasswordException e) {
