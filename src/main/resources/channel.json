@@ -1,1 +1,283 @@
-[{"DisplayImage":"../../resources/default_channel_pic.jpg","ChannelName":"Alex är duktig","Description":"sdfsd","Messages":[["Spondon just joined the channel.","Spondon","2018-10-16T11:46:27.236","CHANNEL"],["Spondon just left the channel.","Spondon","2018-10-16T11:46:31.050","CHANNEL"]],"Users":[]},{"DisplayImage":"../../resources/default_channel_pic.jpg","ChannelName":"Fotboll","Description":"sfdfsfds","Messages":[["Tobias just joined the channel.","Tobias","2018-10-16T11:44:59.348","CHANNEL"],["Tobias just left the channel.","Tobias","2018-10-16T11:45:05.806","CHANNEL"],["Alex just joined the channel.","Alex","2018-10-16T11:47:49.702","CHANNEL"],["Spondon just joined the channel.","Spondon","2018-10-16T11:49:51.900","CHANNEL"],["Spondon just left the channel.","Spondon","2018-10-16T11:50:04.428","CHANNEL"],["Spondon just joined the channel.","Spondon","2018-10-16T11:50:19.722","CHANNEL"],["Spondon just left the channel.","Spondon","2018-10-16T11:50:27.317","CHANNEL"]],"Users":["Alex"]},{"DisplayImage":"../../resources/default_channel_pic.jpg","ChannelName":"Älska json","Description":"Vi som älskar json","Messages":[["Alex just joined the channel.","Alex","2018-10-16T11:47:20.505","CHANNEL"],["Alex just left the channel.","Alex","2018-10-16T11:47:23.077","CHANNEL"],["Alex just joined the channel.","Alex","2018-10-16T11:47:41.703","CHANNEL"],["Spondon just joined the channel.","Spondon","2018-10-16T11:49:42.036","CHANNEL"],["Spondon just left the channel.","Spondon","2018-10-16T11:49:44.827","CHANNEL"],["Spondon just joined the channel.","Spondon","2018-10-16T11:49:57.117","CHANNEL"],["Hej alla","Spondon","2018-10-16T11:50:13.780","TEXT"],["Spondon just left the channel.","Spondon","2018-10-16T11:53:18.448","CHANNEL"]],"Users":["Alex"]}]
+[
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Alex är duktig",
+      "Description": "sdfsd",
+      "Messages": [],
+      "Users": []
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Älska json",
+      "Description": "Vi som älskar json",
+      "Messages": [
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-16T16:38:45.253",
+            "CHANNEL"
+         ],
+         [
+            "Tobuas just joined the channel.",
+            "Tobuas",
+            "2018-10-16T16:39:33.383",
+            "CHANNEL"
+         ],
+         [
+            "Hallå",
+            "Tobuas",
+            "2018-10-16T16:39:37.135",
+            "TEXT"
+         ],
+         [
+            "Älskar in också json?",
+            "Tobuas",
+            "2018-10-16T16:39:44.031",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Tobuas",
+            "2018-10-16T16:40:43.176",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Tobuas",
+            "2018-10-16T16:40:43.416",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Tobuas",
+            "2018-10-16T16:40:43.635",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Tobuas",
+            "2018-10-16T16:40:43.848",
+            "TEXT"
+         ],
+         [
+            "asd",
+            "Tobuas",
+            "2018-10-16T16:40:44.073",
+            "TEXT"
+         ],
+         [
+            "fasdf",
+            "Tobuas",
+            "2018-10-16T16:40:44.330",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Tobuas",
+            "2018-10-16T16:40:44.623",
+            "TEXT"
+         ],
+         [
+            "Spondon är du här?",
+            "Tobuas",
+            "2018-10-16T16:41:19.089",
+            "TEXT"
+         ],
+         [
+            "adsfasdfasdfasdf",
+            "Spondon",
+            "2018-10-16T16:41:36.221",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Spondon",
+            "2018-10-16T16:41:36.501",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Spondon",
+            "2018-10-16T16:41:36.748",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Spondon",
+            "2018-10-16T16:41:36.997",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Spondon",
+            "2018-10-16T16:41:37.277",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Spondon",
+            "2018-10-16T16:41:37.557",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Spondon",
+            "2018-10-16T16:41:37.829",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Spondon",
+            "2018-10-16T16:41:38.086",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Spondon",
+            "2018-10-16T16:41:38.373",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Spondon",
+            "2018-10-16T16:41:38.653",
+            "TEXT"
+         ],
+         [
+            "Hej",
+            "Tobuas",
+            "2018-10-16T16:42:18.135",
+            "TEXT"
+         ],
+         [
+            "asdfadsfasdf",
+            "Spondon",
+            "2018-10-16T16:56:36.873",
+            "TEXT"
+         ],
+         [
+            "fda",
+            "Spondon",
+            "2018-10-16T16:56:37.105",
+            "TEXT"
+         ],
+         [
+            "dfsa",
+            "Spondon",
+            "2018-10-16T16:56:37.338",
+            "TEXT"
+         ],
+         [
+            "fdas",
+            "Spondon",
+            "2018-10-16T16:56:37.569",
+            "TEXT"
+         ],
+         [
+            "fdsa",
+            "Spondon",
+            "2018-10-16T16:56:37.794",
+            "TEXT"
+         ],
+         [
+            "fasd",
+            "Spondon",
+            "2018-10-16T16:56:38.033",
+            "TEXT"
+         ],
+         [
+            "fdsa",
+            "Spondon",
+            "2018-10-16T16:56:38.257",
+            "TEXT"
+         ]
+      ],
+      "Users": [
+         "Spondon",
+         "Tobuas"
+      ]
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Fotboll",
+      "Description": "sfdfsfds",
+      "Messages": [
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-16T16:16:04.182",
+            "CHANNEL"
+         ],
+         [
+            "Hej allihop!",
+            "Spondon",
+            "2018-10-16T16:19:01.293",
+            "TEXT"
+         ],
+         [
+            "Tobuas just joined the channel.",
+            "Tobuas",
+            "2018-10-16T16:23:08.860",
+            "CHANNEL"
+         ],
+         [
+            "Hallå!",
+            "Tobuas",
+            "2018-10-16T16:23:15.421",
+            "TEXT"
+         ],
+         [
+            "Hur mår du?",
+            "Tobuas",
+            "2018-10-16T16:29:23.723",
+            "TEXT"
+         ],
+         [
+            "Jag mår bra!",
+            "Spondon",
+            "2018-10-16T16:31:59.224",
+            "TEXT"
+         ],
+         [
+            "Ska testa de nya knapparna",
+            "Spondon",
+            "2018-10-16T16:38:18.338",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Spondon",
+            "2018-10-16T16:38:24.356",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Spondon",
+            "2018-10-16T16:38:24.868",
+            "TEXT"
+         ],
+         [
+            "adsf",
+            "Spondon",
+            "2018-10-16T16:38:25.221",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Spondon",
+            "2018-10-16T16:38:25.588",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Spondon",
+            "2018-10-16T16:38:25.916",
+            "TEXT"
+         ]
+      ],
+      "Users": [
+         "Spondon",
+         "Tobuas"
+      ]
+   }
+]
