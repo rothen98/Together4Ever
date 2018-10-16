@@ -28,12 +28,18 @@
     -fx-background-color: rgba(35, 196, 217, 0.4);
     -fx-text-fill: rgb(255, 255, 255);
     -fx-font-family: Arial;
-    -fx-stroke: black;
-
+    -fx-font-weight: bold;
 }
 
 .strong-colored-button {
     -fx-background-color: rgb(40, 194, 217);
+}
+
+.banner {
+    -fx-background-color: rgba(255, 104, 46, 0.8);
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
 }
 
 .split-pane-divider {
@@ -45,7 +51,7 @@
 }
 
 .your-message-background{
-    -fx-background-color: rgba(41, 227, 255, 0.25);
+    -fx-background-color: rgba(41, 227, 255, 0.2);
 }
 
 .channelBorder {
@@ -64,7 +70,7 @@
 }
 
 #channel-list-item:hover{
-    -fx-background-color: rgba(209, 230, 230,0.5);
+    -fx-background-color: rgba(35, 196, 217,0.25);
 }
 #channel-list-item:pressed{
     -fx-background-color: rgba(209,230, 230,0.2);
