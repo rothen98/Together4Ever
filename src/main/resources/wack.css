@@ -20,6 +20,10 @@
     -fx-font-weight: bold;
 }
 
+.borderless-button {
+    -fx-border-radius: 0;
+}
+
 .split-pane-divider {
     -fx-padding: 1;
 }

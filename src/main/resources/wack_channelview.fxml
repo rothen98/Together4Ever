@@ -43,7 +43,14 @@
             <TextField fx:id="typeField" alignment="TOP_LEFT" layoutX="151.0" layoutY="34.0" maxHeight="100.0" onKeyPressed="#sendButtonKeyPressed" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
-      <Label fx:id="channelName" alignment="CENTER" layoutX="283.0" layoutY="14.0" prefHeight="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Button fx:id="optionsButton" layoutX="527.0" layoutY="12.0" mnemonicParsing="false" onAction="#optionsButtonPressed" text="Options" AnchorPane.rightAnchor="15.0" />
+      <Label fx:id="channelName" alignment="CENTER" layoutX="283.0" layoutY="14.0" prefHeight="50.0" styleClass="text-bold" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Button fx:id="optionsButton" layoutX="527.0" layoutY="12.0" mnemonicParsing="false" onAction="#optionsButtonPressed" styleClass="borderless-button" AnchorPane.rightAnchor="15.0">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" styleClass="borderless-button">
+               <image>
+                  <Image url="@settingsbutton.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
    </children>
 </fx:root>
