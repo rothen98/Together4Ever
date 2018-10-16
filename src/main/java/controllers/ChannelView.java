@@ -102,6 +102,8 @@ public class ChannelView extends AnchorPane {
 
     public void setChannel(IChannel channel) {
         if (channel != null) {
+            typeField.setDisable(false);
+            clickBox.toBack();
             sendButton.setDisable(false);
             optionsButton.setVisible(true);
             scrollDownButton.setVisible(false);
@@ -120,6 +122,16 @@ public class ChannelView extends AnchorPane {
                     showMessage(m);
                 }
             }
+
+        }else{
+            typeField.setDisable(true);
+            clickBox.toBack();
+            sendButton.setDisable(true);
+            optionsButton.setVisible(false);
+            scrollDownButton.setVisible(false);
+            messageList.getChildren().clear();
+            channelName.setText("");
+            //parentcontroller.leftChannel(channel);
 
         }
     }
@@ -244,6 +256,7 @@ public class ChannelView extends AnchorPane {
     private void leaveButtonPressed() {
         optionsPanel.toBack();
         channel.leave(user);
+        parentcontroller.leftChannel(channel);
         sendButton.setDisable(true);
         typeField.setDisable(true);
     }
