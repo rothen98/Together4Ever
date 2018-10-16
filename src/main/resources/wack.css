@@ -25,8 +25,11 @@
 }
 
 .colored-button {
-    -fx-background-color: rgba(45, 230, 255, 0.4);
+    -fx-background-color: rgba(35, 196, 217, 0.4);
     -fx-text-fill: rgb(255, 255, 255);
+    -fx-font-family: Arial;
+    -fx-stroke: black;
+
 }
 
 .strong-colored-button {
@@ -42,7 +45,7 @@
 }
 
 .your-message-background{
-    -fx-background-color: rgb(174, 217, 217);
+    -fx-background-color: rgba(41, 227, 255, 0.25);
 }
 
 .channelBorder {
