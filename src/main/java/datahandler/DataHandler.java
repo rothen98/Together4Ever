@@ -8,6 +8,7 @@ import model.identifiers.IRecognizable;
 import model.server.ChannelData;
 import model.server.IDataHandler;
 import model.server.MessageData;
+import model.server.UserData;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -156,11 +157,11 @@ public class DataHandler implements IDataHandler {
 
     }
 
-    public Collection<IUser> getUsers() {
-        Collection<IUser> users = new HashSet<>();
+    public Collection<UserData> getUsers() {
+        Collection<UserData> users = new HashSet<>();
         for (int i = 0; i < readUserArray.length(); i++) {
             JSONObject jsonUser = readUserArray.getJSONObject(i);
-            IUser user = new User(
+            UserData user = new UserData(
                     jsonUser.get("Username").toString(),
                     jsonUser.get("Password").toString(),
                     jsonUser.get("DisplayName").toString(),

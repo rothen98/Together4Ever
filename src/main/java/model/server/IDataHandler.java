@@ -7,7 +7,7 @@ import java.util.Collection;
 
 public interface IDataHandler {
     Collection<ChannelData> getChannels();
-    Collection<IUser> getUsers();
+    Collection<UserData> getUsers();
     void pushChannels(Collection<IChannel> channels);
     void pushUsers(Collection<IUser> users);
 }
