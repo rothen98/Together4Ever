@@ -24,6 +24,11 @@
     -fx-border-radius: 0;
 }
 
+.colored-button {
+    -fx-background-color: rgb(174, 217, 217);
+    -fx-text-fill: rgb(255, 255, 255);
+}
+
 .split-pane-divider {
     -fx-padding: 1;
 }

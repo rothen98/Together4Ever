@@ -47,7 +47,14 @@
                     <items>
                       <AnchorPane maxWidth="300.0" minHeight="400.0" minWidth="200.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
-                              <Button fx:id="addGroupButton" layoutX="58.0" layoutY="357.0" mnemonicParsing="false" onAction="#addGroupButtonPressed" prefHeight="50.0" text="Add new group" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                              <Button fx:id="addGroupButton" layoutX="58.0" layoutY="357.0" mnemonicParsing="false" onAction="#addGroupButtonPressed" prefHeight="50.0" styleClass="colored-button" text="New channel" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                 <graphic>
+                                    <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@addicon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
                               <TextField fx:id="searchBar" layoutX="4.0" layoutY="321.0" onKeyPressed="#searchbarKeyPressed" promptText="Find a channel" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="37.0" AnchorPane.topAnchor="0.0" />
                               <Button fx:id="searchButton" layoutX="112.0" layoutY="321.0" maxHeight="27.0" maxWidth="38.0" mnemonicParsing="false" onAction="#searchButtonPressed" prefHeight="6.0" prefWidth="38.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <graphic>
