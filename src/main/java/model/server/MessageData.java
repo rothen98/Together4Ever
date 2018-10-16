@@ -1,5 +1,6 @@
 package model.server;
 
+import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageType;
 
 public class MessageData {
@@ -14,6 +15,13 @@ public class MessageData {
         this.content = content;
         this.type = type;
         this.timestamp = timestamp;
+    }
+
+    public MessageData(IMessage message) {
+        this.sendername = message.getSender().getDisplayName();
+        this.content = message.getMessage();
+        this.type = message.getType().toString();
+        this.timestamp = message.getTimestamp().toString();
     }
 
 

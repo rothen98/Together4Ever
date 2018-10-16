@@ -1,5 +1,11 @@
 package model.server;
 
+import model.chatcomponents.channel.IChannel;
+import model.chatcomponents.message.IMessage;
+import model.identifiers.IIdentifiable;
+import model.identifiers.IRecognizable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChannelData {
@@ -15,6 +21,20 @@ public class ChannelData {
         this.image = image;
         this.messages = messages;
         this.userNames = usernames;
+    }
+
+    public ChannelData(IChannel channel) {
+        this.channelName =channel.getDisplayName();
+        this.description =channel.getDescription();
+        this.image = channel.getDisplayImage();
+        this.messages = new ArrayList<>();
+        for(IMessage message:channel.getAllMessages()){
+            messages.add(new MessageData(message));
+        }
+        this.userNames=new ArrayList<>();
+        for(IRecognizable i:channel.getAllUsersInfo()){
+            userNames.add(i.getDisplayName());
+        }
     }
 
     public List<String> getUserNames() {

@@ -18,8 +18,9 @@ import java.util.concurrent.atomic.AtomicInteger;
  * There are methods to get the messages, the users names and also methods for joining and leaving the channel.
  */
 public class Channel implements IChannel {
-    private final Collection<IUser> users;
+    private final List<IUser> users;
     private final List<IMessage> messages;
+    private IUser channelAdministrator;
 
     private IIdentifiable channelProfile;
 
@@ -28,29 +29,67 @@ public class Channel implements IChannel {
      */
     private static final AtomicInteger idCounter = new AtomicInteger(0);
 
+    /**
+     * Constructor used when creating new channel
+     * @param name
+     * @param description
+     */
     public Channel(String name,String description) {
         channelProfile = new ChannelProfile(name,idCounter.getAndIncrement(),description);
-        this.users = new HashSet<>();
+        this.users = new ArrayList<>();
         this.messages = new ArrayList<>();
     }
 
-    public Channel(String channelName, String description, String displayImage, Collection<IUser> users, List<IMessage> messages) {
+    /**
+     * Constructor used when creating channel with information of old channel
+     * @param channelName
+     * @param description
+     * @param displayImage
+     * @param users
+     * @param messages
+     */
+    public Channel(String channelName, String description, String displayImage, List<IUser> users, List<IMessage> messages) {
         channelProfile = new ChannelProfile(channelName,idCounter.getAndIncrement(), description, displayImage);
         this.users =  users;
         this.messages = messages;
+        if(!users.isEmpty()){
+            channelAdministrator = users.get(0);
+            System.out.println("Channel administrator of " + channelName + ": " + channelAdministrator.getName());
+        }
     }
     
     /**
-     * This method will return all the users
+     * This method will return all the users info
      * @return a collection with the users
      */
     @Override
-    public Collection<IRecognizable> getAllUsers() {
-        //Will be implemented in another way when user is changed
-
-
+    public Collection<IRecognizable> getAllUsersInfo() {
         return new ArrayList<>(users);
+    }
 
+    /**
+     * Use this method to kick a member of the group.
+     * A reference to the channel admin needs to be provided to make sure the action is
+     * allowed.
+     * @param userName the name of the user that should be kicked
+     * @param admin a reference to the channel admin, to make sure you have permission
+     */
+    @Override
+    public void kick(String userName, IUser admin){
+        if(isChannelAdministrator(admin)){
+            IUser userToLeave = null;
+            for (IUser user:users){
+                if(user.getName().equals(userName)){
+                    userToLeave = user;
+                    break;
+                }
+            }
+            if(userToLeave!= null){
+                users.remove(userToLeave);
+                MessageFactory.createChannelMessage(userToLeave.getDisplayName() + " has been kicked from the group",userToLeave);
+            }
+
+        }
     }
 
     /**
@@ -103,7 +142,7 @@ public class Channel implements IChannel {
     }
 
     /**
-     * This method sends the given to all it's users.
+     * This method sends the given message to all it's users.
      * @param message The message to be broadcast to all users.
      */
     @Override
@@ -116,26 +155,41 @@ public class Channel implements IChannel {
 
     /**
      * This method will add the user to the channel
+     * If the user is the first to become a member of the channel,
+     * he/she will also become channel admin.
      * @param user the user that are to join the channel
      */
     @Override
     public void join(IUser user) {
-        if (user != null){
+        if (user != null && !users.contains(user)){
+            if(users.isEmpty()){
+                channelAdministrator = user;
+            }
             users.add(user);
-            //Send the join message to the channel
+
             sendMessage(MessageFactory.createJoinMessage(user));
         }
     }
 
     /**
-     * This method will remove the user from the channel
+     * This method will remove a user from the channel
+     * If the user is the current channel admin, the first user to join
+     * the channel will be selected as the new channel admin.
      * @param user the user that should be removed
      */
     @Override
     public void leave(IUser user) {
-        //Send the leave message to the channel
-        sendMessage(MessageFactory.createLeaveMessage(user));
         users.remove(user);
+        sendMessage(MessageFactory.createLeaveMessage(user));
+        if(channelAdministrator.equals(user)){
+            if(!users.isEmpty()){
+                channelAdministrator=users.get(0);
+            }else{
+                channelAdministrator=null;
+            }
+        }
+
+
     }
 
     /***
@@ -146,6 +200,16 @@ public class Channel implements IChannel {
     @Override
     public boolean hasUser(IUser user) {
         return users.contains(user);
+    }
+
+    /**
+     * Checks whether the given user is the channel administrator.
+     * @param user the possible channel admin
+     * @return true if the user is the channel administrator, false otherwise
+     */
+    @Override
+    public boolean isChannelAdministrator(IUser user){
+        return channelAdministrator.equals(user);
     }
 
     /**
@@ -190,9 +254,8 @@ public class Channel implements IChannel {
         return channelProfile.getDescription();
     }
 
-
     /**
-     *
+     * Returns the pah of the channel's image
      * @return the channels image, null if the channel don't have an image
      */
     @Override

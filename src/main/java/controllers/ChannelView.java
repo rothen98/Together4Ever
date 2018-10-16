@@ -1,5 +1,6 @@
 package controllers;
 
+//javafx import
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -15,12 +16,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import model.*;
-import model.chatcomponents.user.IUser;
+//model import
+import model.ChatFacade;
 import model.chatcomponents.channel.IChannel;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageType;
-
+import model.chatcomponents.user.IUser;
 import java.io.IOException;
 import java.util.List;
 
