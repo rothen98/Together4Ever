@@ -1,1 +1,88 @@
-[{"DisplayImage":"../../resources/default_channel_pic.jpg","ChannelName":"Hello!","Description":"dsdfsd","Messages":[["Tobias just joined the channel.","Tobias","2018-10-16T08:45:23.780","CHANNEL"]],"Users":["Tobias"]},{"DisplayImage":"../../resources/default_channel_pic.jpg","ChannelName":"Test","Description":"fsds","Messages":[["Tobias just joined the channel.","Tobias","2018-10-16T08:45:12.350","CHANNEL"],["sdfsd","Tobias","2018-10-16T08:45:14.121","TEXT"],["sdfsd","Tobias","2018-10-16T08:45:15.335","TEXT"],["sdfsd","Tobias","2018-10-16T08:45:16.035","TEXT"],["sdfsdjksfns","Tobias","2018-10-16T08:45:17.447","TEXT"],["sdfsd","Tobias","2018-10-16T08:45:18.126","TEXT"]],"Users":["Tobias"]}]
+[
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "C12",
+      "Description": "Cdes",
+      "Messages": [],
+      "Users": []
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "CHKFS#",
+      "Description": "test",
+      "Messages": [],
+      "Users": []
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Mynamepls",
+      "Description": "Mydescription is good",
+      "Messages": [
+         [
+            "gaaaadd just joined the channel.",
+            "gaaaadd",
+            "2018-10-16T10:56:13.605",
+            "CHANNEL"
+         ],
+         [
+            "hello",
+            "gaaaadd",
+            "2018-10-16T10:56:19.022",
+            "TEXT"
+         ],
+         [
+            "message #2",
+            "gaaaadd",
+            "2018-10-16T10:56:24.833",
+            "TEXT"
+         ]
+      ],
+      "Users": ["gaaaadd"]
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "CName5",
+      "Description": "test",
+      "Messages": [],
+      "Users": []
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "SecondChannel",
+      "Description": "This is my amazing second channel",
+      "Messages": [
+         [
+            "gaaaadd just joined the channel.",
+            "gaaaadd",
+            "2018-10-16T10:56:50.981",
+            "CHANNEL"
+         ],
+         [
+            "can i speak here",
+            "gaaaadd",
+            "2018-10-16T10:56:55.791",
+            "TEXT"
+         ],
+         [
+            "hello",
+            "gaaaadd",
+            "2018-10-16T10:56:56.957",
+            "TEXT"
+         ],
+         [
+            "fun times",
+            "gaaaadd",
+            "2018-10-16T10:57:01.525",
+            "TEXT"
+         ]
+      ],
+      "Users": ["gaaaadd"]
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "ChannelName1",
+      "Description": "ChannelDesicrgsghds",
+      "Messages": [],
+      "Users": []
+   }
+]

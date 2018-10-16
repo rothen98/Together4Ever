@@ -133,7 +133,7 @@ public class DataHandler implements IDataHandler {
     public void pushUsers(Collection<IUser> users) {
         loopUsers(users);
         try {
-            userFile.write(writeUserArray.toString());
+            userFile.write(writeUserArray.toString(3));
             userFile.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -144,10 +144,9 @@ public class DataHandler implements IDataHandler {
     }
 
     public void pushChannels(Collection<IChannel> channels) {
-        System.out.println("Saving channels");
         loopChannels(channels);
         try {
-            channelFile.write(writeChannelArray.toString());
+            channelFile.write(writeChannelArray.toString(3));
             channelFile.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -173,7 +172,6 @@ public class DataHandler implements IDataHandler {
     }
 
     public Collection<ChannelData> getChannels() {
-        System.out.println("Getting Channels...");
         Collection<ChannelData> channels = new HashSet<>();
         for (int i = 0; i < readChannelArray.length(); i++) {
             JSONObject jsonChannel = readChannelArray.getJSONObject(i);

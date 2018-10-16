@@ -53,6 +53,20 @@ public class DataHandlerTest {
 
     @Test
     public void loopChannels() {
+        Collection<IChannel> channels = new HashSet<>();
+
+        IChannel channel1 = new Channel("c1", "dtest");
+        IChannel channel2 = new Channel("c5", "tdest");
+        IChannel channel3 = new Channel("c7", "tedst");
+        IChannel channel4 = new Channel("c4", "tesdt");
+        channels.add(channel1);
+        channels.add(channel2);
+        channels.add(channel3);
+        channels.add(channel4);
+
+        dataHandler.pushChannels(channels);
+
+        assertTrue(channels.size() == 4);
     }
 
     @Test
@@ -110,7 +124,6 @@ public class DataHandlerTest {
 
         Collection<IUser> catchUsers = dataHandler.getUsers();
         assertTrue(catchUsers.size() == 4);
-        System.out.println(catchUsers);
     }
 
     @Test
@@ -132,8 +145,7 @@ public class DataHandlerTest {
 
         dataHandler.pushChannels(channels);
 
-        Collection<ChannelData> shittyShit = dataHandler.getChannels();
-        System.out.println(shittyShit.size());
-        assertTrue(shittyShit.size() == 4);
+        Collection<ChannelData> testChannel = dataHandler.getChannels();
+        assertTrue(testChannel.size() == 4);
     }
 }
