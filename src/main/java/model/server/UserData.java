@@ -1,5 +1,7 @@
 package model.server;
 
+import model.chatcomponents.user.IUser;
+
 public class UserData {
     private String username;
     private String password;
@@ -11,6 +13,13 @@ public class UserData {
         this.password = password;
         this.displayName = displayName;
         this.displayImage = displayImage;
+    }
+
+    public UserData(IUser user) {
+        this.username = user.getName();
+        this.password = user.getHashedPassword();
+        this.displayName = user.getDisplayName();
+        this.displayImage = user.getDisplayImage();
     }
 
 

@@ -8,6 +8,6 @@ import java.util.Collection;
 public interface IDataHandler {
     Collection<ChannelData> getChannels();
     Collection<UserData> getUsers();
-    void pushChannels(Collection<IChannel> channels);
-    void pushUsers(Collection<IUser> users);
+    void pushChannels(Collection<ChannelData> channels);
+    void pushUsers(Collection<UserData> users);
 }

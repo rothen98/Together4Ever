@@ -1,6 +1,26 @@
-[{
-   "DisplayImage": "../../resources/default_user_pic.jpg",
-   "Username": "gaaaadd",
-   "DisplayName": "gaaaadd",
-   "Password": "$2a$10$91CBSEvH/PXjlXVsSpS7SeMSuOmrQfxYmVncKk/Vzo8b/lYTNn65O"
-}]
+[
+   {
+      "DisplayImage": "MyimageDef",
+      "Username": "MyName",
+      "DisplayName": "JesusName",
+      "Password": "Password123"
+   },
+   {
+      "DisplayImage": "MyimageKat",
+      "Username": "Spooodon",
+      "DisplayName": "London",
+      "Password": "Password"
+   },
+   {
+      "DisplayImage": "MyimageTja",
+      "Username": "Tobbbbeeee",
+      "DisplayName": "Rot",
+      "Password": "Dont"
+   },
+   {
+      "DisplayImage": "MyimageChooo",
+      "Username": "AlexS",
+      "DisplayName": "BigSol",
+      "Password": "MyFuntime"
+   }
+]

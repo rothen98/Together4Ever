@@ -201,8 +201,16 @@ public class Server implements IServer {
 
     @Override
     public void saveData() {
-        dataHandler.pushUsers(users);
-        dataHandler.pushChannels(channels);
+        List<UserData> userDataList = new ArrayList<>();
+        for(IUser user:users){
+            userDataList.add(new UserData(user));
+        }
+        List<ChannelData> channelDataList = new ArrayList<>();
+        for(IChannel channel:channels){
+            channelDataList.add(new ChannelData(channel));
+        }
+        dataHandler.pushUsers(userDataList);
+        dataHandler.pushChannels(channelDataList);
 
     }
 
