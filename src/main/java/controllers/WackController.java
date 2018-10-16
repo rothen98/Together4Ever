@@ -380,7 +380,7 @@ public class WackController implements Initializable, IClientListener {
         }
         if(item!=null){
             selectedChannelItem = item;
-            item.setStyle("-fx-background-color: rgb(209, 230, 230);"); // Should be changed...
+            item.setStyle("-fx-background-color: rgba(41,227,255,0.15);"); // Should be changed...
         }
 
 
