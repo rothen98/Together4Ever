@@ -8,6 +8,101 @@
    },
    {
       "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Fotboll",
+      "Description": "sfdfsfds",
+      "Messages": [
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-16T16:16:04.182",
+            "CHANNEL"
+         ],
+         [
+            "Hej allihop!",
+            "Spondon",
+            "2018-10-16T16:19:01.293",
+            "TEXT"
+         ],
+         [
+            "Tobuas just joined the channel.",
+            "Tobuas",
+            "2018-10-16T16:23:08.860",
+            "CHANNEL"
+         ],
+         [
+            "Hallå!",
+            "Tobuas",
+            "2018-10-16T16:23:15.421",
+            "TEXT"
+         ],
+         [
+            "Hur mår du?",
+            "Tobuas",
+            "2018-10-16T16:29:23.723",
+            "TEXT"
+         ],
+         [
+            "Jag mår bra!",
+            "Spondon",
+            "2018-10-16T16:31:59.224",
+            "TEXT"
+         ],
+         [
+            "Ska testa de nya knapparna",
+            "Spondon",
+            "2018-10-16T16:38:18.338",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Spondon",
+            "2018-10-16T16:38:24.356",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Spondon",
+            "2018-10-16T16:38:24.868",
+            "TEXT"
+         ],
+         [
+            "adsf",
+            "Spondon",
+            "2018-10-16T16:38:25.221",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Spondon",
+            "2018-10-16T16:38:25.588",
+            "TEXT"
+         ],
+         [
+            "asdf",
+            "Spondon",
+            "2018-10-16T16:38:25.916",
+            "TEXT"
+         ],
+         [
+            "Spondon just left the channel.",
+            "Spondon",
+            "2018-10-16T20:09:33.309",
+            "CHANNEL"
+         ],
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-16T20:09:37.210",
+            "CHANNEL"
+         ]
+      ],
+      "Users": [
+         "Tobuas",
+         "Spondon"
+      ]
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
       "ChannelName": "Älska json",
       "Description": "Vi som älskar json",
       "Messages": [
@@ -189,89 +284,6 @@
             "fdsa",
             "Spondon",
             "2018-10-16T16:56:38.257",
-            "TEXT"
-         ]
-      ],
-      "Users": [
-         "Spondon",
-         "Tobuas"
-      ]
-   },
-   {
-      "DisplayImage": "../../resources/default_channel_pic.jpg",
-      "ChannelName": "Fotboll",
-      "Description": "sfdfsfds",
-      "Messages": [
-         [
-            "Spondon just joined the channel.",
-            "Spondon",
-            "2018-10-16T16:16:04.182",
-            "CHANNEL"
-         ],
-         [
-            "Hej allihop!",
-            "Spondon",
-            "2018-10-16T16:19:01.293",
-            "TEXT"
-         ],
-         [
-            "Tobuas just joined the channel.",
-            "Tobuas",
-            "2018-10-16T16:23:08.860",
-            "CHANNEL"
-         ],
-         [
-            "Hallå!",
-            "Tobuas",
-            "2018-10-16T16:23:15.421",
-            "TEXT"
-         ],
-         [
-            "Hur mår du?",
-            "Tobuas",
-            "2018-10-16T16:29:23.723",
-            "TEXT"
-         ],
-         [
-            "Jag mår bra!",
-            "Spondon",
-            "2018-10-16T16:31:59.224",
-            "TEXT"
-         ],
-         [
-            "Ska testa de nya knapparna",
-            "Spondon",
-            "2018-10-16T16:38:18.338",
-            "TEXT"
-         ],
-         [
-            "asdf",
-            "Spondon",
-            "2018-10-16T16:38:24.356",
-            "TEXT"
-         ],
-         [
-            "asdf",
-            "Spondon",
-            "2018-10-16T16:38:24.868",
-            "TEXT"
-         ],
-         [
-            "adsf",
-            "Spondon",
-            "2018-10-16T16:38:25.221",
-            "TEXT"
-         ],
-         [
-            "asdf",
-            "Spondon",
-            "2018-10-16T16:38:25.588",
-            "TEXT"
-         ],
-         [
-            "asdf",
-            "Spondon",
-            "2018-10-16T16:38:25.916",
             "TEXT"
          ]
       ],

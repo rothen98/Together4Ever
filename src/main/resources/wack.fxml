@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@wack.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@wack.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -48,8 +48,15 @@
                       <AnchorPane maxWidth="300.0" minHeight="400.0" minWidth="200.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
                               <Button fx:id="addGroupButton" layoutX="58.0" layoutY="357.0" mnemonicParsing="false" onAction="#addGroupButtonPressed" prefHeight="50.0" text="Add new group" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                              <TextField fx:id="searchBar" layoutX="4.0" layoutY="321.0" onKeyPressed="#searchbarKeyPressed" promptText="Find a channel" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="70.0" AnchorPane.topAnchor="0.0" />
-                              <Button fx:id="searchButton" layoutX="112.0" layoutY="321.0" mnemonicParsing="false" onAction="#searchButtonPressed" prefWidth="70.0" text="Search" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0" />
+                              <TextField fx:id="searchBar" layoutX="4.0" layoutY="321.0" onKeyPressed="#searchbarKeyPressed" promptText="Find a channel" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="37.0" AnchorPane.topAnchor="0.0" />
+                              <Button fx:id="searchButton" layoutX="112.0" layoutY="321.0" maxHeight="27.0" maxWidth="38.0" mnemonicParsing="false" onAction="#searchButtonPressed" prefHeight="6.0" prefWidth="38.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" smooth="false">
+                                       <image>
+                                          <Image url="@searchbutton.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
                               <StackPane layoutY="27.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
                                  <children>
                                     <ScrollPane fx:id="searchResultsScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER">
