@@ -39,7 +39,7 @@
       </AnchorPane>
     <AnchorPane maxHeight="100.0" minHeight="0.0" minWidth="0.0" prefHeight="75.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Button fx:id="sendButton" layoutX="514.0" layoutY="34.0" maxHeight="100.0" mnemonicParsing="false" onAction="#sendButtonPressed" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <Button fx:id="sendButton" layoutX="514.0" layoutY="34.0" maxHeight="100.0" mnemonicParsing="false" onAction="#sendButtonPressed" prefWidth="100.0" styleClass="strong-colored-button" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -51,7 +51,7 @@
          </children>
       </AnchorPane>
       <Label fx:id="channelName" alignment="CENTER" layoutX="283.0" layoutY="14.0" prefHeight="50.0" styleClass="text-bold" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Button fx:id="optionsButton" layoutX="527.0" layoutY="12.0" mnemonicParsing="false" onAction="#optionsButtonPressed" styleClass="borderless-button" AnchorPane.rightAnchor="15.0">
+      <Button fx:id="optionsButton" layoutX="527.0" layoutY="12.0" mnemonicParsing="false" onAction="#optionsButtonPressed" styleClass="colored-button" AnchorPane.rightAnchor="15.0">
          <graphic>
             <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" styleClass="borderless-button">
                <image>

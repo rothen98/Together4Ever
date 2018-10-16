@@ -25,8 +25,12 @@
 }
 
 .colored-button {
-    -fx-background-color: rgb(174, 217, 217);
+    -fx-background-color: rgba(45, 230, 255, 0.4);
     -fx-text-fill: rgb(255, 255, 255);
+}
+
+.strong-colored-button {
+    -fx-background-color: rgb(40, 194, 217);
 }
 
 .split-pane-divider {
