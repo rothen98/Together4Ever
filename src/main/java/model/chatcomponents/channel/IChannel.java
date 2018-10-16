@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface IChannel extends IIdentifiable {
     Collection<IRecognizable> getAllUsersInfo();
-    void kick(String userName, String adminPassword);
+    void kick(String userName, IUser admin);
 
     List<IMessage> getAllMessages();
     List<IMessage> getLastMessages(int index);

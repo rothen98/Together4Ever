@@ -69,14 +69,14 @@ public class Channel implements IChannel {
 
     /**
      * Use this method to kick a member of the group.
-     * The password of the admin needds to be provided to make sure the action is
+     * A reference to the channel admin needs to be provided to make sure the action is
      * allowed.
      * @param userName the name of the user that should be kicked
-     * @param adminPassword the password of the channel admin, to make sure you have permission
+     * @param admin a reference to the channel admin, to make sure you have permission
      */
     @Override
-    public void kick(String userName, String adminPassword){
-        if(channelAdministrator.authorizeLogIn(adminPassword)){
+    public void kick(String userName, IUser admin){
+        if(isChannelAdministrator(admin)){
             IUser userToLeave = null;
             for (IUser user:users){
                 if(user.getName().equals(userName)){

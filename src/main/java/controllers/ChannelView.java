@@ -1,5 +1,6 @@
 package controllers;
 
+//javafx import
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -14,19 +15,19 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import model.*;
+//model import
+import model.ChatFacade;
 import model.chatcomponents.channel.IChannel;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageType;
-import utility.UserContainer;
-
+import model.chatcomponents.user.IUser;
 import java.io.IOException;
 import java.util.List;
 
 public class ChannelView extends AnchorPane {
 
     private IChannel channel;
-    private UserContainer user;
+    private IUser user;
     private ChatFacade chatFacade;
 
     private Button loadOldMessagesButton;
@@ -44,7 +45,7 @@ public class ChannelView extends AnchorPane {
     @FXML
     ScrollPane messageListScrollPane;
 
-    public ChannelView(UserContainer user, ChatFacade chatFacade) {
+    public ChannelView(IUser user, ChatFacade chatFacade) {
 
         this.user = user;
         this.chatFacade = chatFacade;
@@ -144,7 +145,7 @@ public class ChannelView extends AnchorPane {
         String message;
         if (messagefieldNotEmpty()) {
             message = typeField.getCharacters().toString();
-            channel.sendMessage(chatFacade.createTextMessage(message, user.getUser()));
+            channel.sendMessage(chatFacade.createTextMessage(message, user));
             System.out.println(channel.getDisplayName() + ": " + message);
             typeField.clear();
         } else {
@@ -252,6 +253,6 @@ public class ChannelView extends AnchorPane {
     }
 
     private boolean senderIsUser(String sender_name) {
-        return sender_name.equals(user.getUser().getName());
+        return sender_name.equals(user.getName());
     }
 }

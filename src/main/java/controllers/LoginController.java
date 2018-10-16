@@ -1,6 +1,6 @@
 package controllers;
 
-import datahandler.DataHandler;
+//javafx imports
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,12 +12,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import model.*;
+//Model imports
+import model.ChatFacade;
 import model.client.IClient;
 import model.server.NoSuchUserFoundException;
 import model.server.WrongPasswordException;
 import model.chatcomponents.user.IUser;
-import utility.UserContainer;
+
 
 
 import java.io.IOException;
@@ -41,7 +42,6 @@ public class LoginController implements Initializable {
 
     public LoginController(ChatFacade chatFacade) {
         this.chatFacade = chatFacade;
-
         //We want to save all data when closing the program
     }
 
@@ -96,7 +96,7 @@ public class LoginController implements Initializable {
                 IClient client = chatFacade.createClient();
                 user.connectClient(client,getSignupPassword());
 
-                initClient(new UserContainer(user, getSignupPassword()),client);
+                initClient(user,client);
 
             }else{
                 System.out.println("The given username is already taken");
@@ -151,7 +151,7 @@ public class LoginController implements Initializable {
      * @param user The user who will be logged in and using the client
      */
     @FXML
-    private void initClient(UserContainer user, IClient client) {
+    private void initClient(IUser user, IClient client) {
         WackController controller = new WackController(chatFacade, user);
         client.addListeners(controller);
 
@@ -174,7 +174,7 @@ public class LoginController implements Initializable {
 
         Scene scene = new Scene(root, 1000, 600);
 
-        stage.setTitle("wack (logged in as " + user.getUser().getName() + ")");
+        stage.setTitle("wack (logged in as " + user.getName() + ")");
         stage.setScene(scene);
         stage.show();
     }
@@ -185,7 +185,7 @@ public class LoginController implements Initializable {
             IUser user = chatFacade.getUser(loginUsername.getText(),loginPassword.getText());
             IClient client = chatFacade.createClient();
             user.connectClient(client,loginPassword.getText());
-            initClient(new UserContainer(user,loginPassword.getText()),client);
+            initClient(user,client);
         } catch (NoSuchUserFoundException e) {
             e.printStackTrace();
         } catch (WrongPasswordException e) {
