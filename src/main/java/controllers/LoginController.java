@@ -17,7 +17,8 @@ import model.client.IClient;
 import model.server.NoSuchUserFoundException;
 import model.server.WrongPasswordException;
 import model.chatcomponents.user.IUser;
-import util.UserContainer;
+import utility.UserContainer;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -38,16 +39,10 @@ public class LoginController implements Initializable {
 
     private final ChatFacade chatFacade;
 
-    public LoginController() {
-        this.chatFacade = new ChatFacade(new DataHandler());
+    public LoginController(ChatFacade chatFacade) {
+        this.chatFacade = chatFacade;
 
         //We want to save all data when closing the program
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            @Override
-            public void run() {
-                chatFacade.saveAllData();
-            }
-        }));
     }
 
 
@@ -103,8 +98,6 @@ public class LoginController implements Initializable {
 
                 initClient(new UserContainer(user, getSignupPassword()),client);
 
-                System.out.println("User created with name " + getSignupUsername()
-                        + " and password " + getSignupPassword());
             }else{
                 System.out.println("The given username is already taken");
             }

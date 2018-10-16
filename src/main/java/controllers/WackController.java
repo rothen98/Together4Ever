@@ -15,7 +15,7 @@ import model.identifiers.IIdentifiable;
 import model.server.NoChannelFoundException;
 import model.chatcomponents.channel.IChannel;
 import model.client.IClientListener;
-import util.UserContainer;
+import utility.UserContainer;
 
 import java.net.URL;
 import java.util.*;

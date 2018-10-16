@@ -18,7 +18,7 @@ import model.*;
 import model.chatcomponents.channel.IChannel;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageType;
-import util.UserContainer;
+import utility.UserContainer;
 
 import java.io.IOException;
 import java.util.List;
