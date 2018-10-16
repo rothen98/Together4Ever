@@ -8,6 +8,7 @@ import model.identifiers.IRecognizable;
 import model.server.ChannelData;
 import model.server.IDataHandler;
 import model.server.MessageData;
+import model.server.UserData;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -74,66 +75,66 @@ public class DataHandler implements IDataHandler {
         return result;
     }
 
-    public void loopUsers(Collection<IUser> users) {
-        for (IUser u : users) {
+    private void loopUsers(Collection<UserData> users) {
+        for (UserData u : users) {
             writeUserArray.put(createNewUserJObject(u));
             }
     }
 
-    private JSONObject createNewUserJObject(IUser u) {
+    private JSONObject createNewUserJObject(UserData u) {
         JSONObject user = new JSONObject();
         initUserJObject(u,user);
         return user;
     }
-    private void initUserJObject(IUser u,JSONObject userJ){
-        userJ.put("Username", u.getName());
-        userJ.put("Password", u.getHashedPassword());
+    private void initUserJObject(UserData u,JSONObject userJ){
+        userJ.put("Username", u.getUsername());
+        userJ.put("Password", u.getPassword());
         userJ.put("DisplayName", u.getDisplayName());
         userJ.put("DisplayImage", u.getDisplayImage());
     }
 
 
-    private void loopChannels(Collection<IChannel> channels) {
-        for (IChannel c : channels) {
+    private void loopChannels(Collection<ChannelData> channels) {
+        for (ChannelData c : channels) {
                 JSONObject channel = createNewChannelJObject(c);
                 writeChannelArray.put(channel);
             }
     }
 
 
-    private JSONObject createNewChannelJObject(IChannel c) {
+    private JSONObject createNewChannelJObject(ChannelData c) {
         JSONObject channel = new JSONObject();
         initChannelJObject(c, channel);
         return channel;
     }
 
-    private void initChannelJObject(IChannel c, JSONObject channel) {
+    private void initChannelJObject(ChannelData c, JSONObject channel) {
         JSONArray message = new JSONArray();
         JSONArray user = new JSONArray();
 
-        channel.put("ChannelName", c.getDisplayName());
+        channel.put("ChannelName", c.getChannelName());
         channel.put("Description", c.getDescription());
-        channel.put("DisplayImage", c.getDisplayImage());
-        for(IMessage m: c.getAllMessages()) {
+        channel.put("DisplayImage", c.getImage());
+        for(MessageData m: c.getMessages()) {
             JSONArray singleMessage = new JSONArray();
-            singleMessage.put(m.getMessage());
-            singleMessage.put(m.getSender().getDisplayName());
-            singleMessage.put(m.getTimestamp().toString());
-            singleMessage.put(m.getType().toString());
+            singleMessage.put(m.getContent());
+            singleMessage.put(m.getSenderName());
+            singleMessage.put(m.getTimeStamp());
+            singleMessage.put(m.getType());
             message.put(singleMessage);
         }
         channel.put("Messages", message);
-        for (IRecognizable u : c.getAllUsersInfo()) {
-            user.put(u.getDisplayName());
+        for (String u : c.getUserNames()) {
+            user.put(u);
         }
         channel.put("Users", user);
     }
 
 
-    public void pushUsers(Collection<IUser> users) {
+    public void pushUsers(Collection<UserData> users) {
         loopUsers(users);
         try {
-            userFile.write(writeUserArray.toString());
+            userFile.write(writeUserArray.toString(3));
             userFile.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -143,11 +144,10 @@ public class DataHandler implements IDataHandler {
 
     }
 
-    public void pushChannels(Collection<IChannel> channels) {
-        System.out.println("Saving channels");
+    public void pushChannels(Collection<ChannelData> channels) {
         loopChannels(channels);
         try {
-            channelFile.write(writeChannelArray.toString());
+            channelFile.write(writeChannelArray.toString(3));
             channelFile.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -157,11 +157,11 @@ public class DataHandler implements IDataHandler {
 
     }
 
-    public Collection<IUser> getUsers() {
-        Collection<IUser> users = new HashSet<>();
+    public Collection<UserData> getUsers() {
+        Collection<UserData> users = new HashSet<>();
         for (int i = 0; i < readUserArray.length(); i++) {
             JSONObject jsonUser = readUserArray.getJSONObject(i);
-            IUser user = new User(
+            UserData user = new UserData(
                     jsonUser.get("Username").toString(),
                     jsonUser.get("Password").toString(),
                     jsonUser.get("DisplayName").toString(),
@@ -173,7 +173,6 @@ public class DataHandler implements IDataHandler {
     }
 
     public Collection<ChannelData> getChannels() {
-        System.out.println("Getting Channels...");
         Collection<ChannelData> channels = new HashSet<>();
         for (int i = 0; i < readChannelArray.length(); i++) {
             JSONObject jsonChannel = readChannelArray.getJSONObject(i);

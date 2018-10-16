@@ -5,6 +5,7 @@ import model.chatcomponents.channel.Channel;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageFactory;
 import model.chatcomponents.message.MessageType;
+import model.chatcomponents.user.User;
 import model.identifiers.IIdentifiable;
 import model.chatcomponents.user.IUser;
 import model.chatcomponents.channel.IChannel;
@@ -36,8 +37,14 @@ public class Server implements IServer {
     }
 
     private void initServer() {
-        for(IUser user:dataHandler.getUsers()){
-            users.add(user);
+        for(UserData user:dataHandler.getUsers()){
+
+            users.add(new User(
+                    user.getUsername(),
+                    user.getPassword(),
+                    user.getDisplayName(),
+                    user.getDisplayImage()
+            ));
         }
 
         for(ChannelData data: dataHandler.getChannels()) {
@@ -69,7 +76,13 @@ public class Server implements IServer {
                 }
             }
 
-            channels.add(new Channel(data.getChannelName(),data.getDescription(),data.getImage(),channelUsers,channelMessages));
+            channels.add(new Channel(
+                    data.getChannelName(),
+                    data.getDescription(),
+                    data.getImage(),
+                    channelUsers,
+                    channelMessages
+            ));
         }
 
         System.out.println("Channels: " );
@@ -188,8 +201,16 @@ public class Server implements IServer {
 
     @Override
     public void saveData() {
-        dataHandler.pushUsers(users);
-        dataHandler.pushChannels(channels);
+        List<UserData> userDataList = new ArrayList<>();
+        for(IUser user:users){
+            userDataList.add(new UserData(user));
+        }
+        List<ChannelData> channelDataList = new ArrayList<>();
+        for(IChannel channel:channels){
+            channelDataList.add(new ChannelData(channel));
+        }
+        dataHandler.pushUsers(userDataList);
+        dataHandler.pushChannels(channelDataList);
 
     }
 
