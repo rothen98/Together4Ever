@@ -6,6 +6,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,9 +30,14 @@ public class ChannelView extends AnchorPane {
     private IChannel channel;
     private IUser user;
     private ChatFacade chatFacade;
+    private WackController parentcontroller;
 
     private Button loadOldMessagesButton;
 
+    @FXML
+    AnchorPane optionsPanel;
+    @FXML
+    AnchorPane clickBox;
     @FXML
     Button scrollDownButton;
     @FXML
@@ -43,12 +49,18 @@ public class ChannelView extends AnchorPane {
     @FXML
     Button sendButton;
     @FXML
+    Button optionsButton;
+    @FXML
+    Button leaveButton;
+    @FXML
     ScrollPane messageListScrollPane;
 
-    public ChannelView(IUser user, ChatFacade chatFacade) {
+
+    public ChannelView(IUser user, ChatFacade chatFacade, WackController parentcontroller) {
 
         this.user = user;
         this.chatFacade = chatFacade;
+        this.parentcontroller = parentcontroller;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/wack_channelview.fxml"));
 
@@ -61,6 +73,8 @@ public class ChannelView extends AnchorPane {
             e.printStackTrace();
         }
         sendButton.setDisable(true);
+        typeField.setDisable(true);
+        optionsButton.setVisible(false);
         loadOldMessagesButton = new Button("Load older messages");
         loadOldMessagesButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -69,68 +83,76 @@ public class ChannelView extends AnchorPane {
             }
         });
         setScrollDownAutomatically(true);
-
-
-
     }
 
-    private void loadOlderMessages(int number){
+    private void loadOlderMessages(int number) {
         setScrollDownAutomatically(false);
         messageList.getChildren().remove(loadOldMessagesButton);
         int numberOfShowedMessages = messageList.getChildren().size();
-        List<IMessage> messages = channel.getLastMessages(numberOfShowedMessages+number);
-        int startValue = messages.size()-numberOfShowedMessages-1;
-        for (int i = startValue;i>=0;i--){
+        List<IMessage> messages = channel.getLastMessages(numberOfShowedMessages + number);
+        int startValue = messages.size() - numberOfShowedMessages - 1;
+        for (int i = startValue; i >= 0; i--) {
             showOldMessage(messages.get(i));
             numberOfShowedMessages++;
         }
-        if(channel.getAllMessages().size() > numberOfShowedMessages){
-            messageList.getChildren().add(0,loadOldMessagesButton);
+        if (channel.getAllMessages().size() > numberOfShowedMessages) {
+            messageList.getChildren().add(0, loadOldMessagesButton);
         }
-
-
     }
-
 
 
     public void setChannel(IChannel channel) {
         if (channel != null) {
+            typeField.setDisable(false);
+            clickBox.toBack();
             sendButton.setDisable(false);
+            optionsButton.setVisible(true);
             scrollDownButton.setVisible(false);
             setScrollDownAutomatically(true);
             this.channel = channel;
             this.channelName.setText(channel.getDisplayName());
             messageList.getChildren().clear();
 
-            if(channel.getAllMessages().size()>15){
+            if (channel.getAllMessages().size() > 15) {
                 messageList.getChildren().add(loadOldMessagesButton);
                 for (IMessage m : channel.getLastMessages(15)) {
                     showMessage(m);
                 }
-            }else{
+            } else {
                 for (IMessage m : channel.getAllMessages()) {
                     showMessage(m);
                 }
             }
 
+        }else{
+            typeField.setDisable(true);
+            clickBox.toBack();
+            sendButton.setDisable(true);
+            optionsButton.setVisible(false);
+            scrollDownButton.setVisible(false);
+            messageList.getChildren().clear();
+            channelName.setText("");
+            //parentcontroller.leftChannel(channel);
+
         }
     }
 
-    private void showMessage(IMessage message){
-        if(message.getType()== MessageType.TEXT){
-            addTextMessage(message,true);
-        }else if(message.getType()==MessageType.CHANNEL){
-            addChannelMessage(message,true);
+    private void showMessage(IMessage message) {
+        if (message.getType() == MessageType.TEXT) {
+            addTextMessage(message, true);
+        } else if (message.getType() == MessageType.CHANNEL) {
+            addChannelMessage(message, true);
         }
     }
 
     private void showOldMessage(IMessage message) {
-        if(message.getType()== MessageType.TEXT){
-            addTextMessage(message,false);
-        }else if(message.getType()==MessageType.CHANNEL){
-            addChannelMessage(message,false);
+        if (message.getType() == MessageType.TEXT) {
+            addTextMessage(message, false);
+        } else if (message.getType() == MessageType.CHANNEL) {
+            addChannelMessage(message, false);
         }
     }
+
 
     @FXML
     public void sendButtonKeyPressed(KeyEvent event) {
@@ -193,17 +215,17 @@ public class ChannelView extends AnchorPane {
     private void handleScrollpane() {
         setScrollDownAutomatically(false);
 
-        double viewportmaxy = Math.abs(messageListScrollPane.getViewportBounds().getMinY()-
+        double viewportmaxy = Math.abs(messageListScrollPane.getViewportBounds().getMinY() -
                 messageListScrollPane.getViewportBounds().getHeight());
         double vvalue = messageListScrollPane.getVvalue();
 
-        if(vvalue>1){
-            vvalue = viewportmaxy/messageList.getHeight();
+        if (vvalue > 1) {
+            vvalue = viewportmaxy / messageList.getHeight();
         }
 
-        if (vvalue < 0.5 && !(messageListScrollPane.getViewportBounds().getMaxY()== messageList.getHeight())){
+        if (vvalue < 0.5 && !(messageListScrollPane.getViewportBounds().getMaxY() == messageList.getHeight())) {
             scrollDownButton.setVisible(true);
-        }else{
+        } else {
             scrollDownButton.setVisible(false);
             setScrollDownAutomatically(true);
             //setScrollDownAutomatically(true);
@@ -211,10 +233,33 @@ public class ChannelView extends AnchorPane {
     }
 
     @FXML
-    private void scrollDownButtonPressed(){
+    private void optionsMouseTrap(Event event){
+        event.consume();
+    }
+
+    @FXML
+    private void closeOptionsView() {
+        clickBox.toBack();
+    }
+
+    @FXML
+    private void scrollDownButtonPressed() {
         scrollDownButton.setVisible(false);
         slowScrollToBottom(messageListScrollPane);
+    }
 
+    @FXML
+    private void optionsButtonPressed() {
+        clickBox.toFront();
+    }
+
+    @FXML
+    private void leaveButtonPressed() {
+        optionsPanel.toBack();
+        channel.leave(user);
+        parentcontroller.leftChannel(channel);
+        sendButton.setDisable(true);
+        typeField.setDisable(true);
     }
 
     private void slowScrollToBottom(ScrollPane scrollPane) {
@@ -225,31 +270,29 @@ public class ChannelView extends AnchorPane {
     }
 
     private void setScrollDownAutomatically(boolean doIt) {
-        if(doIt){
+        if (doIt) {
             messageListScrollPane.vvalueProperty().bind(messageList.heightProperty());
-        }else{
+        } else {
             messageListScrollPane.vvalueProperty().unbind();
         }
-
     }
 
-    private void addChannelMessage(IMessage newMessage,boolean last) {
-        if(last){
+
+    private void addChannelMessage(IMessage newMessage, boolean last) {
+        if (last) {
             messageList.getChildren().add(new Label(newMessage.getMessage()));
-        }else{
-            messageList.getChildren().add(0,new Label(newMessage.getMessage()));
+        } else {
+            messageList.getChildren().add(0, new Label(newMessage.getMessage()));
 
         }
-
     }
 
-    private void addTextMessage(IMessage iMessage,boolean last) {
-        if (last){
-            messageList.getChildren().add(new MessageView(iMessage,senderIsUser(iMessage.getSender().getDisplayName())));
-        }else{
-            messageList.getChildren().add(0,new MessageView(iMessage,senderIsUser(iMessage.getSender().getDisplayName())));
+    private void addTextMessage(IMessage iMessage, boolean last) {
+        if (last) {
+            messageList.getChildren().add(new MessageView(iMessage, senderIsUser(iMessage.getSender().getDisplayName())));
+        } else {
+            messageList.getChildren().add(0, new MessageView(iMessage, senderIsUser(iMessage.getSender().getDisplayName())));
         }
-
     }
 
     private boolean senderIsUser(String sender_name) {

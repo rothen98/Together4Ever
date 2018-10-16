@@ -30,8 +30,9 @@ public class WackController implements Initializable, IClientListener {
     private IUser user;
 
     private ChannelView channelView;
-    private Map<Integer ,ChannelListItem> channelListItems = new LinkedHashMap<>();
-    private ChannelListItem selecteChannelItem = null;
+    private Map<Integer, ChannelListItem> channelListItems = new LinkedHashMap<>();
+    private ChannelListItem selectedChannelItem = null;
+
 
     @FXML
     AnchorPane mainView;
@@ -60,17 +61,17 @@ public class WackController implements Initializable, IClientListener {
     public WackController(ChatFacade chatFacade, IUser user) {
         this.chatFacade = chatFacade;
         this.user = user;
-        channelView = new ChannelView(user,chatFacade);
+        channelView = new ChannelView(user, chatFacade, this);
     }
 
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("init called");
         channelHolder.getChildren().add(channelView);
-        AnchorPane.setBottomAnchor(channelView,0.0);
-        AnchorPane.setTopAnchor(channelView,0.0);
-        AnchorPane.setLeftAnchor(channelView,0.0);
-        AnchorPane.setRightAnchor(channelView,0.0);
+        AnchorPane.setBottomAnchor(channelView, 0.0);
+        AnchorPane.setTopAnchor(channelView, 0.0);
+        AnchorPane.setLeftAnchor(channelView, 0.0);
+        AnchorPane.setRightAnchor(channelView, 0.0);
 
         Collection<IChannel> channels = chatFacade.getUserChannels(user);
         initChannels(channels);
@@ -87,19 +88,19 @@ public class WackController implements Initializable, IClientListener {
      */
     private void initChannels(Collection<IChannel> channels) {
         IChannel latest = null;
-        for(IChannel channel: channels){
+        for (IChannel channel : channels) {
             addChannelListItem(channel);
-            if(latest == null){
+            if (latest == null) {
                 latest = channel;
-            }else{
+            } else {
                 int result = latest.getLastMessages(1).get(0).getTimestamp().
                         compareTo(channel.getLastMessages(1).get(0).getTimestamp());
-                if(result<0){
-                    latest=channel;
+                if (result < 0) {
+                    latest = channel;
                 }
             }
         }
-        if(latest!=null){
+        if (latest != null) {
             openChannelView(latest);
         }
         updateChannelList();
@@ -112,11 +113,11 @@ public class WackController implements Initializable, IClientListener {
     private void updateChannelList() {
         sortChannelItems();
         channelListItemHolder.getChildren().clear();
-        for(ChannelListItem c:channelListItems.values()) {
+        for (ChannelListItem c : channelListItems.values()) {
             channelListItemHolder.getChildren().add(c);
         }
-        for (Integer i: channelListItems.keySet()){
-            System.out.println("ID: " + i + " Minute: " +channelListItems.get(i).timeOfLastMessage().getMinute()+ " Second: " + channelListItems.get(i).timeOfLastMessage().getSecond());
+        for (Integer i : channelListItems.keySet()) {
+            System.out.println("ID: " + i + " Minute: " + channelListItems.get(i).timeOfLastMessage().getMinute() + " Second: " + channelListItems.get(i).timeOfLastMessage().getSecond());
         }
     }
 
@@ -202,11 +203,11 @@ public class WackController implements Initializable, IClientListener {
         if (searchbarNotEmpty()) {
             searchParameter = searchBar.getCharacters().toString();
             List<IIdentifiable> list = getSearchResults(searchParameter);
-            for(IIdentifiable i:list){
-                if(channelListItems.containsKey(i.getID())){
-                    searchResultsHolder.getChildren().add(new SearchItemView(i,this,true));
-                }else{
-                    searchResultsHolder.getChildren().add(new SearchItemView(i,this,false));
+            for (IIdentifiable i : list) {
+                if (channelListItems.containsKey(i.getID())) {
+                    searchResultsHolder.getChildren().add(new SearchItemView(i, this, true));
+                } else {
+                    searchResultsHolder.getChildren().add(new SearchItemView(i, this, false));
                 }
 
             }
@@ -218,8 +219,8 @@ public class WackController implements Initializable, IClientListener {
 
     private List<IIdentifiable> getSearchResults(String searchParameter) {
         List<IIdentifiable> listToReturn = new ArrayList<>();
-        for(IIdentifiable i:chatFacade.getAllChannels()) {
-            if(i.getDisplayName().toLowerCase().contains(searchParameter.toLowerCase())) {
+        for (IIdentifiable i : chatFacade.getAllChannels()) {
+            if (i.getDisplayName().toLowerCase().contains(searchParameter.toLowerCase())) {
                 listToReturn.add(i);
             }
         }
@@ -280,19 +281,25 @@ public class WackController implements Initializable, IClientListener {
             channelNameText = channelName.getCharacters().toString();
             channelDescriptionText = channelDescription.getCharacters().toString();
             IChannel createdChannel = chatFacade.createChannel(channelNameText, channelDescriptionText, user);
-            openChannelView(createdChannel);
-            addChannelListItem(createdChannel);
-            updateChannelList();
+            if (createdChannel != null) {
+                openChannelView(createdChannel);
+                addChannelListItem(createdChannel);
+                updateChannelList();
+                channelName.clear();
+                channelDescription.clear();
+                mainView.toFront();
+            } else {
+                System.out.println("Channel name already taken");
+            }
+
         } else {
             System.out.println("Type in a group name");
         }
-        channelName.clear();
-        channelDescription.clear();
-        mainView.toFront();
+
     }
 
-    private void addChannelListItem(IChannel channel){
-        ChannelListItem newItem = new ChannelListItem(channel,this);
+    private void addChannelListItem(IChannel channel) {
+        ChannelListItem newItem = new ChannelListItem(channel, this);
         channelListItems.put(channel.getID(), newItem);
         selectChannelListItem(newItem);
     }
@@ -307,8 +314,12 @@ public class WackController implements Initializable, IClientListener {
     }
 
     public void openChannelView(IChannel channel) {
-        channelView.setChannel(channel);
-        selectChannelListItem(channelListItems.get(channel.getID()));
+            channelView.setChannel(channel);
+            if(channel!=null){
+                selectChannelListItem(channelListItems.get(channel.getID()));
+            }else{
+                selectChannelListItem(null);
+            }
     }
 
     /**
@@ -317,18 +328,17 @@ public class WackController implements Initializable, IClientListener {
      * Else if the channelistitems contains the channel, the channellistitem is asked to show a notification
      * Else we assume that another client of the same user has created or joined a new channel, hence this client
      * needs to create a new channellistitem for the new channel.
-     *Lastly, the channelListItems container is updated.
+     * Lastly, the channelListItems container is updated.
+     *
      * @param iIdentifiable
      */
     @Override
     public void update(IIdentifiable iIdentifiable) {
         if (channelView.getCurrentChannelID() == iIdentifiable.getID()) {
             channelView.update();
-        }
-        else if(channelListItems.keySet().contains(iIdentifiable.getID())){
+        } else if (channelListItems.keySet().contains(iIdentifiable.getID())) {
             channelListItems.get(iIdentifiable.getID()).addNotification();
-        }
-        else{
+        } else {
             try {
                 addChannelListItem(chatFacade.getChannel(iIdentifiable.getID()));
             } catch (NoChannelFoundException e) {
@@ -354,21 +364,32 @@ public class WackController implements Initializable, IClientListener {
 
 
     private void addChatListItem(IChannel newChannel) {
-        ChannelListItem newItem =  new ChannelListItem(newChannel,this);
-        channelListItems.put(newChannel.getID(),newItem);
+        ChannelListItem newItem = new ChannelListItem(newChannel, this);
+        channelListItems.put(newChannel.getID(), newItem);
     }
 
     /**
      * This method will make the given channellistitem "Selected" by giving it a
      * color which differentiates it from the others.
+     *
      * @param item the item that should be selected
      */
-    private void selectChannelListItem(ChannelListItem item){
-        if(selecteChannelItem!= null){
-            selecteChannelItem.setStyle("");
+    private void selectChannelListItem(ChannelListItem item) {
+        if (selectedChannelItem != null) {
+            selectedChannelItem.setStyle("");
         }
-        selecteChannelItem = item;
-        item.setStyle("-fx-background-color: rgb(209, 230, 230);"); // Should be changed...
+        if(item!=null){
+            selectedChannelItem = item;
+            item.setStyle("-fx-background-color: rgb(209, 230, 230);"); // Should be changed...
+        }
+
+
+    }
+
+    public void leftChannel(IChannel channel) {
+        channelListItems.remove(channel.getID());
+        openChannelView(null);
+        updateChannelList();
 
     }
 }

@@ -35,7 +35,11 @@ public class ChatFacade {
      * @return a newly created channel to the caller from the controller
      */
     public IChannel createChannel(String channelName, String description, IUser creator) { //take in a user
-
+        for(IIdentifiable channel:server.getChannels()){
+            if(channel.getDisplayName().equals(channelName)){
+                return null;
+            }
+        }
         IChannel channel = new Channel(channelName,description);//constructor takes a user
         server.addChannel(channel);
         channel.join(creator);
