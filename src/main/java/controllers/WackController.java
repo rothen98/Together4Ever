@@ -1,5 +1,5 @@
 package controllers;
-
+//javafx imports
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,12 +10,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import model.*;
+//Model imports
+import model.ChatFacade;
+import model.chatcomponents.user.IUser;
 import model.identifiers.IIdentifiable;
 import model.server.NoChannelFoundException;
-import model.chatcomponents.user.IUser;
 import model.chatcomponents.channel.IChannel;
 import model.client.IClientListener;
+
 
 import java.net.URL;
 import java.util.*;

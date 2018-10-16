@@ -1,10 +1,12 @@
 package controllers;
 
+//javafx imports
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+//model imports
 import model.identifiers.IIdentifiable;
 
 import java.io.IOException;

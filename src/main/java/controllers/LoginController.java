@@ -1,6 +1,6 @@
 package controllers;
 
-import datahandler.DataHandler;
+//javafx imports
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,11 +12,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import model.*;
+//Model imports
+import model.ChatFacade;
 import model.client.IClient;
 import model.server.NoSuchUserFoundException;
 import model.server.WrongPasswordException;
 import model.chatcomponents.user.IUser;
+
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,6 +42,7 @@ public class LoginController implements Initializable {
 
     public LoginController(ChatFacade chatFacade) {
         this.chatFacade = chatFacade;
+        //We want to save all data when closing the program
     }
 
 
@@ -94,8 +98,6 @@ public class LoginController implements Initializable {
 
                 initClient(user,client);
 
-                System.out.println("User created with name " + getSignupUsername()
-                        + " and password " + getSignupPassword());
             }else{
                 System.out.println("The given username is already taken");
             }

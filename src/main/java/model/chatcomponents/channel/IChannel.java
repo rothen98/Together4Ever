@@ -9,7 +9,9 @@ import java.util.Collection;
 import java.util.List;
 
 public interface IChannel extends IIdentifiable {
-    Collection<IRecognizable> getAllUsers();
+    Collection<IRecognizable> getAllUsersInfo();
+    void kick(String userName, IUser admin);
+
     List<IMessage> getAllMessages();
     List<IMessage> getLastMessages(int index);
     int getNumberOfUsers();
@@ -21,7 +23,5 @@ public interface IChannel extends IIdentifiable {
     boolean hasUser(IUser user);
 
 
-
-
-
+    boolean isChannelAdministrator(IUser user);
 }

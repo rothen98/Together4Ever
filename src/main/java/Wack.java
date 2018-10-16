@@ -17,12 +17,10 @@ public class Wack extends Application{
         LoginController controller = new LoginController(chatFacade);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("wack_login.fxml"));
         loader.setController(controller);
-
         Parent root = loader.load();
         //Parent root = FXMLLoader.load(getClass().getResource("wack.fxml"));
 
         Scene scene = new Scene(root, 600, 400);
-
         stage.setTitle("wack");
         stage.setScene(scene);
         stage.getIcons().add(new Image("wack_logo.png"));
