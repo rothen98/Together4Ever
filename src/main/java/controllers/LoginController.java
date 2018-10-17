@@ -1,6 +1,7 @@
 package controllers;
 
 //javafx imports
+import datahandler.DataHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -42,9 +43,17 @@ public class LoginController implements Initializable {
 
     private final ChatFacade chatFacade;
 
-    public LoginController(ChatFacade chatFacade) {
-        this.chatFacade = chatFacade;
-        //We want to save all data when closing the program
+    public LoginController() {
+        this.chatFacade = new ChatFacade(new DataHandler());
+        //Note, the shutdown hook is not called when using the stop button in intellij.
+        //You will need to use the exit button.
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Shut down hook active");
+                chatFacade.saveAllData();
+            }
+        }));
     }
 
 
