@@ -1,10 +1,5 @@
-package datahandler;
+package services.datahandler;
 
-import model.chatcomponents.message.IMessage;
-import model.chatcomponents.user.IUser;
-import model.chatcomponents.user.User;
-import model.chatcomponents.channel.IChannel;
-import model.identifiers.IRecognizable;
 import model.server.ChannelData;
 import model.server.IDataHandler;
 import model.server.MessageData;
