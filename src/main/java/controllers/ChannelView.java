@@ -1,6 +1,7 @@
 package controllers;
 
 //javafx import
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -22,9 +23,16 @@ import model.chatcomponents.channel.IChannel;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageType;
 import model.chatcomponents.user.IUser;
+
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * @author Spondon Siddiqui
+ *
+ * The ChannelView class handles the view of a channel. It is responsible for showing the channel's
+ * messages, the field for typing, and several buttons.
+ */
 public class ChannelView extends AnchorPane {
 
     private IChannel channel;
@@ -32,20 +40,45 @@ public class ChannelView extends AnchorPane {
     private ChatFacade chatFacade;
     private IWackController parentcontroller;
 
-    private Button loadOldMessagesButton;
-
+    /**
+     * An option panel that contains settings for the channel and a button that let's the user
+     * leave a channel
+     */
     @FXML
     AnchorPane optionsPanel;
+
+    /**
+     * A box that functions as a bounding box and let's the user click outside of the options panel
+     * to close it down
+     */
     @FXML
     AnchorPane clickBox;
+
+    /**
+     * A button that shows up when the user scrolls up to the top of the messages in a channel
+     */
+    @FXML
+    private Button loadOldMessagesButton;
+
+    /** A button that shows up when the user has unread in the channel they are currently viewing
+     */
     @FXML
     Button scrollDownButton;
+
     @FXML
     Label channelName;
+    /**
+     * The main panel that contains the messages
+     */
     @FXML
     VBox messageList;
+
+    /**
+     * The field where the user types in their message
+     */
     @FXML
     TextField typeField;
+
     @FXML
     Button sendButton;
     @FXML
@@ -85,6 +118,11 @@ public class ChannelView extends AnchorPane {
         setScrollDownAutomatically(true);
     }
 
+    /**
+     * A method that loads in older messages in a channel
+     *
+     * @param number How many more messages that should be loaded
+     */
     private void loadOlderMessages(int number) {
         setScrollDownAutomatically(false);
         messageList.getChildren().remove(loadOldMessagesButton);
@@ -100,7 +138,12 @@ public class ChannelView extends AnchorPane {
         }
     }
 
-
+    /**
+     * Opens up the view for the channel that the user clicks on and showing the latest messages.
+     * It is also responsible for enabling and disabling the buttons appropriately
+     *
+     * @param channel The channel that should be opened
+     */
     public void setChannel(IChannel channel) {
         if (channel != null) {
             typeField.setDisable(false);
@@ -124,7 +167,7 @@ public class ChannelView extends AnchorPane {
                 }
             }
 
-        }else{
+        } else {
             typeField.setDisable(true);
             clickBox.toBack();
             sendButton.setDisable(true);
@@ -161,9 +204,11 @@ public class ChannelView extends AnchorPane {
         }
     }
 
+    /**
+     * Sends the message to the channel for the other members to view
+     */
     @FXML
     public void sendButtonPressed() {
-        //get data from textfield, check notEmpty and send to listview
         String message;
         if (messagefieldNotEmpty()) {
             message = typeField.getCharacters().toString();
@@ -196,6 +241,9 @@ public class ChannelView extends AnchorPane {
         }
     }
 
+    /**
+     * @return The ID of a channel
+     */
     public int getCurrentChannelID() {
         if (channel != null) {
             return channel.getID();
@@ -204,6 +252,9 @@ public class ChannelView extends AnchorPane {
         }
     }
 
+    /**
+     * Updates the view to show the latest messages in a channel
+     */
     public void update() {
         IMessage newMessage = channel.getLastMessages(1).get(0);
         handleScrollpane();
@@ -232,8 +283,13 @@ public class ChannelView extends AnchorPane {
         }
     }
 
+    /**
+     * A method that ensures that the options panel does not close down when you click on it.
+     * Without this it would close down because of the bounding box behind it; clickBox
+     * @param event
+     */
     @FXML
-    private void optionsMouseTrap(Event event){
+    private void optionsMouseTrap(Event event) {
         event.consume();
     }
 
@@ -242,17 +298,28 @@ public class ChannelView extends AnchorPane {
         clickBox.toBack();
     }
 
+    /**
+     * A method that let's the user scroll down to the bottom of the channel by clicking on
+     * the scrollDownButton
+     */
     @FXML
     private void scrollDownButtonPressed() {
         scrollDownButton.setVisible(false);
         slowScrollToBottom(messageListScrollPane);
     }
 
+    /**
+     * Opens up the options panel when the user clicks on the optionsButton
+     */
     @FXML
     private void optionsButtonPressed() {
         clickBox.toFront();
     }
 
+    /**
+     * Let's the user leave a channel. Disables the field for typing and the send button, as
+     * the user is not currently in a channel and should not be able to type or send anything
+     */
     @FXML
     private void leaveButtonPressed() {
         optionsPanel.toBack();
@@ -262,6 +329,10 @@ public class ChannelView extends AnchorPane {
         typeField.setDisable(true);
     }
 
+    /**
+     * Handles the animation for automatically scrolling down to the bottom of the channel
+     * @param scrollPane
+     */
     private void slowScrollToBottom(ScrollPane scrollPane) {
         Animation animation = new Timeline(
                 new KeyFrame(Duration.seconds(0.5),
