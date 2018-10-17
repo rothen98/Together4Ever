@@ -27,8 +27,16 @@
     -fx-font-weight: bold;
 }
 
+.colored-button:hover {
+    -fx-background-color: rgb(46, 235, 233);
+}
+
 .strong-colored-button {
     -fx-background-color: rgb(40, 194, 217);
+}
+
+.strong-colored-button:hover {
+    -fx-background-color: rgb(40, 212, 235);
 }
 
 .banner {
@@ -42,11 +50,11 @@
     -fx-padding: 1;
 }
 
-.other-message-background{
+.other-message-background {
     -fx-background-color: #FFFFFF;
 }
 
-.your-message-background{
+.your-message-background {
     -fx-background-color: rgba(41, 227, 255, 0.2);
 }
 
@@ -61,15 +69,16 @@
     -fx-border-color: rgba(0, 0, 0, 0.5);
 }
 
-#channel-list-item{
+#channel-list-item {
     -fx-background-color: rgb(255, 255, 255);
 }
 
-#channel-list-item:hover{
-    -fx-background-color: rgba(35, 196, 217,0.25);
+#channel-list-item:hover {
+    -fx-background-color: rgba(35, 196, 217, 0.25);
 }
-#channel-list-item:pressed{
-    -fx-background-color: rgba(209,230, 230,0.2);
+
+#channel-list-item:pressed {
+    -fx-background-color: rgba(209, 230, 230, 0.2);
 }
 
 #labelRight {
