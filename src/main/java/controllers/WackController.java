@@ -1,5 +1,6 @@
 package controllers;
 //javafx imports
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
@@ -89,9 +90,9 @@ public class WackController implements IWackController, Initializable, IClientLi
         searchBar.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(!newValue.isEmpty()){
+                if (!newValue.isEmpty()) {
                     closeSearchButton.setVisible(true);
-                }else{
+                } else {
                     closeSearchButton.setVisible(false);
                 }
             }
@@ -224,9 +225,9 @@ public class WackController implements IWackController, Initializable, IClientLi
         if (searchbarNotEmpty()) {
             searchParameter = searchBar.getCharacters().toString();
             List<IIdentifiable> list = getSearchResults(searchParameter);
-            if(list.isEmpty()){
+            if (list.isEmpty()) {
                 searchResultsHolder.getChildren().add(new Label("No channels found"));
-            }else{
+            } else {
                 for (IIdentifiable i : list) {
                     if (channelListItems.containsKey(i.getID())) {
                         searchResultsHolder.getChildren().add(new SearchItemView(i, this, true));
@@ -351,12 +352,12 @@ public class WackController implements IWackController, Initializable, IClientLi
     }
 
     public void openChannelView(IChannel channel) {
-            channelView.setChannel(channel);
-            if(channel!=null){
-                selectChannelListItem(channelListItems.get(channel.getID()));
-            }else{
-                selectChannelListItem(null);
-            }
+        channelView.setChannel(channel);
+        if (channel != null) {
+            selectChannelListItem(channelListItems.get(channel.getID()));
+        } else {
+            selectChannelListItem(null);
+        }
     }
 
     /**
@@ -417,7 +418,7 @@ public class WackController implements IWackController, Initializable, IClientLi
         if (selectedChannelItem != null) {
             selectedChannelItem.setStyle("");
         }
-        if(item!=null){
+        if (item != null) {
             selectedChannelItem = item;
             item.setStyle("-fx-background-color: rgba(41,227,255,0.15);"); // Should be changed...
         }

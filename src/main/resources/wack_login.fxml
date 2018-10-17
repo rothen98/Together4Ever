@@ -29,5 +29,7 @@
             <Image url="@wack_logo.png" />
          </image>
       </ImageView>
+      <Label fx:id="loginErrorText" layoutX="108.0" layoutY="216.0" styleClass="error-text" text="Error text" visible="false" />
+      <Label fx:id="signupErrorText" layoutX="382.0" layoutY="216.0" styleClass="error-text" text="Error text" visible="false" />
    </children>
 </AnchorPane>

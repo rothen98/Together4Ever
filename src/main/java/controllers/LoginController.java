@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -36,6 +37,10 @@ public class LoginController implements Initializable {
     Button loginButton;
     @FXML
     TextField signupUsername;
+    @FXML
+    Label loginErrorText;
+    @FXML
+    Label signupErrorText;
     @FXML
     PasswordField signupPassword;
     @FXML
@@ -127,6 +132,7 @@ public class LoginController implements Initializable {
         if (signupUsernameNotEmpty() && signupPasswordNotEmpty()) {
             IUser user = chatFacade.createUser(getSignupUsername(), getSignupPassword());
             if (user != null) {
+                signupErrorText.setVisible(false);
                 IClient client = chatFacade.createClient();
                 user.connectClient(client, getSignupPassword());
 
@@ -135,7 +141,8 @@ public class LoginController implements Initializable {
                 System.out.println("User created with name " + getSignupUsername()
                         + " and password " + getSignupPassword());
             } else {
-                System.out.println("The given username is already taken");
+                signupErrorText.setText("Username already taken");
+                signupErrorText.setVisible(true);
             }
 
         } else {
@@ -218,14 +225,17 @@ public class LoginController implements Initializable {
     @FXML
     private void loginButtonPressed() {
         try {
+            loginErrorText.setVisible(false);
             IUser user = chatFacade.getUser(loginUsername.getText(), loginPassword.getText());
             IClient client = chatFacade.createClient();
             user.connectClient(client, loginPassword.getText());
             initClient(user, client);
         } catch (NoSuchUserFoundException e) {
-            e.printStackTrace();
+            loginErrorText.setText("Username or password incorrect");
+            loginErrorText.setVisible(true);
         } catch (WrongPasswordException e) {
-            e.printStackTrace();
+            loginErrorText.setText("Username or password incorrect");
+            loginErrorText.setVisible(true);
         }
 
 
