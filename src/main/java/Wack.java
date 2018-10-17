@@ -20,6 +20,7 @@ public class Wack extends Application{
 
         Scene scene = new Scene(root, 600, 400);
         stage.setTitle("wack");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.getIcons().add(new Image("wack_logo.png"));
         stage.show();

@@ -1,6 +1,7 @@
 package controllers;
 
 //javafx imports
+
 import datahandler.DataHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -19,7 +21,6 @@ import model.client.IClient;
 import model.server.NoSuchUserFoundException;
 import model.server.WrongPasswordException;
 import model.chatcomponents.user.IUser;
-
 
 
 import java.io.IOException;
@@ -37,9 +38,16 @@ public class LoginController implements Initializable {
     @FXML
     TextField signupUsername;
     @FXML
+    Label loginErrorText;
+    @FXML
+    Label signupErrorText;
+    @FXML
     PasswordField signupPassword;
     @FXML
     Button signupButton;
+
+    private final int usernameMaxCharacters = 20;
+    private final int passwordMaxCharacters = 20;
 
     private final ChatFacade chatFacade;
 
@@ -54,12 +62,21 @@ public class LoginController implements Initializable {
                 chatFacade.saveAllData();
             }
         }));
+
+
+    }
+
+    private void initTextFields() {
+        TextUtility.addTextLimiter(signupUsername, usernameMaxCharacters);
+        TextUtility.addTextLimiter(loginUsername, usernameMaxCharacters);
+        TextUtility.addTextLimiter(signupPassword, passwordMaxCharacters);
+        TextUtility.addTextLimiter(loginPassword, passwordMaxCharacters);
     }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        initTextFields();
     }
 
     /**
@@ -127,6 +144,7 @@ public class LoginController implements Initializable {
         if (signupUsernameNotEmpty() && signupPasswordNotEmpty()) {
             IUser user = chatFacade.createUser(getSignupUsername(), getSignupPassword());
             if (user != null) {
+                signupErrorText.setVisible(false);
                 IClient client = chatFacade.createClient();
                 user.connectClient(client, getSignupPassword());
 
@@ -135,7 +153,8 @@ public class LoginController implements Initializable {
                 System.out.println("User created with name " + getSignupUsername()
                         + " and password " + getSignupPassword());
             } else {
-                System.out.println("The given username is already taken");
+                signupErrorText.setText("Username already taken");
+                signupErrorText.setVisible(true);
             }
 
         } else {
@@ -218,14 +237,17 @@ public class LoginController implements Initializable {
     @FXML
     private void loginButtonPressed() {
         try {
+            loginErrorText.setVisible(false);
             IUser user = chatFacade.getUser(loginUsername.getText(), loginPassword.getText());
             IClient client = chatFacade.createClient();
             user.connectClient(client, loginPassword.getText());
             initClient(user, client);
         } catch (NoSuchUserFoundException e) {
-            e.printStackTrace();
+            loginErrorText.setText("Username or password incorrect");
+            loginErrorText.setVisible(true);
         } catch (WrongPasswordException e) {
-            e.printStackTrace();
+            loginErrorText.setText("Username or password incorrect");
+            loginErrorText.setVisible(true);
         }
 
 

@@ -1,11 +1,16 @@
 package controllers;
 //javafx imports
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -56,6 +61,12 @@ public class WackController implements IWackController, Initializable, IClientLi
     TextField channelDescription;
     @FXML
     Button createGroupButton;
+    @FXML
+    Button searchButton;
+    @FXML
+    ImageView closeSearchButton;
+    @FXML
+    Label channelExistsLabel;
 
 
     public WackController(ChatFacade chatFacade, IUser user) {
@@ -75,6 +86,20 @@ public class WackController implements IWackController, Initializable, IClientLi
 
         Collection<IChannel> channels = chatFacade.getUserChannels(user);
         initChannels(channels);
+
+        searchBar.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.isEmpty()) {
+                    closeSearchButton.setVisible(true);
+                } else {
+                    closeSearchButton.setVisible(false);
+                }
+            }
+        });
+
+        TextUtility.addTextLimiter(channelName,20);
+        TextUtility.addTextLimiter(channelDescription,50);
 
 
     }
@@ -203,13 +228,16 @@ public class WackController implements IWackController, Initializable, IClientLi
         if (searchbarNotEmpty()) {
             searchParameter = searchBar.getCharacters().toString();
             List<IIdentifiable> list = getSearchResults(searchParameter);
-            for (IIdentifiable i : list) {
-                if (channelListItems.containsKey(i.getID())) {
-                    searchResultsHolder.getChildren().add(new SearchItemView(i, this, true));
-                } else {
-                    searchResultsHolder.getChildren().add(new SearchItemView(i, this, false));
+            if (list.isEmpty()) {
+                searchResultsHolder.getChildren().add(new Label("No channels found"));
+            } else {
+                for (IIdentifiable i : list) {
+                    if (channelListItems.containsKey(i.getID())) {
+                        searchResultsHolder.getChildren().add(new SearchItemView(i, this, true));
+                    } else {
+                        searchResultsHolder.getChildren().add(new SearchItemView(i, this, false));
+                    }
                 }
-
             }
             searchResultsScrollPane.toFront();
         } else {
@@ -225,6 +253,13 @@ public class WackController implements IWackController, Initializable, IClientLi
             }
         }
         return listToReturn;
+    }
+
+    @FXML
+    private void closeSearch() {
+        searchResultsScrollPane.toBack();
+        closeSearchButton.setVisible(false);
+        searchBar.clear();
     }
 
     /**
@@ -251,6 +286,7 @@ public class WackController implements IWackController, Initializable, IClientLi
     @FXML
     public void closeCreateChannelDetail() {
         mainView.toFront();
+
     }
 
     /**
@@ -282,6 +318,7 @@ public class WackController implements IWackController, Initializable, IClientLi
             channelDescriptionText = channelDescription.getCharacters().toString();
             IChannel createdChannel = chatFacade.createChannel(channelNameText, channelDescriptionText, user);
             if (createdChannel != null) {
+                channelExistsLabel.setVisible(false);
                 openChannelView(createdChannel);
                 addChannelListItem(createdChannel);
                 updateChannelList();
@@ -289,7 +326,9 @@ public class WackController implements IWackController, Initializable, IClientLi
                 channelDescription.clear();
                 mainView.toFront();
             } else {
-                System.out.println("Channel name already taken");
+                String errorMessage = channelNameText + " already exists";
+                channelExistsLabel.setText(errorMessage);
+                channelExistsLabel.setVisible(true);
             }
 
         } else {
@@ -314,12 +353,12 @@ public class WackController implements IWackController, Initializable, IClientLi
     }
 
     public void openChannelView(IChannel channel) {
-            channelView.setChannel(channel);
-            if(channel!=null){
-                selectChannelListItem(channelListItems.get(channel.getID()));
-            }else{
-                selectChannelListItem(null);
-            }
+        channelView.setChannel(channel);
+        if (channel != null) {
+            selectChannelListItem(channelListItems.get(channel.getID()));
+        } else {
+            selectChannelListItem(null);
+        }
     }
 
     /**
@@ -357,6 +396,8 @@ public class WackController implements IWackController, Initializable, IClientLi
             openChannelView(newChannel);
             channelListItemScrollPane.toFront();
             updateChannelList();
+            searchBar.clear();
+            closeSearchButton.setVisible(false);
         } catch (NoChannelFoundException e) {
             e.printStackTrace();
         }
@@ -378,7 +419,7 @@ public class WackController implements IWackController, Initializable, IClientLi
         if (selectedChannelItem != null) {
             selectedChannelItem.setStyle("");
         }
-        if(item!=null){
+        if (item != null) {
             selectedChannelItem = item;
             item.setStyle("-fx-background-color: rgba(41,227,255,0.15);"); // Should be changed...
         }
