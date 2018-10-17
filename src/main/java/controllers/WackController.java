@@ -4,6 +4,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -56,6 +57,8 @@ public class WackController implements IWackController, Initializable, IClientLi
     TextField channelDescription;
     @FXML
     Button createGroupButton;
+    @FXML
+    Label channelExistsLabel;
 
 
     public WackController(ChatFacade chatFacade, IUser user) {
@@ -251,6 +254,7 @@ public class WackController implements IWackController, Initializable, IClientLi
     @FXML
     public void closeCreateChannelDetail() {
         mainView.toFront();
+
     }
 
     /**
@@ -282,6 +286,7 @@ public class WackController implements IWackController, Initializable, IClientLi
             channelDescriptionText = channelDescription.getCharacters().toString();
             IChannel createdChannel = chatFacade.createChannel(channelNameText, channelDescriptionText, user);
             if (createdChannel != null) {
+                channelExistsLabel.setVisible(false);
                 openChannelView(createdChannel);
                 addChannelListItem(createdChannel);
                 updateChannelList();
@@ -289,7 +294,9 @@ public class WackController implements IWackController, Initializable, IClientLi
                 channelDescription.clear();
                 mainView.toFront();
             } else {
-                System.out.println("Channel name already taken");
+                String errorMessage = channelNameText + " already exists";
+                channelExistsLabel.setText(errorMessage);
+                channelExistsLabel.setVisible(true);
             }
 
         } else {

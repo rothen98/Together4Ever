@@ -5,20 +5,29 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="colored-anchor" stylesheets="@wack.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Separator layoutX="297.0" layoutY="100.0" orientation="VERTICAL" prefHeight="200.0" />
-      <Label layoutX="25.0" layoutY="164.0" styleClass="white-text" text="Username" />
-      <Label layoutX="26.0" layoutY="200.0" styleClass="white-text" text="Password" />
-      <Label layoutX="309.0" layoutY="164.0" styleClass="white-text" text="Username" />
-      <Label layoutX="309.0" layoutY="200.0" styleClass="white-text" text="Password" />
-      <TextField fx:id="loginUsername" layoutX="108.0" layoutY="159.0" onKeyPressed="#loginUsernameKeyPressed" />
-      <PasswordField fx:id="loginPassword" layoutX="108.0" layoutY="195.0" onKeyPressed="#loginKeyPressed" />
-      <Button fx:id="loginButton" layoutX="108.0" layoutY="273.0" mnemonicParsing="false" onAction="#loginButtonPressed" styleClass="orange-button" text="Login" />
-      <TextField fx:id="signupUsername" layoutX="382.0" layoutY="159.0" onKeyPressed="#signupUsernameKeyPressed" />
-      <PasswordField fx:id="signupPassword" layoutX="382.0" layoutY="195.0" onKeyPressed="#signupKeyPressed" />
-      <Button fx:id="signupButton" layoutX="382.0" layoutY="273.0" mnemonicParsing="false" onAction="#signupButtonPressed" onKeyPressed="#signupKeyPressed" styleClass="orange-button" text="Sign up" />
+      <Separator layoutX="297.0" layoutY="80.0" orientation="VERTICAL" prefHeight="200.0" />
+      <Label layoutX="25.0" layoutY="144.0" styleClass="white-text" text="Username" />
+      <Label layoutX="26.0" layoutY="180.0" styleClass="white-text" text="Password" />
+      <Label layoutX="309.0" layoutY="144.0" styleClass="white-text" text="Username" />
+      <Label layoutX="309.0" layoutY="180.0" styleClass="white-text" text="Password" />
+      <TextField fx:id="loginUsername" layoutX="108.0" layoutY="139.0" onKeyPressed="#loginUsernameKeyPressed" />
+      <PasswordField fx:id="loginPassword" layoutX="108.0" layoutY="175.0" onKeyPressed="#loginKeyPressed" />
+      <Button fx:id="loginButton" layoutX="108.0" layoutY="253.0" mnemonicParsing="false" onAction="#loginButtonPressed" styleClass="orange-button" text="Log in" />
+      <TextField fx:id="signupUsername" layoutX="382.0" layoutY="139.0" onKeyPressed="#signupUsernameKeyPressed" />
+      <PasswordField fx:id="signupPassword" layoutX="382.0" layoutY="175.0" onKeyPressed="#signupKeyPressed" />
+      <Button fx:id="signupButton" layoutX="382.0" layoutY="253.0" mnemonicParsing="false" onAction="#signupButtonPressed" onKeyPressed="#signupKeyPressed" styleClass="orange-button" text="Sign up" />
+      <Label layoutX="64.0" layoutY="77.0" prefWidth="145.0" styleClass="orange-header" text="Already using Wack?" wrapText="true" />
+      <Label contentDisplay="CENTER" layoutX="396.0" layoutY="77.0" styleClass="orange-header" text="New?" />
+      <ImageView fitHeight="75.0" fitWidth="75.0" layoutX="260.0" layoutY="311.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@wack_logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

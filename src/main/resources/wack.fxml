@@ -16,31 +16,6 @@
    <children>
       <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane id="lightbox" fx:id="newChannelView" onMouseClicked="#closeCreateChannelDetail" prefHeight="412.0" prefWidth="953.0">
-               <children>
-                  <AnchorPane id="createChannelDetail" layoutX="167.0" layoutY="50.0" onMouseClicked="#mouseTrap" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="50.0">
-                     <children>
-                        <Label id="labelRight" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="50.0" layoutY="64.0" prefWidth="95.0" text="Channel name:" textAlignment="RIGHT" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="64.0" />
-                        <TextField fx:id="channelName" layoutX="50.0" layoutY="81.0" onKeyPressed="#channelNameKeyPressed" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="81.0" />
-                        <Label id="labelRight" layoutX="50.0" layoutY="126.0" prefWidth="95.0" text="Description:" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="126.0" />
-                        <TextField fx:id="channelDescription" alignment="TOP_LEFT" layoutX="50.0" layoutY="143.0" onKeyPressed="#channelDescriptionKeyPressed" prefHeight="72.0" prefWidth="167.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="143.0" />
-                        <Button fx:id="createGroupButton" layoutX="50.0" layoutY="236.0" mnemonicParsing="false" onAction="#createGroupButtonPressed" onKeyPressed="#createGroupButtonKeyPressed" prefHeight="50.0" text="Create group" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="236.0" />
-                        <Button fx:id="closeCreateViewButton" mnemonicParsing="false" onAction="#closeCreateViewButtonPressed" prefHeight="30.0" prefWidth="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@closebutton.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </AnchorPane>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </AnchorPane>
             <AnchorPane fx:id="mainView" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <SplitPane dividerPositions="0.25" prefHeight="160.0" prefWidth="200.0" style="-fx-border-width: 1;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -84,6 +59,36 @@
                     </items>
                   </SplitPane>
                </children>
+            </AnchorPane>
+            <AnchorPane id="lightbox" fx:id="newChannelView" onMouseClicked="#closeCreateChannelDetail" prefHeight="412.0" prefWidth="953.0">
+               <children>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane id="createChannelDetail" maxHeight="300.0" maxWidth="350.0" onMouseClicked="#mouseTrap" style="-fx-background-color: #6AD2D9;" StackPane.alignment="CENTER">
+                           <children>
+                              <Label id="labelRight" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="50.0" layoutY="54.0" prefWidth="95.0" styleClass="white-text" text="Channel name:" textAlignment="RIGHT" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="54.0" />
+                              <TextField fx:id="channelName" layoutX="50.0" layoutY="71.0" onKeyPressed="#channelNameKeyPressed" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="71.0" />
+                              <Label id="labelRight" layoutX="50.0" layoutY="116.0" prefWidth="95.0" styleClass="white-text" text="Description:" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="116.0" />
+                              <TextField fx:id="channelDescription" alignment="TOP_LEFT" layoutX="50.0" layoutY="133.0" onKeyPressed="#channelDescriptionKeyPressed" prefHeight="72.0" prefWidth="167.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="133.0" />
+                              <Button fx:id="createGroupButton" layoutX="50.0" layoutY="226.0" mnemonicParsing="false" onAction="#createGroupButtonPressed" onKeyPressed="#createGroupButtonKeyPressed" prefHeight="50.0" styleClass="orange-button" text="Create channel" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="226.0" />
+                              <Button fx:id="closeCreateViewButton" mnemonicParsing="false" onAction="#closeCreateViewButtonPressed" prefHeight="25.0" prefWidth="0.0" styleClass="orange-button" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@closebutton.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Label fx:id="channelExistsLabel" layoutX="50.0" layoutY="25.0" styleClass="error-text" text="Channel name already exists" visible="false" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </StackPane>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </AnchorPane>
          </children>
       </StackPane>

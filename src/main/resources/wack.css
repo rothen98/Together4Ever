@@ -49,11 +49,22 @@
     -fx-font-weight: bold;
 }
 
+.error-text {
+    -fx-text-fill: rgb(255,0,0);
+    -fx-font-size: 11;
+}
+
 .orange-button {
     -fx-background-color: rgba(255, 104, 46, 0.8);
     -fx-text-fill: rgb(255, 255, 255);
     -fx-font-family: Arial;
     -fx-font-weight: bold;
+}
+
+.orange-header {
+    -fx-text-fill: rgb(255, 255, 255);
+    -fx-font-family: Arial;
+    -fx-font-size: 16;
 }
 
 .orange-button:hover {
