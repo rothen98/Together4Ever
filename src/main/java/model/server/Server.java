@@ -36,53 +36,8 @@ public class Server implements IServer {
     }
 
     private void initServer() {
-        for(UserData user:dataHandler.getUsers()){
-
-            users.add(new User(
-                    user.getUsername(),
-                    user.getPassword(),
-                    user.getDisplayName(),
-                    user.getDisplayImage()
-            ));
-        }
-
-        for(ChannelData data: dataHandler.getChannels()) {
-            List<IUser> channelUsers = new ArrayList<>();
-            for (String username : data.getUserNames()) {
-                for (IUser user : users) {
-                    if (username.equals(user.getName())) {
-                        channelUsers.add(user);
-                        break;
-                    }
-                }
-            }
-            List<IMessage> channelMessages = new ArrayList<>();
-            for(MessageData mdata:data.getMessages()) {
-                for (IUser user : users) {
-                    if (mdata.getSenderName().equals(user.getName())) {
-                        MessageType type;
-                        if(mdata.getType().equals("CHANNEL")){
-                            type = MessageType.CHANNEL;
-                        }else if(mdata.getType().equals("IMAGE")){
-                            type = MessageType.IMAGE;
-                        }else{
-                            type = MessageType.TEXT;
-                        }
-                        channelMessages.add(MessageFactory.createMessage(user,mdata.getContent(),
-                                type, LocalDateTime.parse(mdata.getTimeStamp())));
-                        break;
-                    }
-                }
-            }
-
-            channels.add(new Channel(
-                    data.getChannelName(),
-                    data.getDescription(),
-                    data.getImage(),
-                    channelUsers,
-                    channelMessages
-            ));
-        }
+        initUsers();
+        initChannels();
 
         System.out.println("Channels: " );
         for(IChannel channel: channels){
@@ -94,7 +49,61 @@ public class Server implements IServer {
         }
         }
 
+    private void initChannels() {
+        for(ChannelData data: dataHandler.getChannels()) {
+            List<IUser> channelUsers = new ArrayList<>();
+            for (String username : data.getUserNames()) {
+                for (IUser user : users) {
+                    if (username.equals(user.getName())) {
+                        channelUsers.add(user);
+                        break;
+                    }
+                }
+            }
+            List<IMessage> channelMessages = initMessages(data.getMessages());
+            channels.add(new Channel(
+                    data.getChannelName(),
+                    data.getDescription(),
+                    data.getImage(),
+                    channelUsers,
+                    channelMessages
+            ));
+        }
+    }
 
+    private List<IMessage> initMessages(List<MessageData> messageData){
+        List<IMessage> channelMessages = new ArrayList<>();
+        for(MessageData mdata:messageData) {
+            for (IUser user : users) {
+                if (mdata.getSenderName().equals(user.getName())) {
+                    MessageType type;
+                    if(mdata.getType().equals("CHANNEL")){
+                        type = MessageType.CHANNEL;
+                    }else if(mdata.getType().equals("IMAGE")){
+                        type = MessageType.IMAGE;
+                    }else{
+                        type = MessageType.TEXT;
+                    }
+                    channelMessages.add(MessageFactory.createMessage(user,mdata.getContent(),
+                            type, LocalDateTime.parse(mdata.getTimeStamp())));
+                    break;
+                }
+            }
+        }
+        return channelMessages;
+    }
+
+    private void initUsers() {
+        for(UserData user:dataHandler.getUsers()){
+
+            users.add(new User(
+                    user.getUsername(),
+                    user.getPassword(),
+                    user.getDisplayName(),
+                    user.getDisplayImage()
+            ));
+        }
+    }
 
 
     /**
