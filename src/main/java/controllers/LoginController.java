@@ -1,6 +1,7 @@
 package controllers;
 
 //javafx imports
+
 import datahandler.DataHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +21,6 @@ import model.client.IClient;
 import model.server.NoSuchUserFoundException;
 import model.server.WrongPasswordException;
 import model.chatcomponents.user.IUser;
-
 
 
 import java.io.IOException;
@@ -46,6 +46,9 @@ public class LoginController implements Initializable {
     @FXML
     Button signupButton;
 
+    private final int usernameMaxCharacters = 20;
+    private final int passwordMaxCharacters = 20;
+
     private final ChatFacade chatFacade;
 
     public LoginController() {
@@ -59,12 +62,21 @@ public class LoginController implements Initializable {
                 chatFacade.saveAllData();
             }
         }));
+
+
+    }
+
+    private void initTextFields() {
+        TextUtility.addTextLimiter(signupUsername, usernameMaxCharacters);
+        TextUtility.addTextLimiter(loginUsername, usernameMaxCharacters);
+        TextUtility.addTextLimiter(signupPassword, passwordMaxCharacters);
+        TextUtility.addTextLimiter(loginPassword, passwordMaxCharacters);
     }
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        initTextFields();
     }
 
     /**

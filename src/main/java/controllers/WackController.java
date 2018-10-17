@@ -98,6 +98,9 @@ public class WackController implements IWackController, Initializable, IClientLi
             }
         });
 
+        TextUtility.addTextLimiter(channelName,20);
+        TextUtility.addTextLimiter(channelDescription,50);
+
 
     }
 
@@ -234,10 +237,8 @@ public class WackController implements IWackController, Initializable, IClientLi
                     } else {
                         searchResultsHolder.getChildren().add(new SearchItemView(i, this, false));
                     }
-
                 }
             }
-
             searchResultsScrollPane.toFront();
         } else {
             System.out.println("Type what you want to search for");
