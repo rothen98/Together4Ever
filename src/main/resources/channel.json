@@ -1,0 +1,119 @@
+[
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Basket",
+      "Description": "fsfssdfds",
+      "Messages": [
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-17T11:54:15.979",
+            "CHANNEL"
+         ],
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-17T12:25:41.527",
+            "CHANNEL"
+         ],
+         [
+            "Spondon just left the channel.",
+            "Spondon",
+            "2018-10-17T12:27:19.836",
+            "CHANNEL"
+         ],
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-17T12:27:30.410",
+            "CHANNEL"
+         ]
+      ],
+      "Users": [
+         "Tobias",
+         "Spondon"
+      ]
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Fotboll",
+      "Description": "Älska fotboll!",
+      "Messages": [
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-17T10:48:14.080",
+            "CHANNEL"
+         ],
+         [
+            "Spondon just left the channel.",
+            "Spondon",
+            "2018-10-17T10:51:48.938",
+            "CHANNEL"
+         ],
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-17T10:51:57.050",
+            "CHANNEL"
+         ],
+         [
+            "fffffffffffffffffffffffffffffffffffffffffffffffffffmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",
+            "Spondon",
+            "2018-10-17T11:20:05.746",
+            "TEXT"
+         ],
+         [
+            "Spondon just left the channel.",
+            "Spondon",
+            "2018-10-17T11:57:59.988",
+            "CHANNEL"
+         ],
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-17T12:24:31.528",
+            "CHANNEL"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-17T12:30:26.986",
+            "CHANNEL"
+         ]
+      ],
+      "Users": [
+         "Spondon",
+         "Tobias"
+      ]
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Innebandy",
+      "Description": "dsfs",
+      "Messages": [
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-17T11:52:42.044",
+            "CHANNEL"
+         ],
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-17T11:58:15.394",
+            "CHANNEL"
+         ],
+         [
+            "Hej",
+            "Spondon",
+            "2018-10-17T11:58:17.324",
+            "TEXT"
+         ]
+      ],
+      "Users": [
+         "Tobias",
+         "Spondon"
+      ]
+   }
+]
