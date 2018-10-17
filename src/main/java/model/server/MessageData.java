@@ -1,8 +1,13 @@
 package model.server;
 
 import model.chatcomponents.message.IMessage;
-import model.chatcomponents.message.MessageType;
 
+/**
+ * This class contains all the message data that is stored at the end of a session and fetched at the beginning.
+ * The data is stored in the channel file as the messages exist in a channel
+ * The class is a middle ground for server to use
+ * @author Alex Solberg
+ */
 public class MessageData {
     private String sendername;
     private String content;
