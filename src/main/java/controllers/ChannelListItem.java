@@ -5,11 +5,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
-//model import
 import model.chatcomponents.channel.IChannel;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+
+/**
+ * @author Spondon Siddiqui
+ *
+ * The ChannelListItem class functions as a controller for the channels that appear in the list beneath
+ * the searchbar. It contains methods for adding and removing the circular notification a user receives
+ * when they have unread messages and is responsible for setting the correct name and description of
+ * a channel.
+ */
 
 public class ChannelListItem extends AnchorPane {
 
@@ -20,6 +28,11 @@ public class ChannelListItem extends AnchorPane {
     private Label channelName;
     @FXML
     private Label channelDescription;
+
+    /**
+     * A red circle that shows up whenever the user has unread messages in a channel
+     * they are not currently viewing
+     */
     @FXML
     private Circle notificationCircle;
 
@@ -44,18 +57,28 @@ public class ChannelListItem extends AnchorPane {
 
     }
 
+    /**
+     * Opens up the view for the channel the user clicks on. Also removes the notification for
+     * said channel
+     */
     @FXML
     public void onClick() {
         removeNotification();
         parentController.openChannelView(channel);
     }
 
-    private void removeNotification() {
-        notificationCircle.setVisible(false);
-    }
-
+    /**
+     * Shows the red circle for the user
+     */
     public void addNotification() {
         notificationCircle.setVisible(true);
+    }
+
+    /**
+     * Hides the red circle from the user
+     */
+    private void removeNotification() {
+        notificationCircle.setVisible(false);
     }
 
     public LocalDateTime timeOfLastMessage() {
