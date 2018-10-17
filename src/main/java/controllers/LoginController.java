@@ -27,6 +27,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * @author Spondon Siddiqui
+ *
+ * The LoginController class handles the view for logging in and signing up
+ */
 public class LoginController implements Initializable {
 
     @FXML
@@ -38,15 +43,30 @@ public class LoginController implements Initializable {
     @FXML
     TextField signupUsername;
     @FXML
-    Label loginErrorText;
-    @FXML
-    Label signupErrorText;
-    @FXML
     PasswordField signupPassword;
     @FXML
     Button signupButton;
 
+    /**
+     * An error message that shows up when the user has inputted an incorrect username or password
+     */
+    @FXML
+    Label loginErrorText;
+
+    /**
+     * An error message that shows up when the user's desired username already exists
+     */
+    @FXML
+    Label signupErrorText;
+
+    /**
+     * The maximum number of characters the user is allowed to type into the username fields
+     */
     private final int usernameMaxCharacters = 20;
+
+    /**
+     * The maximum number of characters the user is allowed to type into the password fields
+     */
     private final int passwordMaxCharacters = 20;
 
     private final ChatFacade chatFacade;
@@ -66,13 +86,15 @@ public class LoginController implements Initializable {
 
     }
 
+    /**
+     * Adds limits to how many characters the user can type into the fields
+     */
     private void initTextFields() {
         TextUtility.addTextLimiter(signupUsername, usernameMaxCharacters);
         TextUtility.addTextLimiter(loginUsername, usernameMaxCharacters);
         TextUtility.addTextLimiter(signupPassword, passwordMaxCharacters);
         TextUtility.addTextLimiter(loginPassword, passwordMaxCharacters);
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -136,8 +158,8 @@ public class LoginController implements Initializable {
     }
 
     /**
-     * This method makes sure that the fields for typing in username and password aren't empty,
-     * and then creates a user with the given name and password.
+     * This method makes sure that the fields for typing in username and password aren't empty
+     * and that the username isn't already taken, and then creates a user with the given name and password.
      */
     @FXML
     private void signupButtonPressed() {
@@ -234,6 +256,10 @@ public class LoginController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Let's the user log in with an already existing account. Makes sure that the user hasn't
+     * typed in an incorrect username or password. Displays error text if they have
+     */
     @FXML
     private void loginButtonPressed() {
         try {
