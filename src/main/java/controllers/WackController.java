@@ -319,8 +319,8 @@ public class WackController implements IWackController, Initializable, IClientLi
             IChannel createdChannel = chatFacade.createChannel(channelNameText, channelDescriptionText, user);
             if (createdChannel != null) {
                 channelExistsLabel.setVisible(false);
-                openChannelView(createdChannel);
                 addChannelListItem(createdChannel);
+                openChannelView(createdChannel);
                 updateChannelList();
                 channelName.clear();
                 channelDescription.clear();
@@ -340,7 +340,6 @@ public class WackController implements IWackController, Initializable, IClientLi
     private void addChannelListItem(IChannel channel) {
         ChannelListItem newItem = new ChannelListItem(channel, this);
         channelListItems.put(channel.getID(), newItem);
-        selectChannelListItem(newItem);
     }
 
     /**
@@ -392,7 +391,7 @@ public class WackController implements IWackController, Initializable, IClientLi
         try {
             IChannel newChannel = chatFacade.getChannel(id);
             newChannel.join(user);
-            addChatListItem(newChannel);
+            addChannelListItem(newChannel);
             openChannelView(newChannel);
             channelListItemScrollPane.toFront();
             updateChannelList();
@@ -404,10 +403,6 @@ public class WackController implements IWackController, Initializable, IClientLi
     }
 
 
-    private void addChatListItem(IChannel newChannel) {
-        ChannelListItem newItem = new ChannelListItem(newChannel, this);
-        channelListItems.put(newChannel.getID(), newItem);
-    }
 
     /**
      * This method will make the given channellistitem "Selected" by giving it a

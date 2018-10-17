@@ -1,0 +1,120 @@
+[
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Star Wars ",
+      "Description": "Vi som gillar star wars",
+      "Messages": [
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-17T16:38:42.352",
+            "CHANNEL"
+         ],
+         [
+            "Victoria just joined the channel.",
+            "Victoria",
+            "2018-10-17T16:47:19.739",
+            "CHANNEL"
+         ],
+         [
+            "Nu är jag med!",
+            "Victoria",
+            "2018-10-17T16:47:25.216",
+            "TEXT"
+         ]
+      ],
+      "Users": [
+         "Tobias",
+         "Victoria"
+      ]
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Potatis",
+      "Description": "Vi som gillar potatis i alla dess former",
+      "Messages": [[
+         "Tobias just joined the channel.",
+         "Tobias",
+         "2018-10-17T16:43:03.167",
+         "CHANNEL"
+      ]],
+      "Users": ["Tobias"]
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Trumpet",
+      "Description": "Vi som spelar/spelat trumpet",
+      "Messages": [
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-17T16:45:05.266",
+            "CHANNEL"
+         ],
+         [
+            "Hej!",
+            "Tobias",
+            "2018-10-17T16:45:08.840",
+            "TEXT"
+         ],
+         [
+            "Victoria just joined the channel.",
+            "Victoria",
+            "2018-10-17T16:45:55.937",
+            "CHANNEL"
+         ],
+         [
+            "Hej!",
+            "Victoria",
+            "2018-10-17T16:46:11.439",
+            "TEXT"
+         ],
+         [
+            "Hur mår alla?",
+            "Tobias",
+            "2018-10-17T16:46:52.898",
+            "TEXT"
+         ],
+         [
+            "Hur mår ni?",
+            "Victoria",
+            "2018-10-17T16:46:57.829",
+            "TEXT"
+         ],
+         [
+            "Joina Star Wars",
+            "Tobias",
+            "2018-10-17T16:47:12.226",
+            "TEXT"
+         ]
+      ],
+      "Users": [
+         "Tobias",
+         "Victoria"
+      ]
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Fotboll",
+      "Description": "123",
+      "Messages": [[
+         "Tobias just joined the channel.",
+         "Tobias",
+         "2018-10-17T16:38:08.937",
+         "CHANNEL"
+      ]],
+      "Users": ["Tobias"]
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Innebandy",
+      "Description": "vi älskar innebandy",
+      "Messages": [[
+         "Tobias just joined the channel.",
+         "Tobias",
+         "2018-10-17T16:38:21.851",
+         "CHANNEL"
+      ]],
+      "Users": ["Tobias"]
+   }
+]
