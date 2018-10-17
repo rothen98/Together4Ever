@@ -89,6 +89,13 @@ public class ChannelView extends AnchorPane {
     ScrollPane messageListScrollPane;
 
 
+    /**
+     * Constructor for opening up new ChannelViews. Makes sure the correct buttons and fields
+     * are enabled
+     * @param user
+     * @param chatFacade
+     * @param parentcontroller
+     */
     public ChannelView(IUser user, ChatFacade chatFacade, IWackController parentcontroller) {
 
         this.user = user;

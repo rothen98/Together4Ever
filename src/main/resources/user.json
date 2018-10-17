@@ -1,17 +1,5 @@
 [
    {
-      "DisplayImage": "MyimageChooo",
-      "Username": "AlexS",
-      "DisplayName": "BigSol",
-      "Password": "MyFuntime"
-   },
-   {
-      "DisplayImage": "MyimageTja",
-      "Username": "Tobbbbeeee",
-      "DisplayName": "Rot",
-      "Password": "Dont"
-   },
-   {
       "DisplayImage": "../../resources/default_user_pic.jpg",
       "Username": "Spondon",
       "DisplayName": "Spondon",
@@ -24,10 +12,22 @@
       "Password": "Password123"
    },
    {
+      "DisplayImage": "MyimageTja",
+      "Username": "Tobbbbeeee",
+      "DisplayName": "Rot",
+      "Password": "Dont"
+   },
+   {
       "DisplayImage": "../../resources/default_user_pic.jpg",
       "Username": "Alex",
       "DisplayName": "Alex",
       "Password": "$2a$10$LfmkLaWcMpWx5qMYsPn7sOkFmLs48wZ0DjJ.0xxRUgL6UAhFJOFKm"
+   },
+   {
+      "DisplayImage": "MyimageChooo",
+      "Username": "AlexS",
+      "DisplayName": "BigSol",
+      "Password": "MyFuntime"
    },
    {
       "DisplayImage": "MyimageKat",

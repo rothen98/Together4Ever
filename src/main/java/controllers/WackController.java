@@ -29,6 +29,13 @@ import java.util.*;
 
 import static java.util.stream.Collectors.toMap;
 
+/**
+ * @author Spondon Siddiqui
+ *
+ * The WackController class is the controller for the main view. It handles the user's
+ * channels and let's them search for and create new channels. It also holds a ChannelView,
+ * which is the main view for viewing and sending messages in a channel
+ */
 public class WackController implements IWackController, Initializable, IClientListener {
 
     private ChatFacade chatFacade;
@@ -38,33 +45,66 @@ public class WackController implements IWackController, Initializable, IClientLi
     private Map<Integer, ChannelListItem> channelListItems = new LinkedHashMap<>();
     private ChannelListItem selectedChannelItem = null;
 
-
+    /**
+     * The main window of the application
+     */
     @FXML
     AnchorPane mainView;
+
     @FXML
     AnchorPane newChannelView;
+
+    /**
+     * The view where the channels messages show up. Contains a ChannelView
+     */
     @FXML
     AnchorPane channelHolder;
+
+    /**
+     * Contains a list of the users channels
+     */
     @FXML
     VBox channelListItemHolder;
+
+    /**
+     * Replaces the view of the users channels with a view of search results when the user
+     * searches for a new channel
+     */
     @FXML
     VBox searchResultsHolder;
+
     @FXML
     ScrollPane channelListItemScrollPane;
     @FXML
     ScrollPane searchResultsScrollPane;
+
+    /**
+     * A searchbar that let's the user search after new channels to join
+     */
     @FXML
     TextField searchBar;
     @FXML
     TextField channelName;
     @FXML
     TextField channelDescription;
+
+    /**
+     * A button for creating new channels
+     */
     @FXML
     Button createGroupButton;
     @FXML
     Button searchButton;
+
+    /**
+     * A button for clearing the searchbar quickly
+     */
     @FXML
     ImageView closeSearchButton;
+
+    /**
+     * An error message that shows up if the user tries to create a channel with an existing name
+     */
     @FXML
     Label channelExistsLabel;
 
@@ -131,7 +171,7 @@ public class WackController implements IWackController, Initializable, IClientLi
         updateChannelList();
     }
 
-    /*
+    /**
      * This method sorts the items in the channelListItems map and updates
      * the channelListItemHolder
      */
@@ -142,7 +182,8 @@ public class WackController implements IWackController, Initializable, IClientLi
             channelListItemHolder.getChildren().add(c);
         }
         for (Integer i : channelListItems.keySet()) {
-            System.out.println("ID: " + i + " Minute: " + channelListItems.get(i).timeOfLastMessage().getMinute() + " Second: " + channelListItems.get(i).timeOfLastMessage().getSecond());
+            System.out.println("ID: " + i + " Minute: " + channelListItems.get(i).timeOfLastMessage().getMinute() +
+                    " Second: " + channelListItems.get(i).timeOfLastMessage().getSecond());
         }
     }
 
@@ -220,6 +261,9 @@ public class WackController implements IWackController, Initializable, IClientLi
         }
     }
 
+    /**
+     * A method that brings up search results when the user has searched for a channel
+     */
     @FXML
     public void searchButtonPressed() {
         String searchParameter;
@@ -245,6 +289,10 @@ public class WackController implements IWackController, Initializable, IClientLi
         }
     }
 
+    /**
+     * @param searchParameter The channel that the user has searched for
+     * @return Returns a list with the search results
+     */
     private List<IIdentifiable> getSearchResults(String searchParameter) {
         List<IIdentifiable> listToReturn = new ArrayList<>();
         for (IIdentifiable i : chatFacade.getAllChannels()) {
@@ -255,6 +303,9 @@ public class WackController implements IWackController, Initializable, IClientLi
         return listToReturn;
     }
 
+    /**
+     * A method that clears the searchbar
+     */
     @FXML
     private void closeSearch() {
         searchResultsScrollPane.toBack();
@@ -308,9 +359,14 @@ public class WackController implements IWackController, Initializable, IClientLi
         newChannelView.toFront();
     }
 
+    /**
+     * Brings up the view for creating new channels when the user clicks on the new channel button.
+     * This view let's the user input a name and a description for their desired channel and finish
+     * by clicking on the create channel button. A channel is then created with the given
+     * name and description. The user cannot create a channel with an existing name.
+     */
     @FXML
     public void createGroupButtonPressed() {
-        //TODO unfinished
         String channelNameText;
         String channelDescriptionText;
         if (channelnameNotEmpty()) {
@@ -337,6 +393,10 @@ public class WackController implements IWackController, Initializable, IClientLi
 
     }
 
+    /**
+     * Adds a channel to the user's list of channels
+     * @param channel
+     */
     private void addChannelListItem(IChannel channel) {
         ChannelListItem newItem = new ChannelListItem(channel, this);
         channelListItems.put(channel.getID(), newItem);
@@ -352,6 +412,10 @@ public class WackController implements IWackController, Initializable, IClientLi
         return channelName.getCharacters().length() > 0;
     }
 
+    /**
+     * Opens up the view for the corresponding channel
+     * @param channel
+     */
     public void openChannelView(IChannel channel) {
         channelView.setChannel(channel);
         if (channel != null) {
@@ -388,6 +452,11 @@ public class WackController implements IWackController, Initializable, IClientLi
         updateChannelList();
     }
 
+    /**
+     * Let's the user join a channel. The method adds the channel to the user's list of channels
+     * and opens up the view for said channel
+     * @param id
+     */
     public void joinChannel(int id) {
         try {
             IChannel newChannel = chatFacade.getChannel(id);
@@ -403,7 +472,10 @@ public class WackController implements IWackController, Initializable, IClientLi
         }
     }
 
-
+    /**
+     * Creates a new ChannelListItem which is later added to the user's channels when they join the channel
+     * @param newChannel
+     */
     private void addChatListItem(IChannel newChannel) {
         ChannelListItem newItem = new ChannelListItem(newChannel, this);
         channelListItems.put(newChannel.getID(), newItem);
@@ -427,6 +499,10 @@ public class WackController implements IWackController, Initializable, IClientLi
 
     }
 
+    /**
+     * Removes a channel from the user's channels when they leave it
+     * @param channel
+     */
     public void leftChannel(IChannel channel) {
         channelListItems.remove(channel.getID());
         openChannelView(null);
