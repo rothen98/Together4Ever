@@ -126,9 +126,9 @@ public class DataHandler implements IDataHandler {
 
 
     /**
-     * 
+     * This method is responsible for looping through the array and transferring contents into a JSON object
      *
-     * @param channels
+     * @param channels is a collection of data about channels that holds all the information about them
      */
     private void loopChannels(Collection<ChannelData> channels) {
         for (ChannelData c : channels) {
@@ -138,12 +138,24 @@ public class DataHandler implements IDataHandler {
     }
 
 
+    /**
+     * This method creates a new JSONObject with all the channels data
+     *
+     * @param c is a channel object that contains all of the channel data
+     * @return a JSON object with the channel data
+     */
     private JSONObject createNewChannelJObject(ChannelData c) {
         JSONObject channel = new JSONObject();
         initChannelJObject(c, channel);
         return channel;
     }
 
+    /**
+     * This method initializes a JSON object by inserting the values by getting their respective keys
+     *
+     * @param c is an object that contains all the channel data
+     * @param channel is a translatable channel object that can be used to get key values
+     */
     private void initChannelJObject(ChannelData c, JSONObject channel) {
         JSONArray message = new JSONArray();
         JSONArray user = new JSONArray();
@@ -167,6 +179,11 @@ public class DataHandler implements IDataHandler {
     }
 
 
+    /**
+     * This method is responsible for writing the user data to the JSON file
+     *
+     * @param users is a collection of each of the users data
+     */
     public void pushUsers(Collection<UserData> users) {
         loopUsers(users);
         try {
@@ -180,6 +197,11 @@ public class DataHandler implements IDataHandler {
 
     }
 
+    /**
+     * This method is responsible for writing the channel data to the generated JSON file
+     *
+     * @param channels is a collection of each of the channels data
+     */
     public void pushChannels(Collection<ChannelData> channels) {
         loopChannels(channels);
         try {
@@ -193,6 +215,11 @@ public class DataHandler implements IDataHandler {
 
     }
 
+    /**
+     * This method has a core responsibility for getting all of the information from the user JSON file and saving it to a collection
+     *
+     * @return a collection of each of the users data
+     */
     public Collection<UserData> getUsers() {
         Collection<UserData> users = new HashSet<>();
         for (int i = 0; i < readUserArray.length(); i++) {
@@ -208,6 +235,11 @@ public class DataHandler implements IDataHandler {
         return users;
     }
 
+    /**
+     * This method is responsible for getting all of the information from the channel JSON file and saving it to a collection
+     *
+     * @return a collection of each of the channels data
+     */
     public Collection<ChannelData> getChannels() {
         Collection<ChannelData> channels = new HashSet<>();
         for (int i = 0; i < readChannelArray.length(); i++) {
