@@ -1,0 +1,67 @@
+[
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Basket",
+      "Description": "Kom och snacka basket med oss!",
+      "Messages": [[
+         "Spondon just joined the channel.",
+         "Spondon",
+         "2018-10-17T16:37:12.752",
+         "CHANNEL"
+      ]],
+      "Users": ["Spondon"]
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Fotboll",
+      "Description": "Vi som älskar fotboll",
+      "Messages": [
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-17T13:03:08.012",
+            "CHANNEL"
+         ],
+         [
+            "Hejsan!",
+            "Spondon",
+            "2018-10-17T13:03:13.556",
+            "TEXT"
+         ],
+         [
+            "Spondon just left the channel.",
+            "Spondon",
+            "2018-10-17T13:04:05.524",
+            "CHANNEL"
+         ],
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-17T13:04:31.346",
+            "CHANNEL"
+         ],
+         [
+            "Varför är ingen här :(",
+            "Spondon",
+            "2018-10-17T13:06:51.002",
+            "TEXT"
+         ],
+         [
+            "Alex just joined the channel.",
+            "Alex",
+            "2018-10-17T13:07:28.035",
+            "CHANNEL"
+         ],
+         [
+            "Jag är här :D",
+            "Alex",
+            "2018-10-17T13:07:36.870",
+            "TEXT"
+         ]
+      ],
+      "Users": [
+         "Spondon",
+         "Alex"
+      ]
+   }
+]
