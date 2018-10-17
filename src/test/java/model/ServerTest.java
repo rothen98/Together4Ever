@@ -68,7 +68,7 @@ public class ServerTest {
     public void getUserWrongPassword() throws NoSuchUserFoundException, WrongPasswordException {
         IUser user = new User("Tobias", "password");
         server.addUser(user);
-        IUser userTwo = server.getUser("Tobias", "hej");
+        IUser userTwo = server.getUser("Tobias", "jhfhjdfskhkajsdjas");
     }
     @Test(expected=NoSuchUserFoundException.class)
     public void getUser() throws NoSuchUserFoundException, WrongPasswordException {
