@@ -24,7 +24,7 @@ import java.util.*;
 
 import static java.util.stream.Collectors.toMap;
 
-public class WackController implements Initializable, IClientListener {
+public class WackController implements IWackController, Initializable, IClientListener {
 
     private ChatFacade chatFacade;
     private IUser user;

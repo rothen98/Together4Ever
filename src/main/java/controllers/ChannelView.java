@@ -30,7 +30,7 @@ public class ChannelView extends AnchorPane {
     private IChannel channel;
     private IUser user;
     private ChatFacade chatFacade;
-    private WackController parentcontroller;
+    private IWackController parentcontroller;
 
     private Button loadOldMessagesButton;
 
@@ -56,7 +56,7 @@ public class ChannelView extends AnchorPane {
     ScrollPane messageListScrollPane;
 
 
-    public ChannelView(IUser user, ChatFacade chatFacade, WackController parentcontroller) {
+    public ChannelView(IUser user, ChatFacade chatFacade, IWackController parentcontroller) {
 
         this.user = user;
         this.chatFacade = chatFacade;

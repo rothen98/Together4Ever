@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class ChannelListItem extends AnchorPane {
 
     private final IChannel channel;
-    private final WackController parentController;
+    private final IWackController parentController;
 
     @FXML
     private Label channelName;
@@ -23,7 +23,7 @@ public class ChannelListItem extends AnchorPane {
     @FXML
     private Circle notificationCircle;
 
-    public ChannelListItem(IChannel channel, WackController parentController) {
+    public ChannelListItem(IChannel channel, IWackController parentController) {
 
         this.channel = channel;
         this.parentController = parentController;
