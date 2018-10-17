@@ -1,10 +1,8 @@
 package model;
 
-import datahandler.DataHandler;
+import services.datahandler.DataHandler;
 import model.chatcomponents.channel.Channel;
 import model.chatcomponents.channel.IChannel;
-import model.chatcomponents.message.IMessage;
-import model.chatcomponents.message.Message;
 import model.chatcomponents.message.MessageFactory;
 import model.server.*;
 import model.chatcomponents.user.IUser;

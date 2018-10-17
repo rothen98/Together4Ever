@@ -1,6 +1,5 @@
 package model.server;
 
-import datahandler.DataHandler;
 import model.chatcomponents.channel.Channel;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageFactory;

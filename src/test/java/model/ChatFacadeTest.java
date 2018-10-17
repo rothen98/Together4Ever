@@ -1,6 +1,6 @@
 package model;
 
-import datahandler.DataHandler;
+import services.datahandler.DataHandler;
 import model.server.*;
 import model.chatcomponents.user.IUser;
 import model.chatcomponents.channel.IChannel;

@@ -2,7 +2,7 @@ package controllers;
 
 //javafx imports
 
-import datahandler.DataHandler;
+import services.datahandler.DataHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
