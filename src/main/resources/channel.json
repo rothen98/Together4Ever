@@ -1,32 +1,46 @@
-[{
-   "DisplayImage": "../../resources/default_channel_pic.jpg",
-   "ChannelName": "Fotboll",
-   "Description": "Vi älskar fotboll!",
-   "Messages": [
-      [
+[
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Fotboll",
+      "Description": "Vi älskar fotboll!",
+      "Messages": [
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-16T20:31:05.436",
+            "CHANNEL"
+         ],
+         [
+            "Hej!",
+            "Spondon",
+            "2018-10-16T20:32:13.714",
+            "TEXT"
+         ],
+         [
+            "Hej",
+            "Spondon",
+            "2018-10-16T20:55:27.571",
+            "TEXT"
+         ],
+         [
+            "Synd att ingen annan är här :(",
+            "Spondon",
+            "2018-10-16T21:55:13.246",
+            "TEXT"
+         ]
+      ],
+      "Users": ["Spondon"]
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Innebandy",
+      "Description": "bandy <333",
+      "Messages": [[
          "Spondon just joined the channel.",
          "Spondon",
-         "2018-10-16T20:31:05.436",
+         "2018-10-17T09:51:57.762",
          "CHANNEL"
-      ],
-      [
-         "Hej!",
-         "Spondon",
-         "2018-10-16T20:32:13.714",
-         "TEXT"
-      ],
-      [
-         "Hej",
-         "Spondon",
-         "2018-10-16T20:55:27.571",
-         "TEXT"
-      ],
-      [
-         "Synd att ingen annan är här :(",
-         "Spondon",
-         "2018-10-16T21:55:13.246",
-         "TEXT"
-      ]
-   ],
-   "Users": ["Spondon"]
-}]
+      ]],
+      "Users": ["Spondon"]
+   }
+]

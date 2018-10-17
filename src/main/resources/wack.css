@@ -20,12 +20,8 @@
     -fx-font-weight: bold;
 }
 
-.borderless-button {
-    -fx-border-radius: 0;
-}
-
 .colored-button {
-    -fx-background-color: rgba(35, 196, 217, 0.4);
+    -fx-background-color: rgb(106, 210, 217);
     -fx-text-fill: rgb(255, 255, 255);
     -fx-font-family: Arial;
     -fx-font-weight: bold;
