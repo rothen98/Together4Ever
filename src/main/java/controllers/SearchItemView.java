@@ -21,11 +21,11 @@ public class SearchItemView extends AnchorPane {
     @FXML
     Button joinButton;
 
-    private WackController parentcontroller;
+    private IWackController parentcontroller;
 
     private IIdentifiable i;
 
-    public SearchItemView(IIdentifiable i, WackController parentcontroller, boolean alreadyMember) {
+    public SearchItemView(IIdentifiable i, IWackController parentcontroller, boolean alreadyMember) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/wack_searchresult_item.fxml"));
 
