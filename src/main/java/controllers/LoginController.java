@@ -21,6 +21,7 @@ import model.client.IClient;
 import model.server.NoSuchUserFoundException;
 import model.server.WrongPasswordException;
 import model.chatcomponents.user.IUser;
+import views.IMainController;
 import views.TextUtility;
 
 
@@ -208,31 +209,10 @@ public class LoginController implements Initializable {
      */
     @FXML
     private void initClient(IUser user, IClient client) {
-        WackController controller = new WackController(chatFacade, user);
+        MainController controller = new MainController(chatFacade, user);
         client.addListeners(controller);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/wack.fxml"));
-        loader.setController(controller);
 
-        Stage stage = new Stage();
-        stage.setMinHeight(450);
-        stage.setMinWidth(600);
-        stage.setOnHiding(event -> {
-
-        });
-
-        Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Scene scene = new Scene(root, 1000, 600);
-
-        stage.setTitle("wack (logged in as " + user.getName() + ")");
-        stage.setScene(scene);
-        stage.show();
     }
 
     @FXML

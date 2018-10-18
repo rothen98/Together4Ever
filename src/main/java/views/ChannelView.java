@@ -111,6 +111,11 @@ public class ChannelView extends AnchorPane implements IChannelView {
         channelName.setText("");
     }
 
+    @Override
+    public void addNewChannelMessage() {
+
+    }
+
     private void readyUp(){
         typeField.setDisable(false);
         clickBox.toBack();
@@ -148,8 +153,6 @@ public class ChannelView extends AnchorPane implements IChannelView {
         if (messagefieldNotEmpty()) {
             controller.sendMessage(typeField.getText());
             typeField.clear();
-        } else {
-            //Do nothing
         }
     }
 
@@ -238,9 +241,11 @@ public class ChannelView extends AnchorPane implements IChannelView {
     }
 
     @Override
-    public void addNewTextMessage(String displayName, String displayImage, LocalDateTime timestamp) {
+    public void addNewTextMessage(String displayName, String displayImage,
+                                  String message, LocalDateTime timestamp,boolean userOwn) {
         handleScrollpane();
-        //Add message
+        IMessageView messageView = new MessageView(displayName,message,displayImage,timestamp,userOwn);
+        messageList.getChildren().add(messageView.getNode());
     }
 
     @Override

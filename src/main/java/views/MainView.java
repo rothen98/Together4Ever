@@ -5,6 +5,9 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -13,27 +16,22 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import model.chatcomponents.channel.IChannel;
-import model.identifiers.IIdentifiable;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.ResourceBundle;
 
-public class MainView implements IMainView {
+public class MainView extends AnchorPane implements IMainView {
     @FXML
     AnchorPane mainView;
     @FXML
     AnchorPane newChannelView;
     @FXML
     AnchorPane channelHolder;
-    @FXML
-    ScrollPane channelListItemScrollPane;
-    @FXML
-    ScrollPane searchResultsScrollPane;
     @FXML
     TextField searchBar;
     @FXML
@@ -43,11 +41,11 @@ public class MainView implements IMainView {
     @FXML
     Button createGroupButton;
     @FXML
-    Button searchButton;
-    @FXML
     ImageView closeSearchButton;
     @FXML
     Label channelExistsLabel;
+    @FXML
+    private StackPane listHolder;
 
     private IChannelView channelView;
     private IChannelItemHolder channelItemHolder;
@@ -59,6 +57,31 @@ public class MainView implements IMainView {
         this.channelView = channelView;
         this.channelItemHolder = channelItemHolder;
         this.searchResultsHolder = searchResultsHolder;
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/wack.fxml"));
+        loader.setRoot(this);
+        loader.setController(this);
+
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        init();
+
+
+        Stage stage = new Stage();
+        stage.setMinHeight(450);
+        stage.setMinWidth(600);
+        stage.setOnHiding(event -> {
+
+        });
+
+        Scene scene = new Scene(this, 1000, 600);
+
+        stage.setTitle("Wack logged in");
+        stage.setScene(scene);
+        stage.show();
     }
     @Override
     public void setController(IMainController controller){
@@ -66,14 +89,18 @@ public class MainView implements IMainView {
     }
 
 
-    @FXML
-    public void initialize(URL url, ResourceBundle rb) {
+
+    public void init() {
         System.out.println("init called");
         channelHolder.getChildren().add(channelView.getNode());
         AnchorPane.setBottomAnchor(channelView.getNode(), 0.0);
         AnchorPane.setTopAnchor(channelView.getNode(), 0.0);
         AnchorPane.setLeftAnchor(channelView.getNode(), 0.0);
         AnchorPane.setRightAnchor(channelView.getNode(), 0.0);
+
+        listHolder.getChildren().add(searchResultsHolder.getNode());
+        listHolder.getChildren().add(channelItemHolder.getNode());
+
 
         searchBar.textProperty().addListener(new ChangeListener<String>() {
             @Override

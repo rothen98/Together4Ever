@@ -6,4 +6,7 @@ public interface IChannelListItemController {
     void pressed();
 
     LocalDateTime timeOfLatestUpdate();
+
+    int getChannelID();
+
 }

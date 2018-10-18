@@ -3,6 +3,7 @@ package controllers;
 import model.ChatFacade;
 import model.chatcomponents.channel.IChannel;
 import model.chatcomponents.user.IUser;
+import model.client.IClientListener;
 import model.identifiers.IIdentifiable;
 import model.server.NoChannelFoundException;
 import views.*;
@@ -11,19 +12,30 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class MainController implements IMainController {
+public class MainController implements IMainController, IChannelViewParent, ISearchItemParent, IChannelListItemParent, IClientListener {
     private ChannelItemHolderController itemHolderController;
     private IChannelViewController channelViewController;
     private IMainView view;
     private ChatFacade chatFacade;
     private IUser user;
 
-    public MainController(ChatFacade chatFacade, IUser user, IMainView mainView, IChannelViewController channelViewController, ChannelItemHolderController itemHolderController) {
-        this.channelViewController = channelViewController;
-        this.itemHolderController = itemHolderController;
-        this.view = mainView;
+    public MainController(ChatFacade chatFacade, IUser user)  {
+        IChannelView channelView = new ChannelView();
+        IChannelItemHolder channelItemHolder = new ChannelListItemHolder();
+        ISearchResultsHolder searchResultsHolder = new SearchResultsHolder();
+
+        channelViewController = new ChannelViewController(chatFacade, user,channelView,this);
+        channelView.setController(channelViewController);
+
+        itemHolderController = new ChannelItemHolderController(channelItemHolder);
+
+        view = new MainView(channelView,channelItemHolder,searchResultsHolder);
+        view.setController(this);
+
         this.chatFacade = chatFacade;
         this.user = user;
+        Collection<IChannel> channels = chatFacade.getUserChannels(user);
+        initChannels(channels);
 
     }
     /**
@@ -71,19 +83,22 @@ public class MainController implements IMainController {
     public void newChannel(String channelName, String channelDescription) {
         IChannel newChannel = chatFacade.createChannel(channelName,channelDescription,user);
         if(newChannel != null){
-            addChannelListItem(newChannel);
+            //addChannelListItem(newChannel);
+            channelViewController.showChannel(newChannel);
+            itemHolderController.selectChannel(newChannel.getID());
+            itemHolderController.arrange();
             view.hideCreateChannelView();
         }else{
             view.showCreateChannelError(channelName);
         }
     }
-
     public void joinChannel(int id) {
         try {
             IChannel newChannel = chatFacade.getChannel(id);
-            newChannel.join(user);
             addChannelListItem(newChannel);
             channelViewController.showChannel(newChannel);
+            itemHolderController.selectChannel(newChannel.getID());
+            newChannel.join(user);
             itemHolderController.arrange();
             view.resetSearchBar();
             view.showChannelListItemView();
@@ -97,10 +112,11 @@ public class MainController implements IMainController {
         IChannelListItemController itemController = new ChatListItemController(this,newChannel,channelListItem);
         channelListItem.setController(itemController);
         itemHolderController.addChannelListItem(itemController,channelListItem);
+
     }
 
     public void leftChannel(IChannel channel) {
-        itemHolderController.remove(channel);
+        itemHolderController.remove(channel.getID());
         itemHolderController.arrange();
         channelViewController.showNoChannel();
 
@@ -132,4 +148,11 @@ public class MainController implements IMainController {
         }
         return listToReturn;
     }
+
+    @Override
+    public void openChannelView(IChannel channel) {
+        itemHolderController.selectChannel(channel.getID());
+        channelViewController.showChannel(channel);
+    }
+
 }

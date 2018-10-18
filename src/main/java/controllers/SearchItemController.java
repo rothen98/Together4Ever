@@ -5,10 +5,10 @@ import views.ISearchItemController;
 
 public class SearchItemController implements ISearchItemController {
 
-    private IWackController parentcontroller;
+    private ISearchItemParent parentcontroller;
     private IIdentifiable channel;
 
-    public SearchItemController(IWackController parentcontroller, IIdentifiable channel) {
+    public SearchItemController(ISearchItemParent parentcontroller, IIdentifiable channel) {
         this.parentcontroller = parentcontroller;
         this.channel = channel;
     }

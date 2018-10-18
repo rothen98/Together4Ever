@@ -7,10 +7,10 @@ import views.IChannelListItemController;
 import java.time.LocalDateTime;
 
 public class ChatListItemController implements IChannelListItemController {
-    private final IWackController parentController;
+    private final IChannelListItemParent parentController;
     private final IChannel channel;
     private final IChannelListItem listItem;
-    public ChatListItemController(IWackController parentController, IChannel channel, IChannelListItem item) {
+    public ChatListItemController(IChannelListItemParent parentController, IChannel channel, IChannelListItem item) {
         this.parentController = parentController;
         this.channel = channel;
         this.listItem = item;
@@ -22,8 +22,14 @@ public class ChatListItemController implements IChannelListItemController {
         parentController.openChannelView(channel);
     }
 
-    public LocalDateTime timeOfLastMessage() {
+    @Override
+    public LocalDateTime timeOfLatestUpdate() {
         return channel.getLastMessages(1).get(0).getTimestamp();
+    }
+
+    @Override
+    public int getChannelID() {
+        return channel.getID();
     }
 
     public void update(){

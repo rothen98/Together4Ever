@@ -5,20 +5,21 @@ import model.chatcomponents.channel.IChannel;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageType;
 import model.chatcomponents.user.IUser;
-import views.IChannelView;
-import views.IChannelViewController;
-import views.IMessageView;
+import views.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChannelViewController implements IChannelViewController {
 
     private IChannel channel;
     private ChatFacade chatFacade;
     private IUser user;
-    private IWackController parentController;
+    private IChannelViewParent parentController;
     private IChannelView channelView;
 
     public ChannelViewController(ChatFacade chatFacade, IUser user, IChannelView channelView,
-                                 IWackController parentController) {
+                                 IChannelViewParent parentController) {
         this.chatFacade = chatFacade;
         this.user = user;
         this.channelView = channelView;
@@ -34,7 +35,7 @@ public class ChannelViewController implements IChannelViewController {
     }
 
     private boolean senderIsUser(String sender_name) {
-        return sender_name.equals(user.getName());
+        return sender_name.equals(user.getDisplayName());
     }
 
     @Override
@@ -48,7 +49,9 @@ public class ChannelViewController implements IChannelViewController {
         IMessage message = channel.getLastMessages(1).get(0);
         if(message.getType() == MessageType.TEXT){
             channelView.addNewTextMessage(message.getSender().getDisplayName(),message.getSender().getDisplayImage(),
-                    message.getTimestamp());
+                    message.getMessage(), message.getTimestamp(),senderIsUser(message.getSender().getDisplayName()));
+        }else if(message.getType() == MessageType.CHANNEL){
+            channelView.addNewChannelMessage();
         }
     }
     @Override
@@ -59,16 +62,33 @@ public class ChannelViewController implements IChannelViewController {
 
     @Override
     public void showChannel(IChannel channel) {
-        //TODO
+        this.channel = channel;
+        List<IMessageView> messageViews = new ArrayList<>();
+        for(IMessage message:channel.getLastMessages(15)){
+            messageViews.add(createMessageView(message));
+        }
+        channelView.setNewChannel(channel.getDisplayName(),messageViews);
+
     }
 
     @Override
     public void showNoChannel() {
-        //TODO
+        channelView.showNoChannel();
     }
 
-    public void setChannel(IChannel channel){
-        this.channel = channel;
-        //TODO
+    private IMessageView createMessageView(IMessage message){
+        if(message.getType()==MessageType.CHANNEL){
+            return new ChannelMessageView(message.getSender().getDisplayName(),message.getMessage(),message.getSender().getDisplayImage(),
+                    message.getTimestamp(),senderIsUser(message.getSender().getDisplayName()));
+        }
+        /*else if(message.getType()==MessageType.IMAGE){
+            //No implementation yet
+        }*/
+        else{
+            return new MessageView(message.getSender().getDisplayName(),message.getMessage(),message.getSender().getDisplayImage(),
+                    message.getTimestamp(),senderIsUser(message.getSender().getDisplayName()));
+        }
     }
+
+
 }

@@ -1,14 +1,13 @@
 package views;
 
 //javafx imports
-import controllers.IWackController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 //model imports
-import model.identifiers.IIdentifiable;
 
 import java.io.IOException;
 
@@ -53,7 +52,7 @@ public class SearchItemView extends AnchorPane implements ISearchItemView {
     }
 
     @Override
-    public ISearchItemView getNode() {
+    public Node getNode() {
         return this;
     }
 }

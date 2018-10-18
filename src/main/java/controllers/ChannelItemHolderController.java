@@ -46,27 +46,59 @@ public class ChannelItemHolderController {
      *
      * @param item the item that should be selected
      */
-    public void selectChannelListItem(ChannelListItem item) {
+    private void selectChannelListItem(IChannelListItem item) {
         if (selected != null) {
             selected.getNode().setStyle("");
         }
         if (item != null) {
             selected = item;
-            item.setStyle("-fx-background-color: rgba(41,227,255,0.15);"); // Should be changed...
+            item.getNode().setStyle("-fx-background-color: rgba(41,227,255,0.15);"); // Should be changed...
+        }
+    }
+
+    public void selectChannel(int id){
+        if(id>=0){
+            selectChannelListItem(getItem(id));
+        }else{
+            selectChannelListItem(null);
         }
     }
 
 
-    public void remove(IChannel channel) {
-
+    public void remove(int id) {
+        IChannelListItemController controller = getItemController(id);
+        if(controller != null){
+            items.remove(controller);
+        }
     }
 
     public boolean contains(int id) {
-        return false;
-        //TODO
+        IChannelListItemController controller = getItemController(id);
+        return controller != null;
     }
 
     public void addNotificationTo(int id) {
+        IChannelListItem item = getItem(id);
+        if(item != null){
+            item.addNotification();
+        }
+    }
 
+    private IChannelListItem getItem(int id){
+        for(IChannelListItemController item: items.keySet()){
+            if(item.getChannelID() == id){
+                return items.get(item);
+            }
+        }
+        return null;
+    }
+
+    private IChannelListItemController getItemController(int id){
+        for(IChannelListItemController item: items.keySet()){
+            if(item.getChannelID() == id){
+                return item;
+            }
+        }
+        return null;
     }
 }

@@ -30,7 +30,7 @@ import java.util.*;
 
 import static java.util.stream.Collectors.toMap;
 
-public class WackController implements IWackController, IClientListener {
+public class WackController implements IClientListener {
 
     private ChatFacade chatFacade;
     private IUser user;
@@ -40,25 +40,12 @@ public class WackController implements IWackController, IClientListener {
     public WackController(ChatFacade chatFacade, IUser user) {
         this.chatFacade = chatFacade;
         this.user = user;
-        IChannelView channelView = new ChannelView();
-        IChannelViewController controller = new ChannelViewController(chatFacade, user,channelView,this);
-        channelView.setController(controller);
-
-        IChannelItemHolder channelItemHolder = new ChannelListItemHolder();
-        ChannelItemHolderController itemHolderController = new ChannelItemHolderController(channelItemHolder);
-
-        ISearchResultsHolder searchResultsHolder = new SearchResultsHolder();
 
 
 
-        IMainView mainView = new MainView(channelView,channelItemHolder,searchResultsHolder);
-        mainController = new MainController(chatFacade,user,mainView,controller,itemHolderController);
-        mainView.setController(mainController);
 
 
-        Collection<IChannel> channels = chatFacade.getUserChannels(user);
 
-        mainController.initChannels(channels);
     }
 
 
