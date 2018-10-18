@@ -2,12 +2,18 @@ package model.server;
 
 import model.chatcomponents.channel.IChannel;
 import model.chatcomponents.message.IMessage;
-import model.identifiers.IIdentifiable;
 import model.identifiers.IRecognizable;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class contains all the channel data that is stored at the end of a session and fetched at the beginning.
+ * All contents of the channel, including messages and users are stored
+ * The class is a middle ground for server to use
+ *
+ * @author Alex Solberg
+ */
 public class ChannelData {
     private String description;
     private String image;
