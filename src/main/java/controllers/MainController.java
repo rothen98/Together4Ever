@@ -61,6 +61,7 @@ public class MainController implements IMainController, IChannelViewParent, ISea
         }
         if (latest != null) {
             channelViewController.showChannel(latest);
+            itemHolderController.selectChannel(latest.getID());
         }
         itemHolderController.arrange();
 

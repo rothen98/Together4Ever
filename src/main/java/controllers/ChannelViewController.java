@@ -8,6 +8,7 @@ import model.chatcomponents.user.IUser;
 import views.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ChannelViewController implements IChannelViewController {
@@ -17,6 +18,8 @@ public class ChannelViewController implements IChannelViewController {
     private IUser user;
     private IChannelViewParent parentController;
     private IChannelView channelView;
+
+    private int numberOfShowingMessages;
 
     public ChannelViewController(ChatFacade chatFacade, IUser user, IChannelView channelView,
                                  IChannelViewParent parentController) {
@@ -47,13 +50,34 @@ public class ChannelViewController implements IChannelViewController {
     @Override
     public void update(){
         IMessage message = channel.getLastMessages(1).get(0);
-        if(message.getType() == MessageType.TEXT){
-            channelView.addNewTextMessage(message.getSender().getDisplayName(),message.getSender().getDisplayImage(),
-                    message.getMessage(), message.getTimestamp(),senderIsUser(message.getSender().getDisplayName()));
-        }else if(message.getType() == MessageType.CHANNEL){
-            channelView.addNewChannelMessage();
-        }
+        addNewMessageToChannelView(createMessageView(message));
     }
+
+    private void addNewMessageToChannelView(IMessageView message) {
+        channelView.addNewMessage(message);
+        numberOfShowingMessages++;
+    }
+    private void addOldMessageToChannelView(IMessageView message){
+        channelView.addOldMessage(message);
+        numberOfShowingMessages++;
+    }
+
+    @Override
+    public void addOldMessages() {
+
+        List<IMessage> messages = channel.getLastMessages(numberOfShowingMessages + 10);
+        List<IMessage> oldMessages = messages.subList(0,messages.size() - numberOfShowingMessages);
+        Collections.reverse(oldMessages);
+        for(IMessage message:oldMessages){
+            addOldMessageToChannelView(createMessageView(message));
+        }
+
+        if (channel.getAllMessages().size() <= numberOfShowingMessages) {
+            channelView.disableLoadingOldMessages();
+        }
+
+    }
+
     @Override
     public void leaveChannel() {
         channel.leave(user);
@@ -62,13 +86,19 @@ public class ChannelViewController implements IChannelViewController {
 
     @Override
     public void showChannel(IChannel channel) {
-        this.channel = channel;
-        List<IMessageView> messageViews = new ArrayList<>();
-        for(IMessage message:channel.getLastMessages(15)){
-            messageViews.add(createMessageView(message));
-        }
-        channelView.setNewChannel(channel.getDisplayName(),messageViews);
+        if(channel != null && !channel.equals(this.channel)) {
+            this.channel = channel;
 
+            List<IMessageView> messageViews = new ArrayList<>();
+            for (IMessage message : channel.getLastMessages(15)) {
+                messageViews.add(createMessageView(message));
+            }
+            numberOfShowingMessages = messageViews.size();
+            channelView.setNewChannel(channel.getDisplayName(), messageViews);
+            if (channel.getAllMessages().size() > 15) {
+                channelView.enableLoadingOldMessages();
+            }
+        }
     }
 
     @Override

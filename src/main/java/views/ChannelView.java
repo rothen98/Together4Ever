@@ -33,25 +33,25 @@ public class ChannelView extends AnchorPane implements IChannelView {
     private Button loadOldMessagesButton;
 
     @FXML
-    AnchorPane optionsPanel;
+    private AnchorPane optionsPanel;
     @FXML
-    AnchorPane clickBox;
+    private AnchorPane clickBox;
     @FXML
-    Button scrollDownButton;
+    private Button scrollDownButton;
     @FXML
-    Label channelName;
+    private Label channelName;
     @FXML
-    VBox messageList;
+    private VBox messageList;
     @FXML
-    TextField typeField;
+    private TextField typeField;
     @FXML
-    Button sendButton;
+    private Button sendButton;
     @FXML
-    Button optionsButton;
+    private Button optionsButton;
     @FXML
-    Button leaveButton;
+    private Button leaveButton;
     @FXML
-    ScrollPane messageListScrollPane;
+    private ScrollPane messageListScrollPane;
 
 
     public ChannelView() {
@@ -69,36 +69,25 @@ public class ChannelView extends AnchorPane implements IChannelView {
         typeField.setDisable(true);
         optionsButton.setVisible(false);
         loadOldMessagesButton = new Button("Load older messages");
-        /*loadOldMessagesButton.setOnAction(new EventHandler<ActionEvent>() {
+        loadOldMessagesButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                loadOlderMessages(10);
+                loadOlderMessages();
             }
         });
-        setScrollDownAutomatically(true);*/
+        setScrollDownAutomatically(true);
     }
 
-    public void loadOlderMessages(List<IMessageView> messages) {
+    private void loadOlderMessages() {
         setScrollDownAutomatically(false);
-        messageList.getChildren().remove(loadOldMessagesButton);
-        loadInMessagesFirst(messages);
-
-        /*int numberOfShowedMessages = messageList.getChildren().size();
-        List<IMessage> messages = channel.getLastMessages(numberOfShowedMessages + number);
-        int startValue = messages.size() - numberOfShowedMessages - 1;
-        for (int i = startValue; i >= 0; i--) {
-            showOldMessage(messages.get(i));
-            numberOfShowedMessages++;
-        }
-        if (channel.getAllMessages().size() > numberOfShowedMessages) {
-            messageList.getChildren().add(0, loadOldMessagesButton);
-        }*/
+        controller.addOldMessages();
     }
 
     public void setNewChannel(String name, List<IMessageView> messageViews){
         readyUp();
         setChannelName(name);
         loadInMessagesLast(messageViews);
+        scrollDownButton.setVisible(false);
 
     }
     public void showNoChannel(){
@@ -112,18 +101,48 @@ public class ChannelView extends AnchorPane implements IChannelView {
     }
 
     @Override
-    public void addNewChannelMessage() {
+    public void addNewMessage(IMessageView messageView) {
+        handleScrollpane();
+        messageList.getChildren().add(messageView.getNode());
+    }
+
+    @Override
+    public void addOldMessage(IMessageView messageView){
+        //handleScrollpane();
+        int index;
+        if(messageList.getChildren().contains(loadOldMessagesButton)){
+            index = 1;
+        }else{
+            index = 0;
+        }
+        messageList.getChildren().add(index,messageView.getNode());
 
     }
 
+    @Override
+    public void enableLoadingOldMessages() {
+        messageList.getChildren().add(0,loadOldMessagesButton);
+        loadOldMessagesButton.setVisible(true);
+        System.out.println("Enabled");
+
+    }
+
+    @Override
+    public void disableLoadingOldMessages() {
+        messageList.getChildren().remove(loadOldMessagesButton);
+        System.out.println("Disabled");
+    }
+
+
     private void readyUp(){
+        messageList.getChildren().clear();
         typeField.setDisable(false);
         clickBox.toBack();
         sendButton.setDisable(false);
         optionsButton.setVisible(true);
         scrollDownButton.setVisible(false);
         setScrollDownAutomatically(true);
-        messageList.getChildren().clear();
+
     }
 
     public void setChannelName(String name){
@@ -132,7 +151,7 @@ public class ChannelView extends AnchorPane implements IChannelView {
 
     private void loadInMessagesLast(List<IMessageView> messageViews){
         for (IMessageView messageView:messageViews){
-            messageList.getChildren().add(messageView.getNode());
+            addNewMessage(messageView);
         }
     }
     private void loadInMessagesFirst(List<IMessageView> messageViews){
@@ -240,13 +259,6 @@ public class ChannelView extends AnchorPane implements IChannelView {
         }
     }
 
-    @Override
-    public void addNewTextMessage(String displayName, String displayImage,
-                                  String message, LocalDateTime timestamp,boolean userOwn) {
-        handleScrollpane();
-        IMessageView messageView = new MessageView(displayName,message,displayImage,timestamp,userOwn);
-        messageList.getChildren().add(messageView.getNode());
-    }
 
     @Override
     public void setController(IChannelViewController controller) {

@@ -7,9 +7,6 @@ import java.util.List;
 
 public interface IChannelView {
 
-    void addNewTextMessage(String displayName, String displayImage,
-                           String message, LocalDateTime timestamp, boolean userOwn);
-
     void setController(IChannelViewController controller);
 
     Node getNode();
@@ -18,5 +15,11 @@ public interface IChannelView {
 
     void showNoChannel();
 
-    void addNewChannelMessage();
+    void addNewMessage(IMessageView messageView);
+
+    void addOldMessage(IMessageView messageView);
+
+    void enableLoadingOldMessages();
+
+    void disableLoadingOldMessages();
 }
