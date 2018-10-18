@@ -1,4 +1,4 @@
-package controllers;
+package views;
 
 //javafx import
 import javafx.animation.Animation;
@@ -10,6 +10,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -17,20 +18,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 //model import
-import model.ChatFacade;
 import model.chatcomponents.channel.IChannel;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageType;
-import model.chatcomponents.user.IUser;
+
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
-public class ChannelView extends AnchorPane {
+public class ChannelView extends AnchorPane implements IChannelView {
 
-    private IChannel channel;
-    private IUser user;
-    private ChatFacade chatFacade;
-    private IWackController parentcontroller;
+    private IChannelViewController controller;
 
     private Button loadOldMessagesButton;
 
@@ -56,12 +54,7 @@ public class ChannelView extends AnchorPane {
     ScrollPane messageListScrollPane;
 
 
-    public ChannelView(IUser user, ChatFacade chatFacade, IWackController parentcontroller) {
-
-        this.user = user;
-        this.chatFacade = chatFacade;
-        this.parentcontroller = parentcontroller;
-
+    public ChannelView() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/wack_channelview.fxml"));
 
         fxmlLoader.setRoot(this);
@@ -76,19 +69,21 @@ public class ChannelView extends AnchorPane {
         typeField.setDisable(true);
         optionsButton.setVisible(false);
         loadOldMessagesButton = new Button("Load older messages");
-        loadOldMessagesButton.setOnAction(new EventHandler<ActionEvent>() {
+        /*loadOldMessagesButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 loadOlderMessages(10);
             }
         });
-        setScrollDownAutomatically(true);
+        setScrollDownAutomatically(true);*/
     }
 
-    private void loadOlderMessages(int number) {
+    public void loadOlderMessages(List<IMessageView> messages) {
         setScrollDownAutomatically(false);
         messageList.getChildren().remove(loadOldMessagesButton);
-        int numberOfShowedMessages = messageList.getChildren().size();
+        loadInMessagesFirst(messages);
+
+        /*int numberOfShowedMessages = messageList.getChildren().size();
         List<IMessage> messages = channel.getLastMessages(numberOfShowedMessages + number);
         int startValue = messages.size() - numberOfShowedMessages - 1;
         for (int i = startValue; i >= 0; i--) {
@@ -97,62 +92,49 @@ public class ChannelView extends AnchorPane {
         }
         if (channel.getAllMessages().size() > numberOfShowedMessages) {
             messageList.getChildren().add(0, loadOldMessagesButton);
-        }
+        }*/
     }
 
+    public void setNewChannel(String name, List<IMessageView> messageViews){
+        readyUp();
+        setChannelName(name);
+        loadInMessagesLast(messageViews);
 
-    public void setChannel(IChannel channel) {
-        if (channel != null) {
-            typeField.setDisable(false);
-            clickBox.toBack();
-            sendButton.setDisable(false);
-            optionsButton.setVisible(true);
-            scrollDownButton.setVisible(false);
-            setScrollDownAutomatically(true);
-            this.channel = channel;
-            this.channelName.setText(channel.getDisplayName());
-            messageList.getChildren().clear();
-
-            if (channel.getAllMessages().size() > 15) {
-                messageList.getChildren().add(loadOldMessagesButton);
-                for (IMessage m : channel.getLastMessages(15)) {
-                    showMessage(m);
-                }
-            } else {
-                for (IMessage m : channel.getAllMessages()) {
-                    showMessage(m);
-                }
-            }
-
-        }else{
-            typeField.setDisable(true);
-            clickBox.toBack();
-            sendButton.setDisable(true);
-            optionsButton.setVisible(false);
-            scrollDownButton.setVisible(false);
-            messageList.getChildren().clear();
-            channelName.setText("");
-            //parentcontroller.leftChannel(channel);
-
-        }
+    }
+    public void showNoChannel(){
+        typeField.setDisable(true);
+        clickBox.toBack();
+        sendButton.setDisable(true);
+        optionsButton.setVisible(false);
+        scrollDownButton.setVisible(false);
+        messageList.getChildren().clear();
+        channelName.setText("");
     }
 
-    private void showMessage(IMessage message) {
-        if (message.getType() == MessageType.TEXT) {
-            addTextMessage(message, true);
-        } else if (message.getType() == MessageType.CHANNEL) {
-            addChannelMessage(message, true);
-        }
+    private void readyUp(){
+        typeField.setDisable(false);
+        clickBox.toBack();
+        sendButton.setDisable(false);
+        optionsButton.setVisible(true);
+        scrollDownButton.setVisible(false);
+        setScrollDownAutomatically(true);
+        messageList.getChildren().clear();
     }
 
-    private void showOldMessage(IMessage message) {
-        if (message.getType() == MessageType.TEXT) {
-            addTextMessage(message, false);
-        } else if (message.getType() == MessageType.CHANNEL) {
-            addChannelMessage(message, false);
-        }
+    public void setChannelName(String name){
+        this.channelName.setText(name);
     }
 
+    private void loadInMessagesLast(List<IMessageView> messageViews){
+        for (IMessageView messageView:messageViews){
+            messageList.getChildren().add(messageView.getNode());
+        }
+    }
+    private void loadInMessagesFirst(List<IMessageView> messageViews){
+        for (IMessageView messageView:messageViews){
+            messageList.getChildren().add(0, messageView.getNode());
+        }
+    }
 
     @FXML
     public void sendButtonKeyPressed(KeyEvent event) {
@@ -162,16 +144,12 @@ public class ChannelView extends AnchorPane {
     }
 
     @FXML
-    public void sendButtonPressed() {
-        //get data from textfield, check notEmpty and send to listview
-        String message;
+    private void sendButtonPressed() {
         if (messagefieldNotEmpty()) {
-            message = typeField.getCharacters().toString();
-            channel.sendMessage(chatFacade.createTextMessage(message, user));
-            System.out.println(channel.getDisplayName() + ": " + message);
+            controller.sendMessage(typeField.getText());
             typeField.clear();
         } else {
-            System.out.println("Type a message");
+            //Do nothing
         }
     }
 
@@ -196,25 +174,8 @@ public class ChannelView extends AnchorPane {
         }
     }
 
-    public int getCurrentChannelID() {
-        if (channel != null) {
-            return channel.getID();
-        } else {
-            return -1;
-        }
-    }
-
-    public void update() {
-        IMessage newMessage = channel.getLastMessages(1).get(0);
-        handleScrollpane();
-        showMessage(newMessage);
-
-
-    }
-
     private void handleScrollpane() {
         setScrollDownAutomatically(false);
-
         double viewportmaxy = Math.abs(messageListScrollPane.getViewportBounds().getMinY() -
                 messageListScrollPane.getViewportBounds().getHeight());
         double vvalue = messageListScrollPane.getVvalue();
@@ -255,9 +216,8 @@ public class ChannelView extends AnchorPane {
 
     @FXML
     private void leaveButtonPressed() {
+        controller.leaveChannel();
         optionsPanel.toBack();
-        channel.leave(user);
-        parentcontroller.leftChannel(channel);
         sendButton.setDisable(true);
         typeField.setDisable(true);
     }
@@ -277,25 +237,19 @@ public class ChannelView extends AnchorPane {
         }
     }
 
-
-    private void addChannelMessage(IMessage newMessage, boolean last) {
-        if (last) {
-            messageList.getChildren().add(new Label(newMessage.getMessage()));
-        } else {
-            messageList.getChildren().add(0, new Label(newMessage.getMessage()));
-
-        }
+    @Override
+    public void addNewTextMessage(String displayName, String displayImage, LocalDateTime timestamp) {
+        handleScrollpane();
+        //Add message
     }
 
-    private void addTextMessage(IMessage iMessage, boolean last) {
-        if (last) {
-            messageList.getChildren().add(new MessageView(iMessage, senderIsUser(iMessage.getSender().getDisplayName())));
-        } else {
-            messageList.getChildren().add(0, new MessageView(iMessage, senderIsUser(iMessage.getSender().getDisplayName())));
-        }
+    @Override
+    public void setController(IChannelViewController controller) {
+        this.controller = controller;
     }
 
-    private boolean senderIsUser(String sender_name) {
-        return sender_name.equals(user.getName());
+    @Override
+    public Node getNode() {
+        return this;
     }
 }

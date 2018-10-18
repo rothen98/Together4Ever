@@ -21,6 +21,7 @@ import model.client.IClient;
 import model.server.NoSuchUserFoundException;
 import model.server.WrongPasswordException;
 import model.chatcomponents.user.IUser;
+import views.TextUtility;
 
 
 import java.io.IOException;

@@ -1,6 +1,7 @@
-package controllers;
+package views;
 
 //javafx imports
+import controllers.IWackController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -11,7 +12,7 @@ import model.identifiers.IIdentifiable;
 
 import java.io.IOException;
 
-public class SearchItemView extends AnchorPane {
+public class SearchItemView extends AnchorPane implements ISearchItemView {
 
 
     @FXML
@@ -21,11 +22,9 @@ public class SearchItemView extends AnchorPane {
     @FXML
     Button joinButton;
 
-    private IWackController parentcontroller;
+    private ISearchItemController controller;
 
-    private IIdentifiable i;
-
-    public SearchItemView(IIdentifiable i, IWackController parentcontroller, boolean alreadyMember) {
+    public SearchItemView(ISearchItemController controller, String name, String description, boolean alreadyMember) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/wack_searchresult_item.fxml"));
 
@@ -38,10 +37,9 @@ public class SearchItemView extends AnchorPane {
             e.printStackTrace();
         }
 
-        this.parentcontroller = parentcontroller;
-        this.i = i;
-        this.channelName.setText(i.getDisplayName());
-        this.channelDescription.setText(i.getDescription());
+        this.controller = controller;
+        this.channelName.setText(name);
+        this.channelDescription.setText(description);
         if(alreadyMember){
             joinButton.setVisible(false);
         }
@@ -51,7 +49,11 @@ public class SearchItemView extends AnchorPane {
     @FXML
     public void joinButtonPressed() {
         System.out.println("Called");
-        parentcontroller.joinChannel(i.getID());
+        controller.joinChannel();
     }
 
+    @Override
+    public ISearchItemView getNode() {
+        return this;
+    }
 }
