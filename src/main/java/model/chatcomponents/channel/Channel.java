@@ -87,7 +87,7 @@ public class Channel implements IChannel {
             if(userToLeave!= null){
                 users.remove(userToLeave);
                 sendMessage(MessageFactory.createKickMessage(userToLeave));
-                userToLeave.sendMessageToClients(this);
+                userToLeave.updateClients(this);
 
 
             }
@@ -152,7 +152,7 @@ public class Channel implements IChannel {
     public void sendMessage(IMessage message) {
         messages.add(message);
         for(IUser user: users){
-            user.sendMessageToClients(this);
+            user.updateClients(this);
         }
     }
 

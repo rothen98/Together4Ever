@@ -11,8 +11,8 @@ public class MockUser extends User {
     }
 
     @Override
-    public void sendMessageToClients(IIdentifiable iIdentifiable){
-        //super.sendMessageToClients(message);
+    public void updateClients(IIdentifiable iIdentifiable){
+        //super.updateClients(message);
         numberOfUpdates++;
     }
 

@@ -12,7 +12,7 @@ public class MockClient extends Client {
 
     @Override
     public void updateListeners(IIdentifiable message) {
-        //super.update(message);
+        //super.updateClients(message);
         numberOFMessages++;
     }
 
