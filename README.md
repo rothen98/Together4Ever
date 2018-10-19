@@ -15,7 +15,7 @@ The first time you run the application you can use the command:
 > gradle build test run
 
 If you want to run the application again, please use: 
-> gradle run,
+> gradle run
 
 Otherwise the Users and Channels you created previously will be removed.
 
