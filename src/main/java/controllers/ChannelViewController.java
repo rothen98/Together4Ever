@@ -65,11 +65,7 @@ public class ChannelViewController implements IChannelViewController, IMemberIte
             }else{
                 removeFromOptionsPanel(message.getSender().getDisplayName());
             }
-
         }
-
-
-
 
     }
 
@@ -91,16 +87,23 @@ public class ChannelViewController implements IChannelViewController, IMemberIte
         boolean isAdmin = channel.isChannelAdministrator(user);
         for(IRecognizable user:channel.getAllUsersInfo()){
             if(!membersContains(user.getDisplayName())){
-                IMemberItem item = ViewComponentsFactory.createMemberItem(user.getDisplayName(),isAdmin);
-                MemberItemController controller = new MemberItemController(this,item,user.getDisplayName());
-                item.setController(controller);
-                members.put(controller,item);
+                addNewMemberItem(user.getDisplayName(),isAdmin && !this.user.getDisplayName().equals(user.getDisplayName()));
             }else{
                 MemberItemController c = getMemberItemController(user.getDisplayName());
-                c.setAdmin(isAdmin && !this.user.getDisplayName().equals(user.getDisplayName()));
+                if (c != null) {
+
+                    c.setAdmin(isAdmin && !this.user.getDisplayName().equals(user.getDisplayName()));
+                }
             }
         }
         channelView.updateMembers(members.values());
+    }
+
+    private void addNewMemberItem(String displayName, boolean isAdmin) {
+        IMemberItem item = ViewComponentsFactory.createMemberItem(displayName,isAdmin);
+        MemberItemController controller = new MemberItemController(this,item,displayName);
+        item.setController(controller);
+        members.put(controller,item);
     }
 
     private MemberItemController getMemberItemController(String displayName) {
@@ -154,13 +157,14 @@ public class ChannelViewController implements IChannelViewController, IMemberIte
 
     @Override
     public void initMembers() {
+
         if(members.isEmpty()){
             boolean isAdmin = channel.isChannelAdministrator(user);
             for(IRecognizable user:channel.getAllUsersInfo()){
-                IMemberItem item = ViewComponentsFactory.createMemberItem(user.getDisplayName(),isAdmin && !this.user.getDisplayName().equals(user.getDisplayName()));
-                MemberItemController itemController = new MemberItemController(this,item,user.getDisplayName());
-                members.put(itemController,item);
+                addNewMemberItem(user.getDisplayName(),isAdmin && !this.user.getDisplayName().equals(user.getDisplayName()));
             }
+        }else{
+            updateOptionsPanel();
         }
         channelView.updateMembers(members.values());
     }
@@ -188,7 +192,6 @@ public class ChannelViewController implements IChannelViewController, IMemberIte
     }
 
     private IMessageView createMessageView(IMessage message){
-        System.out.println(message.getType().toString());
         if(message.getType()==MessageType.JOIN){
             return ViewComponentsFactory.createChannelMessageView(message.getSender().getDisplayName(),message.getMessage(),message.getSender().getDisplayImage(),
                     message.getTimestamp(),senderIsUser(message.getSender().getDisplayName()));
