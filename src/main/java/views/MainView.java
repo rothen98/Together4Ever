@@ -52,7 +52,7 @@ public class MainView extends AnchorPane implements IMainView {
     private ISearchResultsHolder searchResultsHolder;
     private IMainController controller;
 
-    public MainView(IChannelView channelView,
+    public MainView(String username, IChannelView channelView,
                     IChannelItemHolder channelItemHolder, ISearchResultsHolder searchResultsHolder) {
         this.channelView = channelView;
         this.channelItemHolder = channelItemHolder;
@@ -79,7 +79,7 @@ public class MainView extends AnchorPane implements IMainView {
 
         Scene scene = new Scene(this, 1000, 600);
 
-        stage.setTitle("Wack logged in");
+        stage.setTitle("Wack (logged in as " + username + ")");
         stage.setScene(scene);
         stage.show();
     }

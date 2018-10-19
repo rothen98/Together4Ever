@@ -9,7 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="colored-anchor" stylesheets="@wack.css" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="colored-anchor" stylesheets="@wack.css" type="AnchorPane" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Separator layoutX="297.0" layoutY="80.0" orientation="VERTICAL" prefHeight="200.0" />
       <Label layoutX="25.0" layoutY="144.0" styleClass="white-text" text="Username" />
@@ -32,4 +32,4 @@
       <Label fx:id="loginErrorText" layoutX="108.0" layoutY="216.0" styleClass="error-text" text="Error text" visible="false" />
       <Label fx:id="signupErrorText" layoutX="382.0" layoutY="216.0" styleClass="error-text" text="Error text" visible="false" />
    </children>
-</AnchorPane>
+</fx:root>

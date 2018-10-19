@@ -29,7 +29,7 @@ public class MainController implements IMainController, IChannelViewParent, ISea
 
         itemHolderController = new ChannelItemHolderController(channelItemHolder);
 
-        view = new MainView(channelView,channelItemHolder,searchResultsHolder);
+        view = new MainView(user.getName(),channelView,channelItemHolder,searchResultsHolder);
         view.setController(this);
 
         this.chatFacade = chatFacade;

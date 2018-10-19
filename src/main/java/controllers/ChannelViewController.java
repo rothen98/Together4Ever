@@ -102,6 +102,7 @@ public class ChannelViewController implements IChannelViewController {
 
 
     public void showNoChannel() {
+        channel = null;
         channelView.showNoChannel();
     }
 
