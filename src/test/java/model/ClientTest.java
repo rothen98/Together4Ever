@@ -1,11 +1,12 @@
 package model;
 
+import model.chatcomponents.message.MessageContent;
+import model.chatcomponents.message.MessageType;
 import model.client.Client;
 import model.client.IClient;
 import model.client.IClientListener;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.Message;
-import model.chatcomponents.message.TextContent;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +32,7 @@ public class ClientTest {
         client.addListeners(listener);
 
         MockUser userOne = new MockUser("UserOne", "password");
-        IMessage messageOne = new Message(userOne,new TextContent("Hello my friends!"));
+        IMessage messageOne = new Message(userOne,new MessageContent("Hello my friends!", MessageType.TEXT));
 
         client.updateListeners(null);
         assertTrue(listener.getAmountOfMessages() == 1);

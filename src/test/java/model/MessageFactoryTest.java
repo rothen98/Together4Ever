@@ -1,7 +1,9 @@
 package model;
 
+import model.chatcomponents.message.IMessage;
+import model.chatcomponents.message.MessageContent;
 import model.chatcomponents.message.MessageFactory;
-import model.chatcomponents.message.TextContent;
+import model.chatcomponents.message.MessageType;
 import model.chatcomponents.user.IUser;
 import model.chatcomponents.user.User;
 import org.junit.After;
@@ -11,6 +13,7 @@ import org.junit.Test;
 import services.PasswordEncryption.JBCryptAdapter;
 
 
+import java.awt.*;
 import java.time.LocalDateTime;
 
 import static org.junit.Assert.*;
@@ -36,51 +39,62 @@ public class MessageFactoryTest {
     @Test
     public void createTextMessage() {
         String messageText = "hej jag heter gustav";
-        TextContent messageContent = new TextContent(messageText);
+        IMessage message = MessageFactory.createTextMessage(messageText,messageSender);
 
-        assertEquals(messageText,
-                MessageFactory.createTextMessage(messageText,messageSender).getMessage());
-        assertEquals(messageText,
-                MessageFactory.createTextMessage(messageContent,messageSender).getMessage());
+        assertEquals(messageText, message.getMessage());
+        assertEquals(MessageType.TEXT, message.getType());
+
     }
 
 
     @Test
     public void createImageMessage() {
         String path = "/path/to/image";
-        ImageContent messageContent = new ImageContent(path);
+        IMessage message = MessageFactory.createImageMessage(path,messageSender);
 
-        assertEquals(path,
-                MessageFactory.createImageMessage(path,messageSender).getMessage());
-        assertEquals(path,
-                MessageFactory.createImageMessage(messageContent,messageSender).getMessage());
+
+        assertEquals(path, message.getMessage());
+        assertEquals(MessageType.IMAGE, message.getType());
     }
 
 
     @Test
     public void createJoinMessage() {
-        String message = messageSender.getName() + " just joined the channel.";
+        String messageText = messageSender.getName() + " just joined the channel.";
+        IMessage message = MessageFactory.createJoinMessage(messageSender);
 
-        assertEquals(message,
-                MessageFactory.createJoinMessage(messageSender).getMessage());
+        assertEquals(messageText, message.getMessage());
+        assertEquals(MessageType.JOIN, message.getType());
 
     }
 
     @Test
     public void createLeaveMessage() {
-        String message = messageSender.getName() + " just left the channel.";
+        String messageText = messageSender.getName() + " just left the channel.";
+        IMessage message = MessageFactory.createLeaveMessage(messageSender);
 
-        assertEquals(message,
-                MessageFactory.createLeaveMessage(messageSender).getMessage());
+
+        assertEquals(messageText, message.getMessage());
+        assertEquals(MessageType.LEAVE, message.getType());
 
     }
 
     @Test
-    public void createChannelMessage() {
-        String message = "Test message 12345.";
+    public void createKickMessage(){
+        String messageText = messageSender.getName() + " has just been kicked from the channel.";
+        IMessage message = MessageFactory.createKickMessage(messageSender);
 
-        assertEquals(message,
-                MessageFactory.createChannelMessage(message,messageSender).getMessage());
+        assertEquals(messageText, message.getMessage());
+        assertEquals(MessageType.KICK, message.getType());
+    }
+
+    @Test
+    public void createChannelMessage() {
+        String messageText = "Test message 12345.";
+        IMessage message = MessageFactory.createChannelMessage(messageText,messageSender);
+
+        assertEquals(messageText, message.getMessage());
+        assertEquals(MessageType.CHANNEL, message.getType());
 
     }
 
@@ -88,7 +102,7 @@ public class MessageFactoryTest {
     @Test
     public void createMessageWithTimestamp() {
         LocalDateTime timestamp = LocalDateTime.of(1998,2,8,10,55);
-        TextContent content = new TextContent("test");
+        MessageContent content = new MessageContent("test", MessageType.TEXT);
 
 
 

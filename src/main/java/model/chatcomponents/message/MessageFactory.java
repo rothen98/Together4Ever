@@ -88,7 +88,7 @@ public class MessageFactory {
 
 
     /**
-     * Method to create a message with a timestamp.
+     * Method to create a message with a timestamp and messageContent.
      * @param sender The sender of the message.
      * @param messageContent The content of the message.
      * @param timestamp The timestamp of the message.
