@@ -59,6 +59,10 @@ public class ChannelViewController implements IChannelViewController, IMemberIte
             addNewMessageToChannelView(createMessageView(message));
         }
 
+        if(message.getType() == MessageType.LEAVE){
+            removeFromOptionsPanel(message.getSender().getDisplayName());
+        }
+
         if(message.getType() == MessageType.KICK){
             if(!channel.hasUser(user)){
                 parentController.leftChannel(channel);

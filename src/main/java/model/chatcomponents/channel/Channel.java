@@ -183,7 +183,6 @@ public class Channel implements IChannel {
     @Override
     public void leave(IUser user) {
         users.remove(user);
-        sendMessage(MessageFactory.createLeaveMessage(user));
         if(channelAdministrator.equals(user)){
             if(!users.isEmpty()){
                 channelAdministrator=users.get(0);
@@ -192,7 +191,7 @@ public class Channel implements IChannel {
             }
         }
 
-
+        sendMessage(MessageFactory.createLeaveMessage(user));
     }
 
     /***
@@ -211,8 +210,8 @@ public class Channel implements IChannel {
      * @return true if the user is the channel administrator, false otherwise
      */
     @Override
-    public boolean isChannelAdministrator(IUser user){
-        return channelAdministrator.equals(user);
+    public boolean isChannelAdministrator(IUser user) {
+        return channelAdministrator != null && channelAdministrator.equals(user);
     }
 
     /**
