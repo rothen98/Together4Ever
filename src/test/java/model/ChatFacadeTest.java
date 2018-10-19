@@ -1,5 +1,11 @@
 package model;
 
+import model.chatcomponents.channel.Channel;
+import model.chatcomponents.message.MessageFactory;
+import model.chatcomponents.message.MessageType;
+import model.chatcomponents.user.User;
+import model.identifiers.IIdentifiable;
+import model.identifiers.IRecognizable;
 import services.PasswordEncryption.JBCryptAdapter;
 import services.datahandler.DataHandler;
 import model.server.*;
@@ -11,6 +17,8 @@ import model.chatcomponents.message.IMessage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Collection;
 
 import static org.junit.Assert.*;
 
@@ -110,16 +118,12 @@ public class ChatFacadeTest {
     @Test
     public void createTextMessage() {
         String message = "this is my textMessage";
-        String message2 = "this is my next message";
         IMessage textMessage = facade.createTextMessage(message, user);
-        IMessage textMessage2 = facade.createTextMessage(message2, user);
-        String channelName = "name";
-        String description = "descriotion";
-        IChannel channel = facade.createChannel(channelName, description, user);
-        channel.sendMessage(textMessage);
-        assertTrue(channel.getAllMessages().size() == 2);
-        channel.sendMessage(textMessage2);
-        assertTrue(channel.getAllMessages().size() == 3);
+        IMessage factoryMessage = MessageFactory.createTextMessage(message,user);
+
+        assertEquals(textMessage.getMessage(),factoryMessage.getMessage());
+        assertEquals(textMessage.getSender(),factoryMessage.getSender());
+
 
 
     }
@@ -137,5 +141,34 @@ public class ChatFacadeTest {
         assertTrue(channel.getAllMessages().size() == 2);
         channel.sendMessage(imageMessage2);
         assertTrue(channel.getAllMessages().size() == 3);
+    }
+
+    @Test
+    public void getAllChannels() {
+        facade.createChannel("football", "I like it", new User("viktor", "franzen"));
+        Collection<IIdentifiable> list = facade.getAllChannels();
+        assertTrue(list.size() == 1);
+
+    }
+
+    @Test
+    public void saveAllData() {
+        IUser user1 = new User("Viktor" , "Bad");
+        IUser user2 = new User("Alex" , "Good");
+        server.addUser(user1);
+        server.addUser(user2);
+
+        IChannel channel1 = new Channel("Football", "I love football");
+        IChannel channel2 = new Channel("Gaming", "I love Gaming");
+        server.addChannel(channel1);
+        server.addChannel(channel2);
+
+        facade.saveAllData();
+
+        Collection<String> list = server.getAllUserNames();
+
+        System.out.println(list);
+        assertTrue(list.contains(user1.getName()));
+
     }
 }

@@ -107,23 +107,6 @@ public class ChatFacade {
     }
 
     /**
-     * This method creates a listener and gives it to the client
-     * @param listener is a client listener which will be added
-     */
-    public void addClientListener(IClientListener listener) {
-         client.addListeners(listener);
-
-    }
-
-    /**
-     * This method will remove a listener from the client
-     * @param listener is the client listener that will be removed
-     */
-    public void deleteClientListener(IClientListener listener) {
-        client.removeListeners(listener);
-    }
-
-    /**
      * This method will create a new text message object
      * @param textMessage is the message that the user wants to send
      * @param sender is the user that is sending the newly created message
@@ -137,7 +120,7 @@ public class ChatFacade {
     /**
      * This method will create a new image message object
      * @param imageMessage is an image file(path) that the user wants to send
-     * @param sender is the user that is sending the newly created message
+     * @param  sender is the user that is sending the newly created message
      * @return the newly created imageMessage
      */
     public IMessage createImageMessage(String imageMessage, IUser sender) {
