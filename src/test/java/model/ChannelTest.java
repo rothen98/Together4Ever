@@ -8,7 +8,9 @@ import model.chatcomponents.channel.Channel;
 import model.chatcomponents.channel.IChannel;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import services.PasswordEncryption.JBCryptAdapter;
 
 import java.util.Collection;
 
@@ -16,6 +18,12 @@ import static org.junit.Assert.*;
 
 public class ChannelTest {
     private IChannel channel;
+
+    @BeforeClass
+    public static void setUpBefore(){
+        User.setPWEncryptor(new JBCryptAdapter());
+    }
+
     @Before
     public void setUp() throws Exception {
         /*

@@ -1,5 +1,6 @@
 package model;
 
+import services.PasswordEncryption.JBCryptAdapter;
 import services.datahandler.DataHandler;
 import model.server.*;
 import model.chatcomponents.user.IUser;
@@ -22,7 +23,7 @@ public class ChatFacadeTest {
     @Before
     public void setUp() throws Exception {
         DataHandler d = new DataHandler();
-        facade = new ChatFacade(new DataHandler());
+        facade = new ChatFacade(new DataHandler(), new JBCryptAdapter());
         server = new Server(d);
         user = new MockUser("Tubby", "D!nMamma123");
     }

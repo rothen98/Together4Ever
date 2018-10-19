@@ -2,6 +2,7 @@ package model;
 
 
 import model.chatcomponents.message.*;
+import model.chatcomponents.user.PasswordEncryptor;
 import model.identifiers.IIdentifiable;
 import model.server.*;
 import model.chatcomponents.user.IUser;
@@ -24,8 +25,9 @@ public class ChatFacade {
     private final IServer server;
     private IClient client;
 
-    public ChatFacade(IDataHandler dataHandler) {
+    public ChatFacade(IDataHandler dataHandler, PasswordEncryptor pwEncryptor) {
         this.server = new Server(dataHandler);
+        User.setPWEncryptor(pwEncryptor);
     }
 
     /**
