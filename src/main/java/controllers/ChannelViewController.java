@@ -91,12 +91,25 @@ public class ChannelViewController implements IChannelViewController, IMemberIte
         boolean isAdmin = channel.isChannelAdministrator(user);
         for(IRecognizable user:channel.getAllUsersInfo()){
             if(!membersContains(user.getDisplayName())){
-                MemberItemController controller = new MemberItemController(this,user.getDisplayName());
-                IMemberItem item = ViewComponentsFactory.createMemberItem(controller,user.getDisplayName(),isAdmin);
+                IMemberItem item = ViewComponentsFactory.createMemberItem(user.getDisplayName(),isAdmin);
+                MemberItemController controller = new MemberItemController(this,item,user.getDisplayName());
+                item.setController(controller);
                 members.put(controller,item);
+            }else{
+                MemberItemController c = getMemberItemController(user.getDisplayName());
+                c.setAdmin(isAdmin && !this.user.getDisplayName().equals(user.getDisplayName()));
             }
         }
         channelView.updateMembers(members.values());
+    }
+
+    private MemberItemController getMemberItemController(String displayName) {
+        for(MemberItemController controller:members.keySet()){
+            if(controller.getMemberName().equals(displayName)){
+                return controller;
+            }
+        }
+        return null;
     }
 
     private boolean membersContains(String displayName) {
@@ -144,8 +157,8 @@ public class ChannelViewController implements IChannelViewController, IMemberIte
         if(members.isEmpty()){
             boolean isAdmin = channel.isChannelAdministrator(user);
             for(IRecognizable user:channel.getAllUsersInfo()){
-                MemberItemController itemController = new MemberItemController(this,user.getDisplayName());
-                IMemberItem item = ViewComponentsFactory.createMemberItem(itemController,user.getDisplayName(),isAdmin);
+                IMemberItem item = ViewComponentsFactory.createMemberItem(user.getDisplayName(),isAdmin && !this.user.getDisplayName().equals(user.getDisplayName()));
+                MemberItemController itemController = new MemberItemController(this,item,user.getDisplayName());
                 members.put(itemController,item);
             }
         }

@@ -1,0 +1,382 @@
+[
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "fsdfs",
+      "Description": "sdf",
+      "Messages": [[
+         "BigVik just joined the channel.",
+         "BigVik",
+         "2018-10-19T15:14:48.344",
+         "JOIN"
+      ]],
+      "Users": ["BigVik"]
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Fotboll",
+      "Description": "Vi älskar fotboll",
+      "Messages": [
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-19T13:46:25.103",
+            "TEXT"
+         ],
+         [
+            "Spondon just left the channel.",
+            "Spondon",
+            "2018-10-19T13:55:12.609",
+            "TEXT"
+         ],
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-19T13:55:17.091",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:01:00.567",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:03:47.448",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:06:39.186",
+            "TEXT"
+         ],
+         [
+            "Tobias just left the channel.",
+            "Tobias",
+            "2018-10-19T14:06:47.898",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:07:12.898",
+            "TEXT"
+         ],
+         [
+            "Tobias has just been kicked from the channel.",
+            "Tobias",
+            "2018-10-19T14:07:44.801",
+            "TEXT"
+         ],
+         [
+            "sdfd",
+            "Spondon",
+            "2018-10-19T14:07:59.405",
+            "TEXT"
+         ],
+         [
+            "dsfs",
+            "Spondon",
+            "2018-10-19T14:08:02.009",
+            "TEXT"
+         ],
+         [
+            "jfhf",
+            "Tobias",
+            "2018-10-19T14:08:06.726",
+            "TEXT"
+         ],
+         [
+            "hkhk",
+            "Tobias",
+            "2018-10-19T14:08:12.591",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:11:34.949",
+            "TEXT"
+         ],
+         [
+            "Tobias has just been kicked from the channel.",
+            "Tobias",
+            "2018-10-19T14:12:06.931",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:22:30.034",
+            "TEXT"
+         ],
+         [
+            "Tobias has just been kicked from the channel.",
+            "Tobias",
+            "2018-10-19T14:22:51.009",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:23:37.840",
+            "TEXT"
+         ],
+         [
+            "Tobias has just been kicked from the channel.",
+            "Tobias",
+            "2018-10-19T14:24:06.421",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:27:41.367",
+            "TEXT"
+         ],
+         [
+            "Tobias has just been kicked from the channel.",
+            "Tobias",
+            "2018-10-19T14:27:47.454",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:28:03.080",
+            "TEXT"
+         ],
+         [
+            "sdsaa",
+            "Tobias",
+            "2018-10-19T14:28:06.339",
+            "TEXT"
+         ],
+         [
+            "Tobias has just been kicked from the channel.",
+            "Tobias",
+            "2018-10-19T14:37:53.713",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:38:08.944",
+            "TEXT"
+         ],
+         [
+            "Tobias has just been kicked from the channel.",
+            "Tobias",
+            "2018-10-19T14:39:45.433",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:41:13.529",
+            "TEXT"
+         ],
+         [
+            "Tobias has just been kicked from the channel.",
+            "Tobias",
+            "2018-10-19T14:42:43.573",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:43:00.426",
+            "TEXT"
+         ],
+         [
+            "Spondon has just been kicked from the channel.",
+            "Spondon",
+            "2018-10-19T14:43:32.150",
+            "TEXT"
+         ],
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-19T14:44:23.860",
+            "TEXT"
+         ],
+         [
+            "Tobias has just been kicked from the channel.",
+            "Tobias",
+            "2018-10-19T14:44:36.906",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:45:45.694",
+            "TEXT"
+         ],
+         [
+            "hej",
+            "Spondon",
+            "2018-10-19T14:45:59.986",
+            "TEXT"
+         ],
+         [
+            "Tobias has just been kicked from the channel.",
+            "Tobias",
+            "2018-10-19T14:46:15.114",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:48:34.609",
+            "TEXT"
+         ],
+         [
+            "Tobias has just been kicked from the channel.",
+            "Tobias",
+            "2018-10-19T14:48:46.888",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:50:40.285",
+            "TEXT"
+         ],
+         [
+            "Tobias has just been kicked from the channel.",
+            "Tobias",
+            "2018-10-19T14:50:46.743",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:51:26.758",
+            "TEXT"
+         ],
+         [
+            "Tobias has just been kicked from the channel.",
+            "Tobias",
+            "2018-10-19T14:52:33.619",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:52:45.037",
+            "TEXT"
+         ],
+         [
+            "Spondon just left the channel.",
+            "Spondon",
+            "2018-10-19T14:53:04.478",
+            "TEXT"
+         ],
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-19T15:10:11.518",
+            "JOIN"
+         ],
+         [
+            "Tobias just left the channel.",
+            "Tobias",
+            "2018-10-19T15:10:30.300",
+            "LEAVE"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T15:10:44.139",
+            "JOIN"
+         ],
+         [
+            "Tobias has just been kicked from the channel.",
+            "Tobias",
+            "2018-10-19T15:11:13.050",
+            "KICK"
+         ],
+         [
+            "BigSol just joined the channel.",
+            "BigSol",
+            "2018-10-19T15:11:37.885",
+            "JOIN"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T15:11:54.810",
+            "JOIN"
+         ],
+         [
+            "BigVik just joined the channel.",
+            "BigVik",
+            "2018-10-19T15:12:35.287",
+            "JOIN"
+         ],
+         [
+            "Joel just joined the channel.",
+            "Joel",
+            "2018-10-19T15:13:34.597",
+            "JOIN"
+         ],
+         [
+            "BigSol has just been kicked from the channel.",
+            "BigSol",
+            "2018-10-19T15:13:57.132",
+            "KICK"
+         ],
+         [
+            "Joel has just been kicked from the channel.",
+            "Joel",
+            "2018-10-19T15:14:04.962",
+            "KICK"
+         ],
+         [
+            "Spondon just left the channel.",
+            "Spondon",
+            "2018-10-19T15:14:24.457",
+            "LEAVE"
+         ],
+         [
+            "Tobias just left the channel.",
+            "Tobias",
+            "2018-10-19T15:14:38.474",
+            "LEAVE"
+         ],
+         [
+            "BigVik just left the channel.",
+            "BigVik",
+            "2018-10-19T15:14:59.264",
+            "LEAVE"
+         ]
+      ],
+      "Users": []
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "asd",
+      "Description": "dsfs",
+      "Messages": [[
+         "Tobias just joined the channel.",
+         "Tobias",
+         "2018-10-19T14:43:55.780",
+         "TEXT"
+      ]],
+      "Users": ["Tobias"]
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "dfs",
+      "Description": "sdf",
+      "Messages": [[
+         "Spondon just joined the channel.",
+         "Spondon",
+         "2018-10-19T14:24:02.162",
+         "TEXT"
+      ]],
+      "Users": ["Spondon"]
+   }
+]

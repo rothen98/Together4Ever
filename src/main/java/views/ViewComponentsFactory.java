@@ -47,7 +47,7 @@ public class ViewComponentsFactory {
         return new ChannelMessageView(displayname, message, displayImage, time, b);
     }
 
-    public static IMemberItem createMemberItem(MemberItemController itemController, String displayName, boolean isAdmin) {
-        return new MemberItem(itemController, displayName, isAdmin);
+    public static IMemberItem createMemberItem(String displayName, boolean isAdmin) {
+        return new MemberItem(displayName, isAdmin);
     }
 }

@@ -19,7 +19,7 @@ public class MemberItem extends AnchorPane implements IMemberItem{
     @FXML
     Button kickButton;
 
-    public MemberItem(MemberItemController controller, String membername, boolean isAdmin) {
+    public MemberItem(String membername, boolean isAdmin) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/wack_member.fxml"));
 
@@ -33,7 +33,6 @@ public class MemberItem extends AnchorPane implements IMemberItem{
         }
 
         this.memberName.setText(membername);
-        this.controller = controller;
 
         if (isAdmin) {
             kickButton.setVisible(true);
@@ -49,5 +48,20 @@ public class MemberItem extends AnchorPane implements IMemberItem{
     @Override
     public Node getNode() {
         return this;
+    }
+
+    @Override
+    public void showKickButton() {
+        kickButton.setVisible(true);
+    }
+
+    @Override
+    public void hideKickbutton() {
+        kickButton.setVisible(false);
+    }
+
+    @Override
+    public void setController(IMemberItemController controller) {
+        this.controller=controller;
     }
 }
