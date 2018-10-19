@@ -5,7 +5,6 @@ import model.chatcomponents.channel.IChannel;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageType;
 import model.chatcomponents.user.IUser;
-import model.identifiers.IIdentifiable;
 import model.identifiers.IRecognizable;
 import views.*;
 
@@ -53,20 +52,28 @@ public class ChannelViewController implements IChannelViewController, IMemberIte
     public void update(){
         IMessage message = channel.getLastMessages(1).get(0);
         if(message.getType() != MessageType.TEXT){
-            updateOptionsPanel(message.getSender().getDisplayName());
+            updateOptionsPanel();
         }
-        if(message.getType() == MessageType.KICK){
-            if(!channel.hasUser(user)){
-                parentController.leftChannel(channel);
-            }
 
-        }else{
+        if(channel.hasUser(user)){
             addNewMessageToChannelView(createMessageView(message));
         }
 
+        if(message.getType() == MessageType.KICK){
+            if(!channel.hasUser(user)){
+                parentController.leftChannel(channel);
+            }else{
+                removeFromOptionsPanel(message.getSender().getDisplayName());
+            }
+
+        }
+
+
+
+
     }
 
-    private void updateOptionsPanel(String displayName) {
+    private void removeFromOptionsPanel(String displayName) {
         MemberItemController toRemove = null;
         for(MemberItemController controller:members.keySet()){
             if(controller.getMemberName().equals(displayName)){
@@ -78,6 +85,27 @@ public class ChannelViewController implements IChannelViewController, IMemberIte
             members.remove(toRemove);
         }
         channelView.updateMembers(members.values());
+    }
+
+    private void updateOptionsPanel(){
+        boolean isAdmin = channel.isChannelAdministrator(user);
+        for(IRecognizable user:channel.getAllUsersInfo()){
+            if(!membersContains(user.getDisplayName())){
+                MemberItemController controller = new MemberItemController(this,user.getDisplayName());
+                IMemberItem item = ViewComponentsFactory.createMemberItem(controller,user.getDisplayName(),isAdmin);
+                members.put(controller,item);
+            }
+        }
+        channelView.updateMembers(members.values());
+    }
+
+    private boolean membersContains(String displayName) {
+        for(MemberItemController controller:members.keySet()){
+            if(controller.getMemberName().equals(displayName)){
+                return true;
+            }
+        }
+        return false;
     }
 
     private void addNewMessageToChannelView(IMessageView message) {
@@ -152,6 +180,9 @@ public class ChannelViewController implements IChannelViewController, IMemberIte
             return ViewComponentsFactory.createChannelMessageView(message.getSender().getDisplayName(),message.getMessage(),message.getSender().getDisplayImage(),
                     message.getTimestamp(),senderIsUser(message.getSender().getDisplayName()));
         }else if(message.getType()==MessageType.LEAVE){
+            return ViewComponentsFactory.createChannelMessageView(message.getSender().getDisplayName(),message.getMessage(),message.getSender().getDisplayImage(),
+                    message.getTimestamp(),senderIsUser(message.getSender().getDisplayName()));
+        }else if(message.getType()==MessageType.KICK){
             return ViewComponentsFactory.createChannelMessageView(message.getSender().getDisplayName(),message.getMessage(),message.getSender().getDisplayImage(),
                     message.getTimestamp(),senderIsUser(message.getSender().getDisplayName()));
         }
