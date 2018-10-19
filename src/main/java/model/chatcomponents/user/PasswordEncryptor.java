@@ -1,4 +1,4 @@
-package services.PasswordEncryption;
+package model.chatcomponents.user;
 
 /**
  * Interface for encrpyting passwords in the application. Removes the direct dependency on

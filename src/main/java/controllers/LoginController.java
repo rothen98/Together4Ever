@@ -2,6 +2,8 @@ package controllers;
 
 //javafx imports
 
+import model.chatcomponents.user.PasswordEncryptor;
+import services.PasswordEncryption.JBCryptAdapter;
 import services.datahandler.DataHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,7 +54,8 @@ public class LoginController implements Initializable {
     private final ChatFacade chatFacade;
 
     public LoginController() {
-        this.chatFacade = new ChatFacade(new DataHandler());
+        JBCryptAdapter pwEncryptor = new JBCryptAdapter();
+        this.chatFacade = new ChatFacade(new DataHandler(), pwEncryptor);
         //Note, the shutdown hook is not called when using the stop button in intellij.
         //You will need to use the exit button.
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {

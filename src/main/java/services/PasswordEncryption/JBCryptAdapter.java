@@ -1,5 +1,6 @@
 package services.PasswordEncryption;
 
+import model.chatcomponents.user.PasswordEncryptor;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
