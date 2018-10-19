@@ -1,6 +1,5 @@
 package model;
 
-import model.chatcomponents.message.ImageContent;
 import model.chatcomponents.message.MessageFactory;
 import model.chatcomponents.message.TextContent;
 import model.chatcomponents.user.IUser;
