@@ -20,9 +20,9 @@ public class MainController implements IMainController, IChannelViewParent, ISea
     private IUser user;
 
     public MainController(ChatFacade chatFacade, IUser user)  {
-        IChannelView channelView = new ChannelView();
-        IChannelItemHolder channelItemHolder = new ChannelListItemHolder();
-        ISearchResultsHolder searchResultsHolder = new SearchResultsHolder();
+        IChannelView channelView = ViewComponentsFactory.createChannelview();
+        IChannelItemHolder channelItemHolder = ViewComponentsFactory.createChannelListItemView();
+        ISearchResultsHolder searchResultsHolder = ViewComponentsFactory.createSearchResultsHolder();
 
         channelViewController = new ChannelViewController(chatFacade, user,channelView,this);
         channelView.setController(channelViewController);

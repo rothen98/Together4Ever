@@ -1,5 +1,6 @@
 package views;
 
+import javax.swing.text.html.ImageView;
 import java.time.LocalDateTime;
 
 public class ViewComponentsFactory {
@@ -37,5 +38,10 @@ public class ViewComponentsFactory {
     public static ISearchItemView createSearchItemView(ISearchItemController controller, String name,
                                                        String description, boolean alreadyMember) {
         return new SearchItemView(controller, name, description, alreadyMember);
+    }
+
+    public static IMessageView createChannelMessageView(String displayname, String message,
+                                                        String displayImage, LocalDateTime time, boolean b) {
+        return new ChannelMessageView(displayname, message, displayImage, time, b);
     }
 }

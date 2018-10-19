@@ -108,14 +108,14 @@ public class ChannelViewController implements IChannelViewController {
 
     private IMessageView createMessageView(IMessage message){
         if(message.getType()==MessageType.CHANNEL){
-            return new ChannelMessageView(message.getSender().getDisplayName(),message.getMessage(),message.getSender().getDisplayImage(),
+            return ViewComponentsFactory.createMessageView(message.getSender().getDisplayName(),message.getMessage(),message.getSender().getDisplayImage(),
                     message.getTimestamp(),senderIsUser(message.getSender().getDisplayName()));
         }
         /*else if(message.getType()==MessageType.IMAGE){
             //No implementation yet
         }*/
         else{
-            return new MessageView(message.getSender().getDisplayName(),message.getMessage(),message.getSender().getDisplayImage(),
+            return ViewComponentsFactory.createMessageView(message.getSender().getDisplayName(),message.getMessage(),message.getSender().getDisplayImage(),
                     message.getTimestamp(),senderIsUser(message.getSender().getDisplayName()));
         }
     }
