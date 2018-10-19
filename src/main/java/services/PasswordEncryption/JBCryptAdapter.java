@@ -5,7 +5,7 @@ import org.mindrot.jbcrypt.BCrypt;
 /**
  * Adapter for the JBCrypt library.
  */
-public class JBCryptAdapter implements PasswordEncryption{
+public class JBCryptAdapter implements PasswordEncryptor {
 
 
     /**
