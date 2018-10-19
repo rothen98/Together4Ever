@@ -196,7 +196,7 @@ public class ChannelTest {
         channel.join(kickedUser);
 
         assertEquals(2, channel.getNumberOfUsers());
-        
+
         String kickedName = kickedUser.getName();
         channel.kick(kickedName, adminUser);
 
