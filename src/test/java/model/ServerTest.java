@@ -1,5 +1,7 @@
 package model;
 
+import org.junit.BeforeClass;
+import services.PasswordEncryption.JBCryptAdapter;
 import services.datahandler.DataHandler;
 import model.server.*;
 import model.chatcomponents.user.IUser;
@@ -10,10 +12,18 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Collection;
+
 import static org.junit.Assert.*;
 
 public class ServerTest {
     IServer server;
+
+    @BeforeClass
+    public static void setUpBefore(){
+        User.setPWEncryptor(new JBCryptAdapter());
+    }
+
     @Before
     public void setUp() throws Exception {
         server = new Server(new DataHandler());
@@ -79,5 +89,42 @@ public class ServerTest {
 
     }
 
+    @Test
+    public void getAllUserNames() {
+        IUser user1 = new User("MyName1", "password");
+        IUser user2 = new User("MyName2", "passw2ord");
+        IUser user3 = new User("MyName3", "passwor3d");
 
+        server.addUser(user1);
+        server.addUser(user2);
+        server.addUser(user3);
+
+        Collection<String> list = server.getAllUserNames();
+
+        assertTrue(list.contains(user1.getName()));
+        assertTrue(list.contains(user2.getName()));
+        assertTrue(list.contains(user3.getName()));
+    }
+
+    @Test
+    public void saveData() {
+        IUser user1 = new User("MyName1", "password");
+        IUser user2 = new User("MyName2", "passw2ord");
+        server.addUser(user1);
+        server.addUser(user2);
+
+        IChannel channel1 = new Channel("ChannelName1", "MyDescription11");
+        IChannel channel2 = new Channel("ChannelName2", "MyDescription222");
+        server.addChannel(channel1);
+        server.addChannel(channel2);
+
+        server.saveData();
+
+        IServer newServer = new Server(new DataHandler());
+
+        Collection<String> list = newServer.getAllUserNames();
+        assertTrue(list.contains(user1.getName()));
+        assertTrue(list.contains(user2.getName()));
+
+    }
 }
