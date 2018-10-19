@@ -1,13 +1,10 @@
 import controllers.LoginController;
-import controllers.WackController;
-import datahandler.DataHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import model.ChatFacade;
 
 public class Wack extends Application{
     @Override

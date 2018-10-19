@@ -1,14 +1,15 @@
-package controllers;
+package views;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
-import model.chatcomponents.channel.IChannel;
+
 
 import java.io.IOException;
-import java.time.LocalDateTime;
+
 
 /**
  * @author Spondon Siddiqui
@@ -19,10 +20,9 @@ import java.time.LocalDateTime;
  * a channel.
  */
 
-public class ChannelListItem extends AnchorPane {
+public class ChannelListItem extends AnchorPane implements IChannelListItem {
 
-    private final IChannel channel;
-    private final IWackController parentController;
+    private IChannelListItemController itemController;
 
     @FXML
     private Label channelName;
@@ -36,10 +36,8 @@ public class ChannelListItem extends AnchorPane {
     @FXML
     private Circle notificationCircle;
 
-    public ChannelListItem(IChannel channel, IWackController parentController) {
+    public ChannelListItem(String channelName, String channelDescription) {
 
-        this.channel = channel;
-        this.parentController = parentController;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/wack_channel_listitem.fxml"));
 
@@ -52,9 +50,8 @@ public class ChannelListItem extends AnchorPane {
             e.printStackTrace();
         }
 
-        channelName.setText(channel.getDisplayName());
-        channelDescription.setText(channel.getDescription());
-
+        this.channelName.setText(channelName);
+        this.channelDescription.setText(channelDescription);
     }
 
     /**
@@ -63,25 +60,30 @@ public class ChannelListItem extends AnchorPane {
      */
     @FXML
     public void onClick() {
-        removeNotification();
-        parentController.openChannelView(channel);
+        itemController.pressed();
     }
+
 
     /**
      * Shows the red circle for the user
      */
+    public void removeNotification() {
+        notificationCircle.setVisible(false);
+    }
+
     public void addNotification() {
         notificationCircle.setVisible(true);
     }
 
-    /**
-     * Hides the red circle from the user
-     */
-    private void removeNotification() {
-        notificationCircle.setVisible(false);
+    @Override
+    public void setController(IChannelListItemController itemController) {
+        this.itemController = itemController;
     }
 
-    public LocalDateTime timeOfLastMessage() {
-        return channel.getLastMessages(1).get(0).getTimestamp();
+    @Override
+    public Node getNode() {
+        return this;
     }
+
+
 }

@@ -2,6 +2,11 @@ package model.server;
 
 import model.chatcomponents.user.IUser;
 
+/**
+ * This class contains all the user data that is stored at the end of a session and fetched at the beginning.
+ * The class is a middle ground for server to use
+ * @author Alex Solberg
+ */
 public class UserData {
     private String username;
     private String password;
