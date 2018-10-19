@@ -2,7 +2,7 @@
 
 # Group members
 
-Here are the group members that created this application with thier corresponding github usernames:
+Here are the group members that created this application with their corresponding github usernames:
 
 * Tobias Lindroth - rothen98
 * Spondon Siddiqui - SpondonSiddiqui
