@@ -1,0 +1,136 @@
+[
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Fotboll",
+      "Description": "Vi älskar fotboll",
+      "Messages": [
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-19T13:46:25.103",
+            "TEXT"
+         ],
+         [
+            "Spondon just left the channel.",
+            "Spondon",
+            "2018-10-19T13:55:12.609",
+            "TEXT"
+         ],
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-19T13:55:17.091",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:01:00.567",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:03:47.448",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:06:39.186",
+            "TEXT"
+         ],
+         [
+            "Tobias just left the channel.",
+            "Tobias",
+            "2018-10-19T14:06:47.898",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:07:12.898",
+            "TEXT"
+         ],
+         [
+            "Tobias has just been kicked from the channel.",
+            "Tobias",
+            "2018-10-19T14:07:44.801",
+            "TEXT"
+         ],
+         [
+            "sdfd",
+            "Spondon",
+            "2018-10-19T14:07:59.405",
+            "TEXT"
+         ],
+         [
+            "dsfs",
+            "Spondon",
+            "2018-10-19T14:08:02.009",
+            "TEXT"
+         ],
+         [
+            "jfhf",
+            "Tobias",
+            "2018-10-19T14:08:06.726",
+            "TEXT"
+         ],
+         [
+            "hkhk",
+            "Tobias",
+            "2018-10-19T14:08:12.591",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:11:34.949",
+            "TEXT"
+         ],
+         [
+            "Tobias has just been kicked from the channel.",
+            "Tobias",
+            "2018-10-19T14:12:06.931",
+            "TEXT"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:22:30.034",
+            "JOIN"
+         ],
+         [
+            "Tobias has just been kicked from the channel.",
+            "Tobias",
+            "2018-10-19T14:22:51.009",
+            "KICK"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T14:23:37.840",
+            "JOIN"
+         ],
+         [
+            "Tobias has just been kicked from the channel.",
+            "Tobias",
+            "2018-10-19T14:24:06.421",
+            "KICK"
+         ]
+      ],
+      "Users": ["Spondon"]
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "dfs",
+      "Description": "sdf",
+      "Messages": [[
+         "Spondon just joined the channel.",
+         "Spondon",
+         "2018-10-19T14:24:02.162",
+         "JOIN"
+      ]],
+      "Users": ["Spondon"]
+   }
+]

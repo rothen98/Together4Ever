@@ -5,11 +5,11 @@ import model.chatcomponents.channel.IChannel;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageType;
 import model.chatcomponents.user.IUser;
+import model.identifiers.IIdentifiable;
+import model.identifiers.IRecognizable;
 import views.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class ChannelViewController implements IChannelViewController, IMemberItemParent {
 
@@ -20,6 +20,8 @@ public class ChannelViewController implements IChannelViewController, IMemberIte
     private IChannelView channelView;
 
     private int numberOfShowingMessages;
+
+    private Map<MemberItemController, IMemberItem> members = new HashMap<>();
 
     public ChannelViewController(ChatFacade chatFacade, IUser user, IChannelView channelView,
                                  IChannelViewParent parentController) {
@@ -50,8 +52,32 @@ public class ChannelViewController implements IChannelViewController, IMemberIte
 
     public void update(){
         IMessage message = channel.getLastMessages(1).get(0);
-        //if(message.getType() == MessageTy)
-        addNewMessageToChannelView(createMessageView(message));
+        if(message.getType() != MessageType.TEXT){
+            updateOptionsPanel(message.getSender().getDisplayName());
+        }
+        if(message.getType() == MessageType.KICK){
+            if(!channel.hasUser(user)){
+                parentController.leftChannel(channel);
+            }
+
+        }else{
+            addNewMessageToChannelView(createMessageView(message));
+        }
+
+    }
+
+    private void updateOptionsPanel(String displayName) {
+        MemberItemController toRemove = null;
+        for(MemberItemController controller:members.keySet()){
+            if(controller.getMemberName().equals(displayName)){
+                toRemove = controller;
+                break;
+            }
+        }
+        if(toRemove != null){
+            members.remove(toRemove);
+        }
+        channelView.updateMembers(members.values());
     }
 
     private void addNewMessageToChannelView(IMessageView message) {
@@ -85,10 +111,23 @@ public class ChannelViewController implements IChannelViewController, IMemberIte
         parentController.leftChannel(channel);
     }
 
+    @Override
+    public void initMembers() {
+        if(members.isEmpty()){
+            boolean isAdmin = channel.isChannelAdministrator(user);
+            for(IRecognizable user:channel.getAllUsersInfo()){
+                MemberItemController itemController = new MemberItemController(this,user.getDisplayName());
+                IMemberItem item = ViewComponentsFactory.createMemberItem(itemController,user.getDisplayName(),isAdmin);
+                members.put(itemController,item);
+            }
+        }
+        channelView.updateMembers(members.values());
+    }
+
     public void showChannel(IChannel channel) {
         if(channel != null && !channel.equals(this.channel)) {
             this.channel = channel;
-
+            members.clear();
             List<IMessageView> messageViews = new ArrayList<>();
             for (IMessage message : channel.getLastMessages(15)) {
                 messageViews.add(createMessageView(message));
@@ -108,7 +147,11 @@ public class ChannelViewController implements IChannelViewController, IMemberIte
     }
 
     private IMessageView createMessageView(IMessage message){
-        if(message.getType()==MessageType.CHANNEL){
+        System.out.println(message.getType().toString());
+        if(message.getType()==MessageType.JOIN){
+            return ViewComponentsFactory.createChannelMessageView(message.getSender().getDisplayName(),message.getMessage(),message.getSender().getDisplayImage(),
+                    message.getTimestamp(),senderIsUser(message.getSender().getDisplayName()));
+        }else if(message.getType()==MessageType.LEAVE){
             return ViewComponentsFactory.createChannelMessageView(message.getSender().getDisplayName(),message.getMessage(),message.getSender().getDisplayImage(),
                     message.getTimestamp(),senderIsUser(message.getSender().getDisplayName()));
         }

@@ -86,7 +86,10 @@ public class Channel implements IChannel {
             }
             if(userToLeave!= null){
                 users.remove(userToLeave);
-                MessageFactory.createChannelMessage(userToLeave.getDisplayName() + " has been kicked from the group",userToLeave);
+                sendMessage(MessageFactory.createKickMessage(userToLeave));
+                userToLeave.sendMessageToClients(this);
+
+
             }
 
         }

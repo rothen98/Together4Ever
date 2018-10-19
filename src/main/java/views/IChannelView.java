@@ -3,6 +3,7 @@ package views;
 import javafx.scene.Node;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 public interface IChannelView {
@@ -22,4 +23,6 @@ public interface IChannelView {
     void enableLoadingOldMessages();
 
     void disableLoadingOldMessages();
+
+    void updateMembers(Collection<IMemberItem> values);
 }

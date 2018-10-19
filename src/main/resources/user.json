@@ -1,0 +1,14 @@
+[
+   {
+      "DisplayImage": "../../resources/default_user_pic.jpg",
+      "Username": "Tobias",
+      "DisplayName": "Tobias",
+      "Password": "$2a$10$EM3dvS1jyDu1yBhfePpxX.oagztRTJbsH2U5CZlMFLlQJ.UzljyGa"
+   },
+   {
+      "DisplayImage": "../../resources/default_user_pic.jpg",
+      "Username": "Spondon",
+      "DisplayName": "Spondon",
+      "Password": "$2a$10$ZkyxI1sBqyTAmyYNBxT/IOBqI2n.bejZvZPUaRb2bxfx9XUhSuJsC"
+   }
+]
