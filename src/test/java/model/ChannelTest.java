@@ -8,6 +8,7 @@ import model.chatcomponents.channel.Channel;
 import model.chatcomponents.channel.IChannel;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import services.PasswordEncryption.JBCryptAdapter;
 
@@ -17,6 +18,12 @@ import static org.junit.Assert.*;
 
 public class ChannelTest {
     private IChannel channel;
+
+    @BeforeClass
+    public static void setUpBefore(){
+        User.setPWEncryptor(new JBCryptAdapter());
+    }
+
     @Before
     public void setUp() throws Exception {
         /*
@@ -24,7 +31,6 @@ public class ChannelTest {
         When joining a user in a channel a message is sent. The length of it will therefore be 1 at the start.
          */
         channel = new Channel("Together4Ever", "The best channel");
-        User.setPWEncryptor(new JBCryptAdapter());
     }
 
     @After
