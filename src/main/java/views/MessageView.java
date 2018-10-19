@@ -1,8 +1,9 @@
-package controllers;
+package views;
 
 //javafx imports
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -12,7 +13,7 @@ import model.chatcomponents.message.IMessage;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-public class MessageView extends AnchorPane {
+public class MessageView extends AnchorPane implements IMessageView {
 
     @FXML
     private Label username;
@@ -25,7 +26,7 @@ public class MessageView extends AnchorPane {
     @FXML
     private AnchorPane backgroundPane;
 
-    public MessageView(IMessage iMessage, boolean clients) {
+    public MessageView(String sendername, String messageText, String ImageView, LocalDateTime time, boolean usersOwn) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/wack_message_listitem.fxml"));
 
@@ -38,19 +39,21 @@ public class MessageView extends AnchorPane {
             e.printStackTrace();
         }
 
-        username.setText(iMessage.getSender().getDisplayName());
-        messageText.setText(iMessage.getMessage());
-        LocalDateTime time = iMessage.getTimestamp();
+        username.setText(sendername);
+        this.messageText.setText(messageText);
         String displayedTime = time.getDayOfMonth() + "/" + time.getMonthValue() + " " + time.getHour() + ":" + time.getMinute();
         timeStamp.setText(displayedTime);
 
-        if(clients){
+        if(usersOwn){
             backgroundPane.getStyleClass().remove("other-message-background");
             backgroundPane.getStyleClass().add("your-message-background");
         }
 
-
     }
 
 
+    @Override
+    public Node getNode() {
+        return this;
+    }
 }

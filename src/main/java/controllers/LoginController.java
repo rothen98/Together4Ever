@@ -23,37 +23,37 @@ import model.client.IClient;
 import model.server.NoSuchUserFoundException;
 import model.server.WrongPasswordException;
 import model.chatcomponents.user.IUser;
+import views.*;
 
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginController implements Initializable {
+/**
+ * @author Spondon Siddiqui
+ *
+ * The LoginController class handles the view for logging in and signing up
+ */
+public class LoginController implements ILoginController {
 
-    @FXML
-    TextField loginUsername;
-    @FXML
-    PasswordField loginPassword;
-    @FXML
-    Button loginButton;
-    @FXML
-    TextField signupUsername;
-    @FXML
-    Label loginErrorText;
-    @FXML
-    Label signupErrorText;
-    @FXML
-    PasswordField signupPassword;
-    @FXML
-    Button signupButton;
-
+    /**
+     * The maximum number of characters the user is allowed to type into the username fields
+     */
     private final int usernameMaxCharacters = 20;
+
+    /**
+     * The maximum number of characters the user is allowed to type into the password fields
+     */
     private final int passwordMaxCharacters = 20;
 
     private final ChatFacade chatFacade;
 
-    public LoginController() {
+
+    private ILoginView view;
+
+    public LoginController(ILoginView view) {
+        this.view = view;
         JBCryptAdapter pwEncryptor = new JBCryptAdapter();
         this.chatFacade = new ChatFacade(new DataHandler(), pwEncryptor);
         //Note, the shutdown hook is not called when using the stop button in intellij.
@@ -66,141 +66,39 @@ public class LoginController implements Initializable {
             }
         }));
 
+        view.addTextLimiterToTextFields(20);
 
-    }
 
-    private void initTextFields() {
-        TextUtility.addTextLimiter(signupUsername, usernameMaxCharacters);
-        TextUtility.addTextLimiter(loginUsername, usernameMaxCharacters);
-        TextUtility.addTextLimiter(signupPassword, passwordMaxCharacters);
-        TextUtility.addTextLimiter(loginPassword, passwordMaxCharacters);
     }
 
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        initTextFields();
-    }
-
-    /**
-     * This method lets the user use the keyboard to navigate the signup fields
-     *
-     * @param event a KeyEvent to check if the user has pressed something on the keyboard
-     */
-    @FXML
-    public void signupUsernameKeyPressed(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.DOWN) {
-            signupPassword.requestFocus();
-        }
-    }
-
-    /**
-     * This method lets the user use the keyboard to navigate the signup fields
-     *
-     * @param event a KeyEvent to check if the user has pressed something on the keyboard
-     */
-    @FXML
-    public void signupKeyPressed(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) {
-            signupButtonPressed();
-        } else if (event.getCode() == KeyCode.UP) {
-            signupUsername.requestFocus();
-        } else if (event.getCode() == KeyCode.DOWN) {
-            signupButton.requestFocus();
-        }
-    }
-
-    /**
-     * This method lets the user use the keyboard to navigate the login fields
-     *
-     * @param event a KeyEvent to check if the user has pressed something on the keyboard
-     */
-    @FXML
-    private void loginUsernameKeyPressed(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.DOWN) {
-            loginPassword.requestFocus();
-        }
-    }
-
-    /**
-     * This method lets the user use the keyboard to navigate the signup fields
-     *
-     * @param event a KeyEvent to check if the user has pressed something on the keyboard
-     */
-    @FXML
-    private void loginKeyPressed(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) {
-            loginButtonPressed();
-        } else if (event.getCode() == KeyCode.UP) {
-            loginUsername.requestFocus();
-        } else if (event.getCode() == KeyCode.DOWN) {
-            loginButton.requestFocus();
-        }
-    }
-
-    /**
-     * This method makes sure that the fields for typing in username and password aren't empty,
-     * and then creates a user with the given name and password.
-     */
-    @FXML
-    private void signupButtonPressed() {
-        if (signupUsernameNotEmpty() && signupPasswordNotEmpty()) {
-            IUser user = chatFacade.createUser(getSignupUsername(), getSignupPassword());
-            if (user != null) {
-                signupErrorText.setVisible(false);
-                IClient client = chatFacade.createClient();
-                user.connectClient(client, getSignupPassword());
-
-                initClient(user, client);
-
-                System.out.println("User created with name " + getSignupUsername()
-                        + " and password " + getSignupPassword());
-            } else {
-                signupErrorText.setText("Username already taken");
-                signupErrorText.setVisible(true);
-            }
+    public void signUp(String username, String password) {
+        IUser user = chatFacade.createUser(username,password);
+        if (user != null) {
+            view.hideSignUpError();
+            IClient client = chatFacade.createClient();
+            user.connectClient(client, password);
+            initClient(user, client);
 
         } else {
-            System.out.println("Please enter a username and password");
+            view.showSignUpError(username);
         }
     }
 
-    /**
-     * This method makes sure that the user has not left the username field empty
-     *
-     * @return true if the user has typed something in the field "username"
-     */
-    private boolean signupUsernameNotEmpty() {
-        return signupUsername.getCharacters().length() > 0;
-    }
-
-    /**
-     * This method makes sure that the user has not left the password field empty
-     *
-     * @return true if the user has typed in something in the field password
-     */
-    private boolean signupPasswordNotEmpty() {
-        return signupPassword.getCharacters().length() > 0;
-    }
-
-    /**
-     * This method returns the characters from the username field with a String
-     *
-     * @return a String with the username that the user has typed in
-     */
-    private String getSignupUsername() {
-        CharSequence signupUsernameInput = signupUsername.getCharacters();
-        return signupUsernameInput.toString();
-    }
-
-    /**
-     * This method returns the characters from the password field with a String
-     *
-     * @return a String with the password that the user has typed in
-     */
-    private String getSignupPassword() {
-        CharSequence signupPasswordInput = signupPassword.getCharacters();
-        return signupPasswordInput.toString();
+    @Override
+    public void logIn(String username, String password) {
+        try {
+            IUser user = chatFacade.getUser(username, password);
+            IClient client = chatFacade.createClient();
+            user.connectClient(client, password);
+            initClient(user, client);
+            view.hideLoginError();
+        } catch (NoSuchUserFoundException e) {
+            view.showLoginError();
+        } catch (WrongPasswordException e) {
+            view.showLoginError();
+        }
     }
 
     /**
@@ -208,51 +106,9 @@ public class LoginController implements Initializable {
      *
      * @param user The user who will be logged in and using the client
      */
-    @FXML
     private void initClient(IUser user, IClient client) {
-        WackController controller = new WackController(chatFacade, user);
+
+        MainController controller = new MainController(chatFacade, user);
         client.addListeners(controller);
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/wack.fxml"));
-        loader.setController(controller);
-
-        Stage stage = new Stage();
-        stage.setMinHeight(450);
-        stage.setMinWidth(600);
-        stage.setOnHiding(event -> {
-
-        });
-
-        Parent root = null;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Scene scene = new Scene(root, 1000, 600);
-
-        stage.setTitle("wack (logged in as " + user.getName() + ")");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
-    private void loginButtonPressed() {
-        try {
-            loginErrorText.setVisible(false);
-            IUser user = chatFacade.getUser(loginUsername.getText(), loginPassword.getText());
-            IClient client = chatFacade.createClient();
-            user.connectClient(client, loginPassword.getText());
-            initClient(user, client);
-        } catch (NoSuchUserFoundException e) {
-            loginErrorText.setText("Username or password incorrect");
-            loginErrorText.setVisible(true);
-        } catch (WrongPasswordException e) {
-            loginErrorText.setText("Username or password incorrect");
-            loginErrorText.setVisible(true);
-        }
-
-
     }
 }
