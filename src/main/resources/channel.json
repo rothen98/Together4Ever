@@ -1,0 +1,177 @@
+[
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Fotboll",
+      "Description": "Vi älskar fotboll",
+      "Messages": [
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T10:22:47.388",
+            "CHANNEL"
+         ],
+         [
+            "Hej",
+            "Tobias",
+            "2018-10-19T10:22:50.257",
+            "TEXT"
+         ],
+         [
+            "Tobias just left the channel.",
+            "Tobias",
+            "2018-10-19T10:22:56.213",
+            "CHANNEL"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T10:22:59.234",
+            "CHANNEL"
+         ],
+         [
+            "Tobias just left the channel.",
+            "Tobias",
+            "2018-10-19T10:24:09.440",
+            "CHANNEL"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T10:24:15.055",
+            "CHANNEL"
+         ],
+         [
+            "Tobbe just joined the channel.",
+            "Tobbe",
+            "2018-10-19T11:00:53.895",
+            "CHANNEL"
+         ]
+      ],
+      "Users": [
+         "Tobias",
+         "Tobbe"
+      ]
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Innebandy",
+      "Description": "ad",
+      "Messages": [
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T10:23:32.868",
+            "CHANNEL"
+         ],
+         [
+            "asa",
+            "Tobias",
+            "2018-10-19T10:23:35.812",
+            "TEXT"
+         ],
+         [
+            "fsd",
+            "Tobias",
+            "2018-10-19T10:23:36.468",
+            "TEXT"
+         ],
+         [
+            "sfs",
+            "Tobias",
+            "2018-10-19T10:23:36.964",
+            "TEXT"
+         ],
+         [
+            "Tobias just left the channel.",
+            "Tobias",
+            "2018-10-19T10:23:55.086",
+            "CHANNEL"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T10:24:00.750",
+            "CHANNEL"
+         ],
+         [
+            "Tobias just left the channel.",
+            "Tobias",
+            "2018-10-19T10:24:19.554",
+            "CHANNEL"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T10:24:24.120",
+            "CHANNEL"
+         ],
+         [
+            "Tobias just left the channel.",
+            "Tobias",
+            "2018-10-19T10:25:43.263",
+            "CHANNEL"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T10:26:24.182",
+            "CHANNEL"
+         ],
+         [
+            "Tobias just left the channel.",
+            "Tobias",
+            "2018-10-19T10:27:29.201",
+            "CHANNEL"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T10:27:37.265",
+            "CHANNEL"
+         ],
+         [
+            "1",
+            "Tobias",
+            "2018-10-19T10:27:49.860",
+            "TEXT"
+         ],
+         [
+            "2",
+            "Tobias",
+            "2018-10-19T10:27:50.556",
+            "TEXT"
+         ],
+         [
+            "3",
+            "Tobias",
+            "2018-10-19T10:27:51.116",
+            "TEXT"
+         ],
+         [
+            "Tobias just left the channel.",
+            "Tobias",
+            "2018-10-19T10:28:04.836",
+            "CHANNEL"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T10:28:09.590",
+            "CHANNEL"
+         ],
+         [
+            "Tobias just left the channel.",
+            "Tobias",
+            "2018-10-19T11:08:11.366",
+            "CHANNEL"
+         ],
+         [
+            "Tobias just joined the channel.",
+            "Tobias",
+            "2018-10-19T11:08:15.784",
+            "CHANNEL"
+         ]
+      ],
+      "Users": ["Tobias"]
+   }
+]
