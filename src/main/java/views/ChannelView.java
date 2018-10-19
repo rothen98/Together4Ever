@@ -24,6 +24,7 @@ import model.chatcomponents.message.MessageType;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 public class ChannelView extends AnchorPane implements IChannelView {
@@ -31,6 +32,7 @@ public class ChannelView extends AnchorPane implements IChannelView {
     private IChannelViewController controller;
 
     private Button loadOldMessagesButton;
+
 
     @FXML
     private AnchorPane optionsPanel;
@@ -42,6 +44,8 @@ public class ChannelView extends AnchorPane implements IChannelView {
     private Label channelName;
     @FXML
     private VBox messageList;
+    @FXML
+    private VBox memberList;
     @FXML
     private TextField typeField;
     @FXML
@@ -131,6 +135,14 @@ public class ChannelView extends AnchorPane implements IChannelView {
     public void disableLoadingOldMessages() {
         messageList.getChildren().remove(loadOldMessagesButton);
         System.out.println("Disabled");
+    }
+
+    @Override
+    public void updateMembers(Collection<IMemberItem> values) {
+        memberList.getChildren().clear();
+        for(IMemberItem item:values){
+            memberList.getChildren().add(item.getNode());
+        }
     }
 
 
@@ -233,6 +245,7 @@ public class ChannelView extends AnchorPane implements IChannelView {
 
     @FXML
     private void optionsButtonPressed() {
+        controller.initMembers();
         clickBox.toFront();
     }
 

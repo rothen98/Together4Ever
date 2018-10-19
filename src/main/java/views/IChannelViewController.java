@@ -13,4 +13,6 @@ public interface IChannelViewController {
     void leaveChannel();
 
 
+    void initMembers();
+
 }

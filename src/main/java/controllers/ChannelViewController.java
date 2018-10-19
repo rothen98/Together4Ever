@@ -5,13 +5,12 @@ import model.chatcomponents.channel.IChannel;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageType;
 import model.chatcomponents.user.IUser;
+import model.identifiers.IRecognizable;
 import views.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
-public class ChannelViewController implements IChannelViewController {
+public class ChannelViewController implements IChannelViewController, IMemberItemParent {
 
     private IChannel channel;
     private ChatFacade chatFacade;
@@ -20,6 +19,8 @@ public class ChannelViewController implements IChannelViewController {
     private IChannelView channelView;
 
     private int numberOfShowingMessages;
+
+    private Map<MemberItemController, IMemberItem> members = new HashMap<>();
 
     public ChannelViewController(ChatFacade chatFacade, IUser user, IChannelView channelView,
                                  IChannelViewParent parentController) {
@@ -50,7 +51,74 @@ public class ChannelViewController implements IChannelViewController {
 
     public void update(){
         IMessage message = channel.getLastMessages(1).get(0);
-        addNewMessageToChannelView(createMessageView(message));
+        if(message.getType() != MessageType.TEXT){
+            updateOptionsPanel();
+        }
+
+        if(channel.hasUser(user)){
+            addNewMessageToChannelView(createMessageView(message));
+        }
+
+        if(message.getType() == MessageType.KICK){
+            if(!channel.hasUser(user)){
+                parentController.leftChannel(channel);
+            }else{
+                removeFromOptionsPanel(message.getSender().getDisplayName());
+            }
+
+        }
+
+
+
+
+    }
+
+    private void removeFromOptionsPanel(String displayName) {
+        MemberItemController toRemove = null;
+        for(MemberItemController controller:members.keySet()){
+            if(controller.getMemberName().equals(displayName)){
+                toRemove = controller;
+                break;
+            }
+        }
+        if(toRemove != null){
+            members.remove(toRemove);
+        }
+        channelView.updateMembers(members.values());
+    }
+
+    private void updateOptionsPanel(){
+        boolean isAdmin = channel.isChannelAdministrator(user);
+        for(IRecognizable user:channel.getAllUsersInfo()){
+            if(!membersContains(user.getDisplayName())){
+                IMemberItem item = ViewComponentsFactory.createMemberItem(user.getDisplayName(),isAdmin);
+                MemberItemController controller = new MemberItemController(this,item,user.getDisplayName());
+                item.setController(controller);
+                members.put(controller,item);
+            }else{
+                MemberItemController c = getMemberItemController(user.getDisplayName());
+                c.setAdmin(isAdmin && !this.user.getDisplayName().equals(user.getDisplayName()));
+            }
+        }
+        channelView.updateMembers(members.values());
+    }
+
+    private MemberItemController getMemberItemController(String displayName) {
+        for(MemberItemController controller:members.keySet()){
+            if(controller.getMemberName().equals(displayName)){
+                return controller;
+            }
+        }
+        return null;
+    }
+
+    private boolean membersContains(String displayName) {
+        for(MemberItemController controller:members.keySet()){
+            if(controller.getMemberName().equals(displayName)){
+                return true;
+            }
+        }
+        return false;
     }
 
     private void addNewMessageToChannelView(IMessageView message) {
@@ -84,10 +152,23 @@ public class ChannelViewController implements IChannelViewController {
         parentController.leftChannel(channel);
     }
 
+    @Override
+    public void initMembers() {
+        if(members.isEmpty()){
+            boolean isAdmin = channel.isChannelAdministrator(user);
+            for(IRecognizable user:channel.getAllUsersInfo()){
+                IMemberItem item = ViewComponentsFactory.createMemberItem(user.getDisplayName(),isAdmin && !this.user.getDisplayName().equals(user.getDisplayName()));
+                MemberItemController itemController = new MemberItemController(this,item,user.getDisplayName());
+                members.put(itemController,item);
+            }
+        }
+        channelView.updateMembers(members.values());
+    }
+
     public void showChannel(IChannel channel) {
         if(channel != null && !channel.equals(this.channel)) {
             this.channel = channel;
-
+            members.clear();
             List<IMessageView> messageViews = new ArrayList<>();
             for (IMessage message : channel.getLastMessages(15)) {
                 messageViews.add(createMessageView(message));
@@ -107,7 +188,14 @@ public class ChannelViewController implements IChannelViewController {
     }
 
     private IMessageView createMessageView(IMessage message){
-        if(message.getType()==MessageType.CHANNEL){
+        System.out.println(message.getType().toString());
+        if(message.getType()==MessageType.JOIN){
+            return ViewComponentsFactory.createChannelMessageView(message.getSender().getDisplayName(),message.getMessage(),message.getSender().getDisplayImage(),
+                    message.getTimestamp(),senderIsUser(message.getSender().getDisplayName()));
+        }else if(message.getType()==MessageType.LEAVE){
+            return ViewComponentsFactory.createChannelMessageView(message.getSender().getDisplayName(),message.getMessage(),message.getSender().getDisplayImage(),
+                    message.getTimestamp(),senderIsUser(message.getSender().getDisplayName()));
+        }else if(message.getType()==MessageType.KICK){
             return ViewComponentsFactory.createChannelMessageView(message.getSender().getDisplayName(),message.getMessage(),message.getSender().getDisplayImage(),
                     message.getTimestamp(),senderIsUser(message.getSender().getDisplayName()));
         }
@@ -120,5 +208,8 @@ public class ChannelViewController implements IChannelViewController {
         }
     }
 
-
+    @Override
+    public void kickUser(String username) {
+        channel.kick(username, user);
+    }
 }

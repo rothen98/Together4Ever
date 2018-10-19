@@ -123,7 +123,7 @@ public class MainController implements IMainController, IChannelViewParent, ISea
 
 
     }
-
+    @Override
     public void update(IIdentifiable iIdentifiable) {
         if (channelViewController.getCurrentChannelID() == iIdentifiable.getID()) {
             channelViewController.update();
