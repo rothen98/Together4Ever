@@ -76,7 +76,7 @@ public class LoginController implements ILoginController {
     public void signUp(String username, String password) {
         IUser user = chatFacade.createUser(username,password);
         if (user != null) {
-            view.hideSignUpError();
+            view.reset();
             IClient client = chatFacade.createClient();
             user.connectClient(client, password);
             initClient(user, client);
@@ -93,7 +93,7 @@ public class LoginController implements ILoginController {
             IClient client = chatFacade.createClient();
             user.connectClient(client, password);
             initClient(user, client);
-            view.hideLoginError();
+            view.reset();
         } catch (NoSuchUserFoundException e) {
             view.showLoginError();
         } catch (WrongPasswordException e) {
