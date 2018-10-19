@@ -84,7 +84,7 @@ public class Server implements IServer {
                     }else{
                         type = MessageType.TEXT;
                     }
-                    channelMessages.add(MessageFactory.createMessage(user,mdata.getContent(),
+                    channelMessages.add(MessageFactory.createMessageWithTimestamp(user,mdata.getContent(),
                             type, LocalDateTime.parse(mdata.getTimeStamp())));
                     break;
                 }

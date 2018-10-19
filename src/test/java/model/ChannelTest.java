@@ -59,8 +59,8 @@ public class ChannelTest {
         IUser userOne = new User("UserOne", "password");
         IUser userTwo = new User("UserTwo", "password");
 
-        IMessageContent textMessageOne = new TextContent("Hello my friends");
-        IMessageContent textMessageTwo = new TextContent("Hi how are you?");
+        IMessageContent textMessageOne = new MessageContent("Hello my friends", MessageType.TEXT);
+        IMessageContent textMessageTwo = new MessageContent("Hi how are you?", MessageType.TEXT);
 
         IMessage messageOne = new Message(userOne,textMessageOne);
         IMessage messageTwo = new Message(userTwo,textMessageTwo);
@@ -81,8 +81,8 @@ public class ChannelTest {
         IUser userOne = new MockUser("UserOne", "password");
         IUser userTwo = new User("UserTwo", "password");
 
-        IMessage messageOne = new Message(userOne,new TextContent("Hello my friends!"));
-        IMessage messageTwo = new Message(userTwo,new TextContent("Hi how are you?"));
+        IMessage messageOne = new Message(userOne,new MessageContent("Hello my friends!",MessageType.TEXT));
+        IMessage messageTwo = new Message(userTwo,new MessageContent("Hi how are you?",MessageType.TEXT));
 
         channel.sendMessage(messageOne);
         channel.sendMessage(messageTwo);

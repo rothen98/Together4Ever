@@ -14,39 +14,30 @@ public class MessageFactory {
 
 
     /**
-     * A method to create a text message. Overloaded so it can either take in a String and
-     * then create a TextContent from it or take in an already created TextContent and use that
-     * instead.
-     * @param content The content to be added to the message
+     * A method to create a text message.
+     * @param message The text to be added to the message
      * @param user The author of the message
      * @return The message.
      */
-    public static IMessage createTextMessage(String content, IUser user){
-        IMessageContent textContent = new TextContent(content);
+    public static IMessage createTextMessage(String message, IUser user){
+        IMessageContent textContent = new MessageContent(message, MessageType.TEXT);
         return new Message(user,textContent);
-    }
-    public static IMessage createTextMessage(TextContent content, IUser user){
-        return new Message(user,content);
     }
 
 
     /**
      *
-     * A method to create a image message. Overloaded so it can either take in a String with a filepath and
-     * then create a ImageContent from it or take in an already created ImageContent and use that
-     * instead.
-     * @param content The content to be added to the message. (A string with a filepath or a aldready
+     * A method to create a image message.
+     * @param path The content to be added to the message. (A string with a filepath or a aldready
      *                created ImageContent.
      * @param user The author of the message
      * @return The message.
      */
-    public static IMessage createImageMessage(String content, IUser user){
-        IMessageContent imageContent = new ImageContent(content);
+    public static IMessage createImageMessage(String path, IUser user){
+        IMessageContent imageContent = new MessageContent(path,MessageType.IMAGE);
         return new Message(user,imageContent);
     }
-    public static IMessage createImageMessage(ImageContent content, IUser user){
-        return new Message(user,content);
-    }
+
 
 
     /**
@@ -56,7 +47,7 @@ public class MessageFactory {
      */
     public static IMessage createJoinMessage(IUser user){
         String message = user.getName() + " just joined the channel.";
-        IMessageContent content = new ChannelContent(message);
+        IMessageContent content = new MessageContent(message, MessageType.JOIN);
         return new Message(user,content);
     }
 
@@ -67,7 +58,18 @@ public class MessageFactory {
      */
     public static IMessage createLeaveMessage(IUser user){
         String message = user.getName() + " just left the channel.";
-        IMessageContent content = new ChannelContent(message);
+        IMessageContent content = new MessageContent(message, MessageType.LEAVE);
+        return new Message(user,content);
+    }
+
+    /**
+     * A method to create a kick message. (With a standard message)
+     * @param user The user that has been kicked.
+     * @return The message.
+     */
+    public static IMessage createKickMessage(IUser user){
+        String message = user.getName() + " has just been kicked from the channel.";
+        IMessageContent content = new MessageContent(message,MessageType.KICK);
         return new Message(user,content);
     }
 
@@ -80,13 +82,13 @@ public class MessageFactory {
      * @return The message.
      */
     public static IMessage createChannelMessage(String text, IUser user){
-        IMessageContent content = new ChannelContent(text);
+        IMessageContent content = new MessageContent(text, MessageType.CHANNEL);
         return new Message(user,content);
     }
 
 
     /**
-     * Method to create a message with a timestamp.
+     * Method to create a message with a timestamp and messageContent.
      * @param sender The sender of the message.
      * @param messageContent The content of the message.
      * @param timestamp The timestamp of the message.
@@ -104,13 +106,45 @@ public class MessageFactory {
      * @param timestamp
      * @return
      */
-    public static IMessage createMessage(IUser sender, String content, MessageType type, LocalDateTime timestamp) {
+    public static IMessage createMessageWithTimestamp(IUser sender, String content, MessageType type, LocalDateTime timestamp) {
         if(type.equals(MessageType.IMAGE)){
-            return new Message(sender,new ImageContent(content),timestamp);
+            return new Message(sender,new MessageContent(content, MessageType.IMAGE),timestamp);
         }else if(type.equals(MessageType.CHANNEL)){
-            return new Message(sender,new ChannelContent(content),timestamp);
+            return new Message(sender,new MessageContent(content, MessageType.CHANNEL),timestamp);
+        }else if(type.equals(MessageType.TEXT)){
+            return new Message(sender,new MessageContent(content, MessageType.TEXT),timestamp);
+        }else if(type.equals(MessageType.KICK)){
+            return new Message(sender,new MessageContent(content,MessageType.KICK),timestamp);
+        }else if(type.equals(MessageType.JOIN)){
+            return new Message(sender,new MessageContent(content,MessageType.JOIN),timestamp);
         }else{
-            return new Message(sender,new TextContent(content),timestamp);
+            return new Message(sender,new MessageContent(content,MessageType.LEAVE),timestamp);
+        }
+
+    }
+
+
+    /**
+     * Creates a message with the given type. Can be used if the standard messages are not good enough
+     * for the current scenario.
+     * @param sender The sender of the message.
+     * @param content A string with the message.
+     * @param type The type of the message.
+     * @return The message.
+     */
+    public static IMessage createMessage(IUser sender, String content, MessageType type) {
+        if(type.equals(MessageType.IMAGE)){
+            return new Message(sender,new MessageContent(content, MessageType.IMAGE));
+        }else if(type.equals(MessageType.CHANNEL)){
+            return new Message(sender,new MessageContent(content, MessageType.CHANNEL));
+        }else if(type.equals(MessageType.TEXT)){
+            return new Message(sender,new MessageContent(content, MessageType.TEXT));
+        }else if(type.equals(MessageType.KICK)){
+            return new Message(sender,new MessageContent(content,MessageType.KICK));
+        }else if(type.equals(MessageType.JOIN)){
+            return new Message(sender,new MessageContent(content,MessageType.JOIN));
+        }else{
+            return new Message(sender,new MessageContent(content,MessageType.LEAVE));
         }
 
     }
