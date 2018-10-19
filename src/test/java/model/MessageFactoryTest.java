@@ -7,7 +7,9 @@ import model.chatcomponents.user.IUser;
 import model.chatcomponents.user.User;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import services.PasswordEncryption.JBCryptAdapter;
 
 
 import java.time.LocalDateTime;
@@ -16,6 +18,11 @@ import static org.junit.Assert.*;
 
 public class MessageFactoryTest {
     IUser messageSender;
+
+    @BeforeClass
+    public static void setUpBefore(){
+        User.setPWEncryptor(new JBCryptAdapter());
+    }
 
     @Before
     public void setUp() throws Exception {

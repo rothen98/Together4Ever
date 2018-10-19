@@ -1,8 +1,5 @@
 package model.chatcomponents.user;
 
-
-
-import org.mindrot.jbcrypt.BCrypt;
 import model.identifiers.IIdentifiable;
 import model.identifiers.IRecognizable;
 import model.client.IClient;
@@ -21,6 +18,7 @@ public class User implements IUser{
     private Collection<IClient> clients;
     private String name;
     private String hashedPassword;
+    private static PasswordEncryptor pwEncryptor;
 
     private IRecognizable userProfile;
 
@@ -33,7 +31,7 @@ public class User implements IUser{
 
         this.userProfile = new UserProfile(name);
 
-        this.hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+        this.hashedPassword = pwEncryptor.hashPassword(password, pwEncryptor.generateSalt());
 
     }
 
@@ -54,7 +52,7 @@ public class User implements IUser{
      * @param password The password that needs to match the chatcomponents password.
      */
     public void connectClient(IClient client, String password){
-        if(BCrypt.checkpw(password,hashedPassword)){
+        if(pwEncryptor.checkPassword(password,hashedPassword)){
             clients.add(client);
         }
     }
@@ -102,7 +100,7 @@ public class User implements IUser{
      */
     @Override
     public boolean authorizeLogIn(String password) {
-        if(BCrypt.checkpw(password,hashedPassword)){
+        if(pwEncryptor.checkPassword(password, hashedPassword)){
             return true;
         }
         return false;
@@ -127,7 +125,7 @@ public class User implements IUser{
         return userProfile.getDisplayName();
     }
 
-    /*public void setDisplayName(String displayName) {
+/*    public void setDisplayName(String displayName) {
         userProfile.setDisplayName(displayName);
     }
 
@@ -178,5 +176,9 @@ public class User implements IUser{
             return true;
         }
         return false;
+    }
+
+    public static void setPWEncryptor(PasswordEncryptor encryptor){
+        pwEncryptor = encryptor;
     }
 }
