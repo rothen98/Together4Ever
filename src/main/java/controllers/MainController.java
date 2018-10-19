@@ -72,7 +72,7 @@ public class MainController implements IMainController, IChannelViewParent, ISea
             List<ISearchItemView> listToReturn = new ArrayList<>();
             for (IIdentifiable i : chatFacade.getAllChannels()) {
                 if (i.getDisplayName().toLowerCase().contains(search.toLowerCase())) {
-                    listToReturn.add(new SearchItemView(new SearchItemController(this,i),
+                    listToReturn.add(ViewComponentsFactory.createSearchItemView(new SearchItemController(this,i),
                             i.getDisplayName(),i.getDescription(),itemHolderController.contains(i.getID())));
                 }
             }
@@ -109,7 +109,7 @@ public class MainController implements IMainController, IChannelViewParent, ISea
     }
 
     private void addChannelListItem(IChannel newChannel) {
-        IChannelListItem channelListItem = new ChannelListItem(newChannel.getDisplayName(),newChannel.getDescription());
+        IChannelListItem channelListItem = ViewComponentsFactory.createChannelListItem(newChannel.getDisplayName(),newChannel.getDescription());
         IChannelListItemController itemController = new ChatListItemController(this,newChannel,channelListItem);
         channelListItem.setController(itemController);
         itemHolderController.addChannelListItem(itemController,channelListItem);

@@ -45,11 +45,24 @@
             "Tobbe",
             "2018-10-19T11:00:53.895",
             "CHANNEL"
+         ],
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-19T11:38:41.057",
+            "CHANNEL"
+         ],
+         [
+            "Hejsan",
+            "Spondon",
+            "2018-10-19T11:38:45.047",
+            "TEXT"
          ]
       ],
       "Users": [
          "Tobias",
-         "Tobbe"
+         "Tobbe",
+         "Spondon"
       ]
    },
    {
@@ -170,8 +183,17 @@
             "Tobias",
             "2018-10-19T11:08:15.784",
             "CHANNEL"
+         ],
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-19T11:38:49.235",
+            "CHANNEL"
          ]
       ],
-      "Users": ["Tobias"]
+      "Users": [
+         "Tobias",
+         "Spondon"
+      ]
    }
 ]

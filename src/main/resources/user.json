@@ -1,45 +1,15 @@
 [
    {
-      "DisplayImage": "MyimageKat",
-      "Username": "Spooodon",
-      "DisplayName": "London",
-      "Password": "Password"
+      "DisplayImage": "../../resources/default_user_pic.jpg",
+      "Username": "Tobbe",
+      "DisplayName": "Tobbe",
+      "Password": "$2a$10$hEAX5tH9j1R7pOKcg1StRODL1CiaUboF43DPtR3aU4AFTxivd9vma"
    },
    {
       "DisplayImage": "MyimageChooo",
       "Username": "AlexS",
       "DisplayName": "BigSol",
       "Password": "MyFuntime"
-   },
-   {
-      "DisplayImage": "../../resources/default_user_pic.jpg",
-      "Username": "Spondon",
-      "DisplayName": "Spondon",
-      "Password": "$2a$10$jyxBKaGEfIWyYnWWPmKreeyXbgO9Vh/i0I3dmDk6JzkpCQFLuni4W"
-   },
-   {
-      "DisplayImage": "MyimageDef",
-      "Username": "MyName",
-      "DisplayName": "JesusName",
-      "Password": "Password123"
-   },
-   {
-      "DisplayImage": "../../resources/default_user_pic.jpg",
-      "Username": "Erik",
-      "DisplayName": "Erik",
-      "Password": "$2a$10$RO1ClWtZ9NJyc5DThADvuOnvr8r4cdFjEzSogsXFlNrMb4uofjmCa"
-   },
-   {
-      "DisplayImage": "../../resources/default_user_pic.jpg",
-      "Username": "Anna",
-      "DisplayName": "Anna",
-      "Password": "$2a$10$XTirjA0JGGWMoxugoC/lYu9jowbc02ZaZ1J11aQWmMMl5HIWhkU7S"
-   },
-   {
-      "DisplayImage": "../../resources/default_user_pic.jpg",
-      "Username": "Tobbe",
-      "DisplayName": "Tobbe",
-      "Password": "$2a$10$hEAX5tH9j1R7pOKcg1StRODL1CiaUboF43DPtR3aU4AFTxivd9vma"
    },
    {
       "DisplayImage": "MyimageTja",
@@ -58,5 +28,35 @@
       "Username": "Tobias",
       "DisplayName": "Tobias",
       "Password": "$2a$10$insIBYd23AAsMwFLI6/6beESr35mBx0jXO9nVtFOetb4KJPJX1WWy"
+   },
+   {
+      "DisplayImage": "MyimageDef",
+      "Username": "MyName",
+      "DisplayName": "JesusName",
+      "Password": "Password123"
+   },
+   {
+      "DisplayImage": "../../resources/default_user_pic.jpg",
+      "Username": "Anna",
+      "DisplayName": "Anna",
+      "Password": "$2a$10$XTirjA0JGGWMoxugoC/lYu9jowbc02ZaZ1J11aQWmMMl5HIWhkU7S"
+   },
+   {
+      "DisplayImage": "../../resources/default_user_pic.jpg",
+      "Username": "Spondon",
+      "DisplayName": "Spondon",
+      "Password": "$2a$10$jyxBKaGEfIWyYnWWPmKreeyXbgO9Vh/i0I3dmDk6JzkpCQFLuni4W"
+   },
+   {
+      "DisplayImage": "MyimageKat",
+      "Username": "Spooodon",
+      "DisplayName": "London",
+      "Password": "Password"
+   },
+   {
+      "DisplayImage": "../../resources/default_user_pic.jpg",
+      "Username": "Erik",
+      "DisplayName": "Erik",
+      "Password": "$2a$10$RO1ClWtZ9NJyc5DThADvuOnvr8r4cdFjEzSogsXFlNrMb4uofjmCa"
    }
 ]
