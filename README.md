@@ -16,5 +16,6 @@ The first time you run the application you can use the command:
 
 If you want to run the application again, please use: 
 > gradle run,
+
 Otherwise the Users and Channels you created previously will be removed.
 
