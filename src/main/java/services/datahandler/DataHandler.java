@@ -76,15 +76,15 @@ public class DataHandler implements IDataHandler {
     private String readFile(String filename) throws IOException {
         String result = "";
 
-            BufferedReader br = new BufferedReader(new FileReader(filename));
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-            while (line != null) {
-                sb.append(line);
-                line = br.readLine();
-            }
-            result = sb.toString();
-            br.close();
+        BufferedReader br = new BufferedReader(new FileReader(filename));
+        StringBuilder sb = new StringBuilder();
+        String line = br.readLine();
+        while (line != null) {
+            sb.append(line);
+            line = br.readLine();
+        }
+        result = sb.toString();
+        br.close();
         return result;
     }
 
@@ -96,7 +96,7 @@ public class DataHandler implements IDataHandler {
     private void loopUsers(Collection<UserData> users) {
         for (UserData u : users) {
             writeUserArray.put(createNewUserJObject(u));
-            }
+        }
     }
 
     /**
@@ -132,9 +132,9 @@ public class DataHandler implements IDataHandler {
      */
     private void loopChannels(Collection<ChannelData> channels) {
         for (ChannelData c : channels) {
-                JSONObject channel = createNewChannelJObject(c);
-                writeChannelArray.put(channel);
-            }
+            JSONObject channel = createNewChannelJObject(c);
+            writeChannelArray.put(channel);
+        }
     }
 
 

@@ -77,10 +77,14 @@ public class Server implements IServer {
             for (IUser user : users) {
                 if (mdata.getSenderName().equals(user.getName())) {
                     MessageType type;
-                    if(mdata.getType().equals("CHANNEL")){
-                        type = MessageType.CHANNEL;
-                    }else if(mdata.getType().equals("IMAGE")){
+                    if(mdata.getType().equals("IMAGE")){
                         type = MessageType.IMAGE;
+                    }else if(mdata.getType().equals("JOIN")){
+                        type = MessageType.JOIN;
+                    }else if(mdata.getType().equals("LEAVE")){
+                        type = MessageType.LEAVE;
+                    }else if(mdata.getType().equals("KICK")){
+                        type = MessageType.KICK;
                     }else{
                         type = MessageType.TEXT;
                     }

@@ -103,12 +103,32 @@ public class MessageFactoryTest {
     public void createMessageWithTimestamp() {
         LocalDateTime timestamp = LocalDateTime.of(1998,2,8,10,55);
         MessageContent content = new MessageContent("test", MessageType.TEXT);
-
-
+        String messageImage = "//image/image/image.png";
+        String messageJoin = "Viktor har joined brooo";
+        IUser sender = new User("Viktor", "NoFriends");
 
         assertEquals(timestamp,
                 MessageFactory.createMessageWithTimestamp(messageSender,content,timestamp).getTimestamp());
         assertEquals("test",
                 MessageFactory.createMessageWithTimestamp(messageSender,content,timestamp).getMessage());
+        assertEquals(timestamp,
+                MessageFactory.createMessageWithTimestamp(sender, messageJoin, MessageType.JOIN, timestamp).getTimestamp());
+        assertEquals(messageImage,
+                MessageFactory.createMessageWithTimestamp(sender, messageImage, MessageType.IMAGE, timestamp).getMessage());
+    }
+
+    @Test
+    public void createMessage() {
+        String messageText = "This is my message bro";
+        String messageImage = "//image/image/image.png";
+        String messageJoin = "Viktor har joined brooo";
+        IUser sender = new User("Viktor", "NoFriends");
+        IMessage textMessage = MessageFactory.createMessage(sender, messageText, MessageType.TEXT);
+        assertTrue(textMessage.getMessage() == messageText);
+        IMessage imageMessage = MessageFactory.createMessage(sender, messageImage, MessageType.IMAGE);
+        assertTrue(imageMessage.getMessage() == messageImage);
+        IMessage joinMessage = MessageFactory.createMessage(sender, messageJoin, MessageType.JOIN);
+        assertTrue(joinMessage.getMessage() == messageJoin);
+
     }
 }

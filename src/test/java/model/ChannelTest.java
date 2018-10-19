@@ -6,11 +6,15 @@ import model.chatcomponents.user.IUser;
 import model.chatcomponents.user.User;
 import model.chatcomponents.channel.Channel;
 import model.chatcomponents.channel.IChannel;
+import model.server.IServer;
+import model.server.NoChannelFoundException;
+import model.server.Server;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import services.PasswordEncryption.JBCryptAdapter;
+import services.datahandler.DataHandler;
 
 import java.util.Collection;
 
@@ -180,5 +184,32 @@ public class ChannelTest {
         User user = new User("Test","test");
         someChannel.join(user);
         assertTrue(someChannel.isChannelAdministrator(user));
+    }
+
+    @Test
+    public void kick() {
+        IChannel channel = new Channel("MyNameCh", "DescribeMePls");
+        IUser adminUser = new User("Viktor", "Lonely");
+        IUser kickedUser = new User("Spondon", "Curry");
+
+        channel.join(adminUser);
+        channel.join(kickedUser);
+
+        assertEquals(2, channel.getNumberOfUsers());
+
+        String kickedName = kickedUser.getName();
+        channel.kick(kickedName, adminUser);
+
+        assertEquals(1, channel.getNumberOfUsers());
+
+    }
+
+    @Test
+    public void getDisplayImage() throws NoChannelFoundException {
+        IChannel someChannel = new Channel("theName","NA");
+        IServer server = new Server(new DataHandler());
+        server.addChannel(someChannel);
+        IChannel newChannel = server.getChannel(someChannel.getID());
+        assertEquals(newChannel.getDisplayImage(), someChannel.getDisplayImage());
     }
 }
