@@ -43,6 +43,8 @@ public class ChannelView extends AnchorPane implements IChannelView {
     @FXML
     private VBox messageList;
     @FXML
+    private VBox memberList;
+    @FXML
     private TextField typeField;
     @FXML
     private Button sendButton;
