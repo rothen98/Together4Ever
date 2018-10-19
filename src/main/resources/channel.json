@@ -63,11 +63,95 @@
             "Spondon",
             "2018-10-17T17:19:23.914",
             "TEXT"
+         ],
+         [
+            "Spondon just left the channel.",
+            "Spondon",
+            "2018-10-18T12:25:41.785",
+            "CHANNEL"
+         ],
+         [
+            "Spondon just joined the channel.",
+            "Spondon",
+            "2018-10-18T12:26:22.080",
+            "CHANNEL"
+         ],
+         [
+            "Erik just joined the channel.",
+            "Erik",
+            "2018-10-18T16:57:31.551",
+            "CHANNEL"
+         ],
+         [
+            "Erik just left the channel.",
+            "Erik",
+            "2018-10-18T16:57:40.337",
+            "CHANNEL"
+         ],
+         [
+            "Erik just joined the channel.",
+            "Erik",
+            "2018-10-18T17:00:17.362",
+            "CHANNEL"
          ]
       ],
       "Users": [
+         "Alex",
          "Spondon",
-         "Alex"
+         "Erik"
+      ]
+   },
+   {
+      "DisplayImage": "../../resources/default_channel_pic.jpg",
+      "ChannelName": "Innebandy",
+      "Description": "Vi älskar Innebandy!",
+      "Messages": [
+         [
+            "Erik just joined the channel.",
+            "Erik",
+            "2018-10-18T16:58:00.455",
+            "CHANNEL"
+         ],
+         [
+            "Anna just joined the channel.",
+            "Anna",
+            "2018-10-18T16:58:15.787",
+            "CHANNEL"
+         ],
+         [
+            "Bla bla bla bla bla bla bla! Bla bla bla?",
+            "Erik",
+            "2018-10-18T16:59:23.490",
+            "TEXT"
+         ],
+         [
+            "Bla bla bla bla bla",
+            "Erik",
+            "2018-10-18T16:59:30.009",
+            "TEXT"
+         ],
+         [
+            "Bla! Bla bla bla bla bla?",
+            "Anna",
+            "2018-10-18T16:59:42.642",
+            "TEXT"
+         ],
+         [
+            "Bla bla bla bla bla",
+            "Erik",
+            "2018-10-18T16:59:49.155",
+            "TEXT"
+         ],
+         [
+            "Bla bla bla bla bla!",
+            "Anna",
+            "2018-10-18T17:00:00.879",
+            "TEXT"
+         ]
+      ],
+      "Users": [
+         "Erik",
+         "Anna"
       ]
    }
 ]

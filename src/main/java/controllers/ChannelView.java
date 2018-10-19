@@ -60,7 +60,8 @@ public class ChannelView extends AnchorPane {
     @FXML
     private Button loadOldMessagesButton;
 
-    /** A button that shows up when the user has unread in the channel they are currently viewing
+    /**
+     * A button that shows up when the user has unread in the channel they are currently viewing
      */
     @FXML
     Button scrollDownButton;
@@ -92,6 +93,7 @@ public class ChannelView extends AnchorPane {
     /**
      * Constructor for opening up new ChannelViews. Makes sure the correct buttons and fields
      * are enabled
+     *
      * @param user
      * @param chatFacade
      * @param parentcontroller
@@ -293,6 +295,7 @@ public class ChannelView extends AnchorPane {
     /**
      * A method that ensures that the options panel does not close down when you click on it.
      * Without this it would close down because of the bounding box behind it; clickBox
+     *
      * @param event
      */
     @FXML
@@ -338,6 +341,7 @@ public class ChannelView extends AnchorPane {
 
     /**
      * Handles the animation for automatically scrolling down to the bottom of the channel
+     *
      * @param scrollPane
      */
     private void slowScrollToBottom(ScrollPane scrollPane) {

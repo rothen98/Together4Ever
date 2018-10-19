@@ -138,8 +138,8 @@ public class WackController implements IWackController, Initializable, IClientLi
             }
         });
 
-        TextUtility.addTextLimiter(channelName,20);
-        TextUtility.addTextLimiter(channelDescription,50);
+        TextUtility.addTextLimiter(channelName, 20);
+        TextUtility.addTextLimiter(channelDescription, 50);
 
 
     }
@@ -395,6 +395,7 @@ public class WackController implements IWackController, Initializable, IClientLi
 
     /**
      * Adds a channel to the user's list of channels
+     *
      * @param channel
      */
     private void addChannelListItem(IChannel channel) {
@@ -414,6 +415,7 @@ public class WackController implements IWackController, Initializable, IClientLi
 
     /**
      * Opens up the view for the corresponding channel
+     *
      * @param channel
      */
     public void openChannelView(IChannel channel) {
@@ -455,6 +457,7 @@ public class WackController implements IWackController, Initializable, IClientLi
     /**
      * Let's the user join a channel. The method adds the channel to the user's list of channels
      * and opens up the view for said channel
+     *
      * @param id
      */
     public void joinChannel(int id) {
@@ -474,6 +477,7 @@ public class WackController implements IWackController, Initializable, IClientLi
 
     /**
      * Creates a new ChannelListItem which is later added to the user's channels when they join the channel
+     *
      * @param newChannel
      */
     private void addChatListItem(IChannel newChannel) {
@@ -501,6 +505,7 @@ public class WackController implements IWackController, Initializable, IClientLi
 
     /**
      * Removes a channel from the user's channels when they leave it
+     *
      * @param channel
      */
     public void leftChannel(IChannel channel) {
