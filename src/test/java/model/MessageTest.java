@@ -77,8 +77,8 @@ public class MessageTest {
 
     @Test
     public void getType() {
-        IMessage testMessage = new Message(sender, new ChannelContent("text"));
+        IMessage testMessage = new Message(sender, new MessageContent("text", MessageType.TEXT));
 
-        assertEquals(MessageType.CHANNEL, testMessage.getType());
+        assertEquals(MessageType.TEXT, testMessage.getType());
     }
 }

@@ -1,18 +1,18 @@
 package model.chatcomponents.message;
 
+import model.client.Client;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class TextContentTest {
-
-    private IMessageContent content;
+public class MessageContentTest {
+    IMessageContent content;
 
     @Before
     public void setUp() throws Exception {
-        content = new TextContent("test");
+        content = new MessageContent("text",MessageType.TEXT);
     }
 
     @After
@@ -27,6 +27,6 @@ public class TextContentTest {
 
     @Test
     public void getMessage() {
-        assertEquals("test", content.getMessage());
+        assertEquals("text", content.getMessage());
     }
 }

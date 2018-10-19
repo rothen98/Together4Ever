@@ -1,11 +1,8 @@
 package model;
 
+import model.chatcomponents.message.*;
 import model.client.Client;
 import model.client.IClient;
-import model.chatcomponents.message.IMessage;
-import model.chatcomponents.message.IMessageContent;
-import model.chatcomponents.message.Message;
-import model.chatcomponents.message.TextContent;
 import model.chatcomponents.user.IUser;
 import model.chatcomponents.user.User;
 import org.junit.After;
@@ -56,7 +53,7 @@ public class UserTest {
         user.connectClient(mockclient, "password");
 
         //LocalDateTime timeStampOne = LocalDateTime.of(2013,3,4,15,23);
-        IMessageContent messageContent = new TextContent("Hello my friends!");
+        IMessageContent messageContent = new MessageContent("Hello my friends!", MessageType.TEXT);
         IMessage messageOne = new Message(user,messageContent);
 
         user.sendMessageToClients(null);
