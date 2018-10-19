@@ -14,7 +14,7 @@ import java.util.List;
 
 public class MainController implements IMainController, IChannelViewParent, ISearchItemParent, IChannelListItemParent, IClientListener {
     private ChannelItemHolderController itemHolderController;
-    private IChannelViewController channelViewController;
+    private ChannelViewController channelViewController;
     private IMainView view;
     private ChatFacade chatFacade;
     private IUser user;

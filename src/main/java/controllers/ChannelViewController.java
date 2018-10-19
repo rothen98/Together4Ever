@@ -47,7 +47,7 @@ public class ChannelViewController implements IChannelViewController {
     }
 
 
-    @Override
+
     public void update(){
         IMessage message = channel.getLastMessages(1).get(0);
         addNewMessageToChannelView(createMessageView(message));
@@ -84,7 +84,6 @@ public class ChannelViewController implements IChannelViewController {
         parentController.leftChannel(channel);
     }
 
-    @Override
     public void showChannel(IChannel channel) {
         if(channel != null && !channel.equals(this.channel)) {
             this.channel = channel;
@@ -101,7 +100,7 @@ public class ChannelViewController implements IChannelViewController {
         }
     }
 
-    @Override
+
     public void showNoChannel() {
         channelView.showNoChannel();
     }

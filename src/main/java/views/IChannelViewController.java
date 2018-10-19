@@ -12,12 +12,5 @@ public interface IChannelViewController {
 
     void leaveChannel();
 
-    void showChannel(IChannel channel);
-
-    void showNoChannel();
-
-    int getCurrentChannelID();
-
-    void update();
 
 }

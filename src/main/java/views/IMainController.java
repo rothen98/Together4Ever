@@ -11,8 +11,4 @@ public interface IMainController {
     Collection<ISearchItemView> search(String search);
 
     void newChannel(String channelNameText, String channelDescriptionText);
-
-    void initChannels(Collection<IChannel> channels);
-
-    void update(IIdentifiable iIdentifiable);
 }
