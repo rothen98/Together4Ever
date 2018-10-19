@@ -1,8 +1,5 @@
 package model.chatcomponents.user;
 
-
-
-import org.mindrot.jbcrypt.BCrypt;
 import model.identifiers.IIdentifiable;
 import model.identifiers.IRecognizable;
 import model.client.IClient;
@@ -34,7 +31,7 @@ public class User implements IUser{
 
         this.userProfile = new UserProfile(name);
 
-        this.hashedPassword = pwEncryptor.hashPassword(password, BCrypt.gensalt());
+        this.hashedPassword = pwEncryptor.hashPassword(password, pwEncryptor.generateSalt());
 
     }
 
