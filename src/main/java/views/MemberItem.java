@@ -11,12 +11,14 @@ import java.io.IOException;
 
 public class MemberItem extends AnchorPane implements IMemberItem{
 
+    private IMemberItemController controller;
+
     @FXML
     Label memberName;
     @FXML
     Button kickButton;
 
-    public MemberItem() {
+    public MemberItem(String membername, boolean isAdmin) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/wack_member.fxml"));
 
@@ -28,7 +30,21 @@ public class MemberItem extends AnchorPane implements IMemberItem{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
+        this.memberName.setText(membername);
+
+        if (isAdmin) {
+            kickButton.setVisible(true);
+        }
+
+    }
+
+    private void kickButtonPressed() {
+        controller.kickUser(memberName.getText());
+    }
+
+    private void setController(IMemberItemController controller) {
+        this.controller = controller;
     }
 
     @Override

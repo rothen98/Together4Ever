@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ChannelViewController implements IChannelViewController {
+public class ChannelViewController implements IChannelViewController, IMemberItemParent {
 
     private IChannel channel;
     private ChatFacade chatFacade;
@@ -50,6 +50,7 @@ public class ChannelViewController implements IChannelViewController {
 
     public void update(){
         IMessage message = channel.getLastMessages(1).get(0);
+        //if(message.getType() == MessageTy)
         addNewMessageToChannelView(createMessageView(message));
     }
 
@@ -120,5 +121,8 @@ public class ChannelViewController implements IChannelViewController {
         }
     }
 
-
+    @Override
+    public void kickUser(String username) {
+        channel.kick(username, user);
+    }
 }

@@ -8,6 +8,6 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="memberName" layoutX="20.0" layoutY="17.0" text="Label" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="17.0" AnchorPane.topAnchor="17.0" />
-      <Button fx:id="kickButton" layoutX="177.0" layoutY="12.0" mnemonicParsing="false" text="Kick" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0" />
+      <Button fx:id="kickButton" layoutX="177.0" layoutY="12.0" mnemonicParsing="false" onAction="#kickButtonPressed" text="Kick" visible="false" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0" />
    </children>
 </AnchorPane>
