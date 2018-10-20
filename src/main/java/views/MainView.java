@@ -1,16 +1,13 @@
 package views;
 
-import controllers.MainController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -19,37 +16,43 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-
 import java.io.IOException;
-import java.net.URL;
 import java.util.Collection;
-import java.util.ResourceBundle;
 
 public class MainView extends AnchorPane implements IMainView {
     @FXML
+    private
     AnchorPane mainView;
     @FXML
+    private
     AnchorPane newChannelView;
     @FXML
+    private
     AnchorPane channelHolder;
     @FXML
+    private
     TextField searchBar;
     @FXML
+    private
     TextField channelName;
     @FXML
+    private
     TextField channelDescription;
     @FXML
+    private
     Button createGroupButton;
     @FXML
+    private
     ImageView closeSearchButton;
     @FXML
+    private
     Label channelExistsLabel;
     @FXML
     private StackPane listHolder;
 
-    private IChannelView channelView;
-    private IChannelItemHolder channelItemHolder;
-    private ISearchResultsHolder searchResultsHolder;
+    private final IChannelView channelView;
+    private final IChannelItemHolder channelItemHolder;
+    private final ISearchResultsHolder searchResultsHolder;
     private IMainController controller;
 
     public MainView(String username, IChannelView channelView,
@@ -90,7 +93,7 @@ public class MainView extends AnchorPane implements IMainView {
 
 
 
-    public void init() {
+    private void init() {
         System.out.println("init called");
         channelHolder.getChildren().add(channelView.getNode());
         AnchorPane.setBottomAnchor(channelView.getNode(), 0.0);
@@ -176,7 +179,7 @@ public class MainView extends AnchorPane implements IMainView {
     }
 
     @FXML
-    public void searchButtonPressed() {
+    private void searchButtonPressed() {
         if (searchbarNotEmpty()) {
             String searchParameter = searchBar.getCharacters().toString();
             Collection<ISearchItemView> result = controller.search(searchParameter);

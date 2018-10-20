@@ -11,7 +11,6 @@ import model.chatcomponents.channel.Channel;
 import model.chatcomponents.channel.IChannel;
 import model.client.Client;
 import model.client.IClient;
-import model.client.IClientListener;
 
 import java.util.Collection;
 
@@ -23,7 +22,6 @@ import java.util.Collection;
 
 public class ChatFacade {
     private final IServer server;
-    private IClient client;
 
     public ChatFacade(IDataHandler dataHandler, PasswordEncryptor pwEncryptor) {
         this.server = new Server(dataHandler);
@@ -102,8 +100,7 @@ public class ChatFacade {
      * @return a newly created client
      */
     public IClient createClient() {
-        this.client = new Client();
-        return client;
+        return new Client();
     }
 
     /**

@@ -10,7 +10,7 @@ import java.util.Collection;
  *  @author Viktor Franzén
  */
 public class Client implements IClient{
-    private Collection<IClientListener> listeners;
+    private final Collection<IClientListener> listeners;
 
     public Client(){
         listeners = new ArrayList<>();

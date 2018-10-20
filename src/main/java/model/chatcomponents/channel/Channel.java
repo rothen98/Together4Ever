@@ -1,13 +1,15 @@
 package model.chatcomponents.channel;
 
-import model.identifiers.IIdentifiable;
-import model.identifiers.IRecognizable;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageFactory;
 import model.chatcomponents.user.IUser;
+import model.identifiers.IIdentifiable;
+import model.identifiers.IRecognizable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -299,10 +301,6 @@ public class Channel implements IChannel {
      * @return the copy
      */
     private <T> List<T> copyOfList(List<T> list) {
-        List<T> listToReturn = new ArrayList<>();
-        for(T element:list){
-            listToReturn.add(element);
-        }
-        return listToReturn;
+        return new ArrayList<>(list);
     }
 }

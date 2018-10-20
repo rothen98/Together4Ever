@@ -1,27 +1,32 @@
 package views;
 
 //javafx imports
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-//model imports
 
 import java.io.IOException;
+
+//model imports
 
 public class SearchItemView extends AnchorPane implements ISearchItemView {
 
 
     @FXML
+    private
     Label channelName;
     @FXML
+    private
     Label channelDescription;
     @FXML
+    private
     Button joinButton;
 
-    private ISearchItemController controller;
+    private final ISearchItemController controller;
 
     public SearchItemView(ISearchItemController controller, String name, String description, boolean alreadyMember) {
 

@@ -5,9 +5,9 @@ import views.IMemberItemController;
 
 public class MemberItemController implements IMemberItemController {
 
-    private IMemberItemParent parent;
-    private String username;
-    private IMemberItem item;
+    private final IMemberItemParent parent;
+    private final String username;
+    private final IMemberItem item;
     public MemberItemController(IMemberItemParent parent, IMemberItem item,String username) {
         this.parent = parent;
         this.username = username;

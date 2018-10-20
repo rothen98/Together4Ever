@@ -1,13 +1,13 @@
 package model.server;
 
 import model.chatcomponents.channel.Channel;
+import model.chatcomponents.channel.IChannel;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageFactory;
 import model.chatcomponents.message.MessageType;
+import model.chatcomponents.user.IUser;
 import model.chatcomponents.user.User;
 import model.identifiers.IIdentifiable;
-import model.chatcomponents.user.IUser;
-import model.chatcomponents.channel.IChannel;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class Server implements IServer {
     /**
      * A datahandler that can be used to save the data
      */
-    private IDataHandler dataHandler;
+    private final IDataHandler dataHandler;
 
     public Server(IDataHandler dataHandler) {
         this.users = new HashSet<>();
@@ -163,9 +163,7 @@ public class Server implements IServer {
      */
     @Override
     public Collection<IIdentifiable> getChannels() {
-        final Collection<IIdentifiable> theChannels = new ArrayList<>();
-        theChannels.addAll(channels);
-        return theChannels;
+        return new ArrayList<>(channels);
     }
 
     /**

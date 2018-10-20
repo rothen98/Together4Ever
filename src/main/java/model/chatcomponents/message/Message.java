@@ -1,6 +1,5 @@
 package model.chatcomponents.message;
 
-import model.identifiers.IRecognizable;
 import model.chatcomponents.user.IUser;
 
 import java.time.LocalDateTime;

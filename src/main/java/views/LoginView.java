@@ -1,9 +1,7 @@
 package views;
 
-import controllers.MainController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,34 +13,41 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-
 import java.io.IOException;
 
 public class LoginView extends AnchorPane implements ILoginView{
 
     @FXML
+    private
     TextField loginUsername;
     @FXML
+    private
     PasswordField loginPassword;
     @FXML
+    private
     Button loginButton;
     @FXML
+    private
     TextField signupUsername;
     @FXML
+    private
     PasswordField signupPassword;
     @FXML
+    private
     Button signupButton;
 
     /**
      * An error message that shows up when the user has inputted an incorrect username or password
      */
     @FXML
+    private
     Label loginErrorText;
 
     /**
      * An error message that shows up when the user's desired username already exists
      */
     @FXML
+    private
     Label signupErrorText;
     private ILoginController controller;
 

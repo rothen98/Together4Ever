@@ -1,5 +1,5 @@
 package controllers;
 
-public interface IMemberItemParent {
+interface IMemberItemParent {
     void kickUser(String username);
 }

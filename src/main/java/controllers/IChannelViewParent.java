@@ -2,6 +2,6 @@ package controllers;
 
 import model.chatcomponents.channel.IChannel;
 
-public interface IChannelViewParent {
+interface IChannelViewParent {
     void leftChannel(IChannel channel);
 }

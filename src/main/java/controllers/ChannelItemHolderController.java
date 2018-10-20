@@ -1,13 +1,11 @@
 package controllers;
 
 import model.ChatFacade;
-import model.chatcomponents.channel.Channel;
 import model.chatcomponents.channel.IChannel;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageType;
 import model.identifiers.IIdentifiable;
 import model.server.NoChannelFoundException;
-import views.ChannelListItem;
 import views.IChannelItemHolder;
 import views.IChannelListItem;
 import views.IChannelListItemController;
@@ -19,23 +17,22 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.toMap;
 
-public class ChannelItemHolderController {
+class ChannelItemHolderController {
     private IChannelListItem selected;
     private LinkedHashMap<IChannelListItemController,IChannelListItem> items;
-    private IChannelItemHolder view;
+    private final IChannelItemHolder view;
 
-    private ChatFacade facade;
+    private final ChatFacade facade;
 
 
-    public ChannelItemHolderController(IChannelItemHolder view) {
+    public ChannelItemHolderController(IChannelItemHolder view,ChatFacade facade) {
         items = new LinkedHashMap<>();
         this.view = view;
         this.facade = facade;
     }
 
-    public void addChannelListItem(IChannelListItemController controller, IChannelListItem item, ChatFacade facade){
+    public void addChannelListItem(IChannelListItemController controller, IChannelListItem item){
         items.put(controller,item);
-        this.facade = facade;
     }
 
     public void arrange(){

@@ -3,21 +3,20 @@ package views;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public class ChannelListItemHolder extends AnchorPane implements IChannelItemHolder {
 
-    private List<IChannelListItem> items;
+    private final List<IChannelListItem> items;
 
     @FXML
+    private
     VBox channelListItemVBox;
 
 

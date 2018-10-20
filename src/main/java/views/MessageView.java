@@ -1,17 +1,18 @@
 package views;
 
 //javafx imports
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-//model imports
-import model.chatcomponents.message.IMessage;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+
+//model imports
 
 public class MessageView extends AnchorPane implements IMessageView {
 

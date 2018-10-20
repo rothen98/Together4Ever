@@ -1,8 +1,8 @@
 package model.server;
 
-import model.identifiers.IIdentifiable;
-import model.chatcomponents.user.IUser;
 import model.chatcomponents.channel.IChannel;
+import model.chatcomponents.user.IUser;
+import model.identifiers.IIdentifiable;
 
 import java.util.Collection;
 

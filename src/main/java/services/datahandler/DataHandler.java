@@ -7,8 +7,10 @@ import model.server.UserData;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -74,8 +76,6 @@ public class DataHandler implements IDataHandler {
      * @throws IOException
      */
     private String readFile(String filename) throws IOException {
-        String result = "";
-
         BufferedReader br = new BufferedReader(new FileReader(filename));
         StringBuilder sb = new StringBuilder();
         String line = br.readLine();
@@ -83,7 +83,7 @@ public class DataHandler implements IDataHandler {
             sb.append(line);
             line = br.readLine();
         }
-        result = sb.toString();
+        String result = sb.toString();
         br.close();
         return result;
     }
