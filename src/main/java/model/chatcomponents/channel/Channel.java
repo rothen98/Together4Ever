@@ -66,7 +66,6 @@ public class Channel implements IChannel {
         this.messages = messages;
         if(!users.isEmpty()){
             channelAdministrator = users.get(0);
-            System.out.println("Channel administrator of " + channelName + ": " + channelAdministrator.getName());
         }
     }
     
@@ -98,7 +97,7 @@ public class Channel implements IChannel {
             }
             if(userToLeave!= null){
                 users.remove(userToLeave);
-                sendMessage(MessageFactory.createKickMessage(userToLeave));
+                sendMessageWithoutCheck(MessageFactory.createKickMessage(userToLeave));
                 userToLeave.updateClients(this);
 
 
@@ -118,6 +117,7 @@ public class Channel implements IChannel {
 
     /**
      * This method will return the @param amount latest messages that were sent to the channel.
+     * If amount is zero or below, null will be returned.
      * @param amount The numbers of messages you wish to be returned
      * @return A list with messages
      */
@@ -125,8 +125,10 @@ public class Channel implements IChannel {
     public List<IMessage> getLastMessages(int amount) {
         if(amount>=messages.size()){
             return getAllMessages();
-        }else{
+        }else if (amount>0){
             return copyOfList(messages.subList(messages.size()-amount,messages.size()));
+        }else{
+            return null;
         }
 
 
@@ -147,11 +149,24 @@ public class Channel implements IChannel {
      */
     @Override
     public void sendMessage(IMessage message) {
-        if (getUsernames().contains(message.getSender().getDisplayName())) {
+        if (getUsernames().contains(message.getSenderName())) {
             messages.add(message);
             for (IUser user : users) {
                 user.updateClients(this);
             }
+        }
+    }
+
+    /**
+     * Use this method when a message is need to be sent fro someone
+     * that is no longer part of the channel. For example a leave message
+     * from someone that has just left.
+     * @param message The message to be broadcast to all users.
+     */
+    private void sendMessageWithoutCheck(IMessage message){
+        messages.add(message);
+        for (IUser user : users) {
+            user.updateClients(this);
         }
     }
 
@@ -189,7 +204,7 @@ public class Channel implements IChannel {
             }
         }
 
-        sendMessage(MessageFactory.createLeaveMessage(user));
+        sendMessageWithoutCheck(MessageFactory.createLeaveMessage(user));
     }
 
     /***

@@ -23,7 +23,7 @@ public class MessageData {
     }
 
     public MessageData(IMessage message) {
-        this.sendername = message.getSender().getDisplayName();
+        this.sendername = message.getSenderName();
         this.content = message.getMessage();
         this.type = message.getType().toString();
         this.timestamp = message.getTimestamp().toString();

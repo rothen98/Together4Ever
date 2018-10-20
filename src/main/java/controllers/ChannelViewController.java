@@ -39,7 +39,7 @@ public class ChannelViewController implements IChannelViewController, IMemberIte
     }
 
     private boolean senderIsUser(String sender_name) {
-        return sender_name.equals(user.getDisplayName());
+        return sender_name.equals(user.getName());
     }
 
     @Override
@@ -60,14 +60,14 @@ public class ChannelViewController implements IChannelViewController, IMemberIte
         }
 
         if(message.getType() == MessageType.LEAVE){
-            removeFromOptionsPanel(message.getSender().getDisplayName());
+            removeFromOptionsPanel(message.getSenderName());
         }
 
         if(message.getType() == MessageType.KICK){
             if(!channel.hasUser(user)){
                 parentController.leftChannel(channel);
             }else{
-                removeFromOptionsPanel(message.getSender().getDisplayName());
+                removeFromOptionsPanel(message.getSenderName());
             }
         }
 
@@ -197,21 +197,21 @@ public class ChannelViewController implements IChannelViewController, IMemberIte
 
     private IMessageView createMessageView(IMessage message){
         if(message.getType()==MessageType.JOIN){
-            return ViewComponentsFactory.createChannelMessageView(message.getSender().getDisplayName(),message.getMessage(),message.getSender().getDisplayImage(),
-                    message.getTimestamp(),senderIsUser(message.getSender().getDisplayName()));
+            return ViewComponentsFactory.createChannelMessageView(message.getSenderDisplayName(),message.getMessage(),message.getSenderImagePath(),
+                    message.getTimestamp(),senderIsUser(message.getSenderName()));
         }else if(message.getType()==MessageType.LEAVE){
-            return ViewComponentsFactory.createChannelMessageView(message.getSender().getDisplayName(),message.getMessage(),message.getSender().getDisplayImage(),
-                    message.getTimestamp(),senderIsUser(message.getSender().getDisplayName()));
+            return ViewComponentsFactory.createChannelMessageView(message.getSenderDisplayName(),message.getMessage(),message.getSenderImagePath(),
+                    message.getTimestamp(),senderIsUser(message.getSenderName()));
         }else if(message.getType()==MessageType.KICK){
-            return ViewComponentsFactory.createChannelMessageView(message.getSender().getDisplayName(),message.getMessage(),message.getSender().getDisplayImage(),
-                    message.getTimestamp(),senderIsUser(message.getSender().getDisplayName()));
+            return ViewComponentsFactory.createChannelMessageView(message.getSenderDisplayName(),message.getMessage(),message.getSenderImagePath(),
+                    message.getTimestamp(),senderIsUser(message.getSenderName()));
         }
         /*else if(message.getType()==MessageType.IMAGE){
             //No implementation yet
         }*/
         else{
-            return ViewComponentsFactory.createMessageView(message.getSender().getDisplayName(),message.getMessage(),message.getSender().getDisplayImage(),
-                    message.getTimestamp(),senderIsUser(message.getSender().getDisplayName()));
+            return ViewComponentsFactory.createMessageView(message.getSenderDisplayName(),message.getMessage(),message.getSenderImagePath(),
+                    message.getTimestamp(),senderIsUser(message.getSenderName()));
         }
     }
 

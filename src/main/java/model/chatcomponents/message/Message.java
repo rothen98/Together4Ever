@@ -50,6 +50,21 @@ public class Message implements IMessage {
         return messageContent.getMessage();
     }
 
+    @Override
+    public String getSenderName() {
+        return sender.getName();
+    }
+
+    @Override
+    public String getSenderDisplayName() {
+        return sender.getDisplayName();
+    }
+
+    @Override
+    public String getSenderImagePath() {
+        return sender.getDisplayImage();
+    }
+
     /**
      *
      * @return the timestamp in a specific format
@@ -59,13 +74,6 @@ public class Message implements IMessage {
         return timestamp;
     }
 
-    /**
-     *
-     * @return the person who wrote the message
-     */
-    @Override
-    public IRecognizable getSender() {
-        return sender;
-    }
+
 
 }
