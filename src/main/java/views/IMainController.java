@@ -1,8 +1,5 @@
 package views;
 
-import model.chatcomponents.channel.IChannel;
-import model.identifiers.IIdentifiable;
-
 import java.util.Collection;
 
 public interface IMainController {

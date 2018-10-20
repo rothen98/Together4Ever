@@ -1,13 +1,11 @@
 package controllers;
 
 import model.ChatFacade;
-import model.chatcomponents.channel.Channel;
 import model.chatcomponents.channel.IChannel;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageType;
 import model.identifiers.IIdentifiable;
 import model.server.NoChannelFoundException;
-import views.ChannelListItem;
 import views.IChannelItemHolder;
 import views.IChannelListItem;
 import views.IChannelListItemController;

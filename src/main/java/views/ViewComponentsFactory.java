@@ -1,8 +1,5 @@
 package views;
 
-import controllers.MemberItemController;
-
-import javax.swing.text.html.ImageView;
 import java.time.LocalDateTime;
 
 public class ViewComponentsFactory {

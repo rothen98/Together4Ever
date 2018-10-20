@@ -2,33 +2,17 @@ package controllers;
 
 //javafx imports
 
-import model.chatcomponents.user.PasswordEncryptor;
-import services.PasswordEncryption.JBCryptAdapter;
-import services.datahandler.DataHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
-//Model imports
 import model.ChatFacade;
+import model.chatcomponents.user.IUser;
 import model.client.IClient;
 import model.server.NoSuchUserFoundException;
 import model.server.WrongPasswordException;
-import model.chatcomponents.user.IUser;
-import views.*;
+import services.PasswordEncryption.JBCryptAdapter;
+import services.datahandler.DataHandler;
+import views.ILoginController;
+import views.ILoginView;
 
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+//Model imports
 
 /**
  * @author Spondon Siddiqui

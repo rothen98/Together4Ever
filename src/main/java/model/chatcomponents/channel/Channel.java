@@ -1,13 +1,15 @@
 package model.chatcomponents.channel;
 
-import model.identifiers.IIdentifiable;
-import model.identifiers.IRecognizable;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageFactory;
 import model.chatcomponents.user.IUser;
+import model.identifiers.IIdentifiable;
+import model.identifiers.IRecognizable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**

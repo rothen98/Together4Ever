@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 
-
 import java.io.IOException;
 
 

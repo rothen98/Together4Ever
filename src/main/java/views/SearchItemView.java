@@ -1,15 +1,17 @@
 package views;
 
 //javafx imports
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-//model imports
 
 import java.io.IOException;
+
+//model imports
 
 public class SearchItemView extends AnchorPane implements ISearchItemView {
 

@@ -1,8 +1,8 @@
 package model.chatcomponents.user;
 
+import model.client.IClient;
 import model.identifiers.IIdentifiable;
 import model.identifiers.IRecognizable;
-import model.client.IClient;
 
 import java.util.ArrayList;
 import java.util.Collection;
