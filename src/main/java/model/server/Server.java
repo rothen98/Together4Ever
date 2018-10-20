@@ -16,6 +16,8 @@ import java.util.HashSet;
 import java.util.List;
 
 /**
+ * @author Tobias Lindroth
+ *
  * This class contains data about which users and channels that exists.
  * There are methods to:
  * Get a certain user or channel
@@ -24,8 +26,17 @@ import java.util.List;
  * Add new users and channels
  */
 public class Server implements IServer {
+    /**
+     * A collection with all the users that has registered for Wack
+     */
     private final Collection<IUser> users;
+    /**
+     * A collection with all the channels that exists
+     */
     private final Collection<IChannel> channels;
+    /**
+     * A datahandler that can be used to save the data
+     */
     private IDataHandler dataHandler;
 
     public Server(IDataHandler dataHandler) {
@@ -35,42 +46,57 @@ public class Server implements IServer {
         initServer();
     }
 
+    /**
+     * Initializes the server by retrieving existing channels and users.
+     */
     private void initServer() {
         initUsers();
         initChannels();
-
-        System.out.println("Channels: " );
-        for(IChannel channel: channels){
-            System.out.println(channel.getDisplayName());
-        }
-        System.out.println("Users");
-        for(IUser user: users){
-            System.out.println(user.getName());
-        }
         }
 
+    /**
+     * This method retrieves the channel data from the datahandler
+     * and creates channels. The user collection needs to be initialized before using
+     * this method
+     */
     private void initChannels() {
         for(ChannelData data: dataHandler.getChannels()) {
-            List<IUser> channelUsers = new ArrayList<>();
-            for (String username : data.getUserNames()) {
-                for (IUser user : users) {
-                    if (username.equals(user.getName())) {
-                        channelUsers.add(user);
-                        break;
-                    }
-                }
-            }
+            List<IUser> channelMembers = initChannelMembers(data.getUserNames());
             List<IMessage> channelMessages = initMessages(data.getMessages());
             channels.add(new Channel(
                     data.getChannelName(),
                     data.getDescription(),
                     data.getImage(),
-                    channelUsers,
+                    channelMembers,
                     channelMessages
             ));
         }
     }
 
+    /**
+     * Retrieves the members of the channel using the
+     * given user names.
+     * @param members The user names of the members of a channel
+     * @return The users that has the given names
+     */
+    private List<IUser> initChannelMembers(List<String> members){
+        List<IUser> channelUsers = new ArrayList<>();
+        for (String username : members) {
+            for (IUser user : users) {
+                if (username.equals(user.getName())) {
+                    channelUsers.add(user);
+                    break;
+                }
+            }
+        }
+        return channelUsers;
+    }
+
+    /**
+     * Initializes messages using the given messagedata
+     * @param messageData A list with messagedata that are to be converted to messaegs
+     * @return A list with messages
+     */
     private List<IMessage> initMessages(List<MessageData> messageData){
         List<IMessage> channelMessages = new ArrayList<>();
         for(MessageData mdata:messageData) {
@@ -97,6 +123,9 @@ public class Server implements IServer {
         return channelMessages;
     }
 
+    /**
+     * Asks the data handler for any user data and converts this data into user objects
+     */
     private void initUsers() {
         for(UserData user:dataHandler.getUsers()){
 

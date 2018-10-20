@@ -136,6 +136,4 @@ public class ChatFacade {
         server.saveData();
     }
 
-    //Add more methods in this class in order to decrease dependencies.
-    //For example sendMessage etc.
 }
