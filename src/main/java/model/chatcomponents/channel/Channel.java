@@ -13,15 +13,27 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * @author Tobias Lindroth
  *
- * 
+ *
  * The Channel class contains data about the channel's users and messages.
- * There are methods to get the messages, the users names and also methods for joining and leaving the channel.
+ * There are methods to get the messages, send a message, and also methods for joining and leaving the channel.
  */
 public class Channel implements IChannel {
+    /**
+     * The list with the users that are members of the channel
+     */
     private final List<IUser> users;
+    /**
+     * The list with messages this channel has received
+     */
     private final List<IMessage> messages;
+    /**
+     * The channel admin
+     */
     private IUser channelAdministrator;
 
+    /**
+     * The channel profile
+     */
     private IIdentifiable channelProfile;
 
     /**
@@ -31,8 +43,8 @@ public class Channel implements IChannel {
 
     /**
      * Constructor used when creating new channel
-     * @param name
-     * @param description
+     * @param name        The name of the channel
+     * @param description The description of the channel
      */
     public Channel(String name,String description) {
         channelProfile = new ChannelProfile(name,idCounter.getAndIncrement(),description);
@@ -42,11 +54,11 @@ public class Channel implements IChannel {
 
     /**
      * Constructor used when creating channel with information of old channel
-     * @param channelName
-     * @param description
-     * @param displayImage
-     * @param users
-     * @param messages
+     * @param channelName  The name of the channel
+     * @param description  The description of the channel
+     * @param displayImage The imagepath of the channel
+     * @param users        A list with the members of the channels
+     * @param messages     A list with the messages of the channel
      */
     public Channel(String channelName, String description, String displayImage, List<IUser> users, List<IMessage> messages) {
         channelProfile = new ChannelProfile(channelName,idCounter.getAndIncrement(), description, displayImage);
@@ -54,7 +66,6 @@ public class Channel implements IChannel {
         this.messages = messages;
         if(!users.isEmpty()){
             channelAdministrator = users.get(0);
-            System.out.println("Channel administrator of " + channelName + ": " + channelAdministrator.getName());
         }
     }
     
@@ -86,7 +97,7 @@ public class Channel implements IChannel {
             }
             if(userToLeave!= null){
                 users.remove(userToLeave);
-                sendMessage(MessageFactory.createKickMessage(userToLeave));
+                sendMessageWithoutCheck(MessageFactory.createKickMessage(userToLeave));
                 userToLeave.updateClients(this);
 
 
@@ -105,21 +116,8 @@ public class Channel implements IChannel {
     }
 
     /**
-     * This method will copy a list
-     * @param list the list to be copied
-     * @param <T> any object
-     * @return the copy
-     */
-    private <T> List<T> copyOfList(List<T> list) {
-        List<T> listToReturn = new ArrayList<>();
-        for(T element:list){
-            listToReturn.add(element);
-        }
-        return listToReturn;
-    }
-
-    /**
      * This method will return the @param amount latest messages that were sent to the channel.
+     * If amount is zero or below, null will be returned.
      * @param amount The numbers of messages you wish to be returned
      * @return A list with messages
      */
@@ -127,9 +125,10 @@ public class Channel implements IChannel {
     public List<IMessage> getLastMessages(int amount) {
         if(amount>=messages.size()){
             return getAllMessages();
-        }else{
+        }else if (amount>0){
             return copyOfList(messages.subList(messages.size()-amount,messages.size()));
-            //Is copy of list really needed?
+        }else{
+            return null;
         }
 
 
@@ -150,8 +149,23 @@ public class Channel implements IChannel {
      */
     @Override
     public void sendMessage(IMessage message) {
+        if (getUsernames().contains(message.getSenderName())) {
+            messages.add(message);
+            for (IUser user : users) {
+                user.updateClients(this);
+            }
+        }
+    }
+
+    /**
+     * Use this method when a message is need to be sent fro someone
+     * that is no longer part of the channel. For example a leave message
+     * from someone that has just left.
+     * @param message The message to be broadcast to all users.
+     */
+    private void sendMessageWithoutCheck(IMessage message){
         messages.add(message);
-        for(IUser user: users){
+        for (IUser user : users) {
             user.updateClients(this);
         }
     }
@@ -169,7 +183,6 @@ public class Channel implements IChannel {
                 channelAdministrator = user;
             }
             users.add(user);
-
             sendMessage(MessageFactory.createJoinMessage(user));
         }
     }
@@ -191,7 +204,7 @@ public class Channel implements IChannel {
             }
         }
 
-        sendMessage(MessageFactory.createLeaveMessage(user));
+        sendMessageWithoutCheck(MessageFactory.createLeaveMessage(user));
     }
 
     /***
@@ -257,11 +270,39 @@ public class Channel implements IChannel {
     }
 
     /**
-     * Returns the pah of the channel's image
+     * Returns the path of the channel's image
      * @return the channels image, null if the channel don't have an image
      */
     @Override
     public String getDisplayImage() {
         return channelProfile.getDisplayImage();
+    }
+
+    //-------------Utility--------------------------------
+
+    /**
+     * This method will retrieve the members names
+     * @return The members names
+     */
+    private List<String> getUsernames() {
+        List<String> toBeReturned = new ArrayList<>();
+        for (IUser user : users) {
+            toBeReturned.add(user.getDisplayName());
+        }
+        return toBeReturned;
+    }
+
+    /**
+     * This method will copy a list
+     * @param list the list to be copied
+     * @param <T> any object
+     * @return the copy
+     */
+    private <T> List<T> copyOfList(List<T> list) {
+        List<T> listToReturn = new ArrayList<>();
+        for(T element:list){
+            listToReturn.add(element);
+        }
+        return listToReturn;
     }
 }

@@ -7,9 +7,21 @@ import model.identifiers.IIdentifiable;
  * The channel's name, description, image and id.
  */
 public class ChannelProfile implements IIdentifiable {
+    /**
+     * The name of the channel
+     */
     private String name;
+    /**
+     * The imagepath to the image of the channel
+     */
     private String image;
+    /**
+     * The channel id
+     */
     private int id;
+    /**
+     * The description of the channel
+     */
     private String description;
 
     public ChannelProfile(String name, int id, String description) {
@@ -60,6 +72,6 @@ public class ChannelProfile implements IIdentifiable {
     @Override
     public String getDisplayImage() {
         return image;
-        //TODO this should return a copy?
+
     }
 }

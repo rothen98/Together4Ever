@@ -5,7 +5,9 @@ import model.identifiers.IRecognizable;
 import java.time.LocalDateTime;
 
 public interface IMessage extends IMessageContent {
-    IRecognizable getSender();
+    String getSenderName();
+    String getSenderDisplayName();
+    String getSenderImagePath();
     LocalDateTime getTimestamp();
     
 

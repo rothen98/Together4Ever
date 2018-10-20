@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * This class contains all the channel data that is stored at the end of a session and fetched at the beginning.
- * All contents of the channel, including messages and users are stored
+ * All contents of the channel, including messages and users are stored as strings.
  * The class is a middle ground for server to use
  *
  * @author Alex Solberg

@@ -127,14 +127,12 @@ public class ChannelView extends AnchorPane implements IChannelView {
     public void enableLoadingOldMessages() {
         messageList.getChildren().add(0,loadOldMessagesButton);
         loadOldMessagesButton.setVisible(true);
-        System.out.println("Enabled");
 
     }
 
     @Override
     public void disableLoadingOldMessages() {
         messageList.getChildren().remove(loadOldMessagesButton);
-        System.out.println("Disabled");
     }
 
     @Override
