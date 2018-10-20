@@ -79,7 +79,7 @@ public class MessageTest {
         assertNotNull(sender);
         assertNotNull(sender2);
         assertEquals("Name", sender.getName());
-        assertEquals(sender, message.getSender());
+        assertEquals(sender.getName(), message.getSenderName());
     }
 
     @Test

@@ -69,13 +69,17 @@ public class ChannelTest {
         IMessage messageOne = new Message(userOne,textMessageOne);
         IMessage messageTwo = new Message(userTwo,textMessageTwo);
 
+        //User needs to be a part of channel to send message
+        channel.join(userOne);
+        channel.join(userTwo);
+
         channel.sendMessage(messageOne);
         channel.sendMessage(messageTwo);
 
-        //2 sent messages, 1 join message from base user joining.
-        assertTrue(channel.getAllMessages().size() == 2);
 
-        //Perhaps we should check if the received messages holds the correct data?
+        //2 sent messages, 2 join message from base user joining.
+        assertTrue(channel.getAllMessages().size() == 4);
+
     }
 
     @Test
@@ -88,12 +92,15 @@ public class ChannelTest {
         IMessage messageOne = new Message(userOne,new MessageContent("Hello my friends!",MessageType.TEXT));
         IMessage messageTwo = new Message(userTwo,new MessageContent("Hi how are you?",MessageType.TEXT));
 
+        channel.join(userOne);
+        channel.join(userTwo);
         channel.sendMessage(messageOne);
         channel.sendMessage(messageTwo);
 
         assertEquals(1,channel.getLastMessages(1).size());
 
-        //Perhaps we should check if the received messages holds the correct data?
+        assertEquals(null,channel.getLastMessages(-1));
+
 
     }
 

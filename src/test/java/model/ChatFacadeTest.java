@@ -122,7 +122,7 @@ public class ChatFacadeTest {
         IMessage factoryMessage = MessageFactory.createTextMessage(message,user);
 
         assertEquals(textMessage.getMessage(),factoryMessage.getMessage());
-        assertEquals(textMessage.getSender(),factoryMessage.getSender());
+        assertEquals(textMessage.getSenderName(),factoryMessage.getSenderName());
 
 
 
