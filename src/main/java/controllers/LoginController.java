@@ -34,7 +34,7 @@ public class LoginController implements ILoginController {
     private final ChatFacade chatFacade;
 
 
-    private ILoginView view;
+    private final ILoginView view;
 
     public LoginController(ILoginView view) {
         this.view = view;
@@ -78,9 +78,7 @@ public class LoginController implements ILoginController {
             user.connectClient(client, password);
             initClient(user, client);
             view.reset();
-        } catch (NoSuchUserFoundException e) {
-            view.showLoginError();
-        } catch (WrongPasswordException e) {
+        } catch (NoSuchUserFoundException | WrongPasswordException e) {
             view.showLoginError();
         }
     }

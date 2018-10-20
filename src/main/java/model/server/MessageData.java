@@ -9,10 +9,10 @@ import model.chatcomponents.message.IMessage;
  * @author Alex Solberg
  */
 public class MessageData {
-    private String sendername;
-    private String content;
-    private String type;
-    private String timestamp;
+    private final String sendername;
+    private final String content;
+    private final String type;
+    private final String timestamp;
 
 
     public MessageData( String content,String sendername, String type, String timestamp) {

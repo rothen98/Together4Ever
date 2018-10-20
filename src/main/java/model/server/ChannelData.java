@@ -15,11 +15,11 @@ import java.util.List;
  * @author Alex Solberg
  */
 public class ChannelData {
-    private String description;
-    private String image;
-    private List<MessageData> messages;
-    private List<String> userNames;
-    private String channelName;
+    private final String description;
+    private final String image;
+    private final List<MessageData> messages;
+    private final List<String> userNames;
+    private final String channelName;
 
     public ChannelData(String name, String description, String image, List<MessageData> messages, List<String> usernames) {
         this.channelName = name;

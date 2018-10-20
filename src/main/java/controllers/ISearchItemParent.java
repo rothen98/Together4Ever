@@ -1,5 +1,5 @@
 package controllers;
 
-public interface ISearchItemParent {
+interface ISearchItemParent {
     void joinChannel(int id);
 }

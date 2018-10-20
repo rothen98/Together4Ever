@@ -8,10 +8,10 @@ import model.chatcomponents.user.IUser;
  * @author Alex Solberg
  */
 public class UserData {
-    private String username;
-    private String password;
-    private String displayName;
-    private String displayImage;
+    private final String username;
+    private final String password;
+    private final String displayName;
+    private final String displayImage;
 
     public UserData(String username, String password, String displayName, String displayImage) {
         this.username = username;

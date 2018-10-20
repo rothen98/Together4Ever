@@ -37,7 +37,7 @@ public class Server implements IServer {
     /**
      * A datahandler that can be used to save the data
      */
-    private IDataHandler dataHandler;
+    private final IDataHandler dataHandler;
 
     public Server(IDataHandler dataHandler) {
         this.users = new HashSet<>();
@@ -163,9 +163,7 @@ public class Server implements IServer {
      */
     @Override
     public Collection<IIdentifiable> getChannels() {
-        final Collection<IIdentifiable> theChannels = new ArrayList<>();
-        theChannels.addAll(channels);
-        return theChannels;
+        return new ArrayList<>(channels);
     }
 
     /**

@@ -301,10 +301,6 @@ public class Channel implements IChannel {
      * @return the copy
      */
     private <T> List<T> copyOfList(List<T> list) {
-        List<T> listToReturn = new ArrayList<>();
-        for(T element:list){
-            listToReturn.add(element);
-        }
-        return listToReturn;
+        return new ArrayList<>(list);
     }
 }

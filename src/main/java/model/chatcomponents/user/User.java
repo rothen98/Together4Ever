@@ -83,8 +83,8 @@ public class User implements IUser{
     }
 
     /**
-     * Sends a message to all the connected clients in the chatcomponents collection.
-     * @param iIdentifiable
+     * Sends an update to all the connected clients.
+     * @param iIdentifiable the channel that has been updated
      */
 
     @Override
@@ -100,10 +100,7 @@ public class User implements IUser{
      */
     @Override
     public boolean authorizeLogIn(String password) {
-        if(pwEncryptor.checkPassword(password, hashedPassword)){
-            return true;
-        }
-        return false;
+        return pwEncryptor.checkPassword(password, hashedPassword);
     }
 
 

@@ -17,23 +17,22 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.toMap;
 
-public class ChannelItemHolderController {
+class ChannelItemHolderController {
     private IChannelListItem selected;
     private LinkedHashMap<IChannelListItemController,IChannelListItem> items;
-    private IChannelItemHolder view;
+    private final IChannelItemHolder view;
 
-    private ChatFacade facade;
+    private final ChatFacade facade;
 
 
-    public ChannelItemHolderController(IChannelItemHolder view) {
+    public ChannelItemHolderController(IChannelItemHolder view,ChatFacade facade) {
         items = new LinkedHashMap<>();
         this.view = view;
         this.facade = facade;
     }
 
-    public void addChannelListItem(IChannelListItemController controller, IChannelListItem item, ChatFacade facade){
+    public void addChannelListItem(IChannelListItemController controller, IChannelListItem item){
         items.put(controller,item);
-        this.facade = facade;
     }
 
     public void arrange(){

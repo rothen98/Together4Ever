@@ -18,28 +18,36 @@ import java.io.IOException;
 public class LoginView extends AnchorPane implements ILoginView{
 
     @FXML
+    private
     TextField loginUsername;
     @FXML
+    private
     PasswordField loginPassword;
     @FXML
+    private
     Button loginButton;
     @FXML
+    private
     TextField signupUsername;
     @FXML
+    private
     PasswordField signupPassword;
     @FXML
+    private
     Button signupButton;
 
     /**
      * An error message that shows up when the user has inputted an incorrect username or password
      */
     @FXML
+    private
     Label loginErrorText;
 
     /**
      * An error message that shows up when the user's desired username already exists
      */
     @FXML
+    private
     Label signupErrorText;
     private ILoginController controller;
 

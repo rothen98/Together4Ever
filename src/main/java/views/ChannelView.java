@@ -32,7 +32,7 @@ public class ChannelView extends AnchorPane implements IChannelView {
 
     private IChannelViewController controller;
 
-    private Button loadOldMessagesButton;
+    private final Button loadOldMessagesButton;
 
 
     @FXML
@@ -156,7 +156,7 @@ public class ChannelView extends AnchorPane implements IChannelView {
 
     }
 
-    public void setChannelName(String name){
+    private void setChannelName(String name){
         this.channelName.setText(name);
     }
 

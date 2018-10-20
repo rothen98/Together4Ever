@@ -14,8 +14,10 @@ public class MemberItem extends AnchorPane implements IMemberItem{
     private IMemberItemController controller;
 
     @FXML
+    private
     Label memberName;
     @FXML
+    private
     Button kickButton;
 
     public MemberItem(String membername, boolean isAdmin) {

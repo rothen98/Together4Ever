@@ -76,8 +76,6 @@ public class DataHandler implements IDataHandler {
      * @throws IOException
      */
     private String readFile(String filename) throws IOException {
-        String result = "";
-
         BufferedReader br = new BufferedReader(new FileReader(filename));
         StringBuilder sb = new StringBuilder();
         String line = br.readLine();
@@ -85,7 +83,7 @@ public class DataHandler implements IDataHandler {
             sb.append(line);
             line = br.readLine();
         }
-        result = sb.toString();
+        String result = sb.toString();
         br.close();
         return result;
     }

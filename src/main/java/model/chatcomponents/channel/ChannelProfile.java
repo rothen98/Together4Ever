@@ -66,8 +66,8 @@ public class ChannelProfile implements IIdentifiable {
     }
 
     /**
-     * The image of the channel
-     * @return
+     *
+     * @return The image of the channel
      */
     @Override
     public String getDisplayImage() {

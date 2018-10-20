@@ -13,9 +13,10 @@ import java.util.List;
 
 public class ChannelListItemHolder extends AnchorPane implements IChannelItemHolder {
 
-    private List<IChannelListItem> items;
+    private final List<IChannelListItem> items;
 
     @FXML
+    private
     VBox channelListItemVBox;
 
 

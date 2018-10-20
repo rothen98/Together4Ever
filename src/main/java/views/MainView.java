@@ -21,29 +21,38 @@ import java.util.Collection;
 
 public class MainView extends AnchorPane implements IMainView {
     @FXML
+    private
     AnchorPane mainView;
     @FXML
+    private
     AnchorPane newChannelView;
     @FXML
+    private
     AnchorPane channelHolder;
     @FXML
+    private
     TextField searchBar;
     @FXML
+    private
     TextField channelName;
     @FXML
+    private
     TextField channelDescription;
     @FXML
+    private
     Button createGroupButton;
     @FXML
+    private
     ImageView closeSearchButton;
     @FXML
+    private
     Label channelExistsLabel;
     @FXML
     private StackPane listHolder;
 
-    private IChannelView channelView;
-    private IChannelItemHolder channelItemHolder;
-    private ISearchResultsHolder searchResultsHolder;
+    private final IChannelView channelView;
+    private final IChannelItemHolder channelItemHolder;
+    private final ISearchResultsHolder searchResultsHolder;
     private IMainController controller;
 
     public MainView(String username, IChannelView channelView,
@@ -84,7 +93,7 @@ public class MainView extends AnchorPane implements IMainView {
 
 
 
-    public void init() {
+    private void init() {
         System.out.println("init called");
         channelHolder.getChildren().add(channelView.getNode());
         AnchorPane.setBottomAnchor(channelView.getNode(), 0.0);
@@ -170,7 +179,7 @@ public class MainView extends AnchorPane implements IMainView {
     }
 
     @FXML
-    public void searchButtonPressed() {
+    private void searchButtonPressed() {
         if (searchbarNotEmpty()) {
             String searchParameter = searchBar.getCharacters().toString();
             Collection<ISearchItemView> result = controller.search(searchParameter);

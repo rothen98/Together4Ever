@@ -13,14 +13,14 @@ import java.util.*;
 public class ChannelViewController implements IChannelViewController, IMemberItemParent {
 
     private IChannel channel;
-    private ChatFacade chatFacade;
-    private IUser user;
-    private IChannelViewParent parentController;
-    private IChannelView channelView;
+    private final ChatFacade chatFacade;
+    private final IUser user;
+    private final IChannelViewParent parentController;
+    private final IChannelView channelView;
 
     private int numberOfShowingMessages;
 
-    private Map<MemberItemController, IMemberItem> members = new HashMap<>();
+    private final Map<MemberItemController, IMemberItem> members = new HashMap<>();
 
     public ChannelViewController(ChatFacade chatFacade, IUser user, IChannelView channelView,
                                  IChannelViewParent parentController) {

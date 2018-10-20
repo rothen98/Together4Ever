@@ -5,8 +5,8 @@ import views.ISearchItemController;
 
 public class SearchItemController implements ISearchItemController {
 
-    private ISearchItemParent parentcontroller;
-    private IIdentifiable channel;
+    private final ISearchItemParent parentcontroller;
+    private final IIdentifiable channel;
 
     public SearchItemController(ISearchItemParent parentcontroller, IIdentifiable channel) {
         this.parentcontroller = parentcontroller;

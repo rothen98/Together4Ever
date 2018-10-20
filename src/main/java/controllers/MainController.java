@@ -13,11 +13,11 @@ import java.util.Collection;
 import java.util.List;
 
 public class MainController implements IMainController, IChannelViewParent, ISearchItemParent, IChannelListItemParent, IClientListener {
-    private ChannelItemHolderController itemHolderController;
-    private ChannelViewController channelViewController;
-    private IMainView view;
-    private ChatFacade chatFacade;
-    private IUser user;
+    private final ChannelItemHolderController itemHolderController;
+    private final ChannelViewController channelViewController;
+    private final IMainView view;
+    private final ChatFacade chatFacade;
+    private final IUser user;
 
     public MainController(ChatFacade chatFacade, IUser user)  {
         IChannelView channelView = ViewComponentsFactory.createChannelview();
@@ -27,7 +27,7 @@ public class MainController implements IMainController, IChannelViewParent, ISea
         channelViewController = new ChannelViewController(chatFacade, user,channelView,this);
         channelView.setController(channelViewController);
 
-        itemHolderController = new ChannelItemHolderController(channelItemHolder);
+        itemHolderController = new ChannelItemHolderController(channelItemHolder,chatFacade);
 
         view = new MainView(user.getName(),channelView,channelItemHolder,searchResultsHolder);
         view.setController(this);
@@ -45,7 +45,7 @@ public class MainController implements IMainController, IChannelViewParent, ISea
      *
      * @param channels The channels to use for the initialize
      */
-    void initChannels(Collection<IChannel> channels) {
+    private void initChannels(Collection<IChannel> channels) {
         IChannel latest = null;
         for (IChannel channel : channels) {
             addChannelListItem(channel);
@@ -112,7 +112,7 @@ public class MainController implements IMainController, IChannelViewParent, ISea
         IChannelListItem channelListItem = ViewComponentsFactory.createChannelListItem(newChannel.getDisplayName(),newChannel.getDescription());
         IChannelListItemController itemController = new ChatListItemController(this,newChannel,channelListItem);
         channelListItem.setController(itemController);
-        itemHolderController.addChannelListItem(itemController,channelListItem,chatFacade);
+        itemHolderController.addChannelListItem(itemController,channelListItem);
 
     }
 
