@@ -45,7 +45,7 @@ public class MainController implements IMainController, IChannelViewParent, ISea
      *
      * @param channels The channels to use for the initialize
      */
-    public void initChannels(Collection<IChannel> channels) {
+    void initChannels(Collection<IChannel> channels) {
         IChannel latest = null;
         for (IChannel channel : channels) {
             addChannelListItem(channel);
@@ -112,7 +112,7 @@ public class MainController implements IMainController, IChannelViewParent, ISea
         IChannelListItem channelListItem = ViewComponentsFactory.createChannelListItem(newChannel.getDisplayName(),newChannel.getDescription());
         IChannelListItemController itemController = new ChatListItemController(this,newChannel,channelListItem);
         channelListItem.setController(itemController);
-        itemHolderController.addChannelListItem(itemController,channelListItem);
+        itemHolderController.addChannelListItem(itemController,channelListItem,chatFacade);
 
     }
 
@@ -128,6 +128,7 @@ public class MainController implements IMainController, IChannelViewParent, ISea
         if (channelViewController.getCurrentChannelID() == iIdentifiable.getID()) {
             channelViewController.update();
         } else if (itemHolderController.contains(iIdentifiable.getID())) {
+            itemHolderController.update(iIdentifiable);
             itemHolderController.addNotificationTo(iIdentifiable.getID());
         } else {
             try {

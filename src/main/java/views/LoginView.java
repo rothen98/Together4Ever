@@ -70,6 +70,16 @@ public class LoginView extends AnchorPane implements ILoginView{
         this.controller=controller;
     }
 
+    @Override
+    public void reset() {
+        loginErrorText.setVisible(false);
+        loginUsername.clear();
+        loginPassword.clear();
+        signupErrorText.setVisible(false);
+        signupUsername.clear();
+        signupPassword.clear();
+    }
+
     /**
      * This method lets the user use the keyboard to navigate the signup fields
      *
@@ -209,8 +219,7 @@ public class LoginView extends AnchorPane implements ILoginView{
         initTextFields(i);
     }
 
-    @Override
-    public void hideSignUpError() {
+    private void hideSignUpError() {
         signupErrorText.setVisible(false);
     }
 
@@ -218,11 +227,10 @@ public class LoginView extends AnchorPane implements ILoginView{
     public void showSignUpError(String username) {
         signupErrorText.setText("Username " + username + " already taken");
         signupErrorText.setVisible(true);
-
     }
 
-    @Override
-    public void hideLoginError() {
+
+    private void hideLoginError() {
         loginErrorText.setVisible(false);
 
     }

@@ -1,6 +1,12 @@
 package controllers;
 
+import model.ChatFacade;
+import model.chatcomponents.channel.Channel;
 import model.chatcomponents.channel.IChannel;
+import model.chatcomponents.message.IMessage;
+import model.chatcomponents.message.MessageType;
+import model.identifiers.IIdentifiable;
+import model.server.NoChannelFoundException;
 import views.ChannelListItem;
 import views.IChannelItemHolder;
 import views.IChannelListItem;
@@ -18,13 +24,18 @@ public class ChannelItemHolderController {
     private LinkedHashMap<IChannelListItemController,IChannelListItem> items;
     private IChannelItemHolder view;
 
+    private ChatFacade facade;
+
+
     public ChannelItemHolderController(IChannelItemHolder view) {
         items = new LinkedHashMap<>();
         this.view = view;
+        this.facade = facade;
     }
 
-    public void addChannelListItem(IChannelListItemController controller, IChannelListItem item){
+    public void addChannelListItem(IChannelListItemController controller, IChannelListItem item, ChatFacade facade){
         items.put(controller,item);
+        this.facade = facade;
     }
 
     public void arrange(){
@@ -101,4 +112,36 @@ public class ChannelItemHolderController {
         }
         return null;
     }
+
+    public void update(IIdentifiable iIdentifiable) {
+        try {
+            IChannel updatedChannel = facade.getChannel(iIdentifiable.getID());
+            IMessage message = updatedChannel.getLastMessages(1).get(0);
+            if(message.getType() == MessageType.KICK){
+                remove(iIdentifiable.getID());
+            }else{
+                 IChannelListItem item = getItem(iIdentifiable.getID());
+                 if(item!=null){
+                     item.addNotification();
+                 }
+            }
+
+        } catch (NoChannelFoundException e) {
+            remove(iIdentifiable.getID());
+        }
+            //If there is something wrong here we shouldn't do anything
+    }
+
+
+
+    /*public void update(IIdentifiable channel) {
+        try {
+            IChannel updatedChannel = facade.getChannel(channel.getID());
+            IMessage message = u
+        } catch (NoChannelFoundException e) {
+            //If there is something wrong here we shouldn't do anything
+
+        }
+
+    }*/
 }

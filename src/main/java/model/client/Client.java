@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Client class that is responsible to update the view when a new message is sent.
+ * Client class that is responsible to update the listeners when a new message is sent.
  *  @author Viktor Franzén
  */
 public class Client implements IClient{

@@ -88,7 +88,7 @@ public class User implements IUser{
      */
 
     @Override
-    public void sendMessageToClients(IIdentifiable iIdentifiable) {
+    public void updateClients(IIdentifiable iIdentifiable) {
 
         clients.forEach(x -> x.updateListeners(iIdentifiable));
     }
