@@ -20,6 +20,8 @@ public class MainController implements IMainController, IChannelViewParent, ISea
     private final IUser user;
 
     public MainController(ChatFacade chatFacade, IUser user)  {
+        this.chatFacade = chatFacade;
+        this.user = user;
         IChannelView channelView = ViewComponentsFactory.createChannelview();
         IChannelItemHolder channelItemHolder = ViewComponentsFactory.createChannelListItemView();
         ISearchResultsHolder searchResultsHolder = ViewComponentsFactory.createSearchResultsHolder();
@@ -27,13 +29,11 @@ public class MainController implements IMainController, IChannelViewParent, ISea
         channelViewController = new ChannelViewController(chatFacade, user,channelView,this);
         channelView.setController(channelViewController);
 
-        itemHolderController = new ChannelItemHolderController(channelItemHolder,chatFacade);
+        itemHolderController = new ChannelItemHolderController(channelItemHolder,chatFacade,user);
 
         view = new MainView(user.getName(),channelView,channelItemHolder,searchResultsHolder);
         view.setController(this);
 
-        this.chatFacade = chatFacade;
-        this.user = user;
         Collection<IChannel> channels = chatFacade.getUserChannels(user);
         initChannels(channels);
 

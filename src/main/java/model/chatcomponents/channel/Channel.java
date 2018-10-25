@@ -207,6 +207,7 @@ public class Channel implements IChannel {
         }
 
         sendMessageWithoutCheck(MessageFactory.createLeaveMessage(user));
+        user.updateClients(this);
     }
 
     /***
