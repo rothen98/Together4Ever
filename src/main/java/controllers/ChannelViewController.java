@@ -59,11 +59,7 @@ public class ChannelViewController implements IChannelViewController, IMemberIte
             addNewMessageToChannelView(createMessageView(message));
         }
 
-        if(message.getType() == MessageType.LEAVE){
-            removeFromOptionsPanel(message.getSenderName());
-        }
-
-        if(message.getType() == MessageType.KICK){
+        if(message.getType() == MessageType.KICK || message.getType() == MessageType.LEAVE){
             if(!channel.hasUser(user)){
                 parentController.leftChannel(channel);
             }else{
@@ -156,7 +152,6 @@ public class ChannelViewController implements IChannelViewController, IMemberIte
     @Override
     public void leaveChannel() {
         channel.leave(user);
-        parentController.leftChannel(channel);
     }
 
     @Override

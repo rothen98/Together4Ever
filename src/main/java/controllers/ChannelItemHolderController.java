@@ -4,6 +4,7 @@ import model.ChatFacade;
 import model.chatcomponents.channel.IChannel;
 import model.chatcomponents.message.IMessage;
 import model.chatcomponents.message.MessageType;
+import model.chatcomponents.user.IUser;
 import model.identifiers.IIdentifiable;
 import model.server.NoChannelFoundException;
 import views.IChannelItemHolder;
@@ -23,12 +24,14 @@ class ChannelItemHolderController {
     private final IChannelItemHolder view;
 
     private final ChatFacade facade;
+    private final IUser user;
 
 
-    public ChannelItemHolderController(IChannelItemHolder view,ChatFacade facade) {
+    public ChannelItemHolderController(IChannelItemHolder view, ChatFacade facade, IUser user) {
         items = new LinkedHashMap<>();
         this.view = view;
         this.facade = facade;
+        this.user = user;
     }
 
     public void addChannelListItem(IChannelListItemController controller, IChannelListItem item){
@@ -114,7 +117,8 @@ class ChannelItemHolderController {
         try {
             IChannel updatedChannel = facade.getChannel(iIdentifiable.getID());
             IMessage message = updatedChannel.getLastMessages(1).get(0);
-            if(message.getType() == MessageType.KICK){
+
+            if(!updatedChannel.hasUser(user)){
                 remove(iIdentifiable.getID());
             }else{
                  IChannelListItem item = getItem(iIdentifiable.getID());
